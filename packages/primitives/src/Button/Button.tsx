@@ -1,6 +1,5 @@
 import React from 'react'
 
-import {Primitive} from '../Primitive'
 import {Element} from '../config'
 import {addOptionalProp, getElementFromAs} from '../helpers'
 import type {AnyComponent} from '../types'
