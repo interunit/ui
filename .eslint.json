@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "extends": ["eslint:recommended", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "project": true
+  },
+  "plugins": ["@typescript-eslint", "import"],
+  "overrides": [
+    {
+      "env": {
+        "jest": true
+      },
+      "files": ["*.test.js"]
+    }
+  ],
+  "rules": {
+    "@typescript-eslint/consistent-type-imports": "error"
+    "react/jsx-max-props-per-line": [2, { "maximum": 1, "when": "multiline" }],
+  }
+}

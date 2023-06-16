@@ -1,0 +1,1 @@
+export {optionalProp} from './component'

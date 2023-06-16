@@ -1,0 +1,26 @@
+{
+  "name": "@interunit/ui-primitives",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interunit/ui.git"
+  },
+  "author": "Kyle McDonald",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
+  },
+  "homepage": "https://github.com/interunit/ui#readme",
+  "devDependencies": {
+    "@types/react-native": "^0.72.2"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-native": "^0.71.11"
+  }
+}
