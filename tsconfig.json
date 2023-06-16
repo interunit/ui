@@ -2,7 +2,7 @@
   "extends": "./tsconfig.shared.json",
   "references": [
     {
-      "path": "packages/ui-primitives"
+      "path": "packages/primitives"
     }
   ]
 }

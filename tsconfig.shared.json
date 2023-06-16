@@ -15,7 +15,7 @@
   "exclude": ["node_modules", "**/*.test.ts"],
   "references": [
     {
-      "path": "packages/ui-primitives"
+      "path": "packages/primitives"
     }
   ]
 }
