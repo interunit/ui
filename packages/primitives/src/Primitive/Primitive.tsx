@@ -1,5 +1,8 @@
-import { Button } from './Button';
+import {Button} from '../Button'
+import {Text} from '../Text'
+
 const Primitive = {
-    Button
-    }
-export  { Primitive };
+  Button,
+  Text
+}
+export {Primitive}

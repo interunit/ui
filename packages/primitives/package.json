@@ -1,5 +1,5 @@
 {
-  "name": "@interunit/ui-primitives",
+  "name": "@interunit/primitives",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -20,7 +20,9 @@
     "@types/react-native": "^0.72.2"
   },
   "dependencies": {
+    "@stitches/react": "^1.2.8",
     "react": "^18.2.0",
-    "react-native": "^0.71.11"
+    "react-native": "^0.71.11",
+    "stitches-native": "^0.4.0"
   }
 }
