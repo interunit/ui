@@ -1,1 +1,1 @@
-export {optionalProp} from './component'
+export {addOptionalProp, getElementFromAs} from './component'

@@ -19,6 +19,8 @@ const Element = {
   Select: styled('select'),
   Span: styled('span'),
   Textarea: styled('textarea')
-}
+} as const
+
+type Element = keyof typeof Element
 
 export {Element}

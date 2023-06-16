@@ -1,0 +1,1 @@
+export { AnyComponent } from './shared'

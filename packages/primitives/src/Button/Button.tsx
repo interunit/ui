@@ -1,41 +1,48 @@
 import React from 'react'
-import type {PressableProps} from 'react-native'
 
+import {Primitive} from '../Primitive'
 import {Element} from '../config'
-import {optionalProp} from '../helpers'
+import {addOptionalProp, getElementFromAs} from '../helpers'
+import type {AnyComponent} from '../types'
 
-interface ButtonPrimitiveSharedProps {
-  as?: string | React.FunctionComponent
-  type?: 'button' | 'submit' | 'reset'
+const ButtonElement = {
+  button: Element.Button,
+  a: Element.A
 }
 
-interface ButtonPrimitiveNativeProps
-  extends ButtonPrimitiveSharedProps,
-    PressableProps {}
+type ButtonElementAs = keyof typeof ButtonElement
+type ButtonElementComponent = (typeof ButtonElement)[keyof typeof ButtonElement]
+type ButtonElementProps = React.ComponentProps<ButtonElementComponent>
 
-interface ButtonPrimitiveWebProps
-  extends ButtonPrimitiveSharedProps,
-    React.ButtonHTMLAttributes<HTMLButtonElement> {}
+type ButtonPrimitiveProps = ButtonElementProps & {
+  as?: ButtonElementAs | AnyComponent
+  type?: 'button' | 'submit' | 'reset'
+  role?: 'button' | 'link'
+  children: React.ReactNode
+}
 
-type ButtonPrimitiveProps = ButtonPrimitiveNativeProps | ButtonPrimitiveWebProps
-
-interface ButtonPrimitiveRef extends HTMLButtonElement {}
-
-const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
+const Button = React.forwardRef<ButtonElementComponent, ButtonPrimitiveProps>(
   (
-    {type = 'button', role = 'button', as, children, ...props},
+    {type = 'button', role = 'button', as = 'button', children, ...props},
     forwardedRef
   ) => {
+    const Button = getElementFromAs<typeof ButtonElement, ButtonPrimitiveProps>(
+      {
+        as: as,
+        Element: ButtonElement
+      }
+    )
+
     return (
-      <Element.Button
+      <Button
         type={type}
         role={role}
         ref={forwardedRef}
-        {...optionalProp(as)}
+        {...addOptionalProp(as)}
         {...props}
       >
         {children}
-      </Element.Button>
+      </Button>
     )
   }
 )
