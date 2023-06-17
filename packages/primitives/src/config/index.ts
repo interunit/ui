@@ -1,11 +1,13 @@
 // TODO: Should import this to get createStitches
 // config for themeing
-import {styled} from '@stitches/react'
+import {styled} from '../createPrimitives'
+
+import {Child} from '../Child'
 
 const Element = {
   A: styled('a'),
   Button: styled('button'),
-  Div: styled('div'),
+  Div: styled('div', {}),
   H1: styled('h1'),
   H2: styled('h2'),
   H3: styled('h3'),
@@ -18,9 +20,8 @@ const Element = {
   P: styled('p'),
   Select: styled('select'),
   Span: styled('span'),
-  Textarea: styled('textarea')
+  Textarea: styled('textarea'),
+  Child: Child
 } as const
-
-type Element = keyof typeof Element
 
 export {Element}

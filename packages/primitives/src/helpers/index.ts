@@ -1,1 +1,1 @@
-export {addOptionalProp, getElementFromAs} from './component'
+export {Spacing, SpacingValueToCssString, SpacingUnit, SpacingValue} from './spacing'

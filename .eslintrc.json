@@ -4,7 +4,7 @@
       "typescript": {}
     }
   },
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended"],
   "parser": "@typescript-eslint/parser",
   "env": {
     "es6": true,
@@ -24,6 +24,9 @@
   ],
   "rules": {
     "@typescript-eslint/consistent-type-imports": "error"
-    "react/jsx-max-props-per-line": [2, { "maximum": 1, "when": "multiline" }],
+  },
+  "globals": {
+    "React": true,
+    "JSX": true
   }
 }

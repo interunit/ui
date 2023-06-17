@@ -1,8 +1,7 @@
 import React from 'react'
 
 import {Element} from '../config'
-import {addOptionalProp, getElementFromAs} from '../helpers'
-import type {AnyComponent} from '../types'
+import {styled} from '../createPrimitives'
 
 const TextElement = {
   h1: Element.H1,
@@ -15,27 +14,55 @@ const TextElement = {
   p: Element.P,
   span: Element.Span
 }
+type TextElementAs =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'label'
+  | 'p'
+  | 'span'
+type TextElementComponent =
+  | typeof Element.H1
+  | typeof Element.H2
+  | typeof Element.H3
+  | typeof Element.H4
+  | typeof Element.H5
+  | typeof Element.H6
+  | typeof Element.Label
+  | typeof Element.P
+  | typeof Element.Span
 
-type TextElementAs = keyof typeof TextElement
-type TextElementComponent = (typeof TextElement)[keyof typeof TextElement]
-type TextElementProps = React.ComponentProps<TextElementComponent>
+export type StyledComponentProps<
+  C extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>
+> = Omit<React.ComponentProps<C>, 'css'>
+
+type TextElementProps = StyledComponentProps<TextElementComponent>
 
 type TextPrimitiveProps = TextElementProps & {
-  as?: TextElementAs | AnyComponent
+  as: TextElementAs
   children: React.ReactNode
 }
 
-const Text = React.forwardRef<TextElementComponent, TextPrimitiveProps>(
+// TODO: Type any
+const Text = React.forwardRef<any, TextPrimitiveProps>(
   ({as, children, ...props}, forwardedRef) => {
-    const Text = getElementFromAs<typeof TextElement, TextPrimitiveProps>({
-      as: as,
-      Element: TextElement
-    })
+    const Text = TextElement?.[as]
+
+    if (Text === undefined) {
+      throw new Error(
+        `The element "${as}" doesn't exist in the Text component.`
+      )
+    }
+
+    const StyledText = styled(Text, {})
 
     return (
-      <Text ref={forwardedRef} {...addOptionalProp(as)} {...props}>
+      <StyledText ref={forwardedRef} {...props}>
         {children}
-      </Text>
+      </StyledText>
     )
   }
 )

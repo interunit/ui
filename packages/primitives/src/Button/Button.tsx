@@ -1,20 +1,19 @@
 import React from 'react'
 
 import {Element} from '../config'
-import {addOptionalProp, getElementFromAs} from '../helpers'
-import type {AnyComponent} from '../types'
+import {styled} from '../createPrimitives'
 
 const ButtonElement = {
   button: Element.Button,
   a: Element.A
 }
 
-type ButtonElementAs = keyof typeof ButtonElement
-type ButtonElementComponent = (typeof ButtonElement)[keyof typeof ButtonElement]
+type ButtonElementAs = 'button' | 'a'
+type ButtonElementComponent = typeof Element.Button | typeof Element.A
 type ButtonElementProps = React.ComponentProps<ButtonElementComponent>
 
 type ButtonPrimitiveProps = ButtonElementProps & {
-  as?: ButtonElementAs | AnyComponent
+  as?: ButtonElementAs
   type?: 'button' | 'submit' | 'reset'
   role?: 'button' | 'link'
   disabled?: boolean
@@ -36,7 +35,8 @@ type ButtonPrimitiveProps = ButtonElementProps & {
   }
 }
 
-const Button = React.forwardRef<ButtonElementComponent, ButtonPrimitiveProps>(
+// TODO: Type any
+const Button = React.forwardRef<any, ButtonPrimitiveProps>(
   (
     {
       as = 'button',
@@ -58,16 +58,18 @@ const Button = React.forwardRef<ButtonElementComponent, ButtonPrimitiveProps>(
       accessibilityState: props.accessibilityState ?? {disabled}
     }
 
-    const Button = getElementFromAs<typeof ButtonElement, ButtonPrimitiveProps>(
-      {
-        as: as,
-        Element: ButtonElement
-      }
-    )
+    const Button = ButtonElement?.[as]
+
+    if (Button === undefined) {
+      throw new Error(
+        `The element "${as}" doesn't exist in the Button component.`
+      )
+    }
+
+    const StyledButton = styled(Button, {})
 
     return (
-      <Button
-        {...addOptionalProp(as)}
+      <StyledButton
         type={type}
         role={role}
         disabled={disabled}
@@ -76,7 +78,7 @@ const Button = React.forwardRef<ButtonElementComponent, ButtonPrimitiveProps>(
         {...props}
       >
         {children}
-      </Button>
+      </StyledButton>
     )
   }
 )

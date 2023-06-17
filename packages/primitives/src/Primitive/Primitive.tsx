@@ -1,8 +1,10 @@
 import {Button} from '../Button'
 import {Text} from '../Text'
+import {Box} from '../Box'
 
 const Primitive = {
   Button,
-  Text
+  Text,
+  Box
 }
 export {Primitive}
