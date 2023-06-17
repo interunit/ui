@@ -35,11 +35,8 @@ type TextElementComponent =
   | typeof Element.P
   | typeof Element.Span
 
-export type StyledComponentProps<
-  C extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>
-> = Omit<React.ComponentProps<C>, 'css'>
 
-type TextElementProps = StyledComponentProps<TextElementComponent>
+type TextElementProps = TextElementComponent
 
 type TextPrimitiveProps = TextElementProps & {
   as: TextElementAs
