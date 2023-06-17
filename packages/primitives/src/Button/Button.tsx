@@ -26,7 +26,7 @@ type ButtonPrimitiveProps = ButtonElementProps & {
   // Web Accessibility
   'aria-label'?: string
 
-  // React Native Accessibility
+  // Native Accessibility
   accessible?: boolean
   accessibilityLabel?: string
   accessibilityRole?: string

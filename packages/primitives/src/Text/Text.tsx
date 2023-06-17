@@ -12,7 +12,8 @@ const TextElement = {
   h6: Element.H6,
   label: Element.Label,
   p: Element.P,
-  span: Element.Span
+  span: Element.Span,
+  a: Element.A
 }
 type TextElementAs =
   | 'h1'
@@ -24,6 +25,7 @@ type TextElementAs =
   | 'label'
   | 'p'
   | 'span'
+  | 'a'
 type TextElementComponent =
   | typeof Element.H1
   | typeof Element.H2
@@ -34,7 +36,7 @@ type TextElementComponent =
   | typeof Element.Label
   | typeof Element.P
   | typeof Element.Span
-
+  | typeof Element.A
 
 type TextElementProps = TextElementComponent
 

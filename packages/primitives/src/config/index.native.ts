@@ -1,6 +1,7 @@
 // TODO: Should import this to get createStitches
 // config for themeing
 import {styled} from 'stitches-native'
+
 import {Child} from '../Child'
 
 const Element = {
@@ -13,7 +14,7 @@ const Element = {
   H4: styled('Text'),
   H5: styled('Text'),
   H6: styled('Text'),
-  Img: styled('Image'),
+  Image: styled('Image'),
   Input: styled('TextInput'),
   Label: styled('Text'),
   P: styled('Text'),

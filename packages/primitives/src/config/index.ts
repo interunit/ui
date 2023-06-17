@@ -1,8 +1,7 @@
 // TODO: Should import this to get createStitches
 // config for themeing
-import {styled} from '../createPrimitives'
-
 import {Child} from '../Child'
+import {styled} from '../createPrimitives'
 
 const Element = {
   A: styled('a'),
@@ -14,7 +13,7 @@ const Element = {
   H4: styled('h4'),
   H5: styled('h5'),
   H6: styled('h6'),
-  Img: styled('img'),
+  Image: styled('img'),
   Input: styled('input'),
   Label: styled('label'),
   P: styled('p'),
