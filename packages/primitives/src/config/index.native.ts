@@ -1,8 +1,10 @@
 // TODO: Should import this to get createStitches
 // config for themeing
 import {styled} from 'stitches-native'
+import {Child} from '../Child'
+
 const Element = {
-      A: styled('Pressable'),
+  A: styled('Pressable'),
   Button: styled('Pressable'),
   Div: styled('View'),
   H1: styled('Text'),
@@ -15,10 +17,10 @@ const Element = {
   Input: styled('TextInput'),
   Label: styled('Text'),
   P: styled('Text'),
-  Select: styled('Picker'),
+  // Select: styled('Picker'),
   Span: styled('Text'),
-  Textarea: styled('TextInput')
-
+  Textarea: styled('TextInput'),
+  Child: Child
 }
 
 export {Element}
