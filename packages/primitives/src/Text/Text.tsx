@@ -7,7 +7,6 @@ type ValidWebTextElement =
   | HTMLHeadingElement
   | HTMLParagraphElement
   | HTMLSpanElement
-  | HTMLAnchorElement
 type ValidNativeTextElement = RNText
 type ValidTextElement = ValidWebTextElement & ValidNativeTextElement
 type ValidTextElementProps = React.HTMLProps<ValidTextElement> &
@@ -38,17 +37,16 @@ type TextElementAs =
 // TODO: cut out the HTML element types that are not valid for each TextElementAs
 type TextPrimitiveProps = ValidTextElementProps & {
   as: TextElementAs
+  css?: string
   children: React.ReactNode
   ref?: React.Ref<ValidTextElement>
 }
 
 type TextPrimitiveRef = ValidTextElement
 
-const StyledText = Element.Span``
-
 const Text = React.forwardRef<TextPrimitiveRef, TextPrimitiveProps>(
   ({as, children, ...props}, forwardedRef) => {
-    const Text = TextElement?.[as as TextElementAs]
+    const Text = TextElement?.[as as TextElementAs] as React.ElementType
 
     if (Text === undefined) {
       throw new Error(
@@ -57,9 +55,9 @@ const Text = React.forwardRef<TextPrimitiveRef, TextPrimitiveProps>(
     }
 
     return (
-      <StyledText as={as} ref={forwardedRef} {...props}>
+      <Text as={as} ref={forwardedRef} {...props}>
         {children}
-      </StyledText>
+      </Text>
     )
   }
 )

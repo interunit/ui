@@ -1,27 +1,51 @@
-// TODO: Should import this to get createStitches
-// config for themeing
 import styled, {css} from 'styled-components'
 
 import {Child} from '../Child'
+import {type Spacing, SpacingValueToCssString} from '../helpers/spacing'
 
-const Element = {
-  A: styled.a,
-  Button: styled.button,
-  Div: styled.div,
-  H1: styled.h1,
-  H2: styled.h2,
-  H3: styled.h3,
-  H4: styled.h4,
-  H5: styled.h5,
-  H6: styled.h6,
-  Image: styled.img,
-  Input: styled.input,
-  Label: styled.label,
-  P: styled.p,
-  Select: styled.select,
-  Span: styled.span,
-  Textarea: styled.textarea,
-  Child: Child
+const Elements = {
+  a: 'A',
+  button: 'Button',
+  div: 'Div',
+  h1: 'H1',
+  h2: 'H2',
+  h3: 'H3',
+  h4: 'H4',
+  h5: 'H5',
+  h6: 'H6',
+  img: 'Image',
+  input: 'Input',
+  label: 'Label',
+  p: 'P',
+  select: 'Select',
+  span: 'Span',
+  textarea: 'TextArea'
 } as const
+
+type ElementsType = Lowercase<(typeof Elements)[keyof typeof Elements]>
+
+const Element = Object.values(Elements).reduce(
+  (acc: any, curr: (typeof Elements)[keyof typeof Elements]) => {
+    // styled expects 0 arguements for some reason
+    // @ts-ignore
+    acc[curr] = styled[curr.toLowerCase() as ElementsType]<{
+      sp?: Spacing
+    }>`
+      ${({sp}: {sp?: Spacing}) =>
+        sp &&
+        css`
+          padding: ${sp?.p
+            ? SpacingValueToCssString({value: sp.p})
+            : undefined};
+          margin: ${sp?.m ? SpacingValueToCssString({value: sp.m}) : undefined};
+        `}
+    `
+    return acc
+  },
+  {
+    Child: Child
+  }
+)
+
 
 export {Element, styled, css}

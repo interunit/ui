@@ -41,7 +41,6 @@ type ButtonPrimitiveProps = ValidButtonElementProps & {
 
 type ButtonPrimitiveRef = ValidButtonElements
 
-// TODO: Type any
 const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
   (
     {
