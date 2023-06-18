@@ -17,5 +17,6 @@
     {
       "path": "packages/primitives"
     }
-  ]
+  ],
+  "lib": ["es6", "dom", "dom.iterable",]
 }

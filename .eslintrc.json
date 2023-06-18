@@ -8,7 +8,8 @@
   "parser": "@typescript-eslint/parser",
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "browser": true
   },
   "parserOptions": {
     "project": true

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "typeRoots": ["node_modules/@types", "dist/typescript"],
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "jsx": "react",
+    "lib": ["DOM", "ESNext", "DOM.Iterable"],
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "target": "es2018"
+  },
+  "include": ["src/**/*"]
+}

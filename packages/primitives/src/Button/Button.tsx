@@ -1,23 +1,27 @@
 import React from 'react'
+import type {Pressable} from 'react-native'
 
-import {Element} from '../config'
-import {styled} from '../createPrimitives'
+import {Element, styled} from '../config'
+
+type ValidWebButtonElement = HTMLButtonElement
+type ValidNativeButtonElement = typeof Pressable
+type ValidButtonElements = ValidWebButtonElement & ValidNativeButtonElement
+type ValidButtonElementProps = React.HTMLProps<ValidButtonElements> &
+  React.ComponentProps<typeof Pressable>
 
 const ButtonElement = {
-  button: Element.Button,
-  a: Element.A
+  button: Element.Button
 }
 
-type ButtonElementAs = 'button' | 'a'
-type ButtonElementComponent = typeof Element.Button | typeof Element.A
-type ButtonElementProps = React.ComponentProps<ButtonElementComponent>
+type ButtonElementAs = 'button'
 
-type ButtonPrimitiveProps = ButtonElementProps & {
+type ButtonPrimitiveProps = ValidButtonElementProps & {
   as?: ButtonElementAs
   type?: 'button' | 'submit' | 'reset'
   role?: 'button' | 'link'
   disabled?: boolean
   children: React.ReactNode
+  ref?: React.Ref<ValidButtonElements>
 
   /*
    * Similar accessibility props between React Native and Web
@@ -35,8 +39,10 @@ type ButtonPrimitiveProps = ButtonElementProps & {
   }
 }
 
+type ButtonPrimitiveRef = ValidButtonElements
+
 // TODO: Type any
-const Button = React.forwardRef<any, ButtonPrimitiveProps>(
+const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
   (
     {
       as = 'button',
@@ -66,7 +72,7 @@ const Button = React.forwardRef<any, ButtonPrimitiveProps>(
       )
     }
 
-    const StyledButton = styled(Button, {})
+    const StyledButton = styled(Button``)``
 
     return (
       <StyledButton

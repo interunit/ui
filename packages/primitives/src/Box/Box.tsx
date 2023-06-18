@@ -1,11 +1,14 @@
 import React from 'react'
+import type {View} from 'react-native'
 
 import {Element} from '../config'
-import {styled} from '../createPrimitives'
-import {
-  type Spacing,
-  SpacingValueToCssString,
-} from '../helpers'
+import {type Spacing, SpacingValueToCssString} from '../helpers'
+
+type ValidWebBoxElement = HTMLDivElement | HTMLSpanElement
+type ValidNativeBox = typeof View
+type ValidBoxElement = ValidWebBoxElement & ValidNativeBox
+type ValidBoxElementProps = React.HTMLProps<ValidBoxElement> &
+  React.ComponentProps<typeof View>
 
 const BoxElement = {
   div: Element.Div,
@@ -14,19 +17,23 @@ const BoxElement = {
 }
 
 type BoxElementAs = 'div' | 'span' | 'child'
-type BoxElementComponent =
-  | typeof Element.Div
-  | typeof Element.Span
-  | typeof Element.Child
-type BoxElementProps = React.ComponentProps<BoxElementComponent>
 
-type BoxPrimitiveProps = BoxElementProps & {
+type BoxPrimitiveProps = ValidBoxElementProps & {
   as: BoxElementAs
   sp?: Spacing
   children: React.ReactNode
+  ref?: React.Ref<ValidBoxElement>
 }
 
-const Box = React.forwardRef<BoxElementComponent, BoxPrimitiveProps>(
+type BoxPrimitiveRef = ValidBoxElement
+
+const StyledBox = Element.Div<{sp?: Spacing}>`
+    padding: ${props =>
+      props.sp?.p ? SpacingValueToCssString({value: props.sp.p}) : undefined};
+    margin: ${props =>
+      props.sp?.m ? SpacingValueToCssString({value: props.sp.m}) : undefined};
+`
+const Box = React.forwardRef<BoxPrimitiveRef, BoxPrimitiveProps>(
   ({as, sp, children, ...props}, forwardedRef) => {
     const Box = BoxElement?.[as]
 
@@ -34,13 +41,18 @@ const Box = React.forwardRef<BoxElementComponent, BoxPrimitiveProps>(
       throw new Error(`The element "${as}" doesn't exist in the Box component.`)
     }
 
-    const StyledBox = styled(Box, {
-      padding: sp?.p ? SpacingValueToCssString({value: sp.p}) : undefined,
-      margin: sp?.m ? SpacingValueToCssString({value: sp.m}) : undefined
-    })
+    // TODO: Can we avoid this by abstracting away the StyledBox styled call
+    if (as === 'child') {
+        // TODO: This doesn't have a way to pass styles on yet
+      return (
+        <Element.Child {...props} sp={sp} ref={forwardedRef}>
+          {children}
+        </Element.Child>
+      )
+    }
 
     return (
-      <StyledBox ref={forwardedRef} {...props}>
+      <StyledBox as={as} sp={sp} ref={forwardedRef} {...props}>
         {children}
       </StyledBox>
     )

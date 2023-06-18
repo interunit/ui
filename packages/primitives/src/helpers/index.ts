@@ -1,1 +1,1 @@
-export {Spacing, SpacingValueToCssString, SpacingUnit, SpacingValue} from './spacing'
+export * from './spacing'

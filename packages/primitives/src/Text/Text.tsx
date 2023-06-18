@@ -1,7 +1,17 @@
 import React from 'react'
+import type {Text as RNText} from 'react-native'
 
 import {Element} from '../config'
-import {styled} from '../createPrimitives'
+
+type ValidWebTextElement =
+  | HTMLHeadingElement
+  | HTMLParagraphElement
+  | HTMLSpanElement
+  | HTMLAnchorElement
+type ValidNativeTextElement = RNText
+type ValidTextElement = ValidWebTextElement & ValidNativeTextElement
+type ValidTextElementProps = React.HTMLProps<ValidTextElement> &
+  React.ComponentProps<typeof RNText>
 
 const TextElement = {
   h1: Element.H1,
@@ -12,8 +22,7 @@ const TextElement = {
   h6: Element.H6,
   label: Element.Label,
   p: Element.P,
-  span: Element.Span,
-  a: Element.A
+  span: Element.Span
 }
 type TextElementAs =
   | 'h1'
@@ -25,30 +34,21 @@ type TextElementAs =
   | 'label'
   | 'p'
   | 'span'
-  | 'a'
-type TextElementComponent =
-  | typeof Element.H1
-  | typeof Element.H2
-  | typeof Element.H3
-  | typeof Element.H4
-  | typeof Element.H5
-  | typeof Element.H6
-  | typeof Element.Label
-  | typeof Element.P
-  | typeof Element.Span
-  | typeof Element.A
 
-type TextElementProps = TextElementComponent
-
-type TextPrimitiveProps = TextElementProps & {
+// TODO: cut out the HTML element types that are not valid for each TextElementAs
+type TextPrimitiveProps = ValidTextElementProps & {
   as: TextElementAs
   children: React.ReactNode
+  ref?: React.Ref<ValidTextElement>
 }
 
-// TODO: Type any
-const Text = React.forwardRef<any, TextPrimitiveProps>(
+type TextPrimitiveRef = ValidTextElement
+
+const StyledText = Element.Span``
+
+const Text = React.forwardRef<TextPrimitiveRef, TextPrimitiveProps>(
   ({as, children, ...props}, forwardedRef) => {
-    const Text = TextElement?.[as]
+    const Text = TextElement?.[as as TextElementAs]
 
     if (Text === undefined) {
       throw new Error(
@@ -56,10 +56,8 @@ const Text = React.forwardRef<any, TextPrimitiveProps>(
       )
     }
 
-    const StyledText = styled(Text, {})
-
     return (
-      <StyledText ref={forwardedRef} {...props}>
+      <StyledText as={as} ref={forwardedRef} {...props}>
         {children}
       </StyledText>
     )

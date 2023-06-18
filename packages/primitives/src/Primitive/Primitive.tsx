@@ -1,10 +1,19 @@
-import {Button} from '../Button'
-import {Text} from '../Text'
 import {Box} from '../Box'
+import {Button} from '../Button'
+// import {Image} from '../Image'
+import {Text} from '../Text'
 
-const Primitive = {
+type PrimtiveComponent = {
+  Box: typeof Box
+  Button: typeof Button
+  // Image: typeof Image
+  Text: typeof Text
+}
+
+const Primitive: PrimtiveComponent = {
+  Box,
   Button,
-  Text,
-  Box
+  // Image,
+  Text
 }
 export {Primitive}
