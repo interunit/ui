@@ -7,6 +7,10 @@
       "outputs": ["dist/**", "types/**"],
       "cache": false
     },
-    "lint":{}
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {}
   }
 }

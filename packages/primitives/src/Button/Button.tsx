@@ -1,7 +1,7 @@
 import React from 'react'
 import type {Pressable} from 'react-native'
 
-import {Element, styled} from '../config'
+import {Element} from '../config'
 
 type ValidWebButtonElement = HTMLButtonElement
 type ValidNativeButtonElement = typeof Pressable
@@ -71,10 +71,9 @@ const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
       )
     }
 
-    const StyledButton = styled(Button``)``
 
     return (
-      <StyledButton
+      <Button
         type={type}
         role={role}
         disabled={disabled}
@@ -83,7 +82,7 @@ const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
         {...props}
       >
         {children}
-      </StyledButton>
+      </Button>
     )
   }
 )

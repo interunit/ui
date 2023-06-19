@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 // TODO: Type any
 const ChildElement = React.forwardRef<any, any>(
   ({children, ...props}, forwardedRef) => {
@@ -12,7 +11,6 @@ const ChildElement = React.forwardRef<any, any>(
         ...props,
         ref: forwardedRef
       })
-
 
       return ClonedElement
     }

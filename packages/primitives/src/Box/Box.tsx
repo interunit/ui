@@ -27,7 +27,6 @@ type BoxPrimitiveProps = ValidBoxElementProps & {
 
 type BoxPrimitiveRef = ValidBoxElement
 
-
 const Box = React.forwardRef<BoxPrimitiveRef, BoxPrimitiveProps>(
   ({as, sp, children, ...props}, forwardedRef) => {
     const Box = BoxElement?.[as] as React.ElementType
