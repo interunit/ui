@@ -2,6 +2,7 @@ import React from 'react'
 import type {Text as RNText} from 'react-native'
 
 import {Construct} from '../../config'
+import type {UtilityStyles} from '../../utility/Styles'
 
 type ValidWebTextConstruct =
   | HTMLHeadingElement
@@ -36,7 +37,7 @@ type TextConstructAs =
   | 'span'
 
 // TODO: cut out the HTML element types that are not valid for each TextConstructAs
-type TextPrimitiveProps = ValidTextConstructProps & {
+type TextPrimitiveProps = ValidTextConstructProps & UtilityStyles & {
   as: TextConstructAs
   css?: string
   children: React.ReactNode

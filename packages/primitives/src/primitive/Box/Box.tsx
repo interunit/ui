@@ -2,8 +2,8 @@ import React from 'react'
 import type {View} from 'react-native'
 
 import {Construct} from '../../config'
-import {type Spacing} from '../../helpers/spacing'
 import {Child} from '../../utility/Child'
+import {type UtilityStyles} from '../../utility/Styles'
 
 type ValidWebBoxConstruct = HTMLDivElement | HTMLSpanElement
 type ValidNativeBoxConstruct = typeof View
@@ -19,17 +19,17 @@ const BoxConstruct = {
 
 type BoxConstructAs = 'div' | 'span' | 'child'
 
-type BoxPrimitiveProps = ValidBoxConstructProps & {
-  as: BoxConstructAs
-  sp?: Spacing
-  children: React.ReactNode
-  ref?: React.Ref<ValidBoxConstruct>
-}
+type BoxPrimitiveProps = ValidBoxConstructProps &
+  UtilityStyles & {
+    as: BoxConstructAs
+    children: React.ReactNode
+    ref?: React.Ref<ValidBoxConstruct>
+  }
 
 type BoxPrimitiveRef = ValidBoxConstruct
 
 const Box = React.forwardRef<BoxPrimitiveRef, BoxPrimitiveProps>(
-  ({as, sp, children, ...props}, forwardedRef) => {
+  ({as, children, ...props}, forwardedRef) => {
     const Box = BoxConstruct?.[as] as React.ElementType
 
     if (Box === undefined) {
@@ -38,14 +38,14 @@ const Box = React.forwardRef<BoxPrimitiveRef, BoxPrimitiveProps>(
 
     if (as === 'child') {
       return (
-        <BoxConstruct.child sp={sp} {...props} ref={forwardedRef}>
+        <BoxConstruct.child {...props} ref={forwardedRef}>
           {children}
         </BoxConstruct.child>
       )
     }
 
     return (
-      <Box as={as} sp={sp} ref={forwardedRef} {...props}>
+      <Box as={as} ref={forwardedRef} {...props}>
         {children}
       </Box>
     )
