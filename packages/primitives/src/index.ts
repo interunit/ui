@@ -1,1 +1,1 @@
-export {Primitive} from './Primitive'
+export {Primitive} from './primitive'

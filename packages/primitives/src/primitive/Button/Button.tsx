@@ -1,27 +1,27 @@
 import React from 'react'
 import type {Pressable} from 'react-native'
 
-import {Element} from '../config'
+import {Construct} from '../../config'
 
-type ValidWebButtonElement = HTMLButtonElement
-type ValidNativeButtonElement = typeof Pressable
-type ValidButtonElements = ValidWebButtonElement & ValidNativeButtonElement
-type ValidButtonElementProps = React.HTMLProps<ValidButtonElements> &
+type ValidWebButtonConstruct = HTMLButtonElement
+type ValidNativeButtonConstruct = typeof Pressable
+type ValidButtonConstruct = ValidWebButtonConstruct & ValidNativeButtonConstruct
+type ValidButtonConstructProps = React.HTMLProps<ValidButtonConstruct> &
   React.ComponentProps<typeof Pressable>
 
-const ButtonElement = {
-  button: Element.Button
+const ButtonConstruct = {
+  button: Construct.Button
 }
 
-type ButtonElementAs = 'button'
+type ButtonConstructAs = 'button'
 
-type ButtonPrimitiveProps = ValidButtonElementProps & {
-  as?: ButtonElementAs
+type ButtonPrimitiveProps = ValidButtonConstructProps & {
+  as?: ButtonConstructAs
   type?: 'button' | 'submit' | 'reset'
   role?: 'button' | 'link'
   disabled?: boolean
   children: React.ReactNode
-  ref?: React.Ref<ValidButtonElements>
+  ref?: React.Ref<ValidButtonConstruct>
 
   /*
    * Similar accessibility props between React Native and Web
@@ -39,7 +39,7 @@ type ButtonPrimitiveProps = ValidButtonElementProps & {
   }
 }
 
-type ButtonPrimitiveRef = ValidButtonElements
+type ButtonPrimitiveRef = ValidButtonConstruct
 
 const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
   (
@@ -63,7 +63,7 @@ const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
       accessibilityState: props.accessibilityState ?? {disabled}
     }
 
-    const Button = ButtonElement?.[as]
+    const Button = ButtonConstruct?.[as] as React.ElementType
 
     if (Button === undefined) {
       throw new Error(
@@ -71,9 +71,9 @@ const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
       )
     }
 
-
     return (
       <Button
+        as={as}
         type={type}
         role={role}
         disabled={disabled}

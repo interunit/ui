@@ -29,5 +29,6 @@
   "globals": {
     "React": true,
     "JSX": true
-  }
+  },
+  "ignorePatterns": ["node_modules/", "dist/", "build/", "coverage/", "public/"]
 }
