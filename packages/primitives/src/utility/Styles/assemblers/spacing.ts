@@ -1,11 +1,11 @@
-import {DEFAULT_UNIT} from '../../../config'
+import {ENVIRONMENT} from '../../../config'
 import {
   type OrderingProperty,
   formatOrderingProperty
 } from '../helpers/orderingProperty'
 
 // TODO: Let user override this
-const DEFAULT_SPACING_UNIT = DEFAULT_UNIT.SPACING
+const DEFAULT_SPACING_UNIT = ENVIRONMENT.DEFAULT_UNIT.SPACING
 
 export type Spacing = {
   sp?: SpacingValue

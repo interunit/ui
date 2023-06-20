@@ -6,11 +6,13 @@ import {
   type StyledComponentTag
 } from '../Construct'
 
-
-export const DEFAULT_UNIT = {
+export const ENVIRONMENT = {
+  NAME: 'web',
+  DEFAULT_UNIT: {
     SPACING: 'rem',
     BORDER_WIDTH: 'px',
-    BORDER_RADIUS: 'px',
+    BORDER_RADIUS: 'px'
+  }
 }
 
 export const WebConstruct = [

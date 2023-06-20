@@ -1,11 +1,11 @@
 import {
+  type CrossPlatformStyled,
+  ENVIRONMENT,
   type InterConstruct,
   type StyledComponentTag,
-  type CrossPlatformStyled,
   WebConstruct,
   css,
-  styled,
-  DEFAULT_UNIT
+  styled
 } from './construct/WebConstruct'
 import {createWrappedConstruct} from './helpers/config'
 
@@ -16,10 +16,10 @@ const Construct = createWrappedConstruct({
 })
 
 export {
+  ENVIRONMENT,
   styled,
   css,
   ConstructType,
-  DEFAULT_UNIT,
   Construct,
   type InterConstruct,
   type StyledComponentTag,

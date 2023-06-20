@@ -1,4 +1,4 @@
-export {WebConstruct, styled, css, DEFAULT_UNIT} from './WebConstruct'
+export {WebConstruct, styled, css, ENVIRONMENT} from './WebConstruct'
 export {
   type InterConstruct,
   type StyledComponentTag,

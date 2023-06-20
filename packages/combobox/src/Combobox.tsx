@@ -56,7 +56,7 @@ const Combobox = ({type, value, onChange, options}: ComboboxProps) => {
         aria-expanded={isOpen}
         aria-haspopup="dialog"
       >
-        <Primitive.Box sp={{p: 8}} as="child">
+        <Primitive.Box sp={{p: 1}} as="span">
           <Primitive.Text as="span" fnt={{c: 'black'}}>
             {type === 'multi'
               ? !value || value.length === 0
@@ -77,7 +77,7 @@ const Combobox = ({type, value, onChange, options}: ComboboxProps) => {
                 onPress={() => handleChange(option.value)}
                 onClick={() => handleChange(option.value)}
                 bg={{c: '#ccc'}}
-                sp={{p: 16}}
+                sp={{p: 1}}
                 role="option"
               >
                 <Primitive.Text as="span" fnt={{c: 'black'}}>

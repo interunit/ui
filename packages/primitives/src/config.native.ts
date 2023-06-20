@@ -1,6 +1,6 @@
 import {
   type CrossPlatformStyled,
-  DEFAULT_UNIT,
+  ENVIRONMENT,
   type InterConstruct,
   NativeConstruct,
   type StyledComponentTag,
@@ -18,10 +18,10 @@ const Construct = createWrappedConstruct({
 export {
   styled,
   css,
-  ConstructType,
-  DEFAULT_UNIT,
+  type ConstructType,
   Construct,
   type InterConstruct,
   type StyledComponentTag,
-  type CrossPlatformStyled
+  type CrossPlatformStyled,
+  ENVIRONMENT
 }

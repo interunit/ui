@@ -1,37 +1,47 @@
-import { type OrderingProperty, formatOrderingProperty } from '../helpers//orderingProperty'
-import {DEFAULT_UNIT} from '../../../config'
+import {ENVIRONMENT} from '../../../config'
+import {
+  type OrderingProperty,
+  formatOrderingProperty
+} from '../helpers//orderingProperty'
 
-const DEFAULT_BORDER_WIDTH_UNIT = DEFAULT_UNIT.BORDER_WIDTH
-const DEFAULT_BORDER_RADIUS_UNIT = DEFAULT_UNIT.BORDER_RADIUS
+const DEFAULT_BORDER_WIDTH_UNIT = ENVIRONMENT.DEFAULT_UNIT.BORDER_WIDTH
+const DEFAULT_BORDER_RADIUS_UNIT = ENVIRONMENT.DEFAULT_UNIT.BORDER_RADIUS
 export type Border = {
-    // Border Color
-    c?: string; // TODO: Make this based on predefined colors
-    // Border Width
-    w?: OrderingProperty;
-    // Border Style
-    s?: 'solid' | 'dashed' | 'dotted';
-    // Border Radius
-    r?: OrderingProperty;
+  // Border Color
+  c?: string // TODO: Make this based on predefined colors
+  // Border Width
+  w?: OrderingProperty
+  // Border Style
+  s?: 'solid' | 'dashed' | 'dotted'
+  // Border Radius
+  r?: OrderingProperty
 }
 
 const borderAssembler = ({bdr}: {bdr?: Border}) => {
-    if(!bdr) return undefined
+  if (!bdr) return undefined
 
-    let result = ''
+  let result = ''
 
-    if(bdr.c) result += `border-color: ${bdr.c};`
+  if (bdr.c) result += `border-color: ${bdr.c};`
 
-    if(bdr.w) result += `border-width: ${formatOrderingProperty({value: bdr.w, unit: DEFAULT_BORDER_WIDTH_UNIT})};`
+  if (bdr.w)
+    result += `border-width: ${formatOrderingProperty({
+      value: bdr.w,
+      unit: DEFAULT_BORDER_WIDTH_UNIT
+    })};`
 
-    if(bdr.s) result += `border-style: ${bdr.s};`
+  if (bdr.s) result += `border-style: ${bdr.s};`
 
-    if(bdr.r) result += `border-radius: ${formatOrderingProperty({value: bdr.r, unit: DEFAULT_BORDER_RADIUS_UNIT})};`
+  if (bdr.r)
+    result += `border-radius: ${formatOrderingProperty({
+      value: bdr.r,
+      unit: DEFAULT_BORDER_RADIUS_UNIT
+    })};`
 
-    return result;
-
+  return result
 }
 
 export const border = {
-    assembler: borderAssembler,
-    propNames: ['bdr']
+  assembler: borderAssembler,
+  propNames: ['bdr']
 }
