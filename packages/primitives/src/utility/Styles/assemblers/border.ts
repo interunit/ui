@@ -1,7 +1,8 @@
 import { type OrderingProperty, formatOrderingProperty } from '../helpers//orderingProperty'
+import {DEFAULT_UNIT} from '../../../config'
 
-const DEFAULT_BORDER_WIDTH_UNIT = 'px'
-const DEFAULT_BORDER_RADIUS_UNIT = 'px'
+const DEFAULT_BORDER_WIDTH_UNIT = DEFAULT_UNIT.BORDER_WIDTH
+const DEFAULT_BORDER_RADIUS_UNIT = DEFAULT_UNIT.BORDER_RADIUS
 export type Border = {
     // Border Color
     c?: string; // TODO: Make this based on predefined colors
@@ -13,7 +14,7 @@ export type Border = {
     r?: OrderingProperty;
 }
 
-const borderAssembler = ({bdr}: {bdr: Border}) => {
+const borderAssembler = ({bdr}: {bdr?: Border}) => {
     if(!bdr) return undefined
 
     let result = ''

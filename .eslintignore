@@ -1,4 +1,3 @@
-
 .DS_Store
 
 # Node
@@ -6,5 +5,14 @@ node_modules
 
 # Build
 .turbo
-dist/**
-types/**
+types/
+dist/
+
+# Expo
+ios/
+android/
+.bundle/
+.expo
+
+# Next
+.next

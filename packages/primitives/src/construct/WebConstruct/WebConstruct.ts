@@ -1,7 +1,17 @@
 import styled, {css} from 'styled-components'
 
-import {type CrossPlatformStyled, type InterConstruct, type StyledComponentTag} from '../Construct'
+import {
+  type CrossPlatformStyled,
+  type InterConstruct,
+  type StyledComponentTag
+} from '../Construct'
 
+
+export const DEFAULT_UNIT = {
+    SPACING: 'rem',
+    BORDER_WIDTH: 'px',
+    BORDER_RADIUS: 'px',
+}
 
 export const WebConstruct = [
   {
@@ -70,4 +80,10 @@ export const WebConstruct = [
   }
 ]
 
-export {styled, css, type InterConstruct, type StyledComponentTag, type CrossPlatformStyled}
+export {
+  styled,
+  css,
+  type InterConstruct,
+  type StyledComponentTag,
+  type CrossPlatformStyled
+}

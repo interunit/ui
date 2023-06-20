@@ -1,0 +1,9 @@
+.changeset
+.vscode
+__generated__
+**/dist
+**/node_modules
+**/ios
+**/vendor
+**/.expo
+**/.next

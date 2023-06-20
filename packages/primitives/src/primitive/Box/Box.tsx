@@ -36,16 +36,30 @@ const Box = React.forwardRef<BoxPrimitiveRef, BoxPrimitiveProps>(
       throw new Error(`The element "${as}" doesn't exist in the Box component.`)
     }
 
+    // TODO: probably makes sense to centralize this
+    const accessibilityProps = {
+      accessible: props.accessible ?? undefined,
+      accessibilityLabel:
+        props?.accessibilityLabel ?? props?.['aria-label'] ?? undefined,
+      accessibilityRole: props?.accessibilityRole ?? props?.role ?? undefined,
+      accessibilityState:
+        props?.accessibilityState ?? props.disabled ?? undefined
+    }
+
     if (as === 'child') {
       return (
-        <BoxConstruct.child {...props} ref={forwardedRef}>
+        <BoxConstruct.child
+          ref={forwardedRef}
+          {...props}
+          {...accessibilityProps}
+        >
           {children}
         </BoxConstruct.child>
       )
     }
 
     return (
-      <Box as={as} ref={forwardedRef} {...props}>
+      <Box ref={forwardedRef} {...props}>
         {children}
       </Box>
     )

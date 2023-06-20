@@ -4,7 +4,8 @@ import {
   type CrossPlatformStyled,
   WebConstruct,
   css,
-  styled
+  styled,
+  DEFAULT_UNIT
 } from './construct/WebConstruct'
 import {createWrappedConstruct} from './helpers/config'
 
@@ -18,6 +19,7 @@ export {
   styled,
   css,
   ConstructType,
+  DEFAULT_UNIT,
   Construct,
   type InterConstruct,
   type StyledComponentTag,

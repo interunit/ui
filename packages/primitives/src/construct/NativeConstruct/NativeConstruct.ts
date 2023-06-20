@@ -6,6 +6,12 @@ import {
   type StyledComponentTag
 } from '../Construct'
 
+export const DEFAULT_UNIT = {
+  SPACING: 'px', // TODO, will need to do conversion on rem
+  BORDER_WIDTH: 'px',
+  BORDER_RADIUS: 'px'
+}
+
 export const NativeConstruct = [
   {
     inter: 'A' as InterConstruct,
@@ -73,5 +79,6 @@ export {
   styled,
   css,
   type InterConstruct,
-  type StyledComponentTag, type CrossPlatformStyled
+  type StyledComponentTag,
+  type CrossPlatformStyled
 }

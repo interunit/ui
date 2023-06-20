@@ -37,12 +37,12 @@ type TextConstructAs =
   | 'span'
 
 // TODO: cut out the HTML element types that are not valid for each TextConstructAs
-type TextPrimitiveProps = ValidTextConstructProps & UtilityStyles & {
-  as: TextConstructAs
-  css?: string
-  children: React.ReactNode
-  ref?: React.Ref<ValidTextConstruct>
-}
+type TextPrimitiveProps = ValidTextConstructProps &
+  UtilityStyles & {
+    as: TextConstructAs
+    children: React.ReactNode
+    ref?: React.Ref<ValidTextConstruct>
+  }
 
 type TextPrimitiveRef = ValidTextConstruct
 
@@ -57,7 +57,7 @@ const Text = React.forwardRef<TextPrimitiveRef, TextPrimitiveProps>(
     }
 
     return (
-      <Text as={as} ref={forwardedRef} {...props}>
+      <Text ref={forwardedRef} {...props}>
         {children}
       </Text>
     )

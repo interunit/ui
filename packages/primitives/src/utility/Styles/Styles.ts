@@ -6,18 +6,19 @@ import {
 } from '../../config'
 
 import {type Background, background} from './assemblers/background'
+import {type Border, border} from './assemblers/border'
+import {type Font, font} from './assemblers/font'
 import {type Spacing, spacing} from './assemblers/spacing'
-import { type Border, border }from './assemblers/border'
 
 const assemblers = [spacing.assembler, background.assembler, border.assembler]
-const propNames = [...spacing.propNames, ...background.propNames, ...border.propNames]
+const propNames = [
+  ...background.propNames,
+  ...border.propNames,
+  ...font.propNames,
+  ...spacing.propNames
+]
 
-// TODO: Automate this
-export type UtilityStyles = {
-  sp: Spacing
-  bg: Background
-  bdr: Border
-}
+export type UtilityStyles = Font & Spacing & Background & Border
 
 const assemble = (props: UtilityStyles) => {
   return assemblers.map(assembler => assembler(props)).join('\n')

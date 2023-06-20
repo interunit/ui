@@ -1,0 +1,1 @@
+export { Primitive } from './src';

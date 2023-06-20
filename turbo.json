@@ -7,7 +7,7 @@
       "outputs": ["dist/**", "types/**"],
       "cache": false
     },
-    "dev": {
+    "dev:all": {
       "cache": false,
       "persistent": true
     },

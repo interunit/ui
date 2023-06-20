@@ -18,7 +18,6 @@ type ButtonConstructAs = 'button'
 type ButtonPrimitiveProps = ValidButtonConstructProps & {
   as?: ButtonConstructAs
   type?: 'button' | 'submit' | 'reset'
-  role?: 'button' | 'link'
   disabled?: boolean
   children: React.ReactNode
   ref?: React.Ref<ValidButtonConstruct>
@@ -26,7 +25,6 @@ type ButtonPrimitiveProps = ValidButtonConstructProps & {
   /*
    * Similar accessibility props between React Native and Web
    */
-
   // Web Accessibility
   'aria-label'?: string
 
@@ -42,25 +40,18 @@ type ButtonPrimitiveProps = ValidButtonConstructProps & {
 type ButtonPrimitiveRef = ValidButtonConstruct
 
 const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
-  (
-    {
-      as = 'button',
-      type = 'button',
-      role = 'button',
-      disabled,
-      children,
-      ...props
-    },
-    forwardedRef
-  ) => {
+  ({as = 'button', type = 'button', children, ...props}, forwardedRef) => {
     /*
      * Map similar accessibility props between React Native and Web
      */
+    // TODO: probably makes sense to centralize this
     const accessibilityProps = {
-      accessible: props.accessible ?? true,
-      accessibilityLabel: props.accessibilityLabel ?? props['aria-label'],
-      accessibilityRole: props.accessibilityRole ?? role,
-      accessibilityState: props.accessibilityState ?? {disabled}
+      accessible: props.accessible ?? undefined,
+      accessibilityLabel:
+        props?.accessibilityLabel ?? props?.['aria-label'] ?? undefined,
+      accessibilityRole: props?.accessibilityRole ?? props?.role ?? undefined,
+      accessibilityState:
+        props?.accessibilityState ?? props?.disabled ?? undefined
     }
 
     const Button = ButtonConstruct?.[as] as React.ElementType
@@ -72,15 +63,7 @@ const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
     }
 
     return (
-      <Button
-        as={as}
-        type={type}
-        role={role}
-        disabled={disabled}
-        ref={forwardedRef}
-        {...accessibilityProps}
-        {...props}
-      >
+      <Button type={type} ref={forwardedRef} {...accessibilityProps} {...props}>
         {children}
       </Button>
     )

@@ -1,14 +1,31 @@
 .DS_Store
+*.log
 
 # Node
 node_modules
 
 # Build
 .turbo
-dist
-types
-lib
+types/
+dist/
+
+# Expo
+ios/
+android/
+.bundle/
+.expo
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+.metro-health-check*
+
+# Next
+.next
 
 
-# Local Dev
-test-apps

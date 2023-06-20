@@ -1,8 +1,12 @@
 export type Background = {
+  bg?: BackgroundValue
+}
+
+type BackgroundValue = {
   c?: string // TODO: Make this based on predefined colors
 }
 
-const backgroundAssembler = ({bg}: {bg: Background}) => {
+const backgroundAssembler = ({bg}: {bg?: BackgroundValue}) => {
   if (!bg) return undefined
 
   let result = ''
@@ -14,5 +18,5 @@ const backgroundAssembler = ({bg}: {bg: Background}) => {
 
 export const background = {
   assembler: backgroundAssembler,
-  propNames: ['bg'],
+  propNames: ['bg']
 }
