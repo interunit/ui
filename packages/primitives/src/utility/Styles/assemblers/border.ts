@@ -27,7 +27,7 @@ const borderAssembler = ({bdr}: {bdr?: Border}) => {
   if (bdr.w)
     result += `border-width: ${formatOrderingProperty({
       value: bdr.w,
-      unit: DEFAULT_BORDER_WIDTH_UNIT
+      unit: DEFAULT_BORDER_WIDTH_UNIT as 'px' | 'rem'
     })};`
 
   if (bdr.s) result += `border-style: ${bdr.s};`
@@ -35,7 +35,7 @@ const borderAssembler = ({bdr}: {bdr?: Border}) => {
   if (bdr.r)
     result += `border-radius: ${formatOrderingProperty({
       value: bdr.r,
-      unit: DEFAULT_BORDER_RADIUS_UNIT
+      unit: DEFAULT_BORDER_RADIUS_UNIT as 'px' | 'rem'
     })};`
 
   return result

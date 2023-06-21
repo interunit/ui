@@ -19,7 +19,7 @@ export {
   ENVIRONMENT,
   styled,
   css,
-  ConstructType,
+ type ConstructType,
   Construct,
   type InterConstruct,
   type StyledComponentTag,

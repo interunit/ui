@@ -34,8 +34,8 @@ to: packages/<%= packageName %>/package.json
   },
   "homepage": "https://github.com/interunit/ui#readme",
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-native": "^0.71.11",
-    "styled-components": "^6.0.0-rc.3"
+    "react": "^18",
+    "react-native": "^0.71",
+    "styled-components": "^6"
   }
 }

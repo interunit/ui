@@ -6,7 +6,6 @@
   "main": "dist/interunit-primitives.cjs.js",
   "types": "dist/interunit-primitives.cjs.d.ts",
   "module": "dist/interunit-primitives.esm.js",
-  "react-native": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/interunit/ui.git"
@@ -26,8 +25,8 @@
     "typescript": "^5.1.3"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-native": "^0.71.11",
-    "styled-components": "^6.0.0-rc.3"
+    "react": "^18",
+    "react-native": "^0.71",
+    "styled-components": "^6"
   }
 }
