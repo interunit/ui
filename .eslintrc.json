@@ -12,9 +12,6 @@
     "node": true,
     "browser": true
   },
-  "parserOptions": {
-    "project": true
-  },
   "plugins": ["@typescript-eslint", "import"],
   "overrides": [
     {
