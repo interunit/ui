@@ -7,6 +7,7 @@
     "lint:eslint": "eslint --ext .ts,.tsx .",
     "lint:tsx": "tsc",
     "preconstruct:build": "preconstruct build",
+    "create:package": "npx hygen create package",
     "util:clean": "rm -rf node_modules **/node_modules **/**/node_modules **/**/**/node_modules && rm -rf $TMPDIR/react-* && watchman watch-del-all && yarn cache clean",
     "postinstall": "preconstruct dev"
   },
