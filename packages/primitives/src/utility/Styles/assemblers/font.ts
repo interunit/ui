@@ -11,7 +11,7 @@ const fontAssembler = ({fnt}: {fnt?: FontValues}) => {
 
   let result = ''
 
-  if (fnt.c) result += `color ${fnt.c};`
+  if (fnt.c) result += `color: ${fnt.c};`
 
   return result
 }

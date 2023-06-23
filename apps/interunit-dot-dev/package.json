@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@interunit/config": "*",
     "@interunit/combobox": "*",
     "@interunit/primitives": "*",
     "@preconstruct/next": "^4.0.0",
