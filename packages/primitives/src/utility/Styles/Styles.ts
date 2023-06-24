@@ -53,8 +53,8 @@ const Styles = ({element}: {element: StyledComponentTag}) => {
         ${assemble(props)}
       `}
 
-    // Was originally added when playing with design tokens,
-    // maybe we'll need these late so leaving for now
+ /* Was originally added when playing with design tokens,
+     maybe we'll need these late so leaving for now */
     ${(props: StylesProps) =>
       props.injectedStylesString &&
       css`

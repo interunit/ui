@@ -1,0 +1,1 @@
+export { useComponentExtension } from './componentExtension';

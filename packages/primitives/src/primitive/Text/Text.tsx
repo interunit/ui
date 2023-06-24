@@ -37,12 +37,13 @@ type TextConstructAs =
   | 'span'
 
 // TODO: cut out the HTML element types that are not valid for each TextConstructAs
-type TextPrimitiveProps = ValidTextConstructProps &
-  UtilityStyles & {
-    as: TextConstructAs
-    children: React.ReactNode
-    ref?: React.Ref<ValidTextConstruct>
-  }
+export interface TextPrimitiveProps
+  extends ValidTextConstructProps,
+    UtilityStyles {
+  as: TextConstructAs
+  children: React.ReactNode
+  ref?: React.Ref<ValidTextConstruct>
+}
 
 type TextPrimitiveRef = ValidTextConstruct
 

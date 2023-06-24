@@ -1,22 +1,12 @@
 'use client'
 
-import {useTheme} from '@interunit/config'
-import {Primitive} from '@interunit/primitives'
-
-import {InterUnitProvider} from '../../../interunit.config'
-
-const Content = () => {
-  const theme = useTheme()
-  return (
-    <Primitive.Text as="span" fnt={{c: theme.textColor}}>
-      hi
-    </Primitive.Text>
-  )
-}
+import {InterUnitProvider} from '@interunit/config'
+import {config} from '../../../interunit.config'
+import {Content} from './TextContent'
 
 const Config = () => {
   return (
-    <InterUnitProvider>
+    <InterUnitProvider config={config}>
       <Content />
     </InterUnitProvider>
   )

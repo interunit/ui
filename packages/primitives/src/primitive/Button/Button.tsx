@@ -15,7 +15,7 @@ const ButtonConstruct = {
 
 type ButtonConstructAs = 'button'
 
-type ButtonPrimitiveProps = ValidButtonConstructProps & {
+export type ButtonPrimitiveProps = ValidButtonConstructProps & {
   as?: ButtonConstructAs
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean

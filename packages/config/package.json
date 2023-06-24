@@ -7,7 +7,9 @@
   "types": "dist/interunit-config.cjs.d.ts",
   "module": "dist/interunit-config.esm.js",
   "react-native": "src/index.tsx",
-  "dependendices": {},
+  "dependendices": {
+      "@interunit/primitives": "*"
+  },
   "devDependencies": {
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",

@@ -1,1 +1,8 @@
-export {createInterUnit, InterUnitInternals, useTheme, withTheme} from './createInterUnit'
+export {
+  createInterUnit,
+  InterUnitInternals,
+  InterUnitProvider,
+  useTheme,
+  withTheme
+} from './createInterUnit'
+

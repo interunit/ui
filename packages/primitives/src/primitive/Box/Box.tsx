@@ -19,7 +19,7 @@ const BoxConstruct = {
 
 type BoxConstructAs = 'div' | 'span' | 'child'
 
-type BoxPrimitiveProps = ValidBoxConstructProps &
+export type BoxPrimitiveProps = ValidBoxConstructProps &
   UtilityStyles & {
     as: BoxConstructAs
     children: React.ReactNode

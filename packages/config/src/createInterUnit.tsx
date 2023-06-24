@@ -1,4 +1,3 @@
-import React from 'react'
 
 import {type InterUnitConfig} from './config'
 import {
@@ -8,25 +7,23 @@ import {
   useTheme,
   withTheme
 } from './context'
+import {useComponentExtension} from './helpers/componentExtension'
+
+const createInterUnit = (config: InterUnitConfig) => {
+  return {config}
+}
 
 const InterUnitInternals = {
   InterUnitInternalContext,
-  useInterUnitInternalContext
+  InterUnitInternalProvider,
+  useInterUnitInternalContext,
+  useComponentExtension
 }
 
-const createInterUnit = (config: InterUnitConfig) => {
-  const InterUnitProvider = (props: {
-    children: React.ReactElement
-  }): React.ReactNode => {
-    return (
-      <InterUnitInternalProvider config={config} children={props.children} />
-    )
-  }
-  const InterUnit = {
-    InterUnitProvider: InterUnitProvider as unknown as React.ReactNode
-  }
-
-  return InterUnit
+export {
+  createInterUnit,
+  InterUnitInternalProvider as InterUnitProvider,
+  InterUnitInternals,
+  useTheme,
+  withTheme
 }
-
-export {createInterUnit, useTheme, withTheme, InterUnitInternals}

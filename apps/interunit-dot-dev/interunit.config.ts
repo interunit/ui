@@ -1,9 +1,15 @@
 import {createInterUnit} from '@interunit/config'
 
-const {InterUnitProvider} = createInterUnit({
-        theme: {
-            textColor: 'green'
-        }
+import {TextPrimitive} from './components/TextPrimitive'
+
+const {config} = createInterUnit({
+  theme: {
+    textColor: 'green',
+    backgroundColor: 'yellow'
+  },
+  primitiveExtension: {
+    Text: TextPrimitive
+  }
 })
 
-export {InterUnitProvider}
+export {config}

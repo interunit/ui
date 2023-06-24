@@ -20,7 +20,7 @@ const InterUnitInternalProvider = ({
 }
 
 const useInterUnitInternalContext = () => {
-  return React.useContext(InterUnitInternalContext)
+  return React.useContext(InterUnitInternalContext) as InterUnitConfig
 }
 
 export {
