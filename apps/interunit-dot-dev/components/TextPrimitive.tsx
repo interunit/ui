@@ -1,20 +1,34 @@
 import React from 'react'
-import styled from 'styled-components'
 
-import {Primitive, type PrimitiveToExtend} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
+import {StylesExtender} from '@interunit/primitives'
+import {type PrimitiveToExtend} from '@interunit/primitives'
 
-const StyledTextPrimitive = styled(Primitive.Text)<{outline?: string}>`
-  outline: ${props => props.outline};
-`
+type StyledPrimitiveProps = {
+  $outline?: string
+}
 
-const TextPrimitive: PrimitiveToExtend<{outline?: string}>['Text'] = ({
-  as,
+const StyledTextPrimitive = ({
+  css,
+  ...props
+}: {
+  css: string
+  children: React.ReactNode
+}) => {
+  return StylesExtender({as: Primitive.Text, css, ...props})
+}
+
+const TextPrimitive: PrimitiveToExtend<StyledPrimitiveProps>['Text'] = ({
   children,
-  outline,
+  $outline,
   ...props
 }: React.ComponentProps<typeof Primitive.Text>) => {
+  const css = `
+    outline: ${$outline};
+    `
+
   return (
-    <StyledTextPrimitive as={as} outline={outline} {...props}>
+    <StyledTextPrimitive css={css} {...props}>
       {children}
     </StyledTextPrimitive>
   )

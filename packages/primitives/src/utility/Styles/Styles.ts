@@ -1,3 +1,5 @@
+import type React from 'react'
+
 import {
   type CrossPlatformStyled,
   type StyledComponentTag,
@@ -37,20 +39,25 @@ const assemble = (props: UtilityStyles) => {
   return assemblers.map(assembler => assembler(props)).join('\n')
 }
 
-type StylesProps = UtilityStyles & InjectedStyles
 
-const Styles = ({element}: {element: StyledComponentTag}) => {
+type StylesProps = UtilityStyles & InjectedStyles
+const Styles = ({
+  element,
+  customCss
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  element: StyledComponentTag | React.ReactNode | React.FC<any>
+  customCss: string
+}) => {
   const _styled = styled as CrossPlatformStyled
-  // This produces this error: "Expression produces a union type that is too complex to represent."
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   return _styled[element as StyledComponentTag].withConfig({
-    shouldForwardProp: (prop: string) =>
-      !propNames.some(propName => propName === prop)
+    shouldForwardProp: (propName: string) => !propNames.includes(propName)
   })<StylesProps>`
+  ${(props: StylesProps) => console.log('what', props)}
     ${(props: StylesProps) =>
       css`
         ${assemble(props)}
+        ${customCss}
       `}
 
  /* Was originally added when playing with design tokens,
