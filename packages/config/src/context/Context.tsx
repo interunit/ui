@@ -10,7 +10,7 @@ const InterUnitInternalProvider = ({
   children
 }: {
   config: InterUnitConfig
-  children: React.ReactElement
+  children: React.ReactNode
 }) => {
   return (
     <InterUnitInternalContext.Provider value={{...config}}>
