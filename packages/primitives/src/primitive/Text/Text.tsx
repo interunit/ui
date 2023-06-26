@@ -13,6 +13,7 @@ type ValidTextConstruct = ValidWebTextConstruct & ValidNativeTextConstruct
 type ValidTextConstructProps = React.HTMLProps<ValidTextConstruct> &
   React.ComponentProps<typeof RNText>
 
+// TODO: Add strong, em, etc
 const TextConstruct = {
   h1: Construct.H1,
   h2: Construct.H2,

@@ -23,7 +23,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@interunit/primitives": ["types/@interunit/primitives.d.ts"]
+      "@interunit/primitives": ["types/@interunit/primitives.d.ts"],
       "styled-components": ["types/styled-components.d.ts"]
     }
   },

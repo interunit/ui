@@ -1,2 +1,2 @@
 export {Primitive, type PrimitiveToExtend} from './primitive'
-export {StylesExtender} from './utility/Styles/StylesExtender'
+export {ExtendPrimitive} from './extend/ExtendPrimitive'

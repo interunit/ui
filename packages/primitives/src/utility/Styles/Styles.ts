@@ -3,7 +3,7 @@ import type React from 'react'
 import {
   type CrossPlatformStyled,
   type StyledComponentTag,
-  css,
+  css as StyledCss,
   styled
 } from '../../config'
 
@@ -23,62 +23,32 @@ const propNames = [
   ...border.propNames,
   ...font.propNames,
   ...spacing.propNames,
-  'injectedStylesString',
-  'injectedStylesArray'
+  'css'
 ]
 
 export type UtilityStyles = Font & Spacing & Background & Border
-type InjectedStyles = {
-  injectedStylesString?: string
-  injectedStylesArray?: {
-    [key: string]: string
-  }[]
-}
-
 const assemble = (props: UtilityStyles) => {
   return assemblers.map(assembler => assembler(props)).join('\n')
 }
 
-
-type StylesProps = UtilityStyles & InjectedStyles
+type StylesProps = UtilityStyles & {css?: string}
 const Styles = ({
   element,
-  customCss
+  css
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   element: StyledComponentTag | React.ReactNode | React.FC<any>
-  customCss: string
+  css?: string
 }) => {
   const _styled = styled as CrossPlatformStyled
   return _styled[element as StyledComponentTag].withConfig({
     shouldForwardProp: (propName: string) => !propNames.includes(propName)
   })<StylesProps>`
-  ${(props: StylesProps) => console.log('what', props)}
     ${(props: StylesProps) =>
-      css`
+      StyledCss`
+        ${css}
+        ${props.css}
         ${assemble(props)}
-        ${customCss}
-      `}
-
- /* Was originally added when playing with design tokens,
-     maybe we'll need these late so leaving for now */
-    ${(props: StylesProps) =>
-      props.injectedStylesString &&
-      css`
-        ${props.injectedStylesString}
-      `}
-    ${(props: StylesProps) =>
-      props.injectedStylesArray &&
-      css`
-        ${props.injectedStylesArray.map(
-          (injectedStyles: {[key: string]: string}) => css`
-            ${Object.keys(injectedStyles).map(
-              (key: string) => css`
-                ${key}: ${injectedStyles[key]};
-              `
-            )}
-          `
-        )}
       `}
     `
 }
