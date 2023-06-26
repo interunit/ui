@@ -1,17 +1,23 @@
 import React from 'react'
 
-import {Styles} from '../utility/Styles'
-
-// TODO: Span is fallback, would need fallback for RN as well
-const Component = Styles({element: 'span'})
+import type {Primitive} from '../primitive'
+import {PrimitveComponentToExtend} from '../primitive'
 
 const ExtendPrimitive = ({
+  primitiveToExtend,
   ...props
 }: {
+  primitiveToExtend: keyof typeof Primitive
   children: React.ReactNode
   css?: string
 }) => {
-  return <Component as="h3" {...props} />
+  const Component = PrimitveComponentToExtend[
+    primitiveToExtend
+  ] as (typeof Primitive)[keyof typeof Primitive]
+  // Intersecting types on "as", makes TS unhappy
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return <Component {...props} />
 }
 
 export {ExtendPrimitive}

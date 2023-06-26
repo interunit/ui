@@ -82,6 +82,12 @@ export interface PrimitiveToExtend<T> {
   Box: React.FC<BoxPrimitiveProps & T>
 }
 
+export const PrimitveComponentToExtend = {
+  Text: TextPrimitive,
+  Button: ButtonPrimitive,
+  Box: BoxPrimitive
+}
+
 export const Primitive = {
   Box,
   Button,

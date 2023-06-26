@@ -38,7 +38,11 @@ const TextPrimitive: PrimitiveToExtend<TextPrimitiveProps>['Text'] = ({
     color: ${theme.color.text.primary};
     `
   return (
-    <ExtendPrimitive css={css} {...props}>
+    <ExtendPrimitive
+      primitiveToExtend="Text"
+      css={css}
+      {...props}
+    >
       {children}
     </ExtendPrimitive>
   )
