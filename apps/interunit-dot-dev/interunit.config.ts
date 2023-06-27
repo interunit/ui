@@ -8,7 +8,11 @@ export const Theme = {
       primary: '#FFFFFF'
     },
     background: {
-      primary: '#1D1D27'
+      primary: '#1D1D27',
+      secondary: '#5E47C4'
+    },
+    border: {
+      primary: '#363645'
     }
   }
 }

@@ -24,7 +24,6 @@
     "paths": {
       "@/*": ["./*"],
       "@interunit/primitives": ["types/@interunit/primitives.d.ts"],
-      "styled-components": ["types/styled-components.d.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "types/**/*.d.ts"],
