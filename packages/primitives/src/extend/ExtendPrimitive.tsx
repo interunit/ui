@@ -14,7 +14,7 @@ const ExtendPrimitive = ({
   const Component = PrimitveComponentToExtend[
     primitiveToExtend
   ] as (typeof Primitive)[keyof typeof Primitive]
-  // Intersecting types on "as", makes TS unhappy
+  // TODO: Intersecting types on "as", makes TS unhappy
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   return <Component {...props} />
