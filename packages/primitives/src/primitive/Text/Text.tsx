@@ -13,6 +13,7 @@ type ValidTextConstruct = ValidWebTextConstruct & ValidNativeTextConstruct
 type ValidTextConstructProps = React.HTMLProps<ValidTextConstruct> &
   React.ComponentProps<typeof RNText>
 
+// TODO: Add strong, em, etc
 const TextConstruct = {
   h1: Construct.H1,
   h2: Construct.H2,
@@ -37,12 +38,13 @@ type TextConstructAs =
   | 'span'
 
 // TODO: cut out the HTML element types that are not valid for each TextConstructAs
-type TextPrimitiveProps = ValidTextConstructProps &
-  UtilityStyles & {
-    as: TextConstructAs
-    children: React.ReactNode
-    ref?: React.Ref<ValidTextConstruct>
-  }
+export interface TextPrimitiveProps
+  extends ValidTextConstructProps,
+    UtilityStyles {
+  as: TextConstructAs
+  children: React.ReactNode
+  ref?: React.Ref<ValidTextConstruct>
+}
 
 type TextPrimitiveRef = ValidTextConstruct
 

@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "moduleResolution": "node",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -9,7 +11,6 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -21,9 +22,11 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@interunit/primitives": ["types/@interunit/primitives.d.ts"],
+      "styled-components": ["types/styled-components.d.ts"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "types/**/*.d.ts"],
   "exclude": ["node_modules"]
 }

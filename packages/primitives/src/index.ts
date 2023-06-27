@@ -1,1 +1,2 @@
-export {Primitive} from './primitive'
+export {Primitive, type PrimitiveToExtend} from './primitive'
+export {ExtendPrimitive} from './extend/ExtendPrimitive'

@@ -1,15 +1,14 @@
 {
-  "name": "@interunit/combobox",
-  "version": "0.0.2",
-  "description": "",
+  "name": "@interunit/config",
+  "version": "0.0.1",
+  "description": "Handles all config for interactions between packages",
   "private": true,
-  "main": "dist/interunit-combobox.cjs.js",
-  "types": "dist/interunit-combobox.cjs.d.ts",
-  "module": "dist/interunit-combobox.esm.js",
-  "react-native": "src/index.ts",
-  "dependencies": {
-    "@interunit/config": "*",
-    "@interunit/primitives": "*"
+  "main": "dist/interunit-config.cjs.js",
+  "types": "dist/interunit-config.cjs.d.ts",
+  "module": "dist/interunit-config.esm.js",
+  "react-native": "src/index.tsx",
+  "dependendices": {
+      "@interunit/primitives": "*"
   },
   "devDependencies": {
     "@types/react": "18.2.12",

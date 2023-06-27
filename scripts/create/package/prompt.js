@@ -13,5 +13,10 @@ module.exports = [
     type: 'confirm',
     name: 'shouldIncludePrimitives',
     message: 'Should this package include @interunit/primitives?'
+  },
+  {
+    type: 'confirm',
+    name: 'shouldIncludeConfig',
+    message: 'Should this package include @interunit/config?'
   }
 ]
