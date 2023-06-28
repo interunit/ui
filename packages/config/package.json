@@ -6,7 +6,7 @@
   "main": "dist/interunit-config.cjs.js",
   "types": "dist/interunit-config.cjs.d.ts",
   "module": "dist/interunit-config.esm.js",
-  "react-native": "src/index.tsx",
+  "react-native": "src/index.native.ts",
   "dependendices": {
       "@interunit/primitives": "*"
   },

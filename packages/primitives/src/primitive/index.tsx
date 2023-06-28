@@ -30,51 +30,53 @@ const Text = <T extends unknown>({
   )
 }
 
-const Button = <T extends unknown>({
-  as,
-  children,
-  ...props
-}: ButtonPrimitiveProps & T) => {
-  const config = InterUnitInternals.useInterUnitInternalContext()
-  const ButtonExtension = config?.primitiveExtension?.['Button']
+const Button = React.forwardRef(
+  <T extends unknown>(
+    {as, children, ...props}: ButtonPrimitiveProps & T,
+    forwardedRef: React.ForwardedRef<ButtonPrimitiveProps>
+  ) => {
+    const config = InterUnitInternals.useInterUnitInternalContext()
+    const ButtonExtension = config?.primitiveExtension?.['Button']
 
-  if (ButtonExtension) {
-    const TypedButtonExtension = ButtonExtension
+    if (ButtonExtension) {
+      const TypedButtonExtension = ButtonExtension
+      return (
+        <TypedButtonExtension as={as} {...props} ref={forwardedRef}>
+          {children}
+        </TypedButtonExtension>
+      )
+    }
     return (
-      <TypedButtonExtension as={as} {...props}>
+      <ButtonPrimitive as={as} {...props} ref={forwardedRef}>
         {children}
-      </TypedButtonExtension>
+      </ButtonPrimitive>
     )
   }
-  return (
-    <ButtonPrimitive as={as} {...props}>
-      {children}
-    </ButtonPrimitive>
-  )
-}
+)
 
-const Box = <T extends unknown>({
-  as,
-  children,
-  ...props
-}: BoxPrimitiveProps & T) => {
-  const config = InterUnitInternals.useInterUnitInternalContext()
-  const BoxExtension = config?.primitiveExtension?.['Box']
+const Box = React.forwardRef(
+  <T extends unknown>(
+    {as, children, ...props}: BoxPrimitiveProps & T,
+    forwardedRef: React.ForwardedRef<BoxPrimitiveProps>
+  ) => {
+    const config = InterUnitInternals.useInterUnitInternalContext()
+    const BoxExtension = config?.primitiveExtension?.['Box']
 
-  if (BoxExtension) {
-    const TypedBoxExtension = BoxExtension
+    if (BoxExtension) {
+      const TypedBoxExtension = BoxExtension
+      return (
+        <TypedBoxExtension as={as} ref={forwardedRef} {...props}>
+          {children}
+        </TypedBoxExtension>
+      )
+    }
     return (
-      <TypedBoxExtension as={as} {...props}>
+      <BoxPrimitive as={as} ref={forwardedRef} {...props}>
         {children}
-      </TypedBoxExtension>
+      </BoxPrimitive>
     )
   }
-  return (
-    <BoxPrimitive as={as} {...props}>
-      {children}
-    </BoxPrimitive>
-  )
-}
+)
 
 export interface PrimitiveToExtend<T> {
   Text: React.FC<TextPrimitiveProps & T>

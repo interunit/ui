@@ -58,5 +58,8 @@
     "url": "https://github.com/interunit/ui/issues"
   },
   "homepage": "https://github.com/interunit/ui#readme",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@babel/runtime": "^7.22.5"
+  }
 }

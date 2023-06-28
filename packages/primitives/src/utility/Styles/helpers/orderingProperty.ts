@@ -1,33 +1,10 @@
-import {ENVIRONMENT} from '../../../config'
+import { valueConversion } from './valueConversion'
 
 export type OrderingProperty =
   | [number, number, number, number]
   | [number, number]
   | [number]
   | number
-
-const valueConversion = ({
-  value,
-  unit
-}: {
-  value: number
-  unit: 'px' | 'rem'
-}) => {
-  if (ENVIRONMENT.NAME === 'web') {
-    return `${value}${unit}`
-  }
-
-  console.log(ENVIRONMENT.NAME, value, unit)
-
-  if (ENVIRONMENT.NAME === 'native') {
-    if (unit.toLowerCase() === 'rem') {
-      console.log('rem')
-      return `${value * 16}px`
-    }
-
-    return `${value}${unit}`
-  }
-}
 
 export const formatOrderingProperty = ({
   value,

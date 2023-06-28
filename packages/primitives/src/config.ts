@@ -1,18 +1,15 @@
-import {
-  type CrossPlatformStyled,
-  ENVIRONMENT,
-  type InterConstruct,
-  type StyledComponentTag,
-  WebConstruct,
-  css,
-  styled
-} from './construct/WebConstruct'
+
+import { InterUnitInternals, css, styled, type InterConstruct, type ConstructTag, type CrossPlatformStyled} from '@interunit/config'
+
 import {createWrappedConstruct} from './helpers/config'
 
-type ConstructType = typeof WebConstruct
+const ConstructFromConfig = InterUnitInternals.InterUnitInternalConfig.ConstructFromConfig
+const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT
+
+type ConstructType = typeof ConstructFromConfig
 
 const Construct = createWrappedConstruct({
-  Construct: WebConstruct
+  Construct: ConstructFromConfig,
 })
 
 export {
@@ -22,6 +19,6 @@ export {
  type ConstructType,
   Construct,
   type InterConstruct,
-  type StyledComponentTag,
+  type ConstructTag,
   type CrossPlatformStyled
 }

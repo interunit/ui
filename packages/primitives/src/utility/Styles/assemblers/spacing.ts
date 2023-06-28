@@ -1,9 +1,10 @@
-import {ENVIRONMENT} from '../../../config'
+import {InterUnitInternals} from '@interunit/config'
 import {
   type OrderingProperty,
   formatOrderingProperty
 } from '../helpers/orderingProperty'
 
+const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT
 // TODO: Let user override this
 const DEFAULT_SPACING_UNIT = ENVIRONMENT.DEFAULT_UNIT.SPACING
 
@@ -43,14 +44,14 @@ export const spacingAssembler = ({sp}: {sp?: SpacingValue}) => {
   if (sp?.p) {
     result += `padding: ${formatOrderingProperty({
       value: sp.p,
-      unit: DEFAULT_SPACING_UNIT
+      unit: DEFAULT_SPACING_UNIT as 'rem'
     })};`
   }
 
   if (sp?.m) {
     result += `margin: ${formatOrderingProperty({
       value: sp.m,
-      unit: DEFAULT_SPACING_UNIT
+      unit: DEFAULT_SPACING_UNIT as 'rem'
     })};`
   }
 
