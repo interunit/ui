@@ -19,34 +19,36 @@ const ButtonConstruct = {
 
 type ButtonConstructAs = 'button'
 
-export type ButtonPrimitiveProps = ValidButtonConstructProps &
-  UtilityStyles & {
-    as?: ButtonConstructAs
-    type?: 'button' | 'submit' | 'reset'
+export interface ButtonPrimitiveProps
+  extends ValidButtonConstructProps,
+    UtilityStyles {
+  as?: ButtonConstructAs
+  type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
+  children: React.ReactNode
+  ref?: React.Ref<ValidButtonConstruct>
+  onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
+
+  /*
+   * Similar accessibility props between React Native and Web
+   */
+  // Web Accessibility
+  'aria-label'?: string
+
+  // Native Accessibility
+  accessible?: boolean
+  accessibilityLabel?: string
+  accessibilityRole?: string
+  accessibilityState?: {
     disabled?: boolean
-    children: React.ReactNode
-    ref?: React.Ref<ValidButtonConstruct>
-    onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
-
-    /*
-     * Similar accessibility props between React Native and Web
-     */
-    // Web Accessibility
-    'aria-label'?: string
-
-    // Native Accessibility
-    accessible?: boolean
-    accessibilityLabel?: string
-    accessibilityRole?: string
-    accessibilityState?: {
-      disabled?: boolean
-    }
   }
+}
 
 type ButtonPrimitiveRef = ValidButtonConstruct
 
 const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
   ({as = 'button', type = 'button', children, ...props}, forwardedRef) => {
+    console.log('HERE BUT', forwardedRef)
     /*
      * Map similar accessibility props between React Native and Web
      */

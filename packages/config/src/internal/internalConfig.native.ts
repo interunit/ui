@@ -74,6 +74,14 @@ export const ConstructFromConfig = [
   {
     inter: 'Textarea' as InterConstruct,
     styled: 'TextInput' as ConstructTag
+  },
+  {
+    inter: 'UL' as InterConstruct,
+    styled: 'View' as ConstructTag
+  },
+  {
+    inter: 'LI' as InterConstruct,
+    styled: 'View' as ConstructTag
   }
 ]
 

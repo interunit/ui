@@ -65,6 +65,7 @@ const Child = React.forwardRef<any, ChildProps>(
       React.useEffect(() => {
         if (internalUseRef.current && getChildDimensions) {
           const element = internalUseRef.current as unknown as HTMLElement
+          if (!element.getBoundingClientRect) return
           const clientRect = element.getBoundingClientRect()
 
           getChildDimensions({
@@ -79,14 +80,7 @@ const Child = React.forwardRef<any, ChildProps>(
       return (
         <ChildElement
           {...props}
-          ref={ref => {
-            internalUseRef.current = ref
-            if (typeof forwardedRef === 'function') {
-              forwardedRef(ref)
-            } else if (forwardedRef) {
-              forwardedRef.current = ref
-            }
-          }}
+          ref={forwardedRef}
         >
           {children}
         </ChildElement>
@@ -95,4 +89,13 @@ const Child = React.forwardRef<any, ChildProps>(
   }
 )
 
+          // ref={ref => {
+          //   internalUseRef.current = ref
+          //   console.log('HEREE', ref)
+          //   if (typeof forwardedRef === 'function') {
+          //     forwardedRef(ref)
+          //   } else if (forwardedRef) {
+          //     forwardedRef.current = ref
+          //   }
+          // }}
 export {Child}

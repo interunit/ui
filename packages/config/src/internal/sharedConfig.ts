@@ -27,3 +27,5 @@ export type InterConstruct =
   | 'P'
   | 'Select'
   | 'Span'
+  | 'LI'
+  | 'UL'

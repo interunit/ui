@@ -1,7 +1,5 @@
 import {createInterUnit} from '@interunit/config'
 
-import {TextPrimitive} from './components/TextPrimitive'
-
 export const Theme = {
   color: {
     text: {
@@ -13,16 +11,15 @@ export const Theme = {
     },
     border: {
       primary: '#363645'
-
+    },
+    outline: {
+        primary: '#FFAE71'
     }
   }
 }
 
 const {config} = createInterUnit({
-  theme: Theme,
-  primitiveExtension: {
-    Text: TextPrimitive
-  }
+  theme: Theme
 })
 
 export {config}

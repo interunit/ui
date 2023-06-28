@@ -24,6 +24,7 @@ type TriggerDimensions = {
 
 type PopoverPositioning = UseFloatingOptions & {
   offset?: number
+  // TODO: trigger is broken
   width?: 'trigger' | string | number
   arrow?: Omit<FloatingArrowProps, 'context'>
 }
@@ -64,6 +65,7 @@ type SetTriggerDimensionsAction = {
 
 type ReducerAction = PayloadlessReducerAction | SetTriggerDimensionsAction
 
+// TODO: option to click outside to close (probably should be default behavior)
 const Popover = ({
   children,
   onPopoverStateChange,
@@ -173,11 +175,10 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
                 ref={arrowRef}
                 context={context}
                 style={{
-                    // Align arrow to stroke so that it overlays the box's border
+                  // Align arrow to stroke so that it overlays the box's border
                   transform: `translateY(-${
                     popoverPositioning?.arrow?.strokeWidth || 0
                   }px)`
-
                 }}
                 {...popoverPositioning?.arrow}
               />

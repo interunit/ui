@@ -6,9 +6,9 @@ import {ExtendPrimitive} from '@interunit/primitives'
 import {type PrimitiveToExtend} from '@interunit/primitives'
 
 interface TextPrimitiveProps {
-  type?: 'body' | 'heading'
-  wt?: 'normal' | 'bold' | 'light'
-  sz?: 'sm' | 'md' | 'lg'
+  kind?: 'body' | 'heading'
+  weight?: 'normal' | 'bold' | 'light'
+  variation?: 'sm' | 'md' | 'lg'
 }
 
 const BodyScale = {
@@ -24,25 +24,27 @@ const HeadingScale = {
 }
 
 const TextPrimitive: PrimitiveToExtend<TextPrimitiveProps>['Text'] = ({
+  kind,
+  weight,
+  variation,
   children,
-  type,
-  wt,
-  sz,
   ...props
-}: React.ComponentProps<typeof Primitive.Text>) => {
+}: React.ComponentProps<typeof Primitive.Text> & TextPrimitiveProps) => {
   const theme = useTheme()
   const css = `
-    ${type === 'body' || !type ? `font-size: ${BodyScale[sz ?? 'md']};` : ''}
-    ${type === 'heading' ? `font-size: ${HeadingScale[sz ?? 'md']};` : ''}
-    font-weight: ${wt !== 'normal' ? wt : ''};
-    color: ${theme.color.text.primary};
+    ${
+      kind === 'body' || !kind
+        ? `font-size: ${BodyScale[variation ?? 'md']};`
+        : ''
+    }
+    ${
+      kind === 'heading' ? `font-size: ${HeadingScale[variation ?? 'md']};` : ''
+    }
+    font-weight: ${weight !== 'normal' ? weight : ''};
+    color: ${theme?.color.text.primary};
     `
   return (
-    <ExtendPrimitive
-      primitiveToExtend="Text"
-      css={css}
-      {...props}
-    >
+    <ExtendPrimitive primitiveToExtend="Text" css={css} {...props}>
       {children}
     </ExtendPrimitive>
   )
