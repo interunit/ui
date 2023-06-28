@@ -2,6 +2,7 @@ import React from 'react'
 
 import {PrimitveComponentToExtend, type Primitive} from '../primitive'
 
+
 const ExtendPrimitive = ({
   primitiveToExtend,
   ...props

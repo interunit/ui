@@ -64,6 +64,7 @@ const Styles = ({
   const _styled = styled as CrossPlatformStyled
 
   return _styled[element as ConstructTag].withConfig({
+
     shouldForwardProp: (propName: string) => !propNames.includes(propName)
   })<StylesProps>`
     ${(props: StylesProps) =>

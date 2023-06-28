@@ -13,6 +13,7 @@ export const Theme = {
     },
     border: {
       primary: '#363645'
+
     }
   }
 }
