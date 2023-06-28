@@ -1,24 +1,17 @@
----
-to: packages/<%= packageName %>/package.json
----
 {
-  "name": "@interunit/<%=  packageName %>",
+  "name": "@interunit/popover",
   "version": "0.0.1",
-  "description": "<%=  packageDescription %>",
+  "description": "A popover component",
   "private": true,
-  "main": "dist/interunit-<%= packageName %>.cjs.js",
-  "types": "dist/interunit-<%= packageName %>.cjs.d.ts",
-  "module": "dist/interunit-<%= packageName %>.esm.js",
+  "main": "dist/interunit-popover.cjs.js",
+  "types": "dist/interunit-popover.cjs.d.ts",
+  "module": "dist/interunit-popover.esm.js",
   "react-native": "src/index.ts",
   "dependencies": {
-  <% if (shouldIncludePrimitives && shouldIncludeConfig) { %>
-    "@interunit/primitives": "*",
-    "@interunit/config": "*"
-  <% } else if (shouldIncludePrimitives) { %>
+    "@floating-ui/react": "^0.24.3",
+    "@floating-ui/react-native": "^0.10.1",
+    "@interunit/config": "*",
     "@interunit/primitives": "*"
-  <% } else if (shouldIncludeConfig) { %>
-    "@interunit/config": "*"
-  <% } %>
   },
   "devDependencies": {
     "@types/react": "18.2.12",

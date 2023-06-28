@@ -1,7 +1,6 @@
 import React from 'react'
 
-import type {Primitive} from '../primitive'
-import {PrimitveComponentToExtend} from '../primitive'
+import {PrimitveComponentToExtend, type Primitive} from '../primitive'
 
 const ExtendPrimitive = ({
   primitiveToExtend,

@@ -9,9 +9,15 @@ const PopoverPage = () => {
   return (
     <div>
       <Popover
-        onPopoverStateChange={state => console.log(state)}
         popoverPositioning={{
-          placement: 'right'
+          placement: 'right',
+          offset: 10,
+          arrow: {
+            fill: theme?.color.background.primary,
+            stroke: theme?.color.border.primary,
+            strokeWidth: 1,
+            tipRadius: 2
+          }
         }}
       >
         <Popover.Trigger>

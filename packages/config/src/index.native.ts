@@ -1,3 +1,4 @@
+
 import {
   InterUnitInternalContext,
   InterUnitInternalProvider,
@@ -6,7 +7,7 @@ import {
   withTheme
 } from './context'
 
-import * as InterUnitInternalConfig from './internal/internalConfig'
+import * as InterUnitInternalConfig from './internal/internalConfig.native'
 
 
 const InterUnitInternals = {
@@ -22,5 +23,6 @@ const css = InterUnitInternalConfig.css
 const InterUnitProvider = InterUnitInternalProvider
 
 export type {CrossPlatformStyled, ConstructTag, InterConstruct, CSSUnit } from './internal/sharedConfig'
-export { InterUnitProvider, InterUnitInternals, withTheme, useTheme, styled, css}
 export { createInterUnit } from './createInterUnit'
+export { InterUnitProvider, InterUnitInternals, withTheme, useTheme, styled, css}
+
