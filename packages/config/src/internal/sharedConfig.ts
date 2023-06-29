@@ -29,3 +29,4 @@ export type InterConstruct =
   | 'Span'
   | 'LI'
   | 'UL'
+  | 'Section'

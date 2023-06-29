@@ -12,6 +12,7 @@ import {
   shift,
   useFloating
 } from './floating-ui'
+import {isTouchDevice} from './utils'
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 
@@ -26,7 +27,10 @@ type PopoverPositioning = UseFloatingOptions & {
   offset?: number
   // TODO: trigger is broken
   width?: 'trigger' | string | number
-  arrow?: Omit<FloatingArrowProps, 'context'>
+  maxWidth?: string
+  arrow?: Omit<FloatingArrowProps, 'context'> & {
+    style?: React.CSSProperties
+  }
 }
 
 type PopoverState = {
@@ -36,6 +40,7 @@ type PopoverState = {
   setTrigger: ((trigger: React.ReactElement | null) => void) | null
   togglePopover: () => void
   trigger?: React.ReactElement | null
+  triggerType: 'click' | 'hover'
   triggerDimensions: TriggerDimensions
 }
 const DEFAULT_POPOVER_STATE: PopoverState = {
@@ -44,6 +49,7 @@ const DEFAULT_POPOVER_STATE: PopoverState = {
   setTrigger: null,
   togglePopover: () => {},
   trigger: null,
+  triggerType: 'click',
   triggerDimensions: {
     x: 0,
     y: 0,
@@ -68,10 +74,12 @@ type ReducerAction = PayloadlessReducerAction | SetTriggerDimensionsAction
 // TODO: option to click outside to close (probably should be default behavior)
 const Popover = ({
   children,
+  triggerType,
   onPopoverStateChange,
   popoverPositioning
 }: {
   children: React.ReactNode
+  triggerType: 'click' | 'hover'
   onPopoverStateChange?: (popoverState: PopoverState) => void
   popoverPositioning?: PopoverPositioning
   ArrowElement?: React.ReactElement | null
@@ -103,7 +111,9 @@ const Popover = ({
   }, [state])
 
   return (
-    <PopoverContext.Provider value={{...state, dispatch, trigger, setTrigger}}>
+    <PopoverContext.Provider
+      value={{...state, dispatch, trigger, setTrigger, triggerType}}
+    >
       <Primitive.Box
         as="div"
         pos={{p: 'relative'}}
@@ -116,11 +126,33 @@ const Popover = ({
 }
 
 const PopoverTrigger = ({children}: {children: React.ReactNode}) => {
-  const {dispatch, setTrigger} = React.useContext(PopoverContext)
+  const {dispatch, setTrigger, triggerType} = React.useContext(PopoverContext)
 
   return (
     <Child
-      onClickOrPress={() => dispatch({type: 'TOGGLE'})}
+      onClickOrPress={(event: MouseEvent) => {
+        event.preventDefault
+        if (
+          triggerType === 'click' ||
+          (triggerType === 'hover' && isTouchDevice())
+        ) {
+          dispatch({type: 'TOGGLE'})
+        }
+      }}
+      onMouseEnter={() => {
+        if (triggerType === 'hover' && ENVIRONMENT === 'web') {
+          dispatch({type: 'OPEN'})
+        }
+      }}
+      onKeyDown={(event: KeyboardEvent) => {
+        if (event.key === 'Enter') {
+          dispatch({type: 'TOGGLE'})
+        }
+
+        if (event.key === 'Escape') {
+          dispatch({type: 'CLOSE'})
+        }
+      }}
       getChildDimensions={(dimensions: TriggerDimensions) => {
         dispatch({type: 'SET_TRIGGER_DIMENSIONS', payload: dimensions})
       }}
@@ -132,8 +164,14 @@ const PopoverTrigger = ({children}: {children: React.ReactNode}) => {
 }
 
 const PopoverContent = ({children}: {children: React.ReactNode}) => {
-  const {isOpen, trigger, triggerDimensions, popoverPositioning} =
-    React.useContext(PopoverContext)
+  const {
+    isOpen,
+    trigger,
+    triggerType,
+    dispatch,
+    triggerDimensions,
+    popoverPositioning
+  } = React.useContext(PopoverContext)
   const arrowRef = React.useRef(null)
 
   const {refs, floatingStyles, context} = useFloating({
@@ -153,7 +191,11 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
     return (
       <Primitive.Box
         as="div"
-        style={{...floatingStyles}}
+        style={{
+          ...floatingStyles,
+          maxWidth: popoverPositioning?.maxWidth ?? 'auto'
+        }}
+        className="iu-popover-content"
         sz={{
           w:
             popoverPositioning?.width === 'trigger'
@@ -161,6 +203,18 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
               : popoverPositioning?.width
               ? popoverPositioning?.width
               : 'auto'
+        }}
+        onMouseLeave={() => {
+          if (triggerType === 'hover' && ENVIRONMENT === 'web') {
+            dispatch({type: 'CLOSE'})
+          }
+        }}
+        onKeyDown={(_event: unknown) => {
+          const event = _event as KeyboardEvent
+
+          if (event.key === 'Escape') {
+            dispatch({type: 'CLOSE'})
+          }
         }}
         ref={refs.setFloating}
       >
@@ -174,13 +228,21 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
               <FloatingArrow
                 ref={arrowRef}
                 context={context}
+                className={`iu-popover-arrow ${popoverPositioning?.arrow?.className}`}
                 style={{
                   // Align arrow to stroke so that it overlays the box's border
                   transform: `translateY(-${
                     popoverPositioning?.arrow?.strokeWidth || 0
-                  }px)`
+                  }px)`,
+                  ...popoverPositioning?.arrow?.style
                 }}
-                {...popoverPositioning?.arrow}
+                width={popoverPositioning?.arrow?.width}
+                height={popoverPositioning?.arrow?.height}
+                strokeWidth={popoverPositioning?.arrow?.strokeWidth}
+                stroke={popoverPositioning?.arrow?.stroke}
+                fill={popoverPositioning?.arrow?.fill}
+                d={popoverPositioning?.arrow?.d}
+                tipRadius={popoverPositioning?.arrow?.tipRadius}
               />
             </>
           )}

@@ -10,19 +10,32 @@ import {config} from '../../interunit.config'
 const GlobalStyle = createGlobalStyle`
     body {
         background-color: ${props => props.theme.color.background.primary};
+        color: ${props => props.theme.color.text.primary};
+        max-width: 100vw;
     }
 
     * {
         box-sizing: border-box;
+        padding: 0;
+        margin: 0;
      }
 
-    & * button:focus {
-        outline-color: ${props => props?.theme?.color?.outline?.primary};
+    & *:focus-visible {
+        outline: 2px solid ${props => props?.theme?.color?.outline?.primary};
         outline-offset: 0.4rem;
-        outline-width: 2px;
     }
-    & **:focus:not:(:focus-visible) {
+
+    & *:focus:not:(:focus-visible) {
         outline: none;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    a:hover, a:focus {
+        text-decoration: underline;
     }
 `
 

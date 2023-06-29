@@ -17,7 +17,6 @@ const ExtendPrimitive = React.forwardRef(
     const Component = PrimitveComponentToExtend[
       primitiveToExtend
     ] as (typeof Primitive)[keyof typeof Primitive]
-    console.log('HERE extend', forwardedRef)
     // TODO: Intersecting types on "as", makes TS unhappy
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

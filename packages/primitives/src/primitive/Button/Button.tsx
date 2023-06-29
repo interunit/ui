@@ -48,7 +48,6 @@ type ButtonPrimitiveRef = ValidButtonConstruct
 
 const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
   ({as = 'button', type = 'button', children, ...props}, forwardedRef) => {
-    console.log('HERE BUT', forwardedRef)
     /*
      * Map similar accessibility props between React Native and Web
      */

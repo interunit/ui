@@ -15,12 +15,14 @@ const BoxConstruct = {
   div: Construct.Div,
   span: Construct.Span,
   child: Child,
+  section: Construct.Section,
   // TODO: shoudld these go here?
   ul: Construct.UL,
   li: Construct.LI
+
 }
 
-type BoxConstructAs = 'div' | 'span' | 'child' | 'ul' | 'li'
+type BoxConstructAs = 'div' | 'span' | 'child' | 'ul' | 'li' | 'section'
 
 export type BoxPrimitiveProps = ValidBoxConstructProps &
   UtilityStyles & {

@@ -86,6 +86,10 @@ export const ConstructFromConfig = [
   {
     inter: 'LI' as InterConstruct,
     styled: 'li' as ConstructTag
+  },
+  {
+    inter: 'Section' as InterConstruct,
+    styled: 'section' as ConstructTag
   }
 ]
 

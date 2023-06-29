@@ -5,7 +5,7 @@ import type {Primitive} from '@interunit/primitives'
 import {ExtendPrimitive} from '@interunit/primitives'
 import {type PrimitiveToExtend} from '@interunit/primitives'
 
-interface TextPrimitiveProps {
+interface TextProps {
   kind?: 'body' | 'heading'
   weight?: 'normal' | 'bold' | 'light'
   variation?: 'sm' | 'md' | 'lg'
@@ -14,33 +14,44 @@ interface TextPrimitiveProps {
 const BodyScale = {
   lg: '1.25rem',
   md: '1rem',
-  sm: '0.75rem'
+  sm: '0.85rem'
 }
 
 const HeadingScale = {
   lg: '4rem',
   md: '3rem',
+  sm: '1.5rem'
+}
+
+const BodyLineHeightScale = {
+  lg: '1.75rem',
+  md: '1.5rem',
+  sm: '1.25rem'
+}
+
+const HeadingLineHeightScale = {
+  lg: '4.5rem',
+  md: '3.5rem',
   sm: '2rem'
 }
 
-const TextPrimitive: PrimitiveToExtend<TextPrimitiveProps>['Text'] = ({
-  kind,
+const Text: PrimitiveToExtend<TextProps>['Text'] = ({
+  kind = 'body',
+  variation = 'md',
   weight,
-  variation,
   children,
   ...props
-}: React.ComponentProps<typeof Primitive.Text> & TextPrimitiveProps) => {
+}: React.ComponentProps<typeof Primitive.Text> & TextProps) => {
   const theme = useTheme()
   const css = `
-    ${
+    ${kind === 'body' || !kind ? `font-size: ${BodyScale[variation]};` : ''}
+    ${kind === 'heading' ? `font-size: ${HeadingScale[variation]};` : ''}
+    line-height: ${
       kind === 'body' || !kind
-        ? `font-size: ${BodyScale[variation ?? 'md']};`
-        : ''
-    }
-    ${
-      kind === 'heading' ? `font-size: ${HeadingScale[variation ?? 'md']};` : ''
-    }
-    font-weight: ${weight !== 'normal' ? weight : ''};
+        ? BodyLineHeightScale[variation]
+        : HeadingLineHeightScale[variation]
+    };
+    ${weight && `font-weight: ${weight}`};
     color: ${theme?.color.text.primary};
     `
   return (
@@ -50,4 +61,4 @@ const TextPrimitive: PrimitiveToExtend<TextPrimitiveProps>['Text'] = ({
   )
 }
 
-export {TextPrimitive}
+export {Text}
