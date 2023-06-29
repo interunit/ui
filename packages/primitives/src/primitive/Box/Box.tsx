@@ -14,10 +14,15 @@ type ValidBoxConstructProps = React.HTMLProps<ValidBoxConstruct> &
 const BoxConstruct = {
   div: Construct.Div,
   span: Construct.Span,
-  child: Child
+  child: Child,
+  section: Construct.Section,
+  // TODO: shoudld these go here?
+  ul: Construct.UL,
+  li: Construct.LI
+
 }
 
-type BoxConstructAs = 'div' | 'span' | 'child'
+type BoxConstructAs = 'div' | 'span' | 'child' | 'ul' | 'li' | 'section'
 
 export type BoxPrimitiveProps = ValidBoxConstructProps &
   UtilityStyles & {

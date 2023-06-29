@@ -6,6 +6,7 @@ import {Primitive} from '@interunit/primitives'
 
 const PopoverPage = () => {
   const theme = useTheme()
+  return (<div>hi</div>)
   return (
     <div>
       <Popover

@@ -1,7 +1,7 @@
 // TODO: Make this so we're not tied to styled-components
 import styled, {css} from 'styled-components/native'
 
-import {type InterConstruct, type ConstructTag} from './sharedConfig'
+import {type ConstructTag, type InterConstruct} from './sharedConfig'
 
 export const ENVIRONMENT = {
   NAME: 'native',
@@ -74,6 +74,18 @@ export const ConstructFromConfig = [
   {
     inter: 'Textarea' as InterConstruct,
     styled: 'TextInput' as ConstructTag
+  },
+  {
+    inter: 'UL' as InterConstruct,
+    styled: 'View' as ConstructTag
+  },
+  {
+    inter: 'LI' as InterConstruct,
+    styled: 'View' as ConstructTag
+  },
+  {
+    inter: 'Section' as InterConstruct,
+    styled: 'View' as ConstructTag
   }
 ]
 

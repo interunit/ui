@@ -22,7 +22,7 @@ const flexAssembler = ({flx}: {flx?: FlexValues}) => {
   result += 'display: flex;'
 
   if (flx.dir) {
-    result += `flex-direction: ${flx.dir};`
+    result += `flex-direction: ${flx.dir === 'x' ? 'row': 'column'};`
   } else {
     result += `flex-direction: column;`
   }

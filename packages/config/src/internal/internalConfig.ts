@@ -1,7 +1,7 @@
 // TODO: Make this so were not tied to styled-components
 import styled, {css} from 'styled-components'
 
-import {type InterConstruct, type ConstructTag} from './sharedConfig'
+import {type ConstructTag, type InterConstruct} from './sharedConfig'
 
 export const ENVIRONMENT = {
   NAME: 'web',
@@ -9,8 +9,8 @@ export const ENVIRONMENT = {
     SPACING: 'rem',
     BORDER_WIDTH: 'px',
     BORDER_RADIUS: 'px',
-  POSITION: 'px',
-  SIZING: 'px'
+    POSITION: 'px',
+    SIZING: 'px'
   }
 }
 
@@ -78,6 +78,18 @@ export const ConstructFromConfig = [
   {
     inter: 'TextArea' as InterConstruct,
     styled: 'textarea' as ConstructTag
+  },
+  {
+    inter: 'UL' as InterConstruct,
+    styled: 'ul' as ConstructTag
+  },
+  {
+    inter: 'LI' as InterConstruct,
+    styled: 'li' as ConstructTag
+  },
+  {
+    inter: 'Section' as InterConstruct,
+    styled: 'section' as ConstructTag
   }
 ]
 

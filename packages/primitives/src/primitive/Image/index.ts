@@ -1,1 +1,1 @@
-// export{ Image} from './Image'
+export { Image, type ImagePrimitiveProps} from './Image'
