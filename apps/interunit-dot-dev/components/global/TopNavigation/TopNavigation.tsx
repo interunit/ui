@@ -45,7 +45,7 @@ const TopNavigation = () => {
         <NavigationList>
           <NavigationListItem>
             <Popover
-              triggerType="click"
+              triggerType="hover"
               popoverPositioning={{
                 side: 'bottom',
                 align: 'end',
@@ -60,7 +60,7 @@ const TopNavigation = () => {
               }}
             >
               <Popover.Trigger>
-                <NavigationListButton  tabIndex={0}>
+                <NavigationListButton tabIndex={0}>
                   <Primitive.Box
                     as="span"
                     flx={{dir: 'x', ai: 'center', gp: 0.5}}
