@@ -1,6 +1,6 @@
 import type React from 'react'
 
-export type NativeComponent = 'View' | 'Text'
+export type NativeComponent = 'View' | 'Text' | 'Pressable'
 export type WebComponent = keyof React.JSX.IntrinsicElements
 export type ConstructTag = keyof JSX.IntrinsicElements
 

@@ -1,1 +1,1 @@
-export *  from '@floating-ui/react-native'
+export * from '@floating-ui/react-native'

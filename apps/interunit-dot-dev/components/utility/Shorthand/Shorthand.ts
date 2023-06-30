@@ -71,4 +71,4 @@ const Shorthand = <T extends unknown>({
       `}
     `
 }
-export {Shorthand  }
+export {Shorthand}

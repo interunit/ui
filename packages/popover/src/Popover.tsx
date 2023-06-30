@@ -12,7 +12,7 @@ import {
   shift,
   useFloating
 } from './floating-ui'
-import {isTouchDevice} from './utils'
+import {isTouchDevice, pruneStyles} from './utils'
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 
@@ -125,10 +125,7 @@ const Popover = ({
         //
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        style={{
-          position: 'relative',
-          display: ENVIRONMENT === 'native' ? undefined : 'inline-block'
-        }}
+        collapsable={false}
       >
         {children}
       </Primitive.Box>
@@ -191,6 +188,7 @@ const PopoverTrigger = ({children}: {children: React.ReactNode}) => {
         })
       }}
       ref={setTrigger}
+      collapsable={false}
       data-popover-state={isOpen}
     >
       {children}
@@ -233,17 +231,10 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
     ...popoverPositioning
   })
 
-  const floatingStyles = rawFloatingStyles ? {...rawFloatingStyles} : {}
-
   if (isOpen && trigger) {
     return (
       <Primitive.Box
         as="div"
-        // The floating styles are technically correct but React.CSSProperties
-        // doesn't seem to think so
-        //
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         style={{
           maxWidth:
             convert({
@@ -261,7 +252,7 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
                 })
               ? popoverPositioning?.width
               : 'auto',
-          ...floatingStyles
+          ...pruneStyles(rawFloatingStyles)
         }}
         className="iu-popover-content"
         onMouseLeave={() => {

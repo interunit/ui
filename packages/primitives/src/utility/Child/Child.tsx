@@ -1,4 +1,5 @@
 import React from 'react'
+import {Text} from 'react-native'
 
 // TODO: Type any
 const ChildElement = React.forwardRef<any, any>(
@@ -6,19 +7,15 @@ const ChildElement = React.forwardRef<any, any>(
     ChildElement.displayName = 'ChildElement'
     const child: React.ReactElement = children?.[0] || children
     if (React.isValidElement(child)) {
-      const ClonedElement: React.ReactNode = React.cloneElement(child, {
+      return React.cloneElement(children, {
         ...(child as React.ReactElement)?.props,
         // TODO: a way to automate this?
         onClick: props?.onClick || props?.onClickOrPress,
         onPress: props?.onPress || props?.onClickOrPress,
-        sz: props?.sz,
         ...props,
         ref: forwardedRef
       })
-
-      return ClonedElement
     }
-
     return <>{children}</>
   }
 )

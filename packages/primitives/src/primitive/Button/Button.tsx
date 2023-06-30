@@ -20,7 +20,9 @@ const ButtonConstruct = {
 
 type ButtonConstructAs = 'button'
 
-export interface ButtonPrimitiveProps extends ValidButtonConstructProps {
+// TODO: Omit seems wrong, not sure why Button complains when being called though
+export interface ButtonPrimitiveProps
+  extends Omit<ValidButtonConstructProps, 'name' | '$$typeof'> {
   as?: ButtonConstructAs
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
@@ -74,9 +76,15 @@ const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         props.onPress = props.onClickOrPress
+        delete props.onClickOrPress
+        delete props.onClick
       }
       if (ENVIRONMENT === 'web') {
         props.onClick = props.onClickOrPress
+        delete props.onClickOrPress
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        delete props.onPress
       }
     }
 

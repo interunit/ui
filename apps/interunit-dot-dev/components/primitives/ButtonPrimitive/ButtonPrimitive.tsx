@@ -16,7 +16,6 @@ const ButtonPrimitive = React.forwardRef<
   const ButtonPrimtitiveWithShorthand = Shorthand({element: Primitive.Text})
   return (
     <ButtonPrimtitiveWithShorthand
-      className={props.className}
       {...props}
       ref={forwardedRef}
     >

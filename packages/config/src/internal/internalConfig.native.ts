@@ -1,8 +1,8 @@
 import {
   type ConstructTag,
+  DEFAULT_CSS_UNIT,
   type InterConstruct,
-  type NativeComponent,
-  DEFAULT_CSS_UNIT
+  type NativeComponent
 } from './sharedConfig'
 
 export const ENVIRONMENT = {
@@ -19,12 +19,12 @@ export const ConstructFromConfig = [
   {
     inter: 'Button' as InterConstruct,
     tag: 'button' as ConstructTag,
-    component: 'Text' as NativeComponent
+    component: 'Pressable' as NativeComponent
   },
   {
     inter: 'Div' as InterConstruct,
     tag: 'div' as ConstructTag,
-    component: 'Text' as NativeComponent
+    component: 'View' as NativeComponent
   },
   {
     inter: 'H1' as InterConstruct,
@@ -102,5 +102,3 @@ export const ConstructFromConfig = [
     component: 'View' as NativeComponent
   }
 ]
-
-export {styled, css}
