@@ -1,1 +1,1 @@
-export {Text, type TextPrimitiveProps} from './Text'
+export {Text} from './Text'

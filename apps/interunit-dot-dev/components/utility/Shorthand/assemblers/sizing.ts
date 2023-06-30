@@ -3,7 +3,7 @@ import {type CSSUnit, InterUnitInternals} from '@interunit/config'
 import {valueConversion} from '../helpers/valueConversion'
 
 const DEFAULT_SIZING_UNIT =
-  InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.DEFAULT_UNIT.SIZING
+  InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.DEFAULT_CSS_UNIT.SIZING
 export type Sizing = {
   sz?: SizingValue
 }

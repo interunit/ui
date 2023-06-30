@@ -1,8 +1,2 @@
-export {
-  Primitive,
-  type PrimitiveToExtend,
-  PrimitveComponentToExtend
-} from './primitive'
-
-export {ExtendPrimitive} from './extend/ExtendPrimitive'
+export {Primitive} from './primitive'
 export {Child} from './utility/Child'

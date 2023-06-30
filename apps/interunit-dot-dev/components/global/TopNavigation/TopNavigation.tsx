@@ -3,20 +3,18 @@
 import {ChevronDown, Github, Twitter} from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import {useTheme} from 'styled-components'
 
-import {Button} from '@/components/primitives/Button'
-import {Text} from '@/components/primitives/Text'
+import {Primitive} from '@/components/primitives'
+import {Text} from '@/components/system/Text'
 import {ui} from '@/constants/ui'
-import {useTheme} from '@interunit/config'
 import {Popover} from '@interunit/popover'
-import {Primitive} from '@interunit/primitives'
 
 import {
   Logo,
   NavigationList,
   NavigationListButton,
   NavigationListItem,
-  NavigationListItemPopoverContent,
   NavigationListLink,
   NavigationPopoverList,
   NavigationPopoverListItem,
@@ -24,38 +22,33 @@ import {
   NavigationPopoverSection
 } from './TopNavigation.styled'
 
-// Change To Image Primitive
-
 const TopNavigation = () => {
   const theme = useTheme()
   return (
     <Primitive.Box
       as="div"
-      sp={{p: [0, 2]}}
+      sp={{p: [0, 1]}}
       flx={{dir: 'x', ai: 'center', jc: 'space-between'}}
       bg={{c: theme?.color.background.primary}}
       bdr={{c: theme?.color.border.primary, w: [0, 0, 1, 0]}}
     >
-      <Link href="/">
+      <Link href="/" tabIndex={0}>
         <Primitive.Box
           as="span"
           flx={{dir: 'x', ai: 'center', gp: 0.75}}
           sp={{p: [1, 0]}}
         >
-          <Logo
-            src="/interunit-logo.svg"
-            alt="Logo for InterUnit"
-            sz={{w: 60}}
-          />
+          <Logo src="/interunit-logo.svg" alt="Logo for InterUnit" />
         </Primitive.Box>
       </Link>
       <Primitive.Box as="div" flx={{dir: 'x', ai: 'center', gp: 0.75}}>
         <NavigationList>
           <NavigationListItem>
             <Popover
-              triggerType="hover"
+              triggerType="click"
               popoverPositioning={{
-                placement: 'bottom-end',
+                side: 'bottom',
+                align: 'end',
                 offset: 12,
                 width: 600,
                 maxWidth: '100vw',
@@ -67,12 +60,12 @@ const TopNavigation = () => {
               }}
             >
               <Popover.Trigger>
-                <NavigationListButton>
+                <NavigationListButton  tabIndex={0}>
                   <Primitive.Box
                     as="span"
                     flx={{dir: 'x', ai: 'center', gp: 0.5}}
                   >
-                    <Text as="span">Documentation</Text>
+                    <Text as="span">Docs</Text>
                     <ChevronDown
                       color={theme?.color.text.secondary}
                       aria-role="img"
@@ -82,28 +75,32 @@ const TopNavigation = () => {
                 </NavigationListButton>
               </Popover.Trigger>
               <Popover.Content>
-                <NavigationListItemPopoverContent>
+                <NavigationPopoverList>
                   {ui.sections.map((section, index) => (
-                    <NavigationPopoverListLink
-                      href={`/docs/ui/${section.slug}`}
-                      className="nav-popover-list-link"
-                    >
-                      <NavigationPopoverSection key={index}>
-                        <Text as="h2" variation="md">
-                          {section.name}
-                        </Text>
-                        <Text as="p" variation="md">
-                          {section.description}
-                        </Text>
-                      </NavigationPopoverSection>
-                    </NavigationPopoverListLink>
+                    <NavigationPopoverListItem className="nav-popover-li">
+                      <NavigationPopoverListLink
+                        href={`/docs/ui/${section.slug}`}
+                      >
+                        <NavigationPopoverSection key={index}>
+                          <Text as="h2" variation="md">
+                            {section.name}
+                          </Text>
+                          <Text as="p" variation="md">
+                            {section.description}
+                          </Text>
+                        </NavigationPopoverSection>
+                      </NavigationPopoverListLink>
+                    </NavigationPopoverListItem>
                   ))}
-                </NavigationListItemPopoverContent>
+                </NavigationPopoverList>
               </Popover.Content>
             </Popover>
           </NavigationListItem>
           <NavigationListItem>
-            <NavigationListLink href="https://github.com/interunit">
+            <NavigationListLink
+              href="https://github.com/interunit"
+              tabIndex={0}
+            >
               <Primitive.Box as="span">
                 <Github
                   color={theme?.color.text.secondary}
@@ -114,7 +111,10 @@ const TopNavigation = () => {
             </NavigationListLink>
           </NavigationListItem>
           <NavigationListItem>
-            <NavigationListLink href="https://twitter.com/interunitdev">
+            <NavigationListLink
+              href="https://twitter.com/interunitdev"
+              tabIndex={0}
+            >
               <Primitive.Box as="span">
                 <Twitter
                   color={theme?.color.text.secondary}

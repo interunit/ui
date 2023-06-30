@@ -1,19 +1,13 @@
 import type React from 'react'
-
-import {
-  type ConstructTag,
-  type CrossPlatformStyled,
-  css as StyledCss,
-  styled
-} from '@interunit/config'
+import styled, {css as StyledCss} from 'styled-components'
 
 import {type Background, background} from './assemblers/background'
 import {type Border, border} from './assemblers/border'
 import {type Flex, flex} from './assemblers/flex'
 import {type Font, font} from './assemblers/font'
 import {type Position, position} from './assemblers/position'
+import {type Sizing, sizing} from './assemblers/sizing'
 import {type Spacing, spacing} from './assemblers/spacing'
-import { type Sizing, sizing } from './assemblers/sizing'
 
 const assemblers = [
   background.assembler,
@@ -53,18 +47,20 @@ const assemble = (props: UtilityStyles) => {
 }
 
 type StylesProps = UtilityStyles & {css?: string}
-const Styles = ({
+const Shorthand = <T extends unknown>({
   element,
   css
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  element: ConstructTag | React.ReactNode | React.FC<any>
+  element: T
   css?: string
 }) => {
-  const _styled = styled as CrossPlatformStyled
+  const _styled = styled as typeof styled
 
-  return _styled[element as ConstructTag].withConfig({
-
+  // TODO: this
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return _styled(element).withConfig({
     shouldForwardProp: (propName: string) => !propNames.includes(propName)
   })<StylesProps>`
     ${(props: StylesProps) =>
@@ -75,5 +71,4 @@ const Styles = ({
       `}
     `
 }
-
-export {Styles}
+export {Shorthand  }

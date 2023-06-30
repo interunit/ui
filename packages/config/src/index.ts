@@ -1,27 +1,28 @@
 import {
   InterUnitInternalContext,
   InterUnitInternalProvider,
-  useInterUnitInternalContext,
-  useTheme,
-  withTheme
+  useInterUnitInternalContext
 } from './context'
-
 import * as InterUnitInternalConfig from './internal/internalConfig'
 
+export {type InterUnitConfig} from './config'
 
+export {useCSSUnitConversion} from './hooks/useCSSUnitConversion'
 const InterUnitInternals = {
-    InterUnitInternalContext,
-    InterUnitInternalProvider,
-    useInterUnitInternalContext,
-    InterUnitInternalConfig: { ...InterUnitInternalConfig }
+  InterUnitInternalContext,
+  InterUnitInternalProvider,
+  useInterUnitInternalContext,
+  InterUnitInternalConfig: {...InterUnitInternalConfig}
 }
 
-
-const styled = InterUnitInternalConfig.styled
-const css = InterUnitInternalConfig.css
 const InterUnitProvider = InterUnitInternalProvider
 
-export type {CrossPlatformStyled, ConstructTag, InterConstruct, CSSUnit } from './internal/sharedConfig'
-export { InterUnitProvider, InterUnitInternals, withTheme, useTheme, styled, css}
-export { createInterUnit } from './createInterUnit'
-
+export type {
+  ConstructTag,
+  InterConstruct,
+  CSSUnit,
+  NativeComponent,
+  WebComponent
+} from './internal/sharedConfig'
+export {InterUnitProvider, InterUnitInternals}
+export {createInterUnit} from './createInterUnit'

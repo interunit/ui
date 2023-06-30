@@ -1,15 +1,17 @@
 import React from 'react'
-import type {View} from 'react-native'
+import type {ViewComponent, ViewProps} from 'react-native'
 
 import {Construct} from '../../config'
 import {Child} from '../../utility/Child'
-import {type UtilityStyles} from '../../utility/Styles'
 
-type ValidWebBoxConstruct = HTMLDivElement | HTMLSpanElement
-type ValidNativeBoxConstruct = typeof View
+type ValidWebBoxConstruct =
+  | HTMLDivElement
+  | HTMLSpanElement
+  | HTMLUListElement
+  | HTMLLIElement
+type ValidNativeBoxConstruct = ViewComponent
 type ValidBoxConstruct = ValidWebBoxConstruct & ValidNativeBoxConstruct
-type ValidBoxConstructProps = React.HTMLProps<ValidBoxConstruct> &
-  React.ComponentProps<typeof View>
+type ValidBoxConstructProps = React.HTMLProps<ValidBoxConstruct> & ViewProps
 
 const BoxConstruct = {
   div: Construct.Div,
@@ -19,19 +21,17 @@ const BoxConstruct = {
   // TODO: shoudld these go here?
   ul: Construct.UL,
   li: Construct.LI
-
 }
 
 type BoxConstructAs = 'div' | 'span' | 'child' | 'ul' | 'li' | 'section'
 
-export type BoxPrimitiveProps = ValidBoxConstructProps &
-  UtilityStyles & {
-    as: BoxConstructAs
-    children: React.ReactNode
-    ref?: React.Ref<ValidBoxConstruct>
-  }
+export type BoxPrimitiveProps = ValidBoxConstructProps & {
+  as: BoxConstructAs
+  children: React.ReactNode
+  ref?: React.Ref<ValidBoxConstruct>
+}
 
-type BoxPrimitiveRef = ValidBoxConstruct
+export type BoxPrimitiveRef = ValidBoxConstruct
 
 const Box = React.forwardRef<BoxPrimitiveRef, BoxPrimitiveProps>(
   ({as, children, ...props}, forwardedRef) => {

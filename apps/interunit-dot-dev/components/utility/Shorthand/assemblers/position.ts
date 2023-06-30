@@ -9,7 +9,7 @@ export type Position = {
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT
 
-const DEFAULT_POSITION_UNIT = ENVIRONMENT.DEFAULT_UNIT.POSITION as CSSUnit
+const DEFAULT_POSITION_UNIT = ENVIRONMENT.DEFAULT_CSS_UNIT.ELEMENT_POSITION as CSSUnit
 type PositionValue = {
   p?: 'relative' | 'absolute' | 'fixed' | 'sticky'
   t?: string | number

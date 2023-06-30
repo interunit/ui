@@ -1,14 +1,10 @@
-import {type DefaultTheme} from 'styled-components'
-
-import {type Primitive} from '@interunit/primitives'
+import {type CSSUnitProperties} from './internal/sharedConfig'
 
 export const DEFAULT_CONFIG = {}
 
-type PrimitiveExtension = {
-  [key in keyof typeof Primitive]?: (typeof Primitive)[key]
+export type InterUnitBaseConfig = {
+  // TODO: Any more to support?
+  cssUnit?: CSSUnitProperties
 }
 
-export type InterUnitConfig = {
-  theme?: DefaultTheme
-  primitiveExtension?: PrimitiveExtension
-}
+export type InterUnitConfig<T> = InterUnitBaseConfig & T

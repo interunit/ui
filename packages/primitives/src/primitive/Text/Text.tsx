@@ -1,17 +1,15 @@
 import React from 'react'
-import type {Text as RNText} from 'react-native'
+import type {TextComponent, TextProps} from 'react-native'
 
 import {Construct} from '../../config'
-import type {UtilityStyles} from '../../utility/Styles'
 
 type ValidWebTextConstruct =
   | HTMLHeadingElement
   | HTMLParagraphElement
   | HTMLSpanElement
-type ValidNativeTextConstruct = RNText
+type ValidNativeTextConstruct = TextComponent
 type ValidTextConstruct = ValidWebTextConstruct & ValidNativeTextConstruct
-type ValidTextConstructProps = React.HTMLProps<ValidTextConstruct> &
-  React.ComponentProps<typeof RNText>
+type ValidTextConstructProps = React.HTMLProps<ValidTextConstruct> & TextProps
 
 // TODO: Add strong, em, etc
 const TextConstruct = {
@@ -38,15 +36,13 @@ type TextConstructAs =
   | 'span'
 
 // TODO: cut out the HTML element types that are not valid for each TextConstructAs
-export interface TextPrimitiveProps
-  extends ValidTextConstructProps,
-    UtilityStyles {
+export interface TextPrimitiveProps extends ValidTextConstructProps {
   as: TextConstructAs
   children: React.ReactNode
   ref?: React.Ref<ValidTextConstruct>
 }
 
-type TextPrimitiveRef = ValidTextConstruct
+export type TextPrimitiveRef = ValidTextConstruct
 
 const Text = React.forwardRef<TextPrimitiveRef, TextPrimitiveProps>(
   ({as, children, ...props}, forwardedRef) => {

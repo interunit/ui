@@ -1,91 +1,105 @@
-// TODO: Make this so we're not tied to styled-components
-import styled, {css} from 'styled-components/native'
-
-import {type ConstructTag, type InterConstruct} from './sharedConfig'
+import {
+  type ConstructTag,
+  type InterConstruct,
+  type NativeComponent,
+  DEFAULT_CSS_UNIT
+} from './sharedConfig'
 
 export const ENVIRONMENT = {
   NAME: 'native',
-  DEFAULT_UNIT: {
-    SPACING: 'rem',
-    BORDER_WIDTH: 'px',
-    BORDER_RADIUS: 'px',
-    POSITION: 'px',
-    SIZING: 'px'
-  }
+  DEFAULT_CSS_UNIT
 }
 
 export const ConstructFromConfig = [
   {
     inter: 'A' as InterConstruct,
-    styled: 'Pressable' as ConstructTag
+    tag: 'a' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
   {
     inter: 'Button' as InterConstruct,
-    styled: 'Pressable' as ConstructTag
+    tag: 'button' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
   {
     inter: 'Div' as InterConstruct,
-    styled: 'View' as ConstructTag
+    tag: 'div' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
   {
     inter: 'H1' as InterConstruct,
-    styled: 'Text' as ConstructTag
+    tag: 'h1' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
   {
     inter: 'H2' as InterConstruct,
-    styled: 'Text' as ConstructTag
+    tag: 'h2' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
   {
     inter: 'H3' as InterConstruct,
-    styled: 'Text' as ConstructTag
+    tag: 'h3' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
   {
     inter: 'H4' as InterConstruct,
-    styled: 'Text' as ConstructTag
+    tag: 'h4' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
   {
     inter: 'H5' as InterConstruct,
-    styled: 'Text' as ConstructTag
+    tag: 'h5' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
   {
     inter: 'H6' as InterConstruct,
-    styled: 'Text' as ConstructTag
+    tag: 'h6' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
   {
     inter: 'Img' as InterConstruct,
-    styled: 'Image' as ConstructTag
+    tag: 'img' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
-  {
-    inter: 'Input' as InterConstruct,
-    styled: 'TextInput' as ConstructTag
-  },
+  // {
+  //   inter: 'Input' as InterConstruct,
+  //   tag: 'TextInput' as ConstructTag
+  //   component: 'Text' as NativeComponent
+  // },
   {
     inter: 'Label' as InterConstruct,
-    styled: 'Text' as ConstructTag
+    tag: 'label' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
   {
     inter: 'P' as InterConstruct,
-    styled: 'Text' as ConstructTag
+    tag: 'p' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
   {
     inter: 'Span' as InterConstruct,
-    styled: 'Text' as ConstructTag
+    tag: 'span' as ConstructTag,
+    component: 'Text' as NativeComponent
   },
-  {
-    inter: 'Textarea' as InterConstruct,
-    styled: 'TextInput' as ConstructTag
-  },
+  // {
+  //   inter: 'Textarea' as InterConstruct,
+  //   tag: 'TextInput' as ConstructTag
+  //   component: 'Text' as NativeComponent
+  // },
   {
     inter: 'UL' as InterConstruct,
-    styled: 'View' as ConstructTag
+    tag: 'ul' as ConstructTag,
+    component: 'View' as NativeComponent
   },
   {
     inter: 'LI' as InterConstruct,
-    styled: 'View' as ConstructTag
+    tag: 'li' as ConstructTag,
+    component: 'View' as NativeComponent
   },
   {
     inter: 'Section' as InterConstruct,
-    styled: 'View' as ConstructTag
+    tag: 'section' as ConstructTag,
+    component: 'View' as NativeComponent
   }
 ]
 

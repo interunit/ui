@@ -1,6 +1,7 @@
 import {Inter} from 'next/font/google'
 
 import {InterUnitProvider} from '@/components/utility/InterUnitProvider'
+import { StyledComponentsProvider } from '@/components/utility/StyledComponentsProvider'
 
 import StyledComponentsRegistry from '../components/utility/StyledComponentsRegistry'
 
@@ -16,7 +17,12 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en">
       <body className={inter.className}>
         <StyledComponentsRegistry>
-          <InterUnitProvider>{children}</InterUnitProvider>
+          <InterUnitProvider>
+          <StyledComponentsProvider>
+          {children}
+          </StyledComponentsProvider>
+
+          </InterUnitProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

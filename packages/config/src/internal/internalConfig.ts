@@ -1,96 +1,109 @@
-// TODO: Make this so were not tied to styled-components
-import styled, {css} from 'styled-components'
-
-import {type ConstructTag, type InterConstruct} from './sharedConfig'
+import {
+  type ConstructTag,
+  type InterConstruct,
+  type WebComponent,
+  DEFAULT_CSS_UNIT
+} from './sharedConfig'
 
 export const ENVIRONMENT = {
   NAME: 'web',
-  DEFAULT_UNIT: {
-    SPACING: 'rem',
-    BORDER_WIDTH: 'px',
-    BORDER_RADIUS: 'px',
-    POSITION: 'px',
-    SIZING: 'px'
-  }
+  DEFAULT_CSS_UNIT
 }
 
 export const ConstructFromConfig = [
   {
     inter: 'A' as InterConstruct,
-    styled: 'a' as ConstructTag
+    tag: 'a' as ConstructTag,
+    component: 'a' as WebComponent
   },
   {
     inter: 'Button' as InterConstruct,
-    styled: 'button' as ConstructTag
+    tag: 'button' as ConstructTag,
+    component: 'button' as WebComponent
   },
   {
     inter: 'Div' as InterConstruct,
-    styled: 'div' as ConstructTag
+    tag: 'div' as ConstructTag,
+    component: 'div' as WebComponent
   },
   {
     inter: 'H1' as InterConstruct,
-    styled: 'h1' as ConstructTag
+    tag: 'h1' as ConstructTag,
+    component: 'h1' as WebComponent
   },
   {
     inter: 'H2' as InterConstruct,
-    styled: 'h2' as ConstructTag
+    tag: 'h2' as ConstructTag,
+    component: 'h2' as WebComponent
   },
   {
     inter: 'H3' as InterConstruct,
-    styled: 'h3' as ConstructTag
+    tag: 'h3' as ConstructTag,
+    component: 'h3' as WebComponent
   },
   {
     inter: 'H4' as InterConstruct,
-    styled: 'h4' as ConstructTag
+    tag: 'h4' as ConstructTag,
+    component: 'h4' as WebComponent
   },
   {
     inter: 'H5' as InterConstruct,
-    styled: 'h5' as ConstructTag
+    tag: 'h5' as ConstructTag,
+    component: 'h5' as WebComponent
   },
   {
     inter: 'H6' as InterConstruct,
-    styled: 'h6' as ConstructTag
+    tag: 'h6' as ConstructTag,
+    component: 'h6' as WebComponent
   },
   {
     inter: 'Image' as InterConstruct,
-    styled: 'img' as ConstructTag
+    tag: 'img' as ConstructTag,
+    component: 'img' as WebComponent
   },
   {
     inter: 'Input' as InterConstruct,
-    styled: 'input' as ConstructTag
+    tag: 'input' as ConstructTag,
+    component: 'input' as WebComponent
   },
   {
     inter: 'Label' as InterConstruct,
-    styled: 'label' as ConstructTag
+    tag: 'label' as ConstructTag,
+    component: 'label' as WebComponent
   },
   {
     inter: 'P' as InterConstruct,
-    styled: 'p' as ConstructTag
+    tag: 'p' as ConstructTag,
+    component: 'p' as WebComponent
   },
   {
     inter: 'Select' as InterConstruct,
-    styled: 'select' as ConstructTag
+    tag: 'select' as ConstructTag,
+    component: 'select' as WebComponent
   },
   {
     inter: 'Span' as InterConstruct,
-    styled: 'span' as ConstructTag
+    tag: 'span' as ConstructTag,
+    component: 'span' as WebComponent
   },
   {
     inter: 'TextArea' as InterConstruct,
-    styled: 'textarea' as ConstructTag
+    tag: 'textarea' as ConstructTag,
+    component: 'textarea' as WebComponent
   },
   {
     inter: 'UL' as InterConstruct,
-    styled: 'ul' as ConstructTag
+    tag: 'ul' as ConstructTag,
+    component: 'ul' as WebComponent
   },
   {
     inter: 'LI' as InterConstruct,
-    styled: 'li' as ConstructTag
+    tag: 'li' as ConstructTag,
+    component: 'li' as WebComponent
   },
   {
     inter: 'Section' as InterConstruct,
-    styled: 'section' as ConstructTag
+    tag: 'section' as ConstructTag,
+    component: 'section' as WebComponent
   }
 ]
-
-export {styled, css}

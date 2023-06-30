@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {InterUnitInternals} from '@interunit/config'
+import {InterUnitInternals, useCSSUnitConversion} from '@interunit/config'
 import {Child, Primitive} from '@interunit/primitives'
 
 import {
@@ -23,9 +23,10 @@ type TriggerDimensions = {
   width: number
 }
 
-type PopoverPositioning = UseFloatingOptions & {
+type PopoverPositioning = Omit<UseFloatingOptions, 'placement'> & {
+  side?: 'top' | 'bottom' | 'left' | 'right'
+  align?: 'start' | 'end'
   offset?: number
-  // TODO: trigger is broken
   width?: 'trigger' | string | number
   maxWidth?: string
   arrow?: Omit<FloatingArrowProps, 'context'> & {
@@ -43,6 +44,7 @@ type PopoverState = {
   triggerType: 'click' | 'hover'
   triggerDimensions: TriggerDimensions
 }
+
 const DEFAULT_POPOVER_STATE: PopoverState = {
   dispatch: () => {},
   isOpen: false,
@@ -76,13 +78,15 @@ const Popover = ({
   children,
   triggerType,
   onPopoverStateChange,
-  popoverPositioning
+  popoverPositioning,
+  defaultOpen
 }: {
-  children: React.ReactNode
-  triggerType: 'click' | 'hover'
   onPopoverStateChange?: (popoverState: PopoverState) => void
+  triggerType: 'click' | 'hover'
+  defaultOpen?: boolean
   popoverPositioning?: PopoverPositioning
   ArrowElement?: React.ReactElement | null
+  children: React.ReactNode
 }) => {
   const [trigger, setTrigger] = React.useState<React.ReactElement | null>(null)
 
@@ -101,7 +105,7 @@ const Popover = ({
           throw new Error()
       }
     },
-    {...DEFAULT_POPOVER_STATE, popoverPositioning}
+    {...DEFAULT_POPOVER_STATE, popoverPositioning, isOpen: defaultOpen ?? false}
   )
 
   React.useEffect(() => {
@@ -116,8 +120,15 @@ const Popover = ({
     >
       <Primitive.Box
         as="div"
-        pos={{p: 'relative'}}
-        style={{display: ENVIRONMENT === 'native' ? undefined : 'inline-block'}}
+        // The floating styles are technically correct but React.CSSProperties
+        // doesn't seem to think so
+        //
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        style={{
+          position: 'relative',
+          display: ENVIRONMENT === 'native' ? undefined : 'inline-block'
+        }}
       >
         {children}
       </Primitive.Box>
@@ -126,12 +137,30 @@ const Popover = ({
 }
 
 const PopoverTrigger = ({children}: {children: React.ReactNode}) => {
-  const {dispatch, setTrigger, triggerType} = React.useContext(PopoverContext)
+  const {dispatch, trigger, setTrigger, triggerType, isOpen} =
+    React.useContext(PopoverContext)
+
+  React.useEffect(() => {
+    const TriggerElement = trigger as unknown as HTMLElement
+
+    if (TriggerElement && ENVIRONMENT === 'web') {
+      if (!TriggerElement?.getBoundingClientRect) return
+      const clientRect = TriggerElement.getBoundingClientRect()
+      const dimensions = {
+        x: clientRect.x,
+        y: clientRect.y,
+        width: clientRect.width,
+        height: clientRect.height
+      }
+
+      dispatch({type: 'SET_TRIGGER_DIMENSIONS', payload: dimensions})
+    }
+  }, [trigger])
 
   return (
     <Child
       onClickOrPress={(event: MouseEvent) => {
-        event.preventDefault
+        event.preventDefault()
         if (
           triggerType === 'click' ||
           (triggerType === 'hover' && isTouchDevice())
@@ -153,10 +182,16 @@ const PopoverTrigger = ({children}: {children: React.ReactNode}) => {
           dispatch({type: 'CLOSE'})
         }
       }}
-      getChildDimensions={(dimensions: TriggerDimensions) => {
-        dispatch({type: 'SET_TRIGGER_DIMENSIONS', payload: dimensions})
+      onLayout={(e: {
+        nativeEvent: {layout: PopoverState['triggerDimensions']}
+      }) => {
+        dispatch({
+          type: 'SET_TRIGGER_DIMENSIONS',
+          payload: e.nativeEvent.layout
+        })
       }}
       ref={setTrigger}
+      data-popover-state={isOpen}
     >
       {children}
     </Child>
@@ -164,6 +199,7 @@ const PopoverTrigger = ({children}: {children: React.ReactNode}) => {
 }
 
 const PopoverContent = ({children}: {children: React.ReactNode}) => {
+  const {convert} = useCSSUnitConversion()
   const {
     isOpen,
     trigger,
@@ -174,7 +210,11 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
   } = React.useContext(PopoverContext)
   const arrowRef = React.useRef(null)
 
-  const {refs, floatingStyles, context} = useFloating({
+  const {
+    refs,
+    floatingStyles: rawFloatingStyles,
+    context
+  } = useFloating({
     strategy: 'absolute',
     elements: {
       reference: trigger as unknown as Element
@@ -184,26 +224,46 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
       offset(popoverPositioning?.offset || 0),
       arrow({element: arrowRef || null})
     ],
+    placement:
+      !popoverPositioning?.side || !popoverPositioning?.align
+        ? 'bottom'
+        : (`${popoverPositioning?.side}${
+            popoverPositioning?.align && `-${popoverPositioning.align}`
+          }` as UseFloatingOptions['placement']),
     ...popoverPositioning
   })
+
+  const floatingStyles = rawFloatingStyles ? {...rawFloatingStyles} : {}
 
   if (isOpen && trigger) {
     return (
       <Primitive.Box
         as="div"
+        // The floating styles are technically correct but React.CSSProperties
+        // doesn't seem to think so
+        //
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         style={{
-          ...floatingStyles,
-          maxWidth: popoverPositioning?.maxWidth ?? 'auto'
-        }}
-        className="iu-popover-content"
-        sz={{
-          w:
+          maxWidth:
+            convert({
+              value: popoverPositioning?.maxWidth,
+              unit: 'px',
+              property: 'SIZING'
+            }) ?? 'auto',
+          width:
             popoverPositioning?.width === 'trigger'
               ? triggerDimensions?.width
-              : popoverPositioning?.width
+              : convert({
+                  value: popoverPositioning?.width,
+                  unit: 'px',
+                  property: 'SIZING'
+                })
               ? popoverPositioning?.width
-              : 'auto'
+              : 'auto',
+          ...floatingStyles
         }}
+        className="iu-popover-content"
         onMouseLeave={() => {
           if (triggerType === 'hover' && ENVIRONMENT === 'web') {
             dispatch({type: 'CLOSE'})
@@ -217,6 +277,9 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
           }
         }}
         ref={refs.setFloating}
+        data-popover-state={isOpen}
+        data-popover-side={popoverPositioning?.side}
+        data-popover-align={popoverPositioning?.align}
       >
         <>
           {/* TODO: Arrow doesn't work in native */}
@@ -243,6 +306,7 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
                 fill={popoverPositioning?.arrow?.fill}
                 d={popoverPositioning?.arrow?.d}
                 tipRadius={popoverPositioning?.arrow?.tipRadius}
+                data-popover-state={isOpen}
               />
             </>
           )}

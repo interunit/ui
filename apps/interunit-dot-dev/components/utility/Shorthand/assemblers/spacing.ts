@@ -6,7 +6,7 @@ import {
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT
 // TODO: Let user override this
-const DEFAULT_SPACING_UNIT = ENVIRONMENT.DEFAULT_UNIT.SPACING
+const DEFAULT_SPACING_UNIT = ENVIRONMENT.DEFAULT_CSS_UNIT.SPACING
 
 export type Spacing = {
   sp?: SpacingValue

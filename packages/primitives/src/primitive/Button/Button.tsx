@@ -4,14 +4,15 @@ import type {Pressable} from 'react-native'
 import {InterUnitInternals} from '@interunit/config'
 
 import {Construct} from '../../config'
-import {type UtilityStyles} from '../../utility/Styles'
+
+type PressableComponent = React.ElementType<typeof Pressable>
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 type ValidWebButtonConstruct = HTMLButtonElement
-type ValidNativeButtonConstruct = typeof Pressable
+type ValidNativeButtonConstruct = PressableComponent
 type ValidButtonConstruct = ValidWebButtonConstruct & ValidNativeButtonConstruct
 type ValidButtonConstructProps = React.HTMLProps<ValidButtonConstruct> &
-  React.ComponentProps<typeof Pressable>
+  React.ComponentProps<PressableComponent>
 
 const ButtonConstruct = {
   button: Construct.Button
@@ -19,9 +20,7 @@ const ButtonConstruct = {
 
 type ButtonConstructAs = 'button'
 
-export interface ButtonPrimitiveProps
-  extends ValidButtonConstructProps,
-    UtilityStyles {
+export interface ButtonPrimitiveProps extends ValidButtonConstructProps {
   as?: ButtonConstructAs
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
