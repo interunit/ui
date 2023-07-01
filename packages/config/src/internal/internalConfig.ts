@@ -105,5 +105,11 @@ export const ConstructFromConfig = [
     inter: 'Section' as InterConstruct,
     tag: 'section' as ConstructTag,
     component: 'section' as WebComponent
+  },
+  {
+      inter: 'TextInput',
+      tag: 'input',
+      component: 'TextInput'
+
   }
 ]

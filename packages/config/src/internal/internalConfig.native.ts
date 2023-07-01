@@ -100,5 +100,10 @@ export const ConstructFromConfig = [
     inter: 'Section' as InterConstruct,
     tag: 'section' as ConstructTag,
     component: 'View' as NativeComponent
+  },
+  {
+    inter: 'TextInput' as InterConstruct,
+    tag: 'TextInput' as ConstructTag,
+    component: 'TextInput' as NativeComponent
   }
 ]
