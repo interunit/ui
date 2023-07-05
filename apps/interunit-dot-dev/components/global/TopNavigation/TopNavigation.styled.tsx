@@ -2,7 +2,6 @@ import Link from 'next/link'
 import {styled} from 'styled-components'
 
 import {Primitive} from '@/components/primitives'
-import {ButtonPrimitive} from '@/components/primitives/ButtonPrimitive'
 
 export const Logo = styled(Primitive.Image).attrs({as: 'img'})`
   max-width: 60px;
@@ -21,6 +20,12 @@ export const Logo = styled(Primitive.Image).attrs({as: 'img'})`
 `
 
 export const NavigationList = styled(Primitive.Box).attrs({as: 'ul'})`
+  align-items: center;
+  display: flex;
+  list-style: none;
+  margin: 0 0.5rem 0 0;
+`
+export const NavigationSecondaryList = styled(Primitive.Box).attrs({as: 'ul'})`
   align-items: center;
   display: flex;
   list-style: none;
@@ -57,27 +62,6 @@ export const NavigationListLink = styled(Link)`
   }
 `
 
-export const NavigationListButton = styled(ButtonPrimitive).attrs({
-  as: 'button'
-})`
-  appearance: none;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    text-decoration: none !important;
-  }
-  & > span {
-    border-radius: ${props => props.theme.border.radius.primary}px;
-    padding: 1rem;
-    &:hover {
-      background-color: ${props => props.theme.color.background.muted};
-      text-decoration: none;
-    }
-  }
-`
 
 export const NavigationPopoverSection = styled(Primitive.Box).attrs({
   as: 'section'

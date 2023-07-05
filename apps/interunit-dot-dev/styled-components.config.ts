@@ -13,7 +13,9 @@ export const Theme = {
     background: {
       primary: '#1D1D27',
       secondary: '#5E47C4',
-      muted: '#4A4A57'
+      tertiary: '#292B62',
+      muted: '#4A4A57',
+      blended: '#1D1D27'
     },
     border: {
       primary: '#363645'

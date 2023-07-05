@@ -6,6 +6,7 @@ import React from 'react'
 import {useTheme} from 'styled-components'
 
 import {Primitive} from '@/components/primitives'
+import {Button} from '@/components/system/Button'
 import {Text} from '@/components/system/Text'
 import {ui} from '@/constants/ui'
 import {Popover} from '@interunit/popover'
@@ -13,13 +14,13 @@ import {Popover} from '@interunit/popover'
 import {
   Logo,
   NavigationList,
-  NavigationListButton,
   NavigationListItem,
   NavigationListLink,
   NavigationPopoverList,
   NavigationPopoverListItem,
   NavigationPopoverListLink,
-  NavigationPopoverSection
+  NavigationPopoverSection,
+  NavigationSecondaryList
 } from './TopNavigation.styled'
 
 const TopNavigation = () => {
@@ -60,7 +61,7 @@ const TopNavigation = () => {
               }}
             >
               <Popover.Trigger>
-                <NavigationListButton tabIndex={0}>
+                <Button tabIndex={0} color={theme.color.background.secondary}>
                   <Primitive.Box
                     as="span"
                     flx={{dir: 'x', ai: 'center', gp: 0.5}}
@@ -72,7 +73,7 @@ const TopNavigation = () => {
                       aria-label="Arrow pointing down"
                     />
                   </Primitive.Box>
-                </NavigationListButton>
+                </Button>
               </Popover.Trigger>
               <Popover.Content>
                 <NavigationPopoverList>
@@ -96,6 +97,8 @@ const TopNavigation = () => {
               </Popover.Content>
             </Popover>
           </NavigationListItem>
+        </NavigationList>
+        <NavigationSecondaryList>
           <NavigationListItem>
             <NavigationListLink
               href="https://github.com/interunit"
@@ -124,7 +127,7 @@ const TopNavigation = () => {
               </Primitive.Box>
             </NavigationListLink>
           </NavigationListItem>
-        </NavigationList>
+        </NavigationSecondaryList>
       </Primitive.Box>
     </Primitive.Box>
   )

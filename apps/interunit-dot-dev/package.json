@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ctrl/tinycolor": "^3.6.0",
     "@interunit/combobox": "*",
     "@interunit/config": "*",
     "@interunit/popover": "*",

@@ -4,6 +4,7 @@ import {useTheme} from 'styled-components'
 
 import {Primitive} from '@/components/primitives'
 import {Button} from '@/components/system/Button'
+import {Text} from '@/components/system/Text'
 import {Popover} from '@interunit/popover'
 
 const PopoverPage = () => {
@@ -24,7 +25,10 @@ const PopoverPage = () => {
         }}
       >
         <Popover.Trigger>
-          <Button as="button" color={theme.color.background.secondary}>
+          <Button
+            as="button"
+            color={theme.color.background.secondary}
+          >
             Click me
           </Button>
         </Popover.Trigger>
@@ -36,7 +40,9 @@ const PopoverPage = () => {
             sp={{p: 1}}
             style={{width: '500px'}}
           >
-            The content
+            <Text as="span" variation="md">
+              The content
+            </Text>
           </Primitive.Box>
         </Popover.Content>
       </Popover>
