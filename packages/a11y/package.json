@@ -1,0 +1,33 @@
+{
+  "name": "@interunit/a11y",
+  "version": "0.0.1",
+  "description": "A11y utilities to use in InterUnit",
+  "private": true,
+  "main": "dist/interunit-a11y.cjs.js",
+  "types": "dist/interunit-a11y.cjs.d.ts",
+  "module": "dist/interunit-a11y.esm.js",
+  "react-native": "src/index.ts",
+  "dependencies": {
+      "@interunit/config": "*",
+    "@interunit/primitives": "*"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.12",
+    "@types/react-dom": "18.2.5",
+    "@types/react-native": "^0.72.2",
+    "typescript": "^5.1.3"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interunit/ui.git"
+  },
+  "author": "Kyle McDonald",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
+  },
+  "homepage": "https://github.com/interunit/ui#readme"
+}

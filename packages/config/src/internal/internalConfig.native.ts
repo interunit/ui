@@ -61,11 +61,11 @@ export const ConstructFromConfig = [
     tag: 'img' as ConstructTag,
     component: 'Text' as NativeComponent
   },
-  // {
-  //   inter: 'Input' as InterConstruct,
-  //   tag: 'TextInput' as ConstructTag
-  //   component: 'Text' as NativeComponent
-  // },
+  {
+    inter: 'Input' as InterConstruct,
+    tag: 'text' as ConstructTag,
+    component: 'TextInput' as NativeComponent
+  },
   {
     inter: 'Label' as InterConstruct,
     tag: 'label' as ConstructTag,
@@ -100,5 +100,10 @@ export const ConstructFromConfig = [
     inter: 'Section' as InterConstruct,
     tag: 'section' as ConstructTag,
     component: 'View' as NativeComponent
+  },
+  {
+    inter: 'TextInput' as InterConstruct,
+    tag: 'TextInput' as ConstructTag,
+    component: 'TextInput' as NativeComponent
   }
 ]

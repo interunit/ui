@@ -10,8 +10,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ctrl/tinycolor": "^3.6.0",
     "@interunit/combobox": "*",
     "@interunit/config": "*",
+    "@interunit/form": "*",
     "@interunit/popover": "*",
     "@interunit/primitives": "*",
     "@preconstruct/next": "^4.0.0",

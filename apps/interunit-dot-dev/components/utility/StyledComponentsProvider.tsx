@@ -14,8 +14,10 @@ const GlobalStyle = createGlobalStyle`
 
     * {
         box-sizing: border-box;
-        padding: 0;
+        font-family: var(--font-inter);
+        font-size: 1rem;
         margin: 0;
+        padding: 0;
      }
 
      *:focus-visible {
