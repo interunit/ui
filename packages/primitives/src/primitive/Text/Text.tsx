@@ -1,5 +1,6 @@
 import React from 'react'
 import type {TextComponent, TextProps} from 'react-native'
+import { filterPropsByEnvironment } from '../../helpers/props'
 
 import {Construct} from '../../config'
 
@@ -54,8 +55,9 @@ const Text = React.forwardRef<TextPrimitiveRef, TextPrimitiveProps>(
       )
     }
 
+    const filteredProps = filterPropsByEnvironment({props })
     return (
-      <Text ref={forwardedRef} {...props}>
+      <Text ref={forwardedRef} {...filteredProps}>
         {children}
       </Text>
     )

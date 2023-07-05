@@ -7,18 +7,15 @@ type ButtonPrimitiveProps = React.ComponentPropsWithoutRef<
   typeof Primitive.Button
 > &
   UtilityStyles
-type ButtonPrimitiveRef = React.ElementRef<typeof Primitive.Text>
+type ButtonPrimitiveRef = React.ElementRef<typeof Primitive.Button>
 
+const ButtonPrimtitiveWithShorthand = Shorthand({element: Primitive.Button})
 const ButtonPrimitive = React.forwardRef<
   ButtonPrimitiveRef,
   ButtonPrimitiveProps
 >(({children, ...props}, forwardedRef) => {
-  const ButtonPrimtitiveWithShorthand = Shorthand({element: Primitive.Text})
   return (
-    <ButtonPrimtitiveWithShorthand
-      {...props}
-      ref={forwardedRef}
-    >
+    <ButtonPrimtitiveWithShorthand {...props} ref={forwardedRef}>
       {children}
     </ButtonPrimtitiveWithShorthand>
   )

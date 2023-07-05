@@ -1,13 +1,11 @@
 import React from 'react'
 import type {Pressable} from 'react-native'
-
-import {InterUnitInternals} from '@interunit/config'
+import { filterPropsByEnvironment } from '../../helpers/props'
 
 import {Construct} from '../../config'
 
 type PressableComponent = React.ElementType<typeof Pressable>
 
-const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 type ValidWebButtonConstruct = HTMLButtonElement
 type ValidNativeButtonConstruct = PressableComponent
 type ValidButtonConstruct = ValidWebButtonConstruct & ValidNativeButtonConstruct
@@ -70,26 +68,10 @@ const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
       )
     }
 
-    if (props?.onClickOrPress) {
-      if (ENVIRONMENT === 'native') {
-        // TODO: How to type this properly?
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        props.onPress = props.onClickOrPress
-        delete props.onClickOrPress
-        delete props.onClick
-      }
-      if (ENVIRONMENT === 'web') {
-        props.onClick = props.onClickOrPress
-        delete props.onClickOrPress
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        delete props.onPress
-      }
-    }
+    const filteredProps = filterPropsByEnvironment({props: {...props, ...accessibilityProps}})
 
     return (
-      <Button type={type} ref={forwardedRef} {...accessibilityProps} {...props}>
+      <Button type={type} ref={forwardedRef}  {...filteredProps}>
         {children}
       </Button>
     )

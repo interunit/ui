@@ -61,7 +61,7 @@ const TopNavigation = () => {
               }}
             >
               <Popover.Trigger>
-                <Button tabIndex={0} color={theme.color.background.secondary}>
+                <Button tabIndex={0} color={theme?.color.background.secondary}>
                   <Primitive.Box
                     as="span"
                     flx={{dir: 'x', ai: 'center', gp: 0.5}}
@@ -69,7 +69,7 @@ const TopNavigation = () => {
                     <Text as="span">Docs</Text>
                     <ChevronDown
                       color={theme?.color.text.secondary}
-                      aria-role="img"
+                      role="img"
                       aria-label="Arrow pointing down"
                     />
                   </Primitive.Box>
@@ -78,7 +78,10 @@ const TopNavigation = () => {
               <Popover.Content>
                 <NavigationPopoverList>
                   {ui.sections.map((section, index) => (
-                    <NavigationPopoverListItem className="nav-popover-li">
+                    <NavigationPopoverListItem
+                      className="nav-popover-li"
+                      key={index}
+                    >
                       <NavigationPopoverListLink
                         href={`/docs/ui/${section.slug}`}
                       >
@@ -107,7 +110,7 @@ const TopNavigation = () => {
               <Primitive.Box as="span">
                 <Github
                   color={theme?.color.text.secondary}
-                  aria-role="img"
+                  role="img"
                   aria-label="GitHub logo for going to the InterUnit GitHub"
                 />
               </Primitive.Box>
@@ -121,7 +124,7 @@ const TopNavigation = () => {
               <Primitive.Box as="span">
                 <Twitter
                   color={theme?.color.text.secondary}
-                  aria-role="img"
+                  role="img"
                   aria-label="Twitter logo for going to the InterUnit Twitter"
                 />
               </Primitive.Box>

@@ -124,7 +124,7 @@ const FieldControl = ({children}: {children: React.ReactNode}) => {
         name={name}
         value={value}
         onChange={InternalOnChange}
-        readonly={isReadOnly}
+        readOnly={isReadOnly}
         data-error={isError}
       >
         {children}

@@ -1,26 +1,27 @@
 import type React from 'react'
 
+export type Environment = 'web' | 'native'
+
 export type NativeComponent = 'View' | 'Text' | 'Pressable'
 export type WebComponent = keyof React.JSX.IntrinsicElements
 export type ConstructTag = keyof JSX.IntrinsicElements
 
 export type CSSUnit = 'px' | 'rem'
 export type CSSUnitProperties = {
-
-    SPACING?: CSSUnit
-    BORDER_WIDTH?: CSSUnit
-    BORDER_RADIUS?: CSSUnit
-    ELEMENT_POSITION?: CSSUnit
-    SIZING?: CSSUnit
+  SPACING?: CSSUnit
+  BORDER_WIDTH?: CSSUnit
+  BORDER_RADIUS?: CSSUnit
+  ELEMENT_POSITION?: CSSUnit
+  SIZING?: CSSUnit
 }
 
 export const DEFAULT_CSS_UNIT: CSSUnitProperties = {
-    SPACING: 'rem',
-    BORDER_WIDTH: 'px',
-    BORDER_RADIUS: 'px',
-    ELEMENT_POSITION: 'px',
-    SIZING: 'px'
-  }
+  SPACING: 'rem',
+  BORDER_WIDTH: 'px',
+  BORDER_RADIUS: 'px',
+  ELEMENT_POSITION: 'px',
+  SIZING: 'px'
+}
 
 export type InterConstruct =
   | 'A'

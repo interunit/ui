@@ -9,9 +9,10 @@ type TextProps = React.ComponentPropsWithoutRef<typeof Primitive.Text> & {
   variation?: 'sm' | 'md' | 'lg'
 }
 
-type StyledTextProps = TextProps & {
-  kind: 'body' | 'heading'
-  variation: 'sm' | 'md' | 'lg'
+type StyledTextProps = {
+  $kind: TextProps['kind']
+  $weight: TextProps['weight']
+  $variation: 'sm' | 'md' | 'lg' // Calling reference caused undefined error?
 }
 
 const BodyScale = {
@@ -40,22 +41,22 @@ const HeadingLineHeightScale = {
 
 const StyledText = styled(Primitive.Text)<StyledTextProps>`
   ${props =>
-    props.kind === 'body' || !props.kind
-      ? `font-size: ${BodyScale[props.variation]};`
+    props.$kind === 'body' || !props.$kind
+      ? `font-size: ${BodyScale[props.$variation]};`
       : ''}
   ${props =>
-    props.kind === 'heading'
-      ? `font-size: ${HeadingScale[props.variation]};`
+    props.$kind === 'heading'
+      ? `font-size: ${HeadingScale[props.$variation]};`
       : ''}
-    ${props => props.weight && `font-weight: ${props.weight}`};
+    ${props => props.$weight && `font-weight: ${props.$weight}`};
   color: ${props => props.theme?.color.text.primary};
 
   line-height: ${props =>
-    props.kind === 'body' || !props.kind
-      ? BodyLineHeightScale[props.variation]
-      : HeadingLineHeightScale[props.variation]};
+    props.$kind === 'body' || !props.$kind
+      ? BodyLineHeightScale[props.$variation]
+      : HeadingLineHeightScale[props.$variation]};
 `
-type TextRef = React.ElementRef<TextPrimitive>
+type TextRef = React.ElementRef<typeof Primitive.Text>
 
 const Text = React.forwardRef<TextRef, TextProps>(
   (
@@ -64,9 +65,9 @@ const Text = React.forwardRef<TextRef, TextProps>(
   ) => {
     return (
       <StyledText
-        kind={kind}
-        variation={variation}
-        weight={weight}
+        $kind={kind}
+        $variation={variation}
+        $weight={weight}
         ref={forwardedRef}
         {...props}
       >

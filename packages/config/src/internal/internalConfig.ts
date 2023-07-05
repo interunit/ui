@@ -2,11 +2,12 @@ import {
   type ConstructTag,
   type InterConstruct,
   type WebComponent,
+  type Environment,
   DEFAULT_CSS_UNIT
 } from './sharedConfig'
 
 export const ENVIRONMENT = {
-  NAME: 'web',
+  NAME: 'web' as Environment,
   DEFAULT_CSS_UNIT
 }
 

@@ -9,9 +9,9 @@ type TextPrimitiveProps = React.ComponentPropsWithoutRef<
   UtilityStyles
 type TextPrimitiveRef = React.ElementRef<typeof Primitive.Text>
 
+const TextPrimtitiveWithShorthand = Shorthand({element: Primitive.Text})
 const TextPrimitive = React.forwardRef<TextPrimitiveRef, TextPrimitiveProps>(
   ({children, ...props}, forwardedRef) => {
-    const TextPrimtitiveWithShorthand = Shorthand({element: Primitive.Text})
     return (
       <TextPrimtitiveWithShorthand {...props} ref={forwardedRef}>
         {children}

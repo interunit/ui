@@ -1,6 +1,8 @@
 import React from 'react'
 import type {ViewComponent, ViewProps} from 'react-native'
 
+import { filterPropsByEnvironment } from '../../helpers/props'
+
 import {Construct} from '../../config'
 import {Child} from '../../utility/Child'
 
@@ -46,25 +48,28 @@ const Box = React.forwardRef<BoxPrimitiveRef, BoxPrimitiveProps>(
       accessible: props.accessible ?? undefined,
       accessibilityLabel:
         props?.accessibilityLabel ?? props?.['aria-label'] ?? undefined,
-      accessibilityRole: props?.accessibilityRole ?? props?.role ?? undefined,
+      accessibilityRole:
+        props?.accessibilityRole ??
+        (props?.role as typeof props.accessibilityRole) ??
+        undefined,
       accessibilityState:
-        props?.accessibilityState ?? props.disabled ?? undefined
+        props?.accessibilityState ?? props.disabled
+          ? ('disabled' as typeof props.accessibilityState)
+          : null ?? undefined
     }
 
+
+    const filteredProps = filterPropsByEnvironment({props: {...props, ...accessibilityProps}})
     if (as === 'child') {
       return (
-        <BoxConstruct.child
-          ref={forwardedRef}
-          {...props}
-          {...accessibilityProps}
-        >
+        <BoxConstruct.child ref={forwardedRef} {...filteredProps}>
           {children}
         </BoxConstruct.child>
       )
     }
 
     return (
-      <Box ref={forwardedRef} {...props}>
+      <Box ref={forwardedRef} {...filteredProps}>
         {children}
       </Box>
     )

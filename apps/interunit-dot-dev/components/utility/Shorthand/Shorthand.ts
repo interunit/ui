@@ -30,7 +30,7 @@ const propNames = [
 ]
 
 type CSS = {
-  css?: React.CSSProperties
+  css?: React.CSSProperties | string
 }
 
 export type UtilityStyles = Font &

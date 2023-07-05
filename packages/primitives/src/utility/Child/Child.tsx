@@ -1,5 +1,6 @@
 import React from 'react'
-import {Text} from 'react-native'
+
+import {filterPropsByEnvironment} from '../../helpers/props'
 
 // TODO: Type any
 const ChildElement = React.forwardRef<any, any>(
@@ -7,12 +8,28 @@ const ChildElement = React.forwardRef<any, any>(
     ChildElement.displayName = 'ChildElement'
     const child: React.ReactElement = children?.[0] || children
     if (React.isValidElement(child)) {
-      return React.cloneElement(children, {
+      const combinedProps = {
         ...(child as React.ReactElement)?.props,
-        // TODO: a way to automate this?
-        onClick: props?.onClick || props?.onClickOrPress,
-        onPress: props?.onPress || props?.onClickOrPress,
+
         ...props,
+        onClick:
+          props?.onClick ??
+          (child as React.ReactElement)?.props?.onClick ??
+          props?.onClickOrPress ??
+          (child as React.ReactElement)?.props.onClickOrPress,
+        onPress:
+          props?.onPress ??
+          (child as React.ReactElement)?.props?.onPress ??
+          props?.onClickOrPress ??
+          (child as React.ReactElement)?.props.onClickOrPress
+      }
+
+      delete combinedProps.onClickOrPress
+
+      const filteredProps = filterPropsByEnvironment({props: combinedProps})
+
+      return React.cloneElement(children, {
+        ...filteredProps,
         ref: forwardedRef
       })
     }

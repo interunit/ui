@@ -5,13 +5,13 @@ import {Construct} from '../../config'
 type ImageComponent = React.ElementType<RNImage>
 type ValidWebImageConstruct = HTMLImageElement
 type ValidImageConstruct = ValidWebImageConstruct & ImageComponent
-type ValidImageConstructProps = React.HTMLProps<ValidImageConstruct> & React.ComponentProps<ImageComponent>
+type ValidImageConstructProps = React.HTMLProps<ValidImageConstruct> | React.ComponentProps<ImageComponent>
 
 const ImageConstruct = {
   Image: Construct.Image
 }
-export interface ImagePrimitiveProps
-  extends ValidImageConstructProps     {
+export type ImagePrimitiveProps
+  = ValidImageConstructProps    & {
   src: string
   alt: string
   /*

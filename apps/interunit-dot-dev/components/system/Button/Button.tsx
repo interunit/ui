@@ -11,6 +11,13 @@ interface ButtonProps
   kind?: 'primary' | 'secondary'
 }
 
+interface StyledButtonProps
+  extends React.ComponentPropsWithoutRef<typeof Primitive.Button> {
+  $color: ButtonProps['color']
+  $variation?: ButtonProps['variation']
+  $kind?: ButtonProps['kind']
+}
+
 type ButtonRef = React.ElementRef<typeof Primitive.Button>
 
 const PaddingScale = {
@@ -19,18 +26,18 @@ const PaddingScale = {
   sm: '0.5rem 0.75rem'
 }
 
-const StyledButton = styled(Primitive.Button)<ButtonProps>`
+const StyledButton = styled(Primitive.Button)<StyledButtonProps>`
   appearance: none;
   background: linear-gradient(
         to top,
-        ${props => new TinyColor(props.color).lighten(3) as unknown as string},
-        ${props => props.color}
+        ${props => new TinyColor(props.$color).lighten(3).toString()},
+        ${props => props.$color}
       )
       padding-box,
     linear-gradient(
         to top,
-        ${props => props.color},
-        ${props => new TinyColor(props.color).lighten(10) as unknown as string}
+        ${props => props.$color},
+        ${props => new TinyColor(props.$color).lighten(10).toString()}
       )
       border-box;
   border-color: transparent;
@@ -39,7 +46,7 @@ const StyledButton = styled(Primitive.Button)<ButtonProps>`
   border-width: 1px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   color: ${props =>
-    isReadable(props.color, props.theme.color.text.primary)
+    isReadable(props.$color, props.theme.color.text.primary)
       ? props.theme.color.text.primary
       : props.theme.color.background.primary};
   cursor: pointer;
@@ -47,7 +54,7 @@ const StyledButton = styled(Primitive.Button)<ButtonProps>`
   filter: brightness(1);
   font-size: 1rem;
   font-weight: 400;
-  padding: ${props => props.variation && PaddingScale[props.variation]};
+  padding: ${props => props.$variation && PaddingScale[props.$variation]};
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s ease-in-out,
     background-image 0.2s ease-in-out, filter 0.2s ease-in-out;
@@ -59,8 +66,8 @@ const StyledButton = styled(Primitive.Button)<ButtonProps>`
   ${props =>
     props.kind === 'secondary' &&
     css`
-      background: ${props.color};
-      border-color: ${new TinyColor(props.color).lighten(
+      background: ${props.$color};
+      border-color: ${new TinyColor(props.$color).lighten(
         5
       ) as unknown as string};
       border-style: solid;
@@ -80,9 +87,9 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
   ) => {
     return (
       <StyledButton
-        color={color}
-        kind={kind}
-        variation={variation}
+        $color={color}
+        $kind={kind}
+        $variation={variation}
         {...props}
         ref={forwardedRef}
       >
