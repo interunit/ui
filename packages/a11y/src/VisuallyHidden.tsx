@@ -1,10 +1,11 @@
 import React from 'react'
 
-import {Primitive} from '@interunit/primitives'
+import {Child} from '@interunit/primitives'
 
 import type {CSSProperties} from './types'
 
-export const visuallyHiddenStyles = {
+
+const visuallyHiddenStyles = {
   position: 'absolute',
   width: 1,
   height: 1,
@@ -22,8 +23,8 @@ export const VisuallyHidden = ({
   children: React.ReactNode
 }) => {
   return (
-    <Primitive.Box as="span" style={visuallyHiddenStyles} {...otherProps}>
+    <Child style={visuallyHiddenStyles} {...otherProps}>
       {children}
-    </Primitive.Box>
+    </Child>
   )
 }

@@ -1,1 +1,1 @@
-export {VisuallyHidden, visuallyHiddenStyles} from './VisuallyHidden'
+export {VisuallyHidden } from './VisuallyHidden'

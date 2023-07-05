@@ -37,7 +37,11 @@ const FormPage = () => {
       >
         {() => (
           <>
-            <Field name="firstName" id="firstName" onChange={value => value}>
+            <Field
+              name="firstName"
+              id="firstName"
+              onChange={value => value}
+            >
               <Field.Label>
                 <Text as="label">First Name</Text>
               </Field.Label>

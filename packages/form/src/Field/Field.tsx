@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {visuallyHiddenStyles} from '@interunit/a11y'
+import {VisuallyHidden} from '@interunit/a11y'
 import {Child, Primitive} from '@interunit/primitives'
 
 import {FormContext} from '../Form'
@@ -47,7 +47,11 @@ const Field = ({
   children,
   ...props
 }: FieldProps & {children: React.ReactNode}) => {
-  const {validity: contextValidity, fieldValues, setFieldValues} = React.useContext(FormContext)
+  const {
+    validity: contextValidity,
+    fieldValues,
+    setFieldValues
+  } = React.useContext(FormContext)
 
   const [internalValidity, setInternalValidity] = React.useState<
     string | boolean
@@ -93,13 +97,19 @@ const FieldContainer = ({children}: {children: React.ReactNode}) => {
 
 const FieldLabel = ({children}: {children: React.ReactNode}) => {
   const {id, isError, isLabelHidden} = React.useContext(FieldContext)
+
+  if (isLabelHidden) {
+    return (
+      <VisuallyHidden>
+        <Child as="label" htmlFor={id} data-error={isError}>
+          {children}
+        </Child>
+      </VisuallyHidden>
+    )
+  }
+
   return (
-    <Child
-      as="label"
-      htmlFor={id}
-      data-error={isError}
-      style={isLabelHidden ? visuallyHiddenStyles : {}}
-    >
+    <Child as="label" htmlFor={id} data-error={isError}>
       {children}
     </Child>
   )

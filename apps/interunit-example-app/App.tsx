@@ -8,7 +8,6 @@ import {Primitive} from '@interunit/primitives'
 import {config} from './interunit.config'
 
 const Test = () => {
-
   type FormValues = {
     firstName: string
     lastName: string
@@ -37,7 +36,12 @@ const Test = () => {
       >
         {({onSubmit}) => (
           <>
-            <Field name="firstName" id="firstName" onChange={value => value}>
+            <Field
+              name="firstName"
+              id="firstName"
+              onChange={value => value}
+              isLabelHidden={true}
+            >
               <Field.Label>
                 <Primitive.Text as="label">First Name</Primitive.Text>
               </Field.Label>

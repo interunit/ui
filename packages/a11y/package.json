@@ -8,6 +8,7 @@
   "module": "dist/interunit-a11y.esm.js",
   "react-native": "src/index.ts",
   "dependencies": {
+      "@interunit/config": "*",
     "@interunit/primitives": "*"
   },
   "devDependencies": {
