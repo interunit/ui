@@ -25,21 +25,28 @@ const FormPage = () => {
       <Form
         initialValues={{firstName: 'Peter', lastName: 'Parker'}}
         onSubmit={handleSubmit}
-        validate={({values}: {values: FormValues}) => {
-          const errors = {} as FormValues
+        validate={{
+          validationFn: ({values}) => {
+            const errors = {} as FormValues
 
-          if (values.firstName.length > 10) {
-            errors.firstName = 'First name must be less than 10 characters'
+            if (values.firstName.length > 10) {
+              errors.firstName = 'First name must be less than 10 characters'
+            }
+
+            if (values.lastName.length > 10) {
+              errors.lastName = 'Last name must be less than 10 characters'
+            }
+
+            return errors
           }
-
-          return errors
         }}
       >
-        {() => (
+        {({values}) => (
           <>
             <Field
               name="firstName"
               id="firstName"
+              value={values.firstName}
               onChange={value => value}
             >
               <Field.Label>
@@ -55,6 +62,7 @@ const FormPage = () => {
             <Field
               name="lastName"
               id="lastName"
+              value={values.lastName}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 event.target.value
               }
@@ -65,6 +73,9 @@ const FormPage = () => {
               <Field.Control>
                 <input type="text" />
               </Field.Control>
+              <Field.ValidityMessage>
+                {validity => <Text as="span">{validity}</Text>}
+              </Field.ValidityMessage>
             </Field>
             <Button type="submit" color={theme?.color.background.secondary}>
               Submit

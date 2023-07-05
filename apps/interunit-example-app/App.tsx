@@ -34,11 +34,12 @@ const Test = () => {
           return errors
         }}
       >
-        {({onSubmit}) => (
+        {({values}) => (
           <>
             <Field
               name="firstName"
               id="firstName"
+              value={values.firstName}
               onChange={value => value}
               isLabelHidden={true}
             >
@@ -57,9 +58,8 @@ const Test = () => {
             <Field
               name="lastName"
               id="lastName"
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                event.target.value
-              }
+              value={values.lastName}
+              onChange={value => value}
             >
               <Field.Label>
                 <Primitive.Text as="label">Last Name</Primitive.Text>
@@ -68,19 +68,20 @@ const Test = () => {
                 <TextInput type="text" />
               </Field.Control>
             </Field>
-            <Primitive.Button
-              as="button"
-              type="submit"
-              onClickOrPress={onSubmit}
-              style={{
-                width: 200,
-                backgroundColor: 'blue',
-                padding: 20,
-                color: 'white'
-              }}
-            >
-              <Primitive.Text as="span">Submit</Primitive.Text>
-            </Primitive.Button>
+            <Form.Trigger>
+              <Primitive.Button
+                as="button"
+                type="submit"
+                style={{
+                  width: 200,
+                  backgroundColor: 'blue',
+                  padding: 20,
+                  color: 'white'
+                }}
+              >
+                <Primitive.Text as="span">Submit</Primitive.Text>
+              </Primitive.Button>
+            </Form.Trigger>
           </>
         )}
       </Form>

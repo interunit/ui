@@ -5,78 +5,76 @@ import {Child, Primitive} from '@interunit/primitives'
 
 import {FormContext} from '../Form'
 
-function onChangeValidate<E>(
-  onChange: ((event: E) => void) | undefined,
-  validate: ((value: E) => boolean | string | void) | undefined,
-  setValidity: React.Dispatch<React.SetStateAction<boolean | string>>
-) {
-  if (!onChange) return
-  return (event: E) => {
-    if (validate) {
-      setValidity(validate(event) ?? true)
-    }
-
-    onChange(event)
-  }
-}
-
-interface BaseFieldProps {
+interface FieldProps<T> {
   name: string
   id: string
+  value: T
+  // TODO: Not sure of a good way to avoid an "any" here
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange: (value: any) => void
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  validate?: (value: any) => boolean | string | void
+  onChange: (value: any) => void | T
+  validate?: {
+    validationFn?: (value: T) => string | boolean | void
+  }
   isReadOnly?: boolean
   isError?: boolean
   isLabelHidden?: boolean
 }
 
-type FieldProps = BaseFieldProps
-
-type FieldContextState = FieldProps & {
-  value: unknown
-  InternalOnChange: (value: unknown) => void
+type FieldContextState<T> = Omit<FieldProps<T>, 'validate'> & {
+  value: T
+  InternalOnChange: (value: T | unknown) => void
   validity: string | boolean
-  setValidity: React.Dispatch<React.SetStateAction<string | boolean>>
+  setValidity: ((value: T) => void) | undefined
 }
 
-const FieldContext = React.createContext({} as FieldContextState)
+const FieldContext = React.createContext<Partial<FieldContextState<unknown>>>(
+  {}
+)
 
-const Field = ({
+const Field = <T,>({
+  validate,
   children,
   ...props
-}: FieldProps & {children: React.ReactNode}) => {
-  const {
-    validity: contextValidity,
-    fieldValues,
-    setFieldValues
-  } = React.useContext(FormContext)
+}: FieldProps<T> & {children: React.ReactNode}) => {
+  const {setFieldValue, getFieldValidity} = React.useContext(FormContext)
 
   const [internalValidity, setInternalValidity] = React.useState<
     string | boolean
   >(true)
 
-  const value = fieldValues?.[props.name]
+  const value = props.value
 
-  const InternalOnChange = (event: unknown) => {
-    const value = props.onChange(event)
-    if (setFieldValues) {
-      setFieldValues((prev: typeof fieldValues) => ({
-        ...prev,
-        [props.name]: value
-      }))
+  const InternalOnChange = (_value: T | unknown) => {
+    if (props.onChange) {
+      const value = props.onChange(_value)
+      if (setFieldValue) {
+        setFieldValue({name: props.name, value})
+      }
     }
   }
 
-  const validity = contextValidity?.[props.name] || internalValidity
+  React.useEffect(() => {
+    if (validate?.validationFn) {
+      const validity = validate.validationFn?.(value) ?? true
+      setInternalValidity(validity)
+    }
+  }, [value])
+
+  const validity =
+    (getFieldValidity && getFieldValidity(props.name)) === true
+      ? internalValidity
+      : getFieldValidity && getFieldValidity(props.name)
 
   const ContextValue = {
-    ...props,
+    name: props.name,
+    id: props.id,
+    onChange: props.onChange,
+    isReadOnly: props.isReadOnly,
+    isError: props.isError,
+    isLabelHidden: props.isLabelHidden,
     value,
     InternalOnChange,
-    validity,
-    setValidity: setInternalValidity
+    validity
   }
 
   return (
@@ -116,23 +114,16 @@ const FieldLabel = ({children}: {children: React.ReactNode}) => {
 }
 
 const FieldControl = ({children}: {children: React.ReactNode}) => {
-  const {
-    value,
-    InternalOnChange,
-    id,
-    name,
-    isError,
-    isReadOnly,
-    validate,
-    setValidity
-  } = React.useContext(FieldContext)
+  const {value, InternalOnChange, id, name, isError, isReadOnly} =
+    React.useContext(FieldContext)
+
   return (
     <Primitive.Box as="div" data-error={isError}>
       <Child
         id={id}
         name={name}
         value={value}
-        onChange={onChangeValidate(InternalOnChange, validate, setValidity)}
+        onChange={InternalOnChange}
         readonly={isReadOnly}
         data-error={isError}
       >
