@@ -1,0 +1,35 @@
+import {InterUnitInternals as InterUnitConfigInternals} from '@interunit/config'
+import {InterUnitInternals} from '@interunit/primitives'
+
+const ENVIRONMENT =
+  InterUnitConfigInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
+
+type TextInputProps<T> = {
+  value?: T
+  onChange?: (value: React.ChangeEvent<HTMLInputElement>) => T
+} & typeof InterUnitInternals.Construct.Input
+
+const TextInput = <T extends string>({..._props}: TextInputProps<T>) => {
+  let props = {
+    value: _props.value,
+    ..._props
+  }
+
+  if (ENVIRONMENT === 'native') {
+    props.onChangeText = _props.onChange
+  }
+
+  if (ENVIRONMENT === 'web') {
+    props.onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (_props.onChange) {
+        _props.onChange(event)
+      }
+      console.log('HERE 2 ETV', event.target.value)
+      return event.target.value
+    }
+  }
+
+  return <InterUnitInternals.Construct.Input {...props} sdflkoj="sdfd" />
+}
+
+export {TextInput}

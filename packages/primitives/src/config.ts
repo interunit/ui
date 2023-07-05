@@ -13,7 +13,7 @@ const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT
 type ConstructType = typeof ConstructFromConfig
 
 const Construct = createWrappedConstruct({
-  Construct: ConstructFromConfig
+  Construct: ConstructFromConfig ,
 })
 
 export {

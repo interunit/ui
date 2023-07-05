@@ -13,6 +13,7 @@
   "dependencies": {
     "@interunit/config": "*",
     "@interunit/combobox": "*",
+    "@interunit/form": "*",
     "@interunit/popover": "*",
     "@interunit/primitives": "*",
     "expo": "~48.0.18",
