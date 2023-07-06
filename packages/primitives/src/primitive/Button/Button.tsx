@@ -1,8 +1,8 @@
 import React from 'react'
 import type {Pressable} from 'react-native'
-import { filterPropsByEnvironment } from '../../helpers/props'
 
 import {Construct} from '../../config'
+import {filterPropsByEnvironment} from '../../helpers/props'
 
 type PressableComponent = React.ElementType<typeof Pressable>
 
@@ -16,12 +16,12 @@ const ButtonConstruct = {
   button: Construct.Button
 }
 
-type ButtonConstructAs = 'button'
+type ButtonConstructEl = 'button'
 
 // TODO: Omit seems wrong, not sure why Button complains when being called though
 export interface ButtonPrimitiveProps
   extends Omit<ValidButtonConstructProps, 'name' | '$$typeof'> {
-  as?: ButtonConstructAs
+  el?: ButtonConstructEl
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
   children: React.ReactNode
@@ -46,7 +46,7 @@ export interface ButtonPrimitiveProps
 type ButtonPrimitiveRef = ValidButtonConstruct
 
 const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
-  ({as = 'button', type = 'button', children, ...props}, forwardedRef) => {
+  ({el = 'button', type = 'button', children, ...props}, forwardedRef) => {
     /*
      * Map similar accessibility props between React Native and Web
      */
@@ -60,18 +60,20 @@ const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
         props?.accessibilityState ?? props?.disabled ?? undefined
     }
 
-    const Button = ButtonConstruct?.[as] as React.ElementType
+    const Button = ButtonConstruct?.[el] as React.ElementType
 
     if (Button === undefined) {
       throw new Error(
-        `The element "${as}" doesn't exist in the Button component.`
+        `The element "${el}" doesn't exist in the Button component.`
       )
     }
 
-    const filteredProps = filterPropsByEnvironment({props: {...props, ...accessibilityProps}})
+    const filteredProps = filterPropsByEnvironment({
+      props: {...props, ...accessibilityProps}
+    })
 
     return (
-      <Button type={type} ref={forwardedRef}  {...filteredProps}>
+      <Button type={type} ref={forwardedRef} {...filteredProps}>
         {children}
       </Button>
     )

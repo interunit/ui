@@ -25,13 +25,8 @@ const propNames = [
   ...font.propNames,
   ...position.propNames,
   ...sizing.propNames,
-  ...spacing.propNames,
-  'css'
+  ...spacing.propNames
 ]
-
-type CSS = {
-  css?: React.CSSProperties | string
-}
 
 export type UtilityStyles = Font &
   Spacing &
@@ -39,8 +34,7 @@ export type UtilityStyles = Font &
   Border &
   Position &
   Flex &
-  Sizing &
-  CSS
+  Sizing
 
 const assemble = (props: UtilityStyles) => {
   return assemblers.map(assembler => assembler(props)).join('\n')
@@ -48,12 +42,10 @@ const assemble = (props: UtilityStyles) => {
 
 type StylesProps = UtilityStyles & {css?: string}
 const Shorthand = <T extends unknown>({
-  element,
-  css
+  element
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   element: T
-  css?: string
 }) => {
   const _styled = styled as typeof styled
 
@@ -65,8 +57,6 @@ const Shorthand = <T extends unknown>({
   })<StylesProps>`
     ${(props: StylesProps) =>
       StyledCss`
-        ${css}
-        ${props.css}
         ${assemble(props)}
       `}
     `

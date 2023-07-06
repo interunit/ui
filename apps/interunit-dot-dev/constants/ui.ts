@@ -1,24 +1,27 @@
+import {Theme} from '../styled-components.config'
 
 export const ui = {
-  name: 'UI',
-  slug: 'ui',
   sections: [
     {
       name: 'Primitives',
       description: 'Building blocks of InterUnit',
-      slug: 'primitives',
+      slug: '/primitives',
+      color: Theme.color.accent.orange,
       sections: [
         {
           name: 'Text',
-          slug: 'text'
+          slug: '/primitives/text',
+          color: Theme.color.accent.orange
         },
         {
           name: 'Box',
-          slug: 'box'
+          slug: '/primitives/box',
+          color: Theme.color.accent.orange
         },
         {
           name: 'Button',
-          slug: 'button'
+          slug: '/primitives/button',
+          color: Theme.color.accent.orange
         }
       ]
     },
@@ -26,16 +29,24 @@ export const ui = {
       name: 'Composites',
       description:
         'Components that are made up of other composites and primitves',
-      slug: 'composites',
+      slug: '/composites',
+      color: Theme.color.accent.blue,
       sections: [
         {
           name: 'Popover',
-          slug: 'popover'
+          slug: '/composites/popover',
+          color: Theme.color.accent.blue
+        },
+        {
+            name: 'Form',
+            slug: '/composites/form',
+            color: Theme.color.accent.blue
         },
         {
           name: 'Combobox',
-          slug: 'combobox'
-        }
+          slug: '/composites/combobox',
+          color: Theme.color.accent.blue
+        },
       ]
     }
   ]

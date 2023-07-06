@@ -1,13 +1,14 @@
 import React from 'react'
 import type {TextComponent, TextProps} from 'react-native'
-import { filterPropsByEnvironment } from '../../helpers/props'
 
 import {Construct} from '../../config'
+import {filterPropsByEnvironment} from '../../helpers/props'
 
 type ValidWebTextConstruct =
   | HTMLHeadingElement
   | HTMLParagraphElement
   | HTMLSpanElement
+  | HTMLAnchorElement
 type ValidNativeTextConstruct = TextComponent
 type ValidTextConstruct = ValidWebTextConstruct & ValidNativeTextConstruct
 type ValidTextConstructProps = React.HTMLProps<ValidTextConstruct> & TextProps
@@ -22,10 +23,11 @@ const TextConstruct = {
   h6: Construct.H6,
   label: Construct.Label,
   p: Construct.P,
-  span: Construct.Span
+  span: Construct.Span,
+  a: Construct.A
 }
 
-type TextConstructAs =
+type TextConstructEl =
   | 'h1'
   | 'h2'
   | 'h3'
@@ -35,10 +37,11 @@ type TextConstructAs =
   | 'label'
   | 'p'
   | 'span'
+  | 'a'
 
 // TODO: cut out the HTML element types that are not valid for each TextConstructAs
 export interface TextPrimitiveProps extends ValidTextConstructProps {
-  as: TextConstructAs
+  el: TextConstructEl
   children: React.ReactNode
   ref?: React.Ref<ValidTextConstruct>
 }
@@ -46,16 +49,16 @@ export interface TextPrimitiveProps extends ValidTextConstructProps {
 export type TextPrimitiveRef = ValidTextConstruct
 
 const Text = React.forwardRef<TextPrimitiveRef, TextPrimitiveProps>(
-  ({as, children, ...props}, forwardedRef) => {
-    const Text = TextConstruct?.[as as TextConstructAs] as React.ElementType
+  ({el, children, ...props}, forwardedRef) => {
+    const Text = TextConstruct?.[el as TextConstructEl] as React.ElementType
 
     if (Text === undefined) {
       throw new Error(
-        `The element "${as}" doesn't exist in the Text component.`
+        `The element "${el}" doesn't exist in the Text component.`
       )
     }
 
-    const filteredProps = filterPropsByEnvironment({props })
+    const filteredProps = filterPropsByEnvironment({props})
     return (
       <Text ref={forwardedRef} {...filteredProps}>
         {children}

@@ -23,7 +23,7 @@ const BodyScale = {
 
 const HeadingScale = {
   lg: '4rem',
-  md: '3rem',
+  md: '2.5rem',
   sm: '1.5rem'
 }
 

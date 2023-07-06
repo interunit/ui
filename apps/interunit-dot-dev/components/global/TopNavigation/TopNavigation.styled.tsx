@@ -3,7 +3,7 @@ import {styled} from 'styled-components'
 
 import {Primitive} from '@/components/primitives'
 
-export const Logo = styled(Primitive.Image).attrs({as: 'img'})`
+export const Logo = styled(Primitive.Image)`
   max-width: 60px;
   transition: 0.3s ease-in-out;
   width: 100%;
@@ -19,19 +19,19 @@ export const Logo = styled(Primitive.Image).attrs({as: 'img'})`
   }
 `
 
-export const NavigationList = styled(Primitive.Box).attrs({as: 'ul'})`
+export const NavigationList = styled(Primitive.Box).attrs({el: 'ul'})`
   align-items: center;
   display: flex;
   list-style: none;
   margin: 0 0.5rem 0 0;
 `
-export const NavigationSecondaryList = styled(Primitive.Box).attrs({as: 'ul'})`
+export const NavigationSecondaryList = styled(Primitive.Box).attrs({el: 'ul'})`
   align-items: center;
   display: flex;
   list-style: none;
   margin: 0;
 `
-export const NavigationListItem = styled(Primitive.Box).attrs({as: 'li'})`
+export const NavigationListItem = styled(Primitive.Box).attrs({el: 'li'})`
   & .iu-popover-arrow {
     fill: ${props => props.theme.color.background.primary};
     transition: fill 0.3s ease-in-out;
@@ -62,18 +62,17 @@ export const NavigationListLink = styled(Link)`
   }
 `
 
-
 export const NavigationPopoverSection = styled(Primitive.Box).attrs({
-  as: 'section'
+  el: 'section'
 })`
   display: flex;
   width: 100%;
   flex-direction: column;
   gap: 0.5rem;
 `
-export const NavigationPopoverList = styled(Primitive.Box).attrs({as: 'ul'})`
-  list-style: none;
+export const NavigationPopoverList = styled(Primitive.Box).attrs({el: 'ul'})`
   margin: 0;
+  list-style: none;
   padding: 0;
   display: flex;
   align-items: stretch;
@@ -90,7 +89,7 @@ export const NavigationPopoverList = styled(Primitive.Box).attrs({as: 'ul'})`
   }
 `
 export const NavigationPopoverListItem = styled(Primitive.Box).attrs({
-  as: 'li'
+  el: 'li'
 })`
   &:first-child section {
     border-radius: ${props => props.theme.border.radius.primary - 1}px

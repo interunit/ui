@@ -1,17 +1,20 @@
 import React from 'react'
 import {type Image as RNImage} from 'react-native'
+
 import {Construct} from '../../config'
+import {filterPropsByEnvironment} from '../../helpers/props'
 
 type ImageComponent = React.ElementType<RNImage>
 type ValidWebImageConstruct = HTMLImageElement
 type ValidImageConstruct = ValidWebImageConstruct & ImageComponent
-type ValidImageConstructProps = React.HTMLProps<ValidImageConstruct> | React.ComponentProps<ImageComponent>
+type ValidImageConstructProps =
+  | React.HTMLProps<ValidImageConstruct>
+  | React.ComponentProps<ImageComponent>
 
 const ImageConstruct = {
   Image: Construct.Image
 }
-export type ImagePrimitiveProps
-  = ValidImageConstructProps    & {
+export type ImagePrimitiveProps = ValidImageConstructProps & {
   src: string
   alt: string
   /*
@@ -32,14 +35,9 @@ export const Image = React.forwardRef<ImagePrimitiveRef, ImagePrimitiveProps>(
       accessible: props.accessible ?? true,
       accessibilityLabel: props.accessibilityLabel ?? props['aria-label'] ?? alt
     }
-    return (
-      <Image
-        src={src}
-        alt={alt}
-        ref={forwardedRef}
-        {...accessibilityProps}
-        {...props}
-      />
-    )
+    const filteredProps = filterPropsByEnvironment({
+      props: {...props, ...accessibilityProps}
+    })
+    return <Image src={src} alt={alt} ref={forwardedRef} {...filteredProps} />
   }
 )

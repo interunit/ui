@@ -10,7 +10,9 @@ export type Sizing = {
 
 type SizingValue = {
   w?: string | number
+  mw?: string | number
   h?: string | number
+  mh?: string | number
 }
 
 const formatSizingValues = ({
@@ -38,6 +40,18 @@ const sizingAssembler = ({sz}: {sz?: SizingValue}) => {
   if (sz.h)
     result += `height: ${formatSizingValues({
       value: sz.h,
+      unit: DEFAULT_SIZING_UNIT as CSSUnit
+    })};`
+
+  if (sz.mw)
+    result += `max-width: ${formatSizingValues({
+      value: sz.mw,
+      unit: DEFAULT_SIZING_UNIT as CSSUnit
+    })};`
+
+  if (sz.mh)
+    result += `max-height: ${formatSizingValues({
+      value: sz.mh,
       unit: DEFAULT_SIZING_UNIT as CSSUnit
     })};`
 

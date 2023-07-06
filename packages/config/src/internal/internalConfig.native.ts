@@ -105,5 +105,10 @@ export const ConstructFromConfig = [
     inter: 'TextInput' as InterConstruct,
     tag: 'TextInput' as ConstructTag,
     component: 'TextInput' as NativeComponent
+  },
+  {
+    inter: 'Nav' as InterConstruct,
+    tag: 'nav' as ConstructTag,
+    component: 'View' as NativeComponent
   }
 ]

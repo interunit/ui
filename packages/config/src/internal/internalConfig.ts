@@ -1,9 +1,9 @@
 import {
   type ConstructTag,
-  type InterConstruct,
-  type WebComponent,
+  DEFAULT_CSS_UNIT,
   type Environment,
-  DEFAULT_CSS_UNIT
+  type InterConstruct,
+  type WebComponent
 } from './sharedConfig'
 
 export const ENVIRONMENT = {
@@ -108,9 +108,13 @@ export const ConstructFromConfig = [
     component: 'section' as WebComponent
   },
   {
-      inter: 'TextInput',
-      tag: 'input',
-      component: 'TextInput'
-
+    inter: 'TextInput' as InterConstruct,
+    tag: 'input' as ConstructTag,
+    component: 'input' as WebComponent
+  },
+  {
+    inter: 'Nav' as InterConstruct,
+    tag: 'nav' as ConstructTag,
+    component: 'nav' as WebComponent
   }
 ]

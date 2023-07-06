@@ -87,7 +87,7 @@ const Field = <T,>({
 const FieldContainer = ({children}: {children: React.ReactNode}) => {
   const {isError} = React.useContext(FieldContext)
   return (
-    <Primitive.Box as="div" data-error={isError}>
+    <Primitive.Box el="div" data-error={isError}>
       {children}
     </Primitive.Box>
   )
@@ -99,7 +99,7 @@ const FieldLabel = ({children}: {children: React.ReactNode}) => {
   if (isLabelHidden) {
     return (
       <VisuallyHidden>
-        <Child as="label" htmlFor={id} data-error={isError}>
+        <Child el="label" htmlFor={id} data-error={isError}>
           {children}
         </Child>
       </VisuallyHidden>
@@ -107,7 +107,7 @@ const FieldLabel = ({children}: {children: React.ReactNode}) => {
   }
 
   return (
-    <Child as="label" htmlFor={id} data-error={isError}>
+    <Child el="label" htmlFor={id} data-error={isError}>
       {children}
     </Child>
   )
@@ -118,7 +118,7 @@ const FieldControl = ({children}: {children: React.ReactNode}) => {
     React.useContext(FieldContext)
 
   return (
-    <Primitive.Box as="div" data-error={isError}>
+    <Primitive.Box el="div" data-error={isError}>
       <Child
         id={id}
         name={name}
@@ -147,7 +147,7 @@ const FieldValidityMessage = ({
     children
   ) {
     return (
-      <Primitive.Box as="div" data-error={true}>
+      <Primitive.Box el="div" data-error={true}>
         {children(validity) ?? validity}
       </Primitive.Box>
     )

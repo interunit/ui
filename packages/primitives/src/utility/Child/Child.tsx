@@ -10,8 +10,8 @@ const ChildElement = React.forwardRef<any, any>(
     if (React.isValidElement(child)) {
       const combinedProps = {
         ...(child as React.ReactElement)?.props,
-
         ...props,
+
         onClick:
           props?.onClick ??
           (child as React.ReactElement)?.props?.onClick ??

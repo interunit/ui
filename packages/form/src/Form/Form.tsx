@@ -109,7 +109,7 @@ const Form = <T extends BaseValues>({
 
   return (
     <FormContext.Provider value={ContextValue}>
-      <form onSubmit={InternalOnSubmit}>
+      <form onSubmit={InternalOnSubmit} style={{ width: '100%'}}>
         {children({values: fieldValues, validity, onSubmit: InternalOnSubmit})}
       </form>
     </FormContext.Provider>

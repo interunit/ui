@@ -1,11 +1,22 @@
 import React from 'react'
+import styled from 'styled-components/native'
 
 import {InterUnitProvider} from '@interunit/config'
 import {Field, Form, TextInput} from '@interunit/form'
 import {Popover} from '@interunit/popover'
 import {Primitive} from '@interunit/primitives'
+import {mq} from '@interunit/responsive'
 
 import {config} from './interunit.config'
+
+const StyledBox = styled(Primitive.Box).attrs({el: 'div'})`
+  background-color: red;
+
+  ${mq(800)`
+  background-color: green;
+
+      `}
+`
 
 const Test = () => {
   type FormValues = {
@@ -18,9 +29,12 @@ const Test = () => {
   }
   return (
     <Primitive.Box
-      as="div"
+      el="div"
       style={{height: '100%', flex: 1, marginTop: 30, padding: 20}}
     >
+      <StyledBox el="div">
+        <Primitive.Text el="span">hi</Primitive.Text>
+      </StyledBox>
       <Form
         initialValues={{firstName: 'Peter', lastName: 'Parker'}}
         onSubmit={handleSubmit}
@@ -44,14 +58,14 @@ const Test = () => {
               isLabelHidden={true}
             >
               <Field.Label>
-                <Primitive.Text as="label">First Name</Primitive.Text>
+                <Primitive.Text el="label">First Name</Primitive.Text>
               </Field.Label>
               <Field.Control>
                 <TextInput type="text" />
               </Field.Control>
               <Field.ValidityMessage>
                 {validity => (
-                  <Primitive.Text as="span">{validity}</Primitive.Text>
+                  <Primitive.Text el="span">{validity}</Primitive.Text>
                 )}
               </Field.ValidityMessage>
             </Field>
@@ -62,7 +76,7 @@ const Test = () => {
               onChange={value => value}
             >
               <Field.Label>
-                <Primitive.Text as="label">Last Name</Primitive.Text>
+                <Primitive.Text el="label">Last Name</Primitive.Text>
               </Field.Label>
               <Field.Control>
                 <TextInput type="text" />
@@ -70,7 +84,7 @@ const Test = () => {
             </Field>
             <Form.Trigger>
               <Primitive.Button
-                as="button"
+                el="button"
                 type="submit"
                 style={{
                   width: 200,
@@ -79,13 +93,13 @@ const Test = () => {
                   color: 'white'
                 }}
               >
-                <Primitive.Text as="span">Submit</Primitive.Text>
+                <Primitive.Text el="span">Submit</Primitive.Text>
               </Primitive.Button>
             </Form.Trigger>
           </>
         )}
       </Form>
-      <Primitive.Box as="div" collapsable={false} style={{marginTop: 30}}>
+      <Primitive.Box el="div" collapsable={false} style={{marginTop: 30}}>
         <Popover
           triggerType="click"
           popoverPositioning={{
@@ -97,7 +111,7 @@ const Test = () => {
         >
           <Popover.Trigger>
             <Primitive.Button
-              as="button"
+              el="button"
               style={{
                 width: 200,
                 backgroundColor: 'blue',
@@ -105,12 +119,12 @@ const Test = () => {
                 color: 'white'
               }}
             >
-              <Primitive.Text as="span">Press me</Primitive.Text>
+              <Primitive.Text el="span">Press me</Primitive.Text>
             </Primitive.Button>
           </Popover.Trigger>
           <Popover.Content>
             <Primitive.Box
-              as="div"
+              el="div"
               style={{
                 backgroundColor: 'red',
                 display: 'flex',
@@ -118,7 +132,7 @@ const Test = () => {
                 justifyContent: 'center'
               }}
             >
-              <Primitive.Text as="span">Popover content</Primitive.Text>
+              <Primitive.Text el="span">Popover content</Primitive.Text>
             </Primitive.Box>
           </Popover.Content>
         </Popover>

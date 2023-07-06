@@ -30,7 +30,7 @@ const TextInput = <T extends string>({..._props}: TextInputProps<T>) => {
     }
   }
 
-  return <InterUnitInternals.Construct.Input {...props} sdflkoj="sdfd" />
+  return <InterUnitInternals.Construct.Input {...props} />
 }
 
 export {TextInput}

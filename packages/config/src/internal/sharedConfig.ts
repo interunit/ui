@@ -42,3 +42,4 @@ export type InterConstruct =
   | 'LI'
   | 'UL'
   | 'Section'
+  | 'Nav'

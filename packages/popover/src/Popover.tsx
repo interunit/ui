@@ -29,6 +29,7 @@ type PopoverPositioning = Omit<UseFloatingOptions, 'placement'> & {
   offset?: number
   width?: 'trigger' | string | number
   maxWidth?: string
+  zIndex?: number
   arrow?: Omit<FloatingArrowProps, 'context'> & {
     style?: React.CSSProperties
   }
@@ -119,7 +120,7 @@ const Popover = ({
       value={{...state, dispatch, trigger, setTrigger, triggerType}}
     >
       <Primitive.Box
-        as="div"
+        el="div"
         // The floating styles are technically correct but React.CSSProperties
         // doesn't seem to think so
         //
@@ -234,7 +235,7 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
   if (isOpen && trigger) {
     return (
       <Primitive.Box
-        as="div"
+        el="div"
         style={{
           maxWidth:
             convert({
@@ -252,6 +253,7 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
                 })
               ? popoverPositioning?.width
               : 'auto',
+        zIndex: popoverPositioning?.zIndex ?? 1,
           ...pruneStyles(rawFloatingStyles)
         }}
         className="iu-popover-content"

@@ -8,15 +8,14 @@ type BoxPrimitiveProps = React.ComponentPropsWithoutRef<typeof Primitive.Box> &
 type BoxPrimitiveRef = React.ElementRef<typeof Primitive.Box>
 
 const BoxPrimtitiveWithShorthand = Shorthand({element: Primitive.Box})
-const BoxPrimitive = React.forwardRef<
-  BoxPrimitiveRef,
-  Omit<BoxPrimitiveProps, 'css'>
->(({children, ...props}, forwardedRef) => {
-  return (
-    <BoxPrimtitiveWithShorthand {...props} ref={forwardedRef}>
-      {children}
-    </BoxPrimtitiveWithShorthand>
-  )
-})
+const BoxPrimitive = React.forwardRef<BoxPrimitiveRef, BoxPrimitiveProps>(
+  ({children, ...props}, forwardedRef) => {
+    return (
+      <BoxPrimtitiveWithShorthand {...props} ref={forwardedRef}>
+        {children}
+      </BoxPrimtitiveWithShorthand>
+    )
+  }
+)
 
 export {BoxPrimitive}

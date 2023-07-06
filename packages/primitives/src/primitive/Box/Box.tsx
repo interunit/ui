@@ -1,9 +1,8 @@
 import React from 'react'
 import type {ViewComponent, ViewProps} from 'react-native'
 
-import { filterPropsByEnvironment } from '../../helpers/props'
-
 import {Construct} from '../../config'
+import {filterPropsByEnvironment} from '../../helpers/props'
 import {Child} from '../../utility/Child'
 
 type ValidWebBoxConstruct =
@@ -20,15 +19,16 @@ const BoxConstruct = {
   span: Construct.Span,
   child: Child,
   section: Construct.Section,
+  nav: Construct.Nav,
   // TODO: shoudld these go here?
   ul: Construct.UL,
   li: Construct.LI
 }
 
-type BoxConstructAs = 'div' | 'span' | 'child' | 'ul' | 'li' | 'section'
+type BoxConstructEl = 'div' | 'span' | 'child' | 'ul' | 'li' | 'section' | 'nav'
 
 export type BoxPrimitiveProps = ValidBoxConstructProps & {
-  as: BoxConstructAs
+  el: BoxConstructEl
   children: React.ReactNode
   ref?: React.Ref<ValidBoxConstruct>
 }
@@ -36,11 +36,11 @@ export type BoxPrimitiveProps = ValidBoxConstructProps & {
 export type BoxPrimitiveRef = ValidBoxConstruct
 
 const Box = React.forwardRef<BoxPrimitiveRef, BoxPrimitiveProps>(
-  ({as, children, ...props}, forwardedRef) => {
-    const Box = BoxConstruct?.[as] as React.ElementType
+  ({el, children, ...props}, forwardedRef) => {
+    const Box = BoxConstruct?.[el] as React.ElementType
 
     if (Box === undefined) {
-      throw new Error(`The element "${as}" doesn't exist in the Box component.`)
+      throw new Error(`The element "${el}" doesn't exist in the Box component.`)
     }
 
     // TODO: probably makes sense to centralize this
@@ -58,13 +58,15 @@ const Box = React.forwardRef<BoxPrimitiveRef, BoxPrimitiveProps>(
           : null ?? undefined
     }
 
+    const filteredProps = filterPropsByEnvironment({
+      props: {...props, ...accessibilityProps}
+    })
 
-    const filteredProps = filterPropsByEnvironment({props: {...props, ...accessibilityProps}})
-    if (as === 'child') {
+    if (el === 'child') {
       return (
-        <BoxConstruct.child ref={forwardedRef} {...filteredProps}>
+        <Child ref={forwardedRef} {...filteredProps}>
           {children}
-        </BoxConstruct.child>
+        </Child>
       )
     }
 

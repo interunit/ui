@@ -43,7 +43,7 @@ const Combobox = ({type, value, onChange, options}: ComboboxProps) => {
   }
 
   return (
-    <Primitive.Box as="div">
+    <Primitive.Box el="div">
       <Primitive.Button
         onPress={() => {
           setIsOpen(!isOpen)
@@ -56,8 +56,8 @@ const Combobox = ({type, value, onChange, options}: ComboboxProps) => {
         aria-expanded={isOpen}
         aria-haspopup="dialog"
       >
-        <Primitive.Box sp={{p: 1}} as="span">
-          <Primitive.Text as="span" fnt={{c: 'black'}}>
+        <Primitive.Box sp={{p: 1}} el="span">
+          <Primitive.Text el="span" fnt={{c: 'black'}}>
             {type === 'multi'
               ? !value || value.length === 0
                 ? 'Select...'
@@ -70,7 +70,7 @@ const Combobox = ({type, value, onChange, options}: ComboboxProps) => {
       </Primitive.Button>
       {isOpen && (
         // TODO: Replace with popover component
-        <Primitive.Box as="div" bg={{c: 'white'}} role="group">
+        <Primitive.Box el="div" bg={{c: 'white'}} role="group">
           {options.map(option => {
             return (
               <Primitive.Button
@@ -80,7 +80,7 @@ const Combobox = ({type, value, onChange, options}: ComboboxProps) => {
                 sp={{p: 1}}
                 role="option"
               >
-                <Primitive.Text as="span" fnt={{c: 'black'}}>
+                <Primitive.Text el="span" fnt={{c: 'black'}}>
                   {option.label}
                 </Primitive.Text>
               </Primitive.Button>

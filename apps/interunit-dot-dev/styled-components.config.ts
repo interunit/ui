@@ -15,7 +15,7 @@ export const Theme = {
       secondary: '#5E47C4',
       tertiary: '#292B62',
       muted: '#4A4A57',
-      blended: '#1D1D27'
+      blended: '#16161F'
     },
     border: {
       primary: '#363645'
@@ -31,5 +31,12 @@ export const Theme = {
     width: {
       primary: 2
     }
+  },
+  breakpoint: {
+    small: 600,
+    medium: 768,
+    large: 1024,
+    xlarge: 1280,
+    xxlarge: 1920
   }
 }
