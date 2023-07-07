@@ -1,22 +1,16 @@
+import {VisuallyHidden} from '@interunit/a11y'
+import {Popover} from '@interunit/popover'
+import {Primitive} from '@interunit/primitives'
+import {sw} from '@interunit/responsive'
 import {Menu} from 'lucide-react'
 import Link from 'next/link'
 import {usePathname} from 'next/navigation'
-import {useTheme} from 'styled-components'
 
+import {Button, ButtonAnchor} from '@/components/system/Button'
 import {Text} from '@/components/system/Text'
-import {VisuallyHidden} from '@interunit/a11y'
-import {Popover} from '@interunit/popover'
-import {sw} from '@interunit/responsive'
+import {type ThemeColor, theme} from '@/theme.config'
 
-import {
-  List,
-  ListButtonAnchor,
-  ListContainer,
-  ListItem,
-  MenuButton,
-  NavigationContainer,
-  NavigationPopover
-} from './DocsSideNavigation.styled'
+import './DocsSideNavigation.css'
 
 type DataItem = {
   name: string
@@ -33,25 +27,30 @@ const RecursiveRender = ({data, path}: {path: string; data: DataItem}) => {
   return (
     <>
       {data.name && (
-        <ListItem el="li">
+        <Primitive.Box el="li">
           <Link href={path + data.slug} legacyBehavior passHref>
-            <ListButtonAnchor
+            <ButtonAnchor
               el="a"
-              color={data.color}
+              color={data.color as ThemeColor}
               variation="xs"
-              $active={pathname === path + data.slug}
+              className={`text-sm ${
+                pathname !== path + data.slug ? 'ButtonInActive' : ''
+              }`}
             >
-              <Text el="span">{data.name}</Text>
-            </ListButtonAnchor>
+              {data.name}
+            </ButtonAnchor>
           </Link>
-        </ListItem>
+        </Primitive.Box>
       )}
       {data?.sections?.length > 0 && (
-        <List el="ul">
+        <Primitive.Box
+          el="ul"
+          className="flex flex-col list-none gap-4 [&_ul]:ml-4"
+        >
           {data.sections.map((section, index) => {
             return <RecursiveRender data={section} path={path} key={index} />
           })}
-        </List>
+        </Primitive.Box>
       )}
     </>
   )
@@ -59,23 +58,27 @@ const RecursiveRender = ({data, path}: {path: string; data: DataItem}) => {
 
 const NavigationList = ({data}: {data: DataItem}) => {
   return (
-    <ListContainer el="div">
+    <Primitive.Box el="div" className="sticky left-0 top-4 p-4">
       <RecursiveRender data={data} path={'/ui/docs'} />
-    </ListContainer>
+    </Primitive.Box>
   )
 }
 const DocsSideNavigation = ({data}: DocsSideNavigationProps) => {
-  const theme = useTheme()
-
-  if (sw(theme.breakpoint.large)) {
+  if (sw(theme.screens.lg)) {
     return (
-      <NavigationContainer el="nav">
+      <Primitive.Box
+        el="nav"
+        className="bg-bg-primary border-b-1 border-border h-full [&).iu-popover-arrow]:fill-bg-primary lg:p-4 lg:border-r-1 lg:border-b-0 relative"
+      >
         <NavigationList data={data} />
-      </NavigationContainer>
+      </Primitive.Box>
     )
   }
   return (
-    <NavigationContainer el="nav">
+    <Primitive.Box
+      el="nav"
+      className="bg-bg-primary border-b-1 border-border h-full [&).iu-popover-arrow]:fill-bg-primary lg:p-4 lg:border-r-1 lg:border-b-0 relative"
+    >
       <Popover
         triggerType="click"
         popoverPositioning={{
@@ -84,30 +87,35 @@ const DocsSideNavigation = ({data}: DocsSideNavigationProps) => {
           offset: 12,
           arrow: {
             tipRadius: 2,
-            stroke: theme?.color.border.primary,
+            stroke: theme.colors.border,
             strokeWidth: 2
           }
         }}
       >
         <Popover.Trigger>
-          <MenuButton
+          <Button
             el="button"
-            color={theme.color.background.muted}
+            className="block m-4 lg:hidden"
+            color={theme.colors['bg-muted']}
             variation="sm"
           >
             <VisuallyHidden>
               <Text el="span">Open navigation</Text>
             </VisuallyHidden>
             <Menu size={24} role="img" />
-          </MenuButton>
+          </Button>
         </Popover.Trigger>
         <Popover.Content>
-          <NavigationPopover el="div">
+          <Primitive.Box
+            el="div"
+            className="flex flex-col bg-bg-primary border-border rounded border-1 mx-4 overflow-y-auto"
+            style={{width: 'calc(100vw - 2rem)'}}
+          >
             <NavigationList data={data} />
-          </NavigationPopover>
+          </Primitive.Box>
         </Popover.Content>
       </Popover>
-    </NavigationContainer>
+    </Primitive.Box>
   )
 }
 

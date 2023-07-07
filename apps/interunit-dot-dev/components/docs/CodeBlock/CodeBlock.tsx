@@ -12,7 +12,7 @@ const CodeBlock = ({
   language = 'tsx',
   code
 }: {
-  language: 'tsx' | 'ts'
+  language?: 'tsx' | 'ts'
   code: string
 }) => {
   React.useEffect(() => {

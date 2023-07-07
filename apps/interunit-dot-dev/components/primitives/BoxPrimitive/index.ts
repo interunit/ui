@@ -1,1 +1,0 @@
-export { BoxPrimitive } from './BoxPrimitive';

@@ -1,54 +1,30 @@
 'use client'
 
+import {Primitive} from '@interunit/primitives'
 import React from 'react'
-import styled from 'styled-components'
 
 import {DocsSideNavigation} from '@/components/docs/DocsSideNavigation'
 import {TopNavigation} from '@/components/global/TopNavigation'
-import {Primitive} from '@/components/primitives'
 import {ui} from '@/constants/ui'
-import {mq} from '@interunit/responsive'
-
-const Container = styled(Primitive.Box)`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
-  ${props => mq(props.theme.breakpoint.large)`
-    flex-direction: row;
-`}
-`
-
-const Navigation = styled(Primitive.Box)`
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  ${props => mq(props.theme.breakpoint.large)`
-    flex: 0 0 250px;
-    min-height: 100vh;
-  `}
-`
-
-const Content = styled(Primitive.Box)`
-  flex: 1;
-  max-width: 1920px;
-  width: 100%;
-`
 
 const DocsLayout = ({children}: {children: React.ReactNode}) => {
   return (
     <div style={{height: '100%'}}>
       <TopNavigation />
-      <Container el="div">
-        <Navigation el="div">
+      <Primitive.Box el="div" className="flex flex-col lg:flex-row h-full">
+        <Primitive.Box
+          el="div"
+          className="sticky top-0 z-10 border-b-[1px] lg:basis-[250px] lg:min-h-screen  lg:border-r-[1px] lg:border-b-none"
+        >
           <DocsSideNavigation data={ui} />
-        </Navigation>
-        <Content el="div">
-          <Primitive.Box el="div" sp={{p: [2]}}>
-            {children}
-          </Primitive.Box>
-        </Content>
-      </Container>
+        </Primitive.Box>
+        <Primitive.Box
+          el="div"
+          className="flex-1 mx-auto max-w-[1000px] p-8 w-full"
+        >
+          {children}
+        </Primitive.Box>
+      </Primitive.Box>
     </div>
   )
 }

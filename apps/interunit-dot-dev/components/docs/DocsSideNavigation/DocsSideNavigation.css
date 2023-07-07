@@ -1,0 +1,3 @@
+.ButtonInActive:not(:hover) {
+  background: transparent !important;
+}

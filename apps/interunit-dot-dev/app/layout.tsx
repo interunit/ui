@@ -1,9 +1,8 @@
 import {Inter} from 'next/font/google'
 
 import {InterUnitProvider} from '@/components/utility/InterUnitProvider'
-import {StyledComponentsProvider} from '@/components/utility/StyledComponentsProvider'
+import './globals.css'
 
-import StyledComponentsRegistry from '../components/utility/StyledComponentsRegistry'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,11 +19,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={inter.className}>
       <body>
-        <StyledComponentsRegistry>
           <InterUnitProvider>
-            <StyledComponentsProvider>{children}</StyledComponentsProvider>
+          {children}
           </InterUnitProvider>
-        </StyledComponentsRegistry>
       </body>
     </html>
   )

@@ -1,11 +1,11 @@
 'use client'
 
+import {Popover} from '@interunit/popover'
+import {Primitive} from '@interunit/primitives'
 import {useTheme} from 'styled-components'
 
-import {Primitive} from '@/components/primitives'
 import {Button} from '@/components/system/Button'
 import {Text} from '@/components/system/Text'
-import {Popover} from '@interunit/popover'
 
 const PopoverPage = () => {
   const theme = useTheme()
@@ -25,22 +25,17 @@ const PopoverPage = () => {
         }}
       >
         <Popover.Trigger>
-          <Button
-            as="button"
-            color={theme.color.background.secondary}
-          >
+          <Button as="button" color={'bg-secondary'}>
             Click me
           </Button>
         </Popover.Trigger>
         <Popover.Content>
           <Primitive.Box
-            as="div"
-            bg={{c: theme?.color.background.primary}}
-            bdr={{c: theme?.color.border.primary, w: 1, r: 8}}
-            sp={{p: 1}}
+            el="div"
+            className={'backgound-bg-primary border-border rounded p-4 '}
             style={{width: '500px'}}
           >
-            <Text as="span" variation="md">
+            <Text el="span" variation="md">
               The content
             </Text>
           </Primitive.Box>

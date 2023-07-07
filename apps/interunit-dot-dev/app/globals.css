@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+    body {
+        background-color: #1d1d27;
+        color: #ffffff;
+        max-width: 100vw;
+    }
+    * {
+        box-sizing: border-box;
+        font-family: var(--font-inter);
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+     }
+     *:focus-visible {
+        outline: 2px solid #ffae71;
+        outline-offset: 0.4rem;
+    }
+     *:focus:not(:focus-visible) {
+        outline: none;
+    }
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    a:hover, a:focus {
+        text-decoration: underline;
+    }

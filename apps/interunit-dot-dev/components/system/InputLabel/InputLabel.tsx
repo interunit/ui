@@ -1,12 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import {Text} from '@/components/system/Text'
-
-const StyledInputLabel = styled(Text)`
-  display: inline-block;
-  margin-bottom: 0.25rem;
-`
 
 interface StyledInputLabelProps
   extends Omit<React.ComponentPropsWithoutRef<typeof Text>, 'el'> {
@@ -16,11 +10,11 @@ interface StyledInputLabelProps
 const InputLabel = React.forwardRef<
   React.ElementRef<typeof Text>,
   StyledInputLabelProps
->(({children, ...props}, forwardedRef) => {
+>(({className, children, ...props}, forwardedRef) => {
   return (
-    <StyledInputLabel el={'label'} {...props} ref={forwardedRef}>
+    <Text el={'label'} className={`mb-1 inline-block ${className}`}{...props} ref={forwardedRef}>
       {children}
-    </StyledInputLabel>
+    </Text>
   )
 })
 export {InputLabel}

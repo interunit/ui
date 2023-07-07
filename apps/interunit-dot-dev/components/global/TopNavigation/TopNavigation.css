@@ -1,0 +1,11 @@
+.NavigationArrow .iu-popover-arrow {
+  fill: #1d1d27;
+  	transition-property: fill;
+transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+transition-duration: 150ms;
+}
+
+.NavigationArrow:has(.iu-popover-content .nav-popover-li:first-child:hover)
+  .iu-popover-arrow {
+  fill: #4a4a57;
+}

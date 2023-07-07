@@ -1,50 +1,46 @@
 'use client'
 
+import {Popover} from '@interunit/popover'
+import {Primitive} from '@interunit/primitives'
 import {ChevronDown, Github, Twitter} from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-import {useTheme} from 'styled-components'
 
-import {Primitive} from '@/components/primitives'
 import {Button} from '@/components/system/Button'
 import {Text} from '@/components/system/Text'
 import {ui} from '@/constants/ui'
-import {Popover} from '@interunit/popover'
+import {theme} from '@/theme.config'
 
-import {
-  Logo,
-  NavigationList,
-  NavigationListItem,
-  NavigationListLink,
-  NavigationPopoverList,
-  NavigationPopoverListItem,
-  NavigationPopoverListLink,
-  NavigationPopoverSection,
-  NavigationSecondaryList
-} from './TopNavigation.styled'
+import './TopNavigation.css'
 
 const TopNavigation = () => {
-  const theme = useTheme()
   return (
     <Primitive.Box
       el="div"
-      sp={{p: [0, 1]}}
-      flx={{dir: 'x', ai: 'center', jc: 'space-between'}}
-      bg={{c: theme?.color.background.primary}}
-      bdr={{c: theme?.color.border.primary, w: [0, 0, 1, 0]}}
+      className="px-4 flex flex-row items-center justify-between bg-bg-primary border-b-[1px] border-border"
     >
       <Link href="/" tabIndex={0}>
         <Primitive.Box
           el="span"
-          flx={{dir: 'x', ai: 'center', gp: 0.75}}
-          sp={{p: [1, 0]}}
+          className="flex flex-row items-center gap-3 py-4"
         >
-          <Logo  src="/interunit-logo.svg" alt="Logo for InterUnit" />
+          <Primitive.Image
+            src="/interunit-logo.svg"
+            alt="Logo for InterUnit"
+            className="full-width transition-all hover:rotate-180"
+            style={{maxWidth: '60px'}}
+          />
         </Primitive.Box>
       </Link>
-      <Primitive.Box el="div" flx={{dir: 'x', ai: 'center', gp: 0.75}}>
-        <NavigationList el="ul">
-          <NavigationListItem el="li">
+      <Primitive.Box el="div" className="flex flex-row items-center gap-3">
+        <Primitive.Box
+          el="ul"
+          className="flex flex-row items-center mr-2 list-none"
+        >
+          <Primitive.Box
+            el="li"
+            className={`flex flex-row items-center m-0 NavigationArrow`}
+          >
             <Popover
               triggerType="hover"
               popoverPositioning={{
@@ -56,85 +52,93 @@ const TopNavigation = () => {
                 zIndex: 10,
                 arrow: {
                   tipRadius: 2,
-                  stroke: theme?.color.border.primary,
+                  stroke: theme.colors.border,
                   strokeWidth: 2
                 }
               }}
             >
               <Popover.Trigger>
-                <Button tabIndex={0} color={theme?.color.background.secondary}>
-                  <Primitive.Box
-                    el="span"
-                    flx={{dir: 'x', ai: 'center', gp: 0.5}}
-                  >
-                    <Text el="span">Docs</Text>
-                    <ChevronDown
-                      color={theme?.color.text.secondary}
-                      role="img"
-                      aria-label="Arrow pointing down"
-                    />
-                  </Primitive.Box>
+                <Button tabIndex={0} color="bg-secondary">
+                  <Text el="span">Docs</Text>
+                  <ChevronDown
+                    color={theme.colors['text-light-accent']}
+                    role="img"
+                    aria-label="Arrow pointing down"
+                  />
                 </Button>
               </Popover.Trigger>
               <Popover.Content>
-                <Primitive.Box el="div">
-                  <NavigationPopoverList el="ul">
+                <Primitive.Box el="div" className="rounded">
+                  <Primitive.Box
+                    el="ul"
+                    className="m-0 list-none p-0 flex flex-col bg-bg-primary border rounded hover:no-underline"
+                  >
                     {ui.sections.map((section, index) => (
-                      <NavigationPopoverListItem
+                      <Primitive.Box
                         el="li"
-                        className="nav-popover-li"
+                        className={`nav-popover-li first:border-b-[1px] hover:bg-bg-muted first:rounded-tl-[7px] first:rounded-tr-[7px] last:rounded-bl-[7px] last:rounded-br-[7px] transition-all`}
                         key={index}
                       >
-                        <NavigationPopoverListLink
+                        <Link
                           href={`/docs/ui/${section.slug}`}
+                          className="flex flex-col hover:no-underline focus:no-underline"
                         >
-                          <NavigationPopoverSection el="div" key={index}>
+                          <Primitive.Box
+                            el="div"
+                            className="border-border p-6 transition-all flex flex-col full-width gap-2  hover:no-underline"
+                            key={index}
+                          >
                             <Text el="h2" variation="md">
                               {section.name}
                             </Text>
                             <Text el="p" variation="md">
                               {section.description}
                             </Text>
-                          </NavigationPopoverSection>
-                        </NavigationPopoverListLink>
-                      </NavigationPopoverListItem>
+                          </Primitive.Box>
+                        </Link>
+                      </Primitive.Box>
                     ))}
-                  </NavigationPopoverList>
+                  </Primitive.Box>
                 </Primitive.Box>
               </Popover.Content>
             </Popover>
-          </NavigationListItem>
-        </NavigationList>
-        <NavigationSecondaryList el="ul">
-          <NavigationListItem el="li">
-            <NavigationListLink
+          </Primitive.Box>
+        </Primitive.Box>
+        <Primitive.Box
+          el="ul"
+          className="flex flex-row items-center list-none m-0 gap-4"
+        >
+          <Primitive.Box el="li" className="flex flex-row items-center m-0">
+            <Link
               href="https://github.com/interunit"
+              className="flex flex-col hover:no-underline focus:no-underline hover:bg-bg-muted rounded"
               tabIndex={0}
             >
-              <Primitive.Box el="span">
+              <Primitive.Box el="span" className="inline-block p-4">
                 <Github
-                  color={theme?.color.text.secondary}
+                  color={theme.colors['text-light-accent']}
                   role="img"
                   aria-label="GitHub logo for going to the InterUnit GitHub"
                 />
               </Primitive.Box>
-            </NavigationListLink>
-          </NavigationListItem>
-          <NavigationListItem el="li">
-            <NavigationListLink
+            </Link>
+          </Primitive.Box>
+          <Primitive.Box el="li">
+            <Link
               href="https://twitter.com/interunitdev"
+              className="flex flex-col hover:no-underline focus:no-underline hover:bg-bg-muted rounded"
               tabIndex={0}
             >
-              <Primitive.Box el="span">
+              <Primitive.Box el="span" className="inline-block p-4">
                 <Twitter
-                  color={theme?.color.text.secondary}
+                  color={theme.colors['text-light-accent']}
                   role="img"
                   aria-label="Twitter logo for going to the InterUnit Twitter"
                 />
               </Primitive.Box>
-            </NavigationListLink>
-          </NavigationListItem>
-        </NavigationSecondaryList>
+            </Link>
+          </Primitive.Box>
+        </Primitive.Box>
       </Primitive.Box>
     </Primitive.Box>
   )

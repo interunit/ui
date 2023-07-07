@@ -1,9 +1,3 @@
 {
-  "extends": ["../../.eslintrc.json"],
-  "plugins": [
-        "better-styled-components"
-  ],
-  "rules": {
-    "better-styled-components/sort-declarations-alphabetically": "warn"
-  }
+  "extends": ["../../.eslintrc.json"]
 }

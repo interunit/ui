@@ -8,10 +8,9 @@
   "module": "dist/interunit-form.esm.js",
   "react-native": "src/index.ts",
   "dependencies": {
-      "@interunit/a11y": "*",
+    "@interunit/a11y": "*",
     "@interunit/config": "*",
     "@interunit/primitives": "*"
-
   },
   "devDependencies": {
     "@types/react": "18.2.12",
@@ -31,5 +30,5 @@
   "bugs": {
     "url": "https://github.com/interunit/ui/issues"
   },
-  "homepage": "https://github.com/interunit/ui#readme"
+  "homepage": "https://github.com/interunit/ui/tree/main/packages/form"
 }
