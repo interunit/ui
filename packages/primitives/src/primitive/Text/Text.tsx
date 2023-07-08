@@ -27,28 +27,15 @@ const TextConstruct = {
   a: Construct.A
 }
 
-type TextConstructEl =
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6'
-  | 'label'
-  | 'p'
-  | 'span'
-  | 'a'
+export type TextConstructEl = keyof typeof TextConstruct
 
 // TODO: cut out the HTML element types that are not valid for each TextConstructAs
-export interface TextPrimitiveProps extends ValidTextConstructProps {
+export type TextPrimitiveProps = ValidTextConstructProps & {
   el: TextConstructEl
-  children: React.ReactNode
-  ref?: React.Ref<ValidTextConstruct>
 }
 
-export type TextPrimitiveRef = ValidTextConstruct
-
-const Text = React.forwardRef<TextPrimitiveRef, TextPrimitiveProps>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Text = React.forwardRef<any, TextPrimitiveProps>(
   ({el, children, ...props}, forwardedRef) => {
     const Text = TextConstruct?.[el as TextConstructEl] as React.ElementType
 

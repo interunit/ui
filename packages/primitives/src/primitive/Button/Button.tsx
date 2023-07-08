@@ -24,8 +24,6 @@ export interface ButtonPrimitiveProps
   el?: ButtonConstructEl
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
-  children: React.ReactNode
-  ref?: React.Ref<ValidButtonConstruct>
   onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
 
   /*
@@ -43,9 +41,8 @@ export interface ButtonPrimitiveProps
   }
 }
 
-type ButtonPrimitiveRef = ValidButtonConstruct
 
-const Button = React.forwardRef<ButtonPrimitiveRef, ButtonPrimitiveProps>(
+const Button = React.forwardRef<any, ButtonPrimitiveProps>(
   ({el = 'button', type = 'button', children, ...props}, forwardedRef) => {
     /*
      * Map similar accessibility props between React Native and Web

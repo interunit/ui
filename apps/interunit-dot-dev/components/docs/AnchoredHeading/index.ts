@@ -1,0 +1,1 @@
+export {AnchoredHeading} from './AnchoredHeading'

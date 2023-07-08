@@ -6,10 +6,13 @@
  * Added by Souvik Mandal [@SimpleIndian]
  */
 
+code[class*='language-'] {
+  border: none !important;
+}
+
 code[class*='language-'],
 pre[class*='language-'] {
   color: #d6deeb;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -53,7 +56,7 @@ code[class*='language-'] ::selection {
 
 /* Code blocks */
 pre[class*='language-'] {
-  padding: 1em;
+  padding: 1rem 2rem;
   margin: 0.5em 0;
   overflow: auto;
 }

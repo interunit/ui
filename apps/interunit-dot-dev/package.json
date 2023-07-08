@@ -25,7 +25,8 @@
     "next": "^13.4.8",
     "prismjs": "^1.29.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "tailwind-merge": "^1.13.2"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",

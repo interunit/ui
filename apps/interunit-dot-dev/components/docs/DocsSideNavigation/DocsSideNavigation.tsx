@@ -33,6 +33,7 @@ const RecursiveRender = ({data, path}: {path: string; data: DataItem}) => {
               el="a"
               color={data.color as ThemeColor}
               variation="xs"
+              data-active={pathname === path + data.slug}
               className={`text-sm ${
                 pathname !== path + data.slug ? 'ButtonInActive' : ''
               }`}

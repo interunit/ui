@@ -1,21 +1,25 @@
+import {P, type PP} from '@interunit/primitives'
 import React from 'react'
 
-import {Primitive} from '@interunit/primitives'
-
-interface InputGroupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Primitive.Box>, 'el'> {
+type InputGroupProps = Omit<PP['BX'], 'el'> & {
   el?: 'div'
+  children?: React.ReactNode
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ref?: React.Ref<any>
 }
 
-
-const InputGroup = React.forwardRef<
-  React.ElementRef<typeof Primitive.Box>,
-  InputGroupProps
->(({el = 'div', className, children, ...props}, forwardedRef) => {
-  return (
-    <Primitive.Box el={el} className={`mb-4 full-width ${className}`} {...props} ref={forwardedRef}>
-      {children}
-    </Primitive.Box>
-  )
-})
+const InputGroup = React.forwardRef<any, InputGroupProps>(
+  ({el = 'div', className, children, ...props}, forwardedRef) => {
+    return (
+      <P.BX
+        el={el}
+        className={`mb-4 full-width ${className}`}
+        {...props}
+        ref={forwardedRef}
+      >
+        {children}
+      </P.BX>
+    )
+  }
+)
 export {InputGroup}

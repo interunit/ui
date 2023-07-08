@@ -1,1 +1,1 @@
-export { Box, type BoxPrimitiveProps, type BoxPrimitiveRef} from './Box'
+export {Box, type BoxPrimitiveProps, type BoxConstructEl} from './Box'

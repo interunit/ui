@@ -1,18 +1,16 @@
 import {TinyColor, isReadable} from '@ctrl/tinycolor'
-import {Primitive} from '@interunit/primitives'
+import {P, type PP, type PE} from '@interunit/primitives'
 import React from 'react'
 
 import {type ThemeColor, theme} from '@/theme.config'
 
-interface ButtonProps
-  extends React.ComponentPropsWithoutRef<typeof Primitive.Button> {
+type ButtonProps = PP['BT'] & {
   color: ThemeColor
   variation?: 'xs' | 'sm' | 'md' | 'lg'
   kind?: 'primary' | 'secondary'
 }
 
-interface ButtonAnchorProps
-  extends React.ComponentPropsWithoutRef<typeof Primitive.Text> {
+type ButtonAnchorProps = PP['BT'] & {
   color: ThemeColor
   variation?: 'xs' | 'sm' | 'md' | 'lg'
   kind?: 'primary'
@@ -76,8 +74,10 @@ const getGradient = (color: string) => {
       )
       border-box`
 }
+
 const Button = React.forwardRef<
-  React.ElementRef<typeof Primitive.Button>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  any,
   ButtonProps
 >(
   (
@@ -93,7 +93,7 @@ const Button = React.forwardRef<
   ) => {
     const colorValue = getColorValue(color)
     return (
-      <Primitive.Button
+      <P.BT
         className={`${baseClassName} ${kindClassName(
           kind
         )} ${variationClassName(variation)} ${className}`}
@@ -104,15 +104,16 @@ const Button = React.forwardRef<
         {...props}
         ref={forwardedRef}
       >
-        <Primitive.Text el="span" className={textClassName}>
+        <P.TX el="span" className={textClassName}>
           {children}
-        </Primitive.Text>
-      </Primitive.Button>
+        </P.TX>
+      </P.BT>
     )
   }
 )
 const ButtonAnchor = React.forwardRef<
-  React.ElementRef<typeof Primitive.Text>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  any,
   ButtonAnchorProps
 >(
   (
@@ -129,8 +130,8 @@ const ButtonAnchor = React.forwardRef<
   ) => {
     const colorValue = getColorValue(color)
     return (
-      <Primitive.Text
-        el={el}
+      <P.TX
+        el={el as PE['TX']}
         className={`${baseClassName} inline-block ${kindClassName(
           kind
         )} ${variationClassName(variation)} ${className}`}
@@ -141,10 +142,10 @@ const ButtonAnchor = React.forwardRef<
         {...props}
         ref={forwardedRef}
       >
-        <Primitive.Text el="span" className={textClassName}>
+        <P.TX el="span" className={textClassName}>
           {children}
-        </Primitive.Text>
-      </Primitive.Text>
+        </P.TX>
+      </P.TX>
     )
   }
 )

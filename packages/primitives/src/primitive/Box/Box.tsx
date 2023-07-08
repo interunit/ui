@@ -25,17 +25,14 @@ const BoxConstruct = {
   li: Construct.LI
 }
 
-type BoxConstructEl = 'div' | 'span' | 'child' | 'ul' | 'li' | 'section' | 'nav'
+export type BoxConstructEl = keyof typeof BoxConstruct
 
 export type BoxPrimitiveProps = ValidBoxConstructProps & {
   el: BoxConstructEl
-  children: React.ReactNode
-  ref?: React.Ref<ValidBoxConstruct>
 }
 
-export type BoxPrimitiveRef = ValidBoxConstruct
-
-const Box = React.forwardRef<BoxPrimitiveRef, BoxPrimitiveProps>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Box = React.forwardRef<any, BoxPrimitiveProps>(
   ({el, children, ...props}, forwardedRef) => {
     const Box = BoxConstruct?.[el] as React.ElementType
 

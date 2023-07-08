@@ -20,7 +20,7 @@ module.exports = {
         md: ['1rem', '1.75rem'],
         lg: ['1.15rem', '2rem'],
         'sm-hd': ['1.5rem','2rem'],
-        'md-hd': ['2.5rem', '3.5rem'],
+        'md-hd': ['2rem', '3rem'],
         'lg-hd': ['4rem', '4.5rem']
       },
       shadow: {

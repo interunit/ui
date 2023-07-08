@@ -1,6 +1,7 @@
 import {Primitive} from '@interunit/primitives'
 import {Copy} from 'lucide-react'
 import React from 'react'
+import{ firaCode } from '@/fonts'
 
 import {Button} from '@/components/system/Button'
 import {Text} from '@/components/system/Text'
@@ -21,17 +22,14 @@ const InstallBlock = ({packageName}: {packageName: string}) => {
   }
 
   return (
-    <Primitive.Box
-      el="div"
-      className="bg-bg-blended border rounded max-w-[400px] w-full"
-    >
+    <Primitive.Box el="div" className="bg-bg-blended border rounded w-full">
       <Primitive.Box
         el="div"
-        className="flex flex-row bg-border rounded-tr-[7px] rounded-tl-[7px]"
+        className="flex flex-row bg-bg-primary rounded-tr-[7px] rounded-tl-[7px]"
       >
         <Button
           onClick={() => setManager('npm')}
-          color="bg-muted"
+          color={manager === 'npm' ? 'bg-muted' : 'bg-primary'}
           variation="sm"
           className="text-sm rounded-br-none rounded-bl-none rounded-tr-none "
         >
@@ -39,17 +37,17 @@ const InstallBlock = ({packageName}: {packageName: string}) => {
         </Button>
         <Button
           onClick={() => setManager('yarn')}
-          color="bg-muted"
+          color={manager === 'yarn' ? 'bg-muted' : 'bg-primary'}
           variation="sm"
-          className="text-sm rounded-none"
+          className="text-sm rounded-none transition-all"
         >
           yarn
         </Button>
         <Button
           onClick={() => setManager('pnpm')}
-          color="bg-muted"
+          color={manager === 'pnpm' ? 'bg-muted' : 'bg-primary'}
           variation="sm"
-          className="text-sm rounded-tl-none rounded-br-none rounded-bl-none"
+          className="text-sm rounded-none"
         >
           pnpm
         </Button>
@@ -58,7 +56,7 @@ const InstallBlock = ({packageName}: {packageName: string}) => {
         el="div"
         className="p-6 flex flex-row items-center justify-between w-full gap-4"
       >
-        <Text el="span" id="packageInstall" ref={copyArea}>
+        <Text el="span" id="packageInstall" className={firaCode.className} ref={copyArea}>
           {manager === 'npm' && `npm install ${packageName}`}
           {manager === 'yarn' && `yarn add ${packageName}`}
           {manager === 'pnpm' && `pnpm install ${packageName}`}

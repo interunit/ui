@@ -25,10 +25,10 @@ export type ImagePrimitiveProps = ValidImageConstructProps & {
   // Native Accessibility
   accessible?: boolean
   accessibilityLabel?: string
-  ref?: React.ForwardedRef<ValidImageConstruct>
 }
-type ImagePrimitiveRef = ValidImageConstruct
-export const Image = React.forwardRef<ImagePrimitiveRef, ImagePrimitiveProps>(
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const Image = React.forwardRef<any, ImagePrimitiveProps>(
   ({src, alt, ...props}, forwardedRef) => {
     const Image = ImageConstruct.Image
     const accessibilityProps = {
