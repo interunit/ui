@@ -14,6 +14,7 @@ export const theme = {
     orange: '#CC4B2E',
     transparent: 'transparent',
     border: '#363645',
+    'border-accent': '#21212E',
     outline: '#FFAE71'
   },
   screens: {
