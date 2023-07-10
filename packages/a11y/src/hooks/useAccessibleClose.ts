@@ -1,7 +1,7 @@
 import React from 'react'
 
 type UseAccessibleCloseProps = {
-  onClose: () => void
+  onClose?: () => void
   KeyDownElement?: React.RefObject<any>
 }
 
@@ -11,7 +11,7 @@ const useAccessibleClose = ({
 }: UseAccessibleCloseProps) => {
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      onClose()
+      onClose && onClose()
     }
   }
   React.useEffect(() => {

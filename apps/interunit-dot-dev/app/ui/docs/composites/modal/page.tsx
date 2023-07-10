@@ -8,8 +8,8 @@ import {ComponentDisplay} from '@/components/docs/ComponentDisplay'
 import {FeatureList} from '@/components/docs/FeatureList'
 import {InstallBlock} from '@/components/docs/InstallBlock'
 import {PackageInfo} from '@/components/docs/PackageInfo'
+import {PropsTable} from '@/components/docs/PropsTable'
 import {Button} from '@/components/system/Button'
-import { PropsTable } from '@/components/docs/PropsTable'
 
 const ModalPage = () => {
   const [showModal, setShowModal] = React.useState(false)
@@ -58,11 +58,9 @@ const ModalPage = () => {
         </FeatureList>
       </P.BX>
       <P.BX el="div" className="mb-12">
-      <P.TX el="h2" className="text-sm-hd mb-4">
-      {'<Modal/>'}
-      </P.TX>
-
-
+        <P.TX el="h2" className="text-sm-hd mb-4">
+          {'<Modal/>'}
+        </P.TX>
         <PropsTable
           propsToDisplay={[
             {
@@ -70,7 +68,7 @@ const ModalPage = () => {
               type: 'boolean | undefined',
               required: false,
               description:
-                'If you plan to control the styling of the modal to be open or closed, you can pass this prop to control the open state of the modal. If you are using conditional rendering, this isn\'t necessary.'
+                "If you plan to control the styling of the modal to be open or closed, you can pass this prop to control the open state of the modal. If you are using conditional rendering, this isn't necessary."
             },
             {
               name: 'onClose',
@@ -83,23 +81,20 @@ const ModalPage = () => {
               name: '...props',
               type: 'object',
               required: false,
-              description:
-                'All rest props will go to the modal container'
+              description: 'All rest props will go to the modal container'
             },
             {
               name: 'ref',
               type: 'React.RefObject',
               required: false,
-              description:
-                'A ref to the modal container'
+              description: 'A ref to the modal container'
             },
             {
               name: 'children',
               type: 'React.ReactNode',
               required: false,
-              description:
-                'The contents of the modal'
-            },
+              description: 'The contents of the modal'
+            }
           ]}
         />
       </P.BX>

@@ -13,7 +13,7 @@ const DocsLayout = ({children}: {children: React.ReactNode}) => {
       <TopNavigation />
       <Primitive.Box
         el="div"
-        className="flex flex-col lg:flex-row lg:justify-center lg:max-w-[1200px] lg:mx-auto h-full"
+        className="flex flex-col lg:flex-row lg:justify-center lg:max-w-[1250px] lg:mx-auto h-full"
       >
         <Primitive.Box
           el="div"
