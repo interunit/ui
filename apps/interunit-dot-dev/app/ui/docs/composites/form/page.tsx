@@ -1,10 +1,15 @@
 'use client'
 
-import {Field, Form, homepage, name, version} from '@interunit/form'
+import {
+  Field,
+  Form,
+  description,
+  homepage,
+  name,
+  version
+} from '@interunit/form'
 import {P} from '@interunit/primitives'
 import {Check} from 'lucide-react'
-import {Github, Package} from 'lucide-react'
-import Link from 'next/link'
 import React from 'react'
 import {useTheme} from 'styled-components'
 
@@ -12,9 +17,10 @@ import {AnchoredHeading} from '@/components/docs/AnchoredHeading'
 import {CodeBlock} from '@/components/docs/CodeBlock'
 import {CodeTag} from '@/components/docs/CodeTag'
 import {ComponentDisplay} from '@/components/docs/ComponentDisplay'
+import {FeatureList} from '@/components/docs/FeatureList'
 import {InstallBlock} from '@/components/docs/InstallBlock'
+import {PackageInfo} from '@/components/docs/PackageInfo'
 import {PropsTable} from '@/components/docs/PropsTable'
-import {Badge} from '@/components/system/Badge'
 import {Button} from '@/components/system/Button'
 import {InputGroup} from '@/components/system/InputGroup'
 import {InputLabel} from '@/components/system/InputLabel'
@@ -35,43 +41,15 @@ const FormPage = () => {
 
   return (
     <P.BX el="div">
-      <P.BX
-        el="div"
-        className="flex flex-col lg:flex-row  justify-between mb-8"
-      >
-        <P.BX el="div" className="flex flex-col gap-4 mb-4 max-w-[600px]">
-          <Text el="h1" className="text-lg-hd">
-            Form
-          </Text>
-          <Text el="p" className="text-lg">
-            Cross platform UI components for forms along with a light weight
-            form state management library.
-          </Text>
-        </P.BX>
-        <P.BX
-          el="ul"
-          className="flex flex-row items-center gap-4 pb-4 list-none m-0 lg:p-0 lg:flex-col lg:items-end"
-        >
-          <P.BX el="li">
-            <Badge color="bg-blended">v{version}</Badge>
-          </P.BX>
-          <P.BX el="li">
-            <Link href={homepage} className="flex flex-row items-center gap-1">
-              <Github size={16} />
-              Source
-            </Link>
-          </P.BX>
-          <P.BX el="li">
-            <Link
-              href={`https://www.npmjs.com/package/${name}`}
-              className="flex flex-row items-center gap-1"
-            >
-              <Package size={16} />
-              npm
-            </Link>
-          </P.BX>
-        </P.BX>
-      </P.BX>
+      <PackageInfo
+        data={{
+          title: 'Form',
+          name,
+          version,
+          description,
+          homepage
+        }}
+      />
       <ComponentDisplay className="mb-12">
         <Form
           initialValues={{firstName: 'Peter', lastName: 'Parker'}}
@@ -138,7 +116,7 @@ const FormPage = () => {
         </Form>
       </ComponentDisplay>
       <P.BX el="div" className="flex flex-col justify-between gap-12 mb-12">
-        <P.BX el="div" className="w-full max-w-[500px]">
+        <P.BX el="div" className="w-full">
           <AnchoredHeading
             id="installation"
             el="h2"
@@ -154,64 +132,12 @@ const FormPage = () => {
           <Text el="h2" className="text-sm-hd mb-4">
             What's Included
           </Text>
-          <P.BX
-            el="ul"
-            className="list-none flex justify-end flex-col gap-4 px-4"
-          >
-            <P.BX el="li">
-              <P.BX el="span" className="flex flex-row items-center">
-                <P.BX
-                  el="span"
-                  className="inline-block p-2 mr-4 rounded-full bg-bg-muted"
-                >
-                  <Check size={16} role="img" aria-label="Checkmark" />
-                </P.BX>
-                <Text el="span" className="text-lg">
-                  Form
-                </Text>
-              </P.BX>
-            </P.BX>
-
-            <P.BX el="li">
-              <P.BX el="span" className="flex flex-row items-center">
-                <P.BX
-                  el="span"
-                  className="inline-block p-2 mr-4 rounded-full bg-bg-muted"
-                >
-                  <Check size={16} role="img" aria-label="Checkmark" />
-                </P.BX>
-                <Text el="span" className="text-lg">
-                  Field
-                </Text>
-              </P.BX>
-            </P.BX>
-            <P.BX el="li">
-              <P.BX el="span" className="flex flex-row items-center">
-                <P.BX
-                  el="span"
-                  className="inline-block p-2 mr-4 rounded-full bg-bg-muted"
-                >
-                  <Check size={16} role="img" aria-label="Checkmark" />
-                </P.BX>
-                <Text el="span" className="text-lg">
-                  Text Input
-                </Text>
-              </P.BX>
-            </P.BX>
-            <P.BX el="li">
-              <P.BX el="span" className="flex flex-row items-center">
-                <P.BX
-                  el="span"
-                  className="inline-block p-2 mr-4 rounded-full bg-bg-muted"
-                >
-                  <Check size={16} role="img" aria-label="Checkmark" />
-                </P.BX>
-                <Text el="span" className="text-lg">
-                  And more... (WIP)
-                </Text>
-              </P.BX>
-            </P.BX>
-          </P.BX>
+          <FeatureList>
+            <FeatureList.Item>Form</FeatureList.Item>
+            <FeatureList.Item>Field</FeatureList.Item>
+            <FeatureList.Item>Text Input</FeatureList.Item>
+            <FeatureList.Item>More (WIP)</FeatureList.Item>
+          </FeatureList>
         </P.BX>
       </P.BX>
       <AnchoredHeading
@@ -262,25 +188,25 @@ const FormPage = () => {
         </P.TX>
       </P.BX>
       <P.BX el="div" className="mb-8">
-      <PropsTable
-      propsToDisplay={[
-          {
-name: 'initialValues',
-          type: 'object',
-          required: false,
-          description:
-              'An object of values that the form will be initialized with. The keys of this object should match the name prop of the Field component.'
-          },
-              {
-name: 'initialValues',
-      type: 'object',
-      required: false,
-      description:
-          'An object of values that the form will be initialized with. The keys of this object should match the name prop of the Field component.'
-              }
-      ]}
-          />
-              </P.BX>
+        <PropsTable
+          propsToDisplay={[
+            {
+              name: 'initialValues',
+              type: 'object',
+              required: false,
+              description:
+                'An object of values that the form will be initialized with. The keys of this object should match the name prop of the Field component.'
+            },
+            {
+              name: 'initialValues',
+              type: 'object',
+              required: false,
+              description:
+                'An object of values that the form will be initialized with. The keys of this object should match the name prop of the Field component.'
+            }
+          ]}
+        />
+      </P.BX>
     </P.BX>
   )
 }

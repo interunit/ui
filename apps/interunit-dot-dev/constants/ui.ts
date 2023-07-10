@@ -46,6 +46,11 @@ export const ui = {
           name: 'Combobox',
           slug: '/composites/combobox',
           color: 'blue' as ThemeColor
+        },
+        {
+          name: 'Modal',
+          slug: '/composites/modal',
+          color: 'blue' as ThemeColor
         }
       ]
     }

@@ -1,23 +1,9 @@
-import {
-  InterUnitInternalContext,
-  InterUnitInternalProvider,
-  useInterUnitInternalContext
-} from './context'
-import * as InterUnitInternalConfig from './internal/internalConfig.native'
-
-export {useCSSUnitConversion} from './hooks/useCSSUnitConversion'
-
-export {type InterUnitConfig} from './config'
+import * as InterUnitInternalConfig from './internal/internalConfig'
 
 const InterUnitInternals = {
-  InterUnitInternalContext,
-  InterUnitInternalProvider,
-  useInterUnitInternalContext,
   InterUnitInternalConfig: {...InterUnitInternalConfig}
 }
-
-const InterUnitProvider = InterUnitInternalProvider
-
+export {useCSSUnitConversion} from './hooks/useCSSUnitConversion'
 export type {
   ConstructTag,
   InterConstruct,
@@ -26,4 +12,4 @@ export type {
   WebComponent
 } from './internal/sharedConfig'
 export {createInterUnit} from './createInterUnit'
-export {InterUnitProvider, InterUnitInternals}
+export {InterUnitInternals}

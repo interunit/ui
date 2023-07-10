@@ -1,4 +1,3 @@
-import {InterUnitInternals} from '../index'
 import {ENVIRONMENT} from '../internal/internalConfig'
 import {type CSSUnit, type CSSUnitProperties} from '../internal/sharedConfig'
 
@@ -29,8 +28,6 @@ const UnitsToIgnore = [
 ]
 
 export const useCSSUnitConversion = () => {
-  const config = InterUnitInternals.useInterUnitInternalContext()
-
   const convert = ({
     value: RawValue,
     unit,
@@ -45,13 +42,13 @@ export const useCSSUnitConversion = () => {
     if (
       typeof RawValue === 'string' &&
       UnitsToIgnore.some(unit => RawValue.includes(unit))
-    ){
-        return RawValue
+    ) {
+      return RawValue
     }
 
     const value = typeof RawValue === 'string' ? parseFloat(RawValue) : RawValue
     const passedUnit = unit
-    const configuredUnit = config?.cssUnit?.[property]
+    const configuredUnit = ENVIRONMENT?.DEFAULT_CSS_UNIT?.[property]
 
     if (!configuredUnit)
       throw new Error(`Error fetching configuration for ${property}`)

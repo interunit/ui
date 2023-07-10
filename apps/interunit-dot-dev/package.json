@@ -15,6 +15,7 @@
     "@interunit/combobox": "*",
     "@interunit/config": "*",
     "@interunit/form": "*",
+    "@interunit/modal": "*",
     "@interunit/popover": "*",
     "@interunit/primitives": "*",
     "@interunit/responsive": "*",

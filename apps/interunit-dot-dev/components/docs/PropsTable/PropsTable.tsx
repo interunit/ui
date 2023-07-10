@@ -11,7 +11,7 @@ const PropsTable = ({propsToDisplay}: {propsToDisplay: PropToDisplay[]}) => {
   return (
     <P.BX
       el="div"
-      className="bg-bg-blended border grid grid-cols-[1fr_1fr_3fr] [&>div]:p-4 "
+      className="bg-bg-blended border grid grid-cols-[1fr_1fr_3fr] [&>div]:p-4 overflow-x-auto"
     >
       <P.BX
         el="div"
@@ -50,7 +50,10 @@ const PropsTable = ({propsToDisplay}: {propsToDisplay: PropToDisplay[]}) => {
             >
               {prop.default ? prop.default : '-'}
             </P.BX>
-            <P.BX el="div" className="text-sm border-b-[1px] border-border-accent">
+            <P.BX
+              el="div"
+              className="text-sm border-b-[1px] border-border-accent"
+            >
               {prop.description}
             </P.BX>
           </>
