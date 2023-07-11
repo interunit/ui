@@ -1,15 +1,16 @@
-import {P, type PP} from '@interunit/primitives'
+import {P} from '@interunit/primitives'
 import React from 'react'
 
-type TextProps = PP['TX'] & {
+type TextProps = React.ComponentPropsWithoutRef<typeof P.TX> & {
   className?: string
   children?: React.ReactNode
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ref?: React.Ref<any>
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Text = React.forwardRef<any, TextProps>(
+type TextRef = React.ElementRef<typeof P.TX>
+
+const Text = React.forwardRef<TextRef, TextProps>(
   ({className, children, ...props}, forwardedRef) => {
     return (
       <P.TX

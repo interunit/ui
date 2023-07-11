@@ -1,13 +1,15 @@
 import {Primitive} from '@interunit/primitives'
-import {Copy} from 'lucide-react'
+import {Check, Copy} from 'lucide-react'
 import React from 'react'
-import{ firaCode } from '@/fonts'
+import {twMerge} from 'tailwind-merge'
 
 import {Button} from '@/components/system/Button'
 import {Text} from '@/components/system/Text'
+import {firaCode} from '@/fonts'
 
 const InstallBlock = ({packageName}: {packageName: string}) => {
   const [manager, setManager] = React.useState<'npm' | 'yarn' | 'pnpm'>('npm')
+  const [isCopied, setIsCopied] = React.useState(false)
   const copyArea = React.useRef(null)
 
   const copyToClipboard = () => {
@@ -19,6 +21,11 @@ const InstallBlock = ({packageName}: {packageName: string}) => {
     // @ts-ignore
     const textToCopy = copyText?.innerText
     navigator.clipboard.writeText(textToCopy)
+    setIsCopied(true)
+
+    setTimeout(() => {
+      setIsCopied(false)
+    }, 1000)
   }
 
   return (
@@ -56,7 +63,12 @@ const InstallBlock = ({packageName}: {packageName: string}) => {
         el="div"
         className="p-6 flex flex-row items-center justify-between w-full gap-4"
       >
-        <Text el="span" id="packageInstall" className={firaCode.className} ref={copyArea}>
+        <Text
+          el="span"
+          id="packageInstall"
+          className={firaCode.className}
+          ref={copyArea}
+        >
           {manager === 'npm' && `npm install ${packageName}`}
           {manager === 'yarn' && `yarn add ${packageName}`}
           {manager === 'pnpm' && `pnpm install ${packageName}`}
@@ -65,8 +77,26 @@ const InstallBlock = ({packageName}: {packageName: string}) => {
           color="bg-muted"
           variation="sm"
           onClick={() => copyToClipboard()}
+          className="w-8 h-8 relative"
         >
-          <Copy size={16} role="img" aria-label="Copy" />
+          <Check
+            size={16}
+            role="img"
+            aria-label="Copy"
+            className={twMerge(
+              'absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] transition-opacity',
+              isCopied ? 'opacity-1' : 'opacity-0'
+            )}
+          />
+          <Copy
+            size={16}
+            role="img"
+            aria-label="Copy"
+            className={twMerge(
+              'absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] transition-opacity',
+              isCopied ? 'opacity-0' : 'opacity-1'
+            )}
+          />
         </Button>
       </Primitive.Box>
     </Primitive.Box>

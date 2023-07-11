@@ -1,4 +1,5 @@
 import {TinyColor, isReadable} from '@ctrl/tinycolor'
+import { twMerge} from 'tailwind-merge'
 import {P, type PP, type PE} from '@interunit/primitives'
 import React from 'react'
 
@@ -132,9 +133,7 @@ const ButtonAnchor = React.forwardRef<
     return (
       <P.TX
         el={el as PE['TX']}
-        className={`${baseClassName} inline-block ${kindClassName(
-          kind
-        )} ${variationClassName(variation)} ${className}`}
+     className={twMerge('inline-block', baseClassName, kindClassName(kind), variationClassName(variation), className)}
         style={{
           color: getFontColor(colorValue),
           background: getGradient(colorValue)

@@ -1,17 +1,11 @@
 import React from 'react'
-import type {TextComponent, TextProps} from 'react-native'
+import type {TextProps} from 'react-native'
 
 import {Construct} from '../../config'
 import {filterPropsByEnvironment} from '../../helpers/props'
 
-type ValidWebTextConstruct =
-  | HTMLHeadingElement
-  | HTMLParagraphElement
-  | HTMLSpanElement
-  | HTMLAnchorElement
-type ValidNativeTextConstruct = TextComponent
-type ValidTextConstruct = ValidWebTextConstruct & ValidNativeTextConstruct
-type ValidTextConstructProps = React.HTMLProps<ValidTextConstruct> & TextProps
+type ValidTextConstructProps<T extends TextConstructEl> =
+  React.ComponentProps<T> & TextProps
 
 // TODO: Add strong, em, etc
 const TextConstruct = {
@@ -21,23 +15,27 @@ const TextConstruct = {
   h4: Construct.H4,
   h5: Construct.H5,
   h6: Construct.H6,
-  label: Construct.Label,
   p: Construct.P,
   span: Construct.Span,
+  label: Construct.Label,
   a: Construct.A
 }
 
 export type TextConstructEl = keyof typeof TextConstruct
+// TODO: This cuts out all HTML attributes that aren't an above element
+// I'd ideally like it to use the "el" prop to determine which HTML attributes
+// are valid for that specifc element.
+export type TextPrimitiveProps<T extends TextConstructEl> =
+  ValidTextConstructProps<T> & {
+    el: T
+  }
 
-// TODO: cut out the HTML element types that are not valid for each TextConstructAs
-export type TextPrimitiveProps = ValidTextConstructProps & {
-  el: TextConstructEl
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Text = React.forwardRef<any, TextPrimitiveProps>(
-  ({el, children, ...props}, forwardedRef) => {
-    const Text = TextConstruct?.[el as TextConstructEl] as React.ElementType
+const Text = React.forwardRef(
+  <T extends TextConstructEl>(
+    {el, children, ...props}: TextPrimitiveProps<T>,
+    forwardedRef: any
+  ) => {
+    const Text = TextConstruct?.[el as TextConstructEl]
 
     if (Text === undefined) {
       throw new Error(
