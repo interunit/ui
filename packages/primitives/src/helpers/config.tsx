@@ -4,7 +4,8 @@ import {InterUnitInternals} from '@interunit/config'
 import {
   type ConstructTag,
   type InterConstruct,
-  type NativeComponent
+  type NativeComponent,
+  type WebComponent
 } from '@interunit/config'
 
 import {getConstruct} from './getConstruct'
@@ -14,7 +15,7 @@ const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 type ConstructObject = {
   inter: InterConstruct
   tag: ConstructTag
-  component?: NativeComponent
+  component?: NativeComponent | WebComponent
 }
 export const createWrappedConstruct = ({
   Construct
@@ -22,10 +23,9 @@ export const createWrappedConstruct = ({
   Construct: ConstructObject[]
 }) => {
   return Construct.reduce(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (acc: any, {inter, tag, component}: ConstructObject) => {
       if (ENVIRONMENT === 'web') {
-        const InterUnitConstruct = tag as keyof React.JSX.IntrinsicElements
+        const InterUnitConstruct = tag as React.ElementType
         acc[inter] = InterUnitConstruct
         return acc
       }

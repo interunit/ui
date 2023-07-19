@@ -34,3 +34,11 @@ export const filterPropsByEnvironment = ({props}: {[prop: string]: any}) => {
 
   return props
 }
+
+export type DiscriminatedProps<T> = T extends infer R
+  ? R extends keyof React.JSX.IntrinsicElements
+    ? {
+        el: R
+      } & React.JSX.IntrinsicElements[R]
+    : never
+  : never

@@ -1,49 +1,32 @@
 import React from 'react'
-import type {Pressable} from 'react-native'
+import type {PressableProps} from 'react-native'
 
 import {Construct} from '../../config'
-import {filterPropsByEnvironment} from '../../helpers/props'
-
-type PressableComponent = React.ElementType<typeof Pressable>
-
-type ValidWebButtonConstruct = HTMLButtonElement
-type ValidNativeButtonConstruct = PressableComponent
-type ValidButtonConstruct = ValidWebButtonConstruct & ValidNativeButtonConstruct
-type ValidButtonConstructProps = React.HTMLProps<ValidButtonConstruct> &
-  React.ComponentProps<PressableComponent>
+import {
+  type DiscriminatedProps,
+  filterPropsByEnvironment
+} from '../../helpers/props'
 
 const ButtonConstruct = {
   button: Construct.Button
 }
 
-type ButtonConstructEl = 'button'
+export type ButtonPrimitiveProps<T extends keyof typeof ButtonConstruct> =
+  PressableProps &
+    DiscriminatedProps<T> & {
+      onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
+    }
 
-// TODO: Omit seems wrong, not sure why Button complains when being called though
-export interface ButtonPrimitiveProps
-  extends Omit<ValidButtonConstructProps, 'name' | '$$typeof'> {
-  el?: ButtonConstructEl
-  type?: 'button' | 'submit' | 'reset'
-  disabled?: boolean
-  onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
-
-  /*
-   * Similar accessibility props between React Native and Web
-   */
-  // Web Accessibility
-  'aria-label'?: string
-
-  // Native Accessibility
-  accessible?: boolean
-  accessibilityLabel?: string
-  accessibilityRole?: string
-  accessibilityState?: {
-    disabled?: boolean
-  }
-}
-
-
-const Button = React.forwardRef<any, ButtonPrimitiveProps>(
-  ({el = 'button', type = 'button', children, ...props}, forwardedRef) => {
+const Button = React.forwardRef(
+  <T extends keyof typeof ButtonConstruct>(
+    {
+      el = 'button',
+      type = 'button',
+      children,
+      ...props
+    }: ButtonPrimitiveProps<T>,
+    forwardedRef: any
+  ) => {
     /*
      * Map similar accessibility props between React Native and Web
      */

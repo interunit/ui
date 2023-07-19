@@ -2,10 +2,10 @@ import React from 'react'
 import type {TextProps} from 'react-native'
 
 import {Construct} from '../../config'
-import {filterPropsByEnvironment} from '../../helpers/props'
-
-type ValidTextConstructProps<T extends TextConstructEl> =
-  React.ComponentProps<T> & TextProps
+import {
+  type DiscriminatedProps,
+  filterPropsByEnvironment
+} from '../../helpers/props'
 
 // TODO: Add strong, em, etc
 const TextConstruct = {
@@ -19,23 +19,17 @@ const TextConstruct = {
   span: Construct.Span,
   label: Construct.Label,
   a: Construct.A
-}
+} as const
 
-export type TextConstructEl = keyof typeof TextConstruct
-// TODO: This cuts out all HTML attributes that aren't an above element
-// I'd ideally like it to use the "el" prop to determine which HTML attributes
-// are valid for that specifc element.
-export type TextPrimitiveProps<T extends TextConstructEl> =
-  ValidTextConstructProps<T> & {
-    el: T
-  }
+type TextPrimitiveProps<T extends keyof typeof TextConstruct> = TextProps &
+  DiscriminatedProps<T>
 
 const Text = React.forwardRef(
-  <T extends TextConstructEl>(
+  <T extends keyof typeof TextConstruct>(
     {el, children, ...props}: TextPrimitiveProps<T>,
     forwardedRef: any
   ) => {
-    const Text = TextConstruct?.[el as TextConstructEl]
+    const Text = TextConstruct?.[el] as React.ElementType
 
     if (Text === undefined) {
       throw new Error(
@@ -44,6 +38,7 @@ const Text = React.forwardRef(
     }
 
     const filteredProps = filterPropsByEnvironment({props})
+
     return (
       <Text ref={forwardedRef} {...filteredProps}>
         {children}
