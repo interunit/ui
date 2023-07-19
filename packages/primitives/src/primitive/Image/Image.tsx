@@ -10,10 +10,12 @@ import {
 const ImageConstruct = {
   img: Construct.Image
 }
-export type ImagePrimitiveProps<T extends keyof typeof ImageConstruct> =
-  ImageProps & DiscriminatedProps<T>
+export type ImagePrimitiveProps<T extends keyof typeof ImageConstruct> = Omit<
+  ImageProps,
+  'source'
+> &
+  DiscriminatedProps<T>
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Image = React.forwardRef(
   <T extends keyof typeof ImageConstruct>(
     {src, alt, ...props}: ImagePrimitiveProps<T>,

@@ -27,6 +27,7 @@ const TopNavigation = () => {
             className="flex flex-row items-center gap-3 py-4"
           >
             <Primitive.Image
+            el="img"
               src="/interunit-logo.png"
               alt="Logo for InterUnit"
               className="full-width transition-all hover:rotate-180 max-w-[50px]"
@@ -34,10 +35,7 @@ const TopNavigation = () => {
           </Primitive.Box>
         </Link>
 
-        <Primitive.Box
-          el="div"
-          className="flex flex-row items-center gap-3"
-        >
+        <Primitive.Box el="div" className="flex flex-row items-center gap-3">
           <SearchBar />
           <Primitive.Box
             el="ul"
@@ -57,8 +55,9 @@ const TopNavigation = () => {
                   maxWidth: '100vw',
                   zIndex: 10,
                   arrow: {
-                    tipRadius: 2,
-                    stroke: theme.colors.border,
+                    strokeColor: theme.colors.border,
+                    width: 12,
+                    borderRadius: 2,
                     strokeWidth: 2
                   }
                 }}

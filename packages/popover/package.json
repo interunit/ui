@@ -11,6 +11,7 @@
     "@floating-ui/react": "^0.24.3",
     "@floating-ui/react-native": "^0.10.1",
     "@interunit/config": "*",
+    "@interunit/modal": "*",
     "@interunit/primitives": "*"
   },
   "devDependencies": {

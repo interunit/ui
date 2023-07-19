@@ -1,13 +1,18 @@
-import {InterUnitInternals, useCSSUnitConversion} from '@interunit/config'
-import {Modal} from '@interunit/modal'
-import {Child, Primitive} from '@interunit/primitives'
 import React from 'react'
 
+import {InterUnitInternals, useCSSUnitConversion} from '@interunit/config'
+import {Child, Primitive} from '@interunit/primitives'
+
 import {
-  type PopoverPositioning,
-  useContentPositioning
-} from './hooks/useContentPositioning'
-import {isTouchDevice} from './utils'
+  FloatingArrow,
+  type FloatingArrowProps,
+  type UseFloatingOptions,
+  arrow,
+  offset,
+  shift,
+  useFloating
+} from './floating-ui'
+import {isTouchDevice, pruneStyles} from './utils'
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 
@@ -18,10 +23,21 @@ type TriggerDimensions = {
   width: number
 }
 
+type PopoverPositioning = Omit<UseFloatingOptions, 'placement'> & {
+  side?: 'top' | 'bottom' | 'left' | 'right'
+  align?: 'start' | 'end'
+  offset?: number
+  width?: 'trigger' | string | number
+  maxWidth?: string
+  zIndex?: number
+  arrow?: Omit<FloatingArrowProps, 'context'> & {
+    style?: React.CSSProperties
+  }
+}
+
 type PopoverState = {
   dispatch: React.Dispatch<ReducerAction>
   isOpen: boolean
-  focusType: 'none' | 'default'
   popoverPositioning?: PopoverPositioning
   setTrigger: ((trigger: React.ReactElement | null) => void) | null
   togglePopover: () => void
@@ -35,7 +51,6 @@ const DEFAULT_POPOVER_STATE: PopoverState = {
   isOpen: false,
   setTrigger: null,
   togglePopover: () => {},
-  focusType: 'none',
   trigger: null,
   triggerType: 'click',
   triggerDimensions: {
@@ -100,17 +115,12 @@ const Popover = ({
     }
   }, [state])
 
-  // TODO: RN View doesn't like inline-block here
-  const display = (ENVIRONMENT === 'web' ? 'inline-block' : 'flex') as 'flex'
-
   return (
     <PopoverContext.Provider
       value={{...state, dispatch, trigger, setTrigger, triggerType}}
     >
       <Primitive.Box
         el="div"
-        // TODO: inline block won't work on native
-        style={{position: 'relative', overflow: 'visible', display}}
         // The floating styles are technically correct but React.CSSProperties
         // doesn't seem to think so
         //
@@ -195,18 +205,37 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
     triggerType,
     dispatch,
     triggerDimensions,
-    focusType,
     popoverPositioning
   } = React.useContext(PopoverContext)
+  const arrowRef = React.useRef(null)
 
-  const {positioningStyles, arrowStyles} = useContentPositioning({
-    trigger,
-    positioning: popoverPositioning
+  const {
+    refs,
+    floatingStyles: rawFloatingStyles,
+    context
+  } = useFloating({
+    strategy: 'absolute',
+    elements: {
+      reference: trigger as unknown as Element
+    },
+    middleware: [
+      shift(),
+      offset(popoverPositioning?.offset || 0),
+      arrow({element: arrowRef || null})
+    ],
+    placement:
+      !popoverPositioning?.side || !popoverPositioning?.align
+        ? 'bottom'
+        : (`${popoverPositioning?.side}${
+            popoverPositioning?.align && `-${popoverPositioning.align}`
+          }` as UseFloatingOptions['placement']),
+    ...popoverPositioning
   })
 
   if (isOpen && trigger) {
     return (
-      <Modal
+      <Primitive.Box
+        el="div"
         style={{
           maxWidth:
             convert({
@@ -224,8 +253,8 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
                 })
               ? popoverPositioning?.width
               : 'auto',
-          zIndex: popoverPositioning?.zIndex ?? 1,
-          ...positioningStyles
+        zIndex: popoverPositioning?.zIndex ?? 1,
+          ...pruneStyles(rawFloatingStyles)
         }}
         className="iu-popover-content"
         onMouseLeave={() => {
@@ -240,22 +269,43 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
             dispatch({type: 'CLOSE'})
           }
         }}
-        onClose={() => dispatch({type: 'CLOSE'})}
-        focusType={focusType}
+        ref={refs.setFloating}
         data-popover-state={isOpen}
         data-popover-side={popoverPositioning?.side}
         data-popover-align={popoverPositioning?.align}
       >
         <>
+          {/* TODO: Arrow doesn't work in native */}
+          {ENVIRONMENT === 'web' && popoverPositioning?.arrow && (
+            <>
+              {/* TODO: Why is this type not cooperating? */}
+              {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+              {/* @ts-ignore */}
+              <FloatingArrow
+                ref={arrowRef}
+                context={context}
+                className={`iu-popover-arrow ${popoverPositioning?.arrow?.className}`}
+                style={{
+                  // Align arrow to stroke so that it overlays the box's border
+                  transform: `translateY(-${
+                    popoverPositioning?.arrow?.strokeWidth || 0
+                  }px)`,
+                  ...popoverPositioning?.arrow?.style
+                }}
+                width={popoverPositioning?.arrow?.width}
+                height={popoverPositioning?.arrow?.height}
+                strokeWidth={popoverPositioning?.arrow?.strokeWidth}
+                stroke={popoverPositioning?.arrow?.stroke}
+                fill={popoverPositioning?.arrow?.fill}
+                d={popoverPositioning?.arrow?.d}
+                tipRadius={popoverPositioning?.arrow?.tipRadius}
+                data-popover-state={isOpen}
+              />
+            </>
+          )}
           {children}
-          <Primitive.Box
-            el="div"
-            className="iu-popover-arrow"
-            aria-hidden="true"
-            style={{...arrowStyles}}
-          />
         </>
-      </Modal>
+      </Primitive.Box>
     )
   }
 

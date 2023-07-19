@@ -4,12 +4,14 @@ import {
   useLockBodyScroll
 } from '@interunit/a11y'
 import {P} from '@interunit/primitives'
-import FocusTrap from 'focus-trap-react'
+import FocusTrap, {type Props as FocusTrapProps} from 'focus-trap-react'
 import React from 'react'
 
 import {type BaseModalProps} from './Modal'
 
-const ModalComponent = React.forwardRef<any, BaseModalProps>(
+type ModalComponentProps = BaseModalProps & FocusTrapProps
+
+const ModalComponent = React.forwardRef<any, ModalComponentProps>(
   ({isOpen, onClose, children, ...props}, forwardedRef) => {
     const modalComponentRef = React.useRef(null)
 
@@ -17,13 +19,21 @@ const ModalComponent = React.forwardRef<any, BaseModalProps>(
     useAccessibleClose({onClose, KeyDownElement: modalComponentRef})
 
     return (
-      <FocusTrap focusTrapOptions={{tabbableOptions: {displayCheck: 'none'}}}>
+      <FocusTrap
+        focusTrapOptions={{
+          tabbableOptions: {displayCheck: 'none'},
+          ...props.focusTrapOptions
+        }}
+        active={props?.active ?? true}
+        paused={props?.paused ?? false}
+
+      >
         <P.BX
           el="div"
           role="dialog"
           aria-hidden={!isOpen || isOpen === undefined}
           ref={el => {
-            modalComponentRef.current = el
+            modalComponentRef.current = el as any
             if (forwardedRef) {
               // TODO: Not sure why TS doesn't like this
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -34,7 +44,7 @@ const ModalComponent = React.forwardRef<any, BaseModalProps>(
           {...props}
         >
           <VisuallyHidden>
-            <P.BT type="button" onClick={onClose}>
+            <P.BT el="button" type="button" onClick={onClose}>
               Close Modal
             </P.BT>
           </VisuallyHidden>

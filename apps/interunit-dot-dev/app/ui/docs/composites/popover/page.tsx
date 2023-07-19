@@ -2,25 +2,27 @@
 
 import {Popover} from '@interunit/popover'
 import {Primitive} from '@interunit/primitives'
-import {useTheme} from 'styled-components'
 
 import {Button} from '@/components/system/Button'
 import {Text} from '@/components/system/Text'
+import {theme} from '@/theme.config'
 
 const PopoverPage = () => {
-  const theme = useTheme()
   return (
     <div>
       <Popover
         triggerType="click"
         popoverPositioning={{
-          side: 'right',
+          side: 'bottom',
           offset: 10,
+          zIndex: 10,
+          width: '200px',
           arrow: {
-            fill: theme?.color.background.primary,
-            stroke: theme?.color.border.primary,
+            fillColor: theme?.colors['bg-primary'],
+            strokeColor: theme?.colors.border,
             strokeWidth: 1,
-            tipRadius: 2
+            width: 10,
+            borderRadius: 2
           }
         }}
       >
@@ -32,11 +34,10 @@ const PopoverPage = () => {
         <Popover.Content>
           <Primitive.Box
             el="div"
-            className={'backgound-bg-primary border-border rounded p-4 '}
-            style={{width: '500px'}}
+            className={'bg-bg-primary border-[1px] border-border rounded p-4'}
           >
-            <Text el="span" variation="md">
-              The content
+            <Text el="span">
+              The content test test <br /> test <br /> test
             </Text>
           </Primitive.Box>
         </Popover.Content>

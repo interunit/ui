@@ -15,7 +15,6 @@ const nativeOnlyProps = [
 
 const webOnlyProps = ['onClick']
 
-//eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const filterPropsByEnvironment = ({props}: {[prop: string]: any}) => {
   if (ENVIRONMENT === 'native') {
     Object.keys(props).forEach(prop => {

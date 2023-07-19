@@ -1,4 +1,5 @@
 import {InterUnitInternals} from '@interunit/config'
+import React from 'react'
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 export const isTouchDevice = () => {
@@ -25,3 +26,4 @@ export const pruneStyles = (_styles: React.CSSProperties) => {
 
   return Styles
 }
+
