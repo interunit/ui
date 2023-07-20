@@ -3,13 +3,14 @@
 import {
   Field,
   Form,
+} from '@interunit/form'
+import {
   description,
   homepage,
   name,
   version
-} from '@interunit/form'
+} from '@interunit/form/package.json'
 import {P} from '@interunit/primitives'
-import {Check} from 'lucide-react'
 import React from 'react'
 import {useTheme} from 'styled-components'
 

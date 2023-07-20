@@ -1,5 +1,5 @@
 {
-  "name": "@interunit/ui",
+  "name": "interunit",
   "version": "0.0.1",
   "description": "",
   "scripts": {
@@ -10,7 +10,9 @@
     "preconstruct:dev": "preconstruct dev",
     "create:package": "npx hygen create package",
     "util:clean": "rm -rf node_modules **/node_modules **/**/node_modules **/**/**/node_modules && rm -rf $TMPDIR/react-* && watchman watch-del-all && yarn cache clean",
-    "postinstall": "preconstruct dev"
+    "util:delete-dist": "rm -rf packages/**/dist",
+    "postinstall": "preconstruct dev",
+    "publish:all": "npm run util:delete-dist && preconstruct build && changeset version && changeset publish"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.21.5",
@@ -60,6 +62,7 @@
   "homepage": "https://github.com/interunit/ui#readme",
   "private": true,
   "dependencies": {
-    "@babel/runtime": "^7.22.5"
+    "@babel/runtime": "^7.22.5",
+    "@changesets/cli": "^2.26.2"
   }
 }

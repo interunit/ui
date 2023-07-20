@@ -2,7 +2,6 @@
   "name": "@interunit/primitives",
   "version": "0.0.1",
   "description": "",
-  "private": true,
   "main": "dist/interunit-primitives.cjs.js",
   "types": "dist/interunit-primitives.cjs.d.ts",
   "module": "dist/interunit-primitives.esm.js",

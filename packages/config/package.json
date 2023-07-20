@@ -2,7 +2,6 @@
   "name": "@interunit/config",
   "version": "0.0.1",
   "description": "Handles all config for interactions between packages",
-  "private": true,
   "main": "dist/interunit-config.cjs.js",
   "types": "dist/interunit-config.cjs.d.ts",
   "module": "dist/interunit-config.esm.js",

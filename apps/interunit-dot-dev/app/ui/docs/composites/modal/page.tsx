@@ -1,6 +1,12 @@
 'use client'
 
-import {Modal, description, homepage, name, version} from '@interunit/modal'
+import {Modal} from '@interunit/modal'
+import {
+  description,
+  homepage,
+  name,
+  version
+} from '@interunit/modal/package.json'
 import {P} from '@interunit/primitives'
 import React from 'react'
 
