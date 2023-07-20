@@ -15,19 +15,8 @@ type ModalProps = (React.HTMLProps<'div'> | RNModalProps) & BaseModalProps
 
 const Modal = React.forwardRef<any, ModalProps>(
   ({children, ...props}, forwardedRef) => {
-    const calculateFocus = (focusType: FocusType) => {
-      if (focusType === 'none') {
-        return false
-      }
-      return true
-    }
-
     return (
-      <ModalComponent
-        active={calculateFocus(props.focusType)}
-        {...props}
-        ref={forwardedRef}
-      >
+      <ModalComponent focusType={props.focusType} {...props} ref={forwardedRef}>
         {children}
       </ModalComponent>
     )

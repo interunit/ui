@@ -2,21 +2,29 @@
 // No longer have to use position fixed on the body :)
 import {useEffect} from 'react'
 
-const useLockBodyScroll = (isLocked: boolean) => {
+const useLockBodyScroll = ({
+  isLocked,
+  enabled = true
+}: {
+  isLocked: boolean
+  enabled: boolean
+}) => {
   useEffect(() => {
-    const body = document.querySelector('body')
-    if (body) {
-      if (isLocked) {
-        body.style.overflow = 'hidden'
-        body.style.height = `${window.innerHeight}px`
-      } else {
-        body.style.overflow = 'visible'
-        body.style.height = 'auto'
-      }
+    if (enabled) {
+      const body = document.querySelector('body')
+      if (body) {
+        if (isLocked) {
+          body.style.overflow = 'hidden'
+          body.style.height = `${window.innerHeight}px`
+        } else {
+          body.style.overflow = 'visible'
+          body.style.height = 'auto'
+        }
 
-      return () => {
-        body.style.overflow = 'visible'
-        body.style.height = 'auto'
+        return () => {
+          body.style.overflow = 'visible'
+          body.style.height = 'auto'
+        }
       }
     }
   }, [isLocked])

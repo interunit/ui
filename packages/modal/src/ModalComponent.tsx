@@ -9,14 +9,26 @@ import React from 'react'
 
 import {type BaseModalProps} from './Modal'
 
-type ModalComponentProps = BaseModalProps & FocusTrapProps
+type FocusType = 'none' | 'default'
+type ModalComponentProps = BaseModalProps &
+  FocusTrapProps & {focusType: FocusType}
 
 const ModalComponent = React.forwardRef<any, ModalComponentProps>(
-  ({isOpen, onClose, children, ...props}, forwardedRef) => {
+  ({isOpen, onClose, focusType, children, ...props}, forwardedRef) => {
     const modalComponentRef = React.useRef(null)
 
-    useLockBodyScroll(isOpen === true || isOpen === undefined)
+    useLockBodyScroll({
+      isLocked: isOpen === true || isOpen === undefined,
+      enabled: focusType !== 'none'
+    })
     useAccessibleClose({onClose, KeyDownElement: modalComponentRef})
+
+    const calculateFocus = (focusType: FocusType) => {
+      if (focusType === 'none') {
+        return false
+      }
+      return true
+    }
 
     return (
       <FocusTrap
@@ -24,9 +36,7 @@ const ModalComponent = React.forwardRef<any, ModalComponentProps>(
           tabbableOptions: {displayCheck: 'none'},
           ...props.focusTrapOptions
         }}
-        active={props?.active ?? true}
-        paused={props?.paused ?? false}
-
+        active={calculateFocus(focusType)}
       >
         <P.BX
           el="div"
