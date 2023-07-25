@@ -1,6 +1,6 @@
 // 'use client'
 // import {InterUnitProvider as InterUnit} from '@interunit/config'
-import React from 'react'
+import type React from 'react'
 
 // import {config} from '../../interunit.config'
 

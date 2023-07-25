@@ -1,4 +1,3 @@
-import {useOutsideClick} from '@interunit/a11y'
 import {P} from '@interunit/primitives'
 import {Search} from 'lucide-react'
 import React from 'react'
