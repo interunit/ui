@@ -11,10 +11,10 @@ import {type BaseModalProps} from './Modal'
 
 type FocusType = 'none' | 'default'
 type ModalComponentProps = BaseModalProps &
-  FocusTrapProps & {focusType: FocusType}
+  FocusTrapProps & {focusType?: FocusType}
 
 const ModalComponent = React.forwardRef<any, ModalComponentProps>(
-  ({isOpen, onClose, focusType, children, ...props}, forwardedRef) => {
+  ({isOpen, onClose, focusType = 'default', children, ...props}, forwardedRef) => {
     const modalComponentRef = React.useRef(null)
 
     useLockBodyScroll({
