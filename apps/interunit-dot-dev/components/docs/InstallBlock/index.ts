@@ -1,1 +1,1 @@
-export { InstallBlock} from './InstallBlock'
+export {InstallBlock} from './InstallBlock'

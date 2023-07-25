@@ -2,8 +2,6 @@ import {Modal} from '@interunit/modal'
 import {Primitive} from '@interunit/primitives'
 import React from 'react'
 
-import {config} from './interunit.config'
-
 const Test = () => {
   const [showModal, setShowModal] = React.useState(false)
   return (

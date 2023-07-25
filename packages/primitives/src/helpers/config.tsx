@@ -1,5 +1,3 @@
-import type React from 'react'
-
 import {InterUnitInternals} from '@interunit/config'
 import {
   type ConstructTag,
@@ -7,6 +5,7 @@ import {
   type NativeComponent,
   type WebComponent
 } from '@interunit/config'
+import type React from 'react'
 
 import {getConstruct} from './getConstruct'
 

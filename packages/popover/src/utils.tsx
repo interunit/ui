@@ -1,4 +1,4 @@
-import React from 'react'
+import type React from 'react'
 
 // RN doesn't like NaN styles and floating-ui doesn't filter it out
 export const pruneStyles = (_styles: React.CSSProperties) => {

@@ -1,6 +1,6 @@
 import {Primitive} from '@interunit/primitives'
-import { twMerge} from 'tailwind-merge'
 import React from 'react'
+import {twMerge} from 'tailwind-merge'
 
 import {type ThemeColor, getColorValue} from '@/theme.config'
 
@@ -16,7 +16,7 @@ const Badge = ({
   return (
     <Primitive.Box
       el="span"
-      className={twMerge('inline-block py-2 px-4 rounded border',className)}
+      className={twMerge('inline-block py-2 px-4 rounded border', className)}
       style={{background: getColorValue(color)}}
     >
       {children}

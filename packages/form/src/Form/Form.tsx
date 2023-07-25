@@ -1,7 +1,6 @@
-import React from 'react'
-
 import {InterUnitInternals} from '@interunit/config'
 import {Child} from '@interunit/primitives'
+import React from 'react'
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 
@@ -109,7 +108,7 @@ const Form = <T extends BaseValues>({
 
   return (
     <FormContext.Provider value={ContextValue}>
-      <form onSubmit={InternalOnSubmit} style={{ width: '100%'}}>
+      <form onSubmit={InternalOnSubmit} style={{width: '100%'}}>
         {children({values: fieldValues, validity, onSubmit: InternalOnSubmit})}
       </form>
     </FormContext.Provider>

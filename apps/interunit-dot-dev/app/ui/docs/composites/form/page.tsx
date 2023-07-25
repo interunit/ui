@@ -1,9 +1,6 @@
 'use client'
 
-import {
-  Field,
-  Form,
-} from '@interunit/form'
+import {Field, Form} from '@interunit/form'
 import {
   description,
   homepage,

@@ -149,9 +149,8 @@ export const useContentPositioning = ({
       zIndex: (positioning?.zIndex || 2) + 1
     }
 
-    if(positioning?.arrow?.fillColor) {
-        arrowStyles.backgroundColor = positioning?.arrow?.fillColor
-
+    if (positioning?.arrow?.fillColor) {
+      arrowStyles.backgroundColor = positioning?.arrow?.fillColor
     }
 
     if (positioning.side === 'bottom') {

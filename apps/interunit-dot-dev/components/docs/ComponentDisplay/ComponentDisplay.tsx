@@ -15,7 +15,8 @@ const ComponentDisplay = ({
     <Primitive.Box
       el="div"
       className={twMerge(
-        'flex flex-col items-center justify-center py-16 px-4 bg-bg-blended border rounded w-full', className
+        'flex flex-col items-center justify-center py-16 px-4 bg-bg-blended border rounded w-full',
+        className
       )}
     >
       <Primitive.Box el="div" className={contentClassName}>

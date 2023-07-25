@@ -108,7 +108,7 @@ const Button = React.forwardRef<
     const colorValue = getColorValue(color)
     return (
       <P.BT
-      el="button"
+        el="button"
         className={twMerge(
           kindClassName(kind),
           variationClassName(variation),

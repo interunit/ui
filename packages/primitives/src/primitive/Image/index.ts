@@ -1,1 +1,1 @@
-export { Image, type ImagePrimitiveProps} from './Image'
+export {Image, type ImagePrimitiveProps} from './Image'

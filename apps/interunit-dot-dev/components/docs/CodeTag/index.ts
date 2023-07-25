@@ -1,1 +1,1 @@
-export { CodeTag} from './CodeTag'
+export {CodeTag} from './CodeTag'

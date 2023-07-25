@@ -1,10 +1,9 @@
 'use client'
+
 import {Content} from './TextContent'
 
 const Config = () => {
-  return (
-      <Content />
-  )
+  return <Content />
 }
 
 export default Config

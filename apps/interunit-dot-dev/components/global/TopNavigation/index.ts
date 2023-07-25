@@ -1,1 +1,1 @@
-export { TopNavigation} from './TopNavigation'
+export {TopNavigation} from './TopNavigation'

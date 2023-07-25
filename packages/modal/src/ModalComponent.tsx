@@ -1,7 +1,7 @@
 import {
   VisuallyHidden,
   useAccessibleClose,
-  useLockBodyScroll,
+  useLockBodyScroll
 } from '@interunit/a11y'
 import {P} from '@interunit/primitives'
 import _FocusTrap, {type Props as FocusTrapProps} from 'focus-trap-react'
@@ -20,13 +20,7 @@ type ModalComponentProps = BaseModalProps &
 
 const ModalComponent = React.forwardRef<any, ModalComponentProps>(
   (
-    {
-      isOpen,
-      onClose,
-      focusType = 'default',
-      children,
-      ...props
-    },
+    {isOpen, onClose, focusType = 'default', children, ...props},
     forwardedRef
   ) => {
     const modalComponentRef = React.useRef(null)

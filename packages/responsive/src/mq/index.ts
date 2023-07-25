@@ -1,1 +1,1 @@
-export { mq } from './mq'
+export {mq} from './mq'

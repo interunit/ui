@@ -1,9 +1,7 @@
+import {Child} from '@interunit/primitives'
 import React from 'react'
 
-import {Child} from '@interunit/primitives'
-
 import type {CSSProperties} from './types'
-
 
 const visuallyHiddenStyles = {
   position: 'absolute',

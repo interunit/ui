@@ -7,7 +7,7 @@ import {twMerge} from 'tailwind-merge'
 import {Text} from '@/components/system/Text'
 
 type AnchoredHeadingProps = React.ComponentPropsWithoutRef<typeof Text> & {
-    id: string
+  id: string
   boxClassName?: string
 }
 

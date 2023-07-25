@@ -4,14 +4,14 @@ const getWorkspaces = require('get-yarn-workspaces')
 async function getConfig(appDir, options = {}) {
   //Get all the workspace
   const workspaces = getWorkspaces(appDir)
-    const WORKSPACE_ROOT = path.resolve(__dirname, '../../')
-
+  const WORKSPACE_ROOT = path.resolve(__dirname, '../../')
 
   //Filter all the unnessary paths
   const watchFolders = [
-      path.resolve(WORKSPACE_ROOT, 'node_modules'),
+    path.resolve(WORKSPACE_ROOT, 'node_modules'),
     path.resolve(appDir, 'node_modules'),
-    ...workspaces.filter( workPath =>
+    ...workspaces.filter(
+      workPath =>
         !workPath
           .split('/')
           .pop()

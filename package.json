@@ -6,6 +6,7 @@
     "dev:all": "turbo run dev:all",
     "lint:eslint": "eslint --ext .ts,.tsx .",
     "lint:tsc": "tsc",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "preconstruct:build": "preconstruct build",
     "preconstruct:dev": "preconstruct dev",
     "create:package": "npx hygen create package",
@@ -14,12 +15,14 @@
     "postinstall": "preconstruct dev",
     "changeset:add": "changeset add",
     "changeset:version": "changeset version",
-    "changeset:publish": "npm run util:delete-dist && preconstruct build && changeset publish"
+    "changeset:publish": "npm run util:delete-dist && preconstruct build && changeset publish",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.21.5",
+    "@changesets/cli": "^2.26.2",
     "@manypkg/cli": "^0.20.0",
     "@preconstruct/cli": "^2.7.0",
     "@react-native-community/eslint-config": "^3.2.0",
@@ -62,9 +65,5 @@
     "url": "https://github.com/interunit/ui/issues"
   },
   "homepage": "https://github.com/interunit/ui#readme",
-  "private": true,
-  "dependencies": {
-    "@babel/runtime": "^7.22.5",
-    "@changesets/cli": "^2.26.2"
-  }
+  "private": true
 }

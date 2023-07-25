@@ -1,6 +1,6 @@
-import React from 'react'
 import {InterUnitInternals as InterUnitConfigInternals} from '@interunit/config'
 import {InterUnitInternals} from '@interunit/primitives'
+import React from 'react'
 
 const ENVIRONMENT =
   InterUnitConfigInternals.InterUnitInternalConfig.ENVIRONMENT.NAME

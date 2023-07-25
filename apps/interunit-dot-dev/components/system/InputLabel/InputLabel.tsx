@@ -12,7 +12,12 @@ const InputLabel = React.forwardRef<
   StyledInputLabelProps
 >(({className, children, ...props}, forwardedRef) => {
   return (
-    <Text el={'label'} className={`mb-1 inline-block ${className}`}{...props} ref={forwardedRef}>
+    <Text
+      el={'label'}
+      className={`mb-1 inline-block ${className}`}
+      {...props}
+      ref={forwardedRef}
+    >
       {children}
     </Text>
   )

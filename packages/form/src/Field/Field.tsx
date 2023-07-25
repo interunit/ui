@@ -1,7 +1,6 @@
-import React from 'react'
-
 import {VisuallyHidden} from '@interunit/a11y'
 import {Child, Primitive} from '@interunit/primitives'
+import React from 'react'
 
 import {FormContext} from '../Form'
 

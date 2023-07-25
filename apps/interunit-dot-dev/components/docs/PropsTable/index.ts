@@ -1,1 +1,1 @@
-export { PropsTable } from './PropsTable';
+export {PropsTable} from './PropsTable'

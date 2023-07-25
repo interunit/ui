@@ -1,1 +1,1 @@
-export { sw } from './sw'
+export {sw} from './sw'
