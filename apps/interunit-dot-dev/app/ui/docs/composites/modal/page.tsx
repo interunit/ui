@@ -84,14 +84,6 @@ const ModalPage = () => {
                 'A function that will be called when the modal is closed'
             },
             {
-              name: 'onInteractOutside',
-              type: '() => void',
-              required: false,
-              description:
-                'A function that will be called when the user clicks outside of the modal'
-            },
-
-            {
               name: 'focusType',
               type: `'none' | 'default'`,
               required: false,
