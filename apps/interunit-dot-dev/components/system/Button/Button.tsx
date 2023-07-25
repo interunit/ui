@@ -6,7 +6,7 @@ import {twMerge} from 'tailwind-merge'
 import {type ThemeColor, theme} from '@/theme.config'
 
 type ButtonKind = 'primary' | 'text'
-type ButtonProps = React.ComponentPropsWithoutRef<typeof P.BT> & {
+type ButtonProps = Omit<React.ComponentPropsWithoutRef<typeof P.BT>, 'el'> & {
   color: ThemeColor
   variation?: 'xs' | 'sm' | 'md' | 'lg'
   kind?: ButtonKind
@@ -108,6 +108,7 @@ const Button = React.forwardRef<
     const colorValue = getColorValue(color)
     return (
       <P.BT
+      el="button"
         className={twMerge(
           kindClassName(kind),
           variationClassName(variation),

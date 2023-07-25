@@ -12,7 +12,9 @@
     "util:clean": "rm -rf node_modules **/node_modules **/**/node_modules **/**/**/node_modules && rm -rf $TMPDIR/react-* && watchman watch-del-all && yarn cache clean",
     "util:delete-dist": "rm -rf packages/**/dist",
     "postinstall": "preconstruct dev",
-    "publish:all": "npm run util:delete-dist && preconstruct build && changeset version && changeset publish"
+    "changeset:add": "changeset add",
+    "changeset:version": "changeset version",
+    "changeset:publish": "npm run util:delete-dist && preconstruct build && changeset publish"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.21.5",

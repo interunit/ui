@@ -1,13 +1,9 @@
-# @interunit/primitives
+# @interunit/a11y
 
-## 0.0.2
+## 0.0.4
 
 ### Patch Changes
 
 - Updates to support better popover and modal support. Making way for supporting collapsible component
-
-## 0.0.1
-
-### Patch Changes
-
-- First alpha release of primitives
+- Updated dependencies
+  - @interunit/primitives@0.0.2

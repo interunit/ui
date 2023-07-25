@@ -27,7 +27,7 @@ const PopoverPage = () => {
         }}
       >
         <Popover.Trigger>
-          <Button as="button" color={'bg-secondary'}>
+          <Button  color={'bg-secondary'}>
             Click me
           </Button>
         </Popover.Trigger>

@@ -1,4 +1,5 @@
 import {isTouchDevice} from '@interunit/a11y'
+import {useOutsideClick} from '@interunit/a11y'
 import {InterUnitInternals, useCSSUnitConversion} from '@interunit/config'
 import {Modal} from '@interunit/modal'
 import {Child, Primitive} from '@interunit/primitives'
@@ -68,14 +69,13 @@ type PopoverSettings = {
   shouldCloseOnInteractOutside?: boolean
 }
 
-// TODO: option to click outside to close (probably should be default behavior)
 const Popover = ({
   children,
   triggerType,
   onPopoverChange,
   popoverPositioning,
   defaultIsOpen,
-  settings = {shouldCloseOnInteractOutside : true}
+  settings = {shouldCloseOnInteractOutside: true}
 }: {
   onPopoverChange?: (popoverState: PopoverState) => void
   triggerType: 'click' | 'hover'
@@ -85,6 +85,7 @@ const Popover = ({
   settings?: PopoverSettings
   children: React.ReactNode
 }) => {
+  const popoverRef = React.useRef(null)
   const [trigger, setTrigger] = React.useState<React.ReactElement | null>(null)
 
   const [state, dispatch] = React.useReducer(
@@ -109,6 +110,14 @@ const Popover = ({
     }
   )
 
+  useOutsideClick({
+    ref: popoverRef,
+    fn:
+      settings?.shouldCloseOnInteractOutside && state.isOpen
+        ? state.togglePopover
+        : undefined
+  })
+
   React.useEffect(() => {
     if (onPopoverChange) {
       onPopoverChange(state)
@@ -127,6 +136,7 @@ const Popover = ({
         // TODO: inline block won't work on native
         style={{position: 'relative', overflow: 'visible', display}}
         collapsable={false}
+        ref={popoverRef}
       >
         {children}
       </Primitive.Box>
@@ -214,8 +224,7 @@ const PopoverContent = ({
     dispatch,
     triggerDimensions,
     focusType,
-    popoverPositioning,
-    settings
+    popoverPositioning
   } = React.useContext(PopoverContext)
 
   const {positioningStyles, arrowStyles} = useContentPositioning({
@@ -226,7 +235,6 @@ const PopoverContent = ({
   if (isOpen && trigger) {
     return (
       <Modal
-        onInteractOutside={() => settings.shouldCloseOnInteractOutside &&  dispatch({type: 'CLOSE'})}
         style={{
           maxWidth:
             convert({

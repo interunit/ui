@@ -2,7 +2,6 @@ import {
   VisuallyHidden,
   useAccessibleClose,
   useLockBodyScroll,
-  useOutsideClick
 } from '@interunit/a11y'
 import {P} from '@interunit/primitives'
 import _FocusTrap, {type Props as FocusTrapProps} from 'focus-trap-react'
@@ -16,7 +15,6 @@ const FocusTrap = _FocusTrap as React.ElementType<FocusTrapProps>
 type FocusType = 'none' | 'default'
 type ModalComponentProps = BaseModalProps &
   Pick<FocusTrapProps, 'focusTrapOptions' | 'active'> & {
-    onInteractOutside?: () => void
     children: React.ReactNode
   }
 
@@ -25,7 +23,6 @@ const ModalComponent = React.forwardRef<any, ModalComponentProps>(
     {
       isOpen,
       onClose,
-      onInteractOutside,
       focusType = 'default',
       children,
       ...props
@@ -37,11 +34,6 @@ const ModalComponent = React.forwardRef<any, ModalComponentProps>(
     useLockBodyScroll({
       isLocked: isOpen === true || isOpen === undefined,
       enabled: focusType !== 'none'
-    })
-
-    useOutsideClick({
-      ref: modalComponentRef,
-      fn: typeof onInteractOutside === 'function' ? onInteractOutside : () => {}
     })
 
     useAccessibleClose({onClose, KeyDownElement: modalComponentRef})

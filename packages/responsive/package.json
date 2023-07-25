@@ -2,15 +2,12 @@
   "name": "@interunit/responsive",
   "version": "0.0.1",
   "description": "Utilities to make cross-platform development a breeze 🍃",
-  "private": true,
   "main": "dist/interunit-responsive.cjs.js",
   "types": "dist/interunit-responsive.cjs.d.ts",
   "module": "dist/interunit-responsive.esm.js",
   "react-native": "src/index.ts",
   "dependencies": {
-  
     "@interunit/config": "*"
-  
   },
   "devDependencies": {
     "@types/react": "18.2.12",

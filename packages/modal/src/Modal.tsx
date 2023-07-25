@@ -9,7 +9,6 @@ export type BaseModalProps = {
   onClose: () => void
   children: React.ReactNode
   focusType?: FocusType
-  onInteractOutside?: () => void
 }
 
 type ModalProps = (React.HTMLProps<'div'> | RNModalProps) & BaseModalProps
