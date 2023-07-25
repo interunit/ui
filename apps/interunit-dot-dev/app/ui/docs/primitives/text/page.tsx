@@ -1,9 +1,14 @@
 'use client'
 
-import {Primitive} from '@interunit/primitives'
+import {P} from '@interunit/primitives'
 
 const Page = () => {
-  return <Primitive.Text el="span">hi</Primitive.Text>
+  return (
+         <div>
+         <P.TX el="a">Hello</P.TX>
+
+         </div>
+         )
 }
 
 export default Page

@@ -1,14 +1,13 @@
 {
   "name": "@interunit/a11y",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A11y utilities to use in InterUnit",
-  "private": true,
   "main": "dist/interunit-a11y.cjs.js",
   "types": "dist/interunit-a11y.cjs.d.ts",
   "module": "dist/interunit-a11y.esm.js",
   "react-native": "src/index.ts",
   "dependencies": {
-      "@interunit/config": "*",
+    "@interunit/config": "*",
     "@interunit/primitives": "*"
   },
   "devDependencies": {

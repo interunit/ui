@@ -2,14 +2,11 @@
   "name": "@interunit/popover",
   "version": "0.0.1",
   "description": "A popover component",
-  "private": true,
   "main": "dist/interunit-popover.cjs.js",
   "types": "dist/interunit-popover.cjs.d.ts",
   "module": "dist/interunit-popover.esm.js",
   "react-native": "src/index.ts",
   "dependencies": {
-    "@floating-ui/react": "^0.24.3",
-    "@floating-ui/react-native": "^0.10.1",
     "@interunit/config": "*",
     "@interunit/modal": "*",
     "@interunit/primitives": "*"
