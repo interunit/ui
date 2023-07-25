@@ -1,11 +1,4 @@
-import {InterUnitInternals} from '@interunit/config'
 import React from 'react'
-
-const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
-export const isTouchDevice = () => {
-  if (ENVIRONMENT === 'native') return true
-  return 'ontouchstart' in window || navigator.maxTouchPoints > 0
-}
 
 // RN doesn't like NaN styles and floating-ui doesn't filter it out
 export const pruneStyles = (_styles: React.CSSProperties) => {
@@ -26,4 +19,3 @@ export const pruneStyles = (_styles: React.CSSProperties) => {
 
   return Styles
 }
-

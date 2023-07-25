@@ -59,7 +59,7 @@ const RecursiveRender = ({data, path}: {path: string; data: DataItem}) => {
 
 const NavigationList = ({data}: {data: DataItem}) => {
   return (
-    <Primitive.Box el="div" className="sticky left-0 top-4 p-4">
+    <Primitive.Box el="div" className="lg:sticky lg:left-0 lg:top-4 p-4">
       <RecursiveRender data={data} path={'/ui/docs'} />
     </Primitive.Box>
   )
@@ -69,7 +69,7 @@ const DocsSideNavigation = ({data}: DocsSideNavigationProps) => {
     return (
       <Primitive.Box
         el="nav"
-        className="bg-bg-primary border-b-1 border-border h-full [&).iu-popover-arrow]:fill-bg-primary lg:p-4 lg:border-r-1 lg:border-b-0 relative"
+        className="bg-bg-primary border-b-1 border-border h-full lg:p-4 lg:border-r-1 lg:border-b-0 relative"
       >
         <NavigationList data={data} />
       </Primitive.Box>
@@ -78,7 +78,8 @@ const DocsSideNavigation = ({data}: DocsSideNavigationProps) => {
   return (
     <Primitive.Box
       el="nav"
-      className="bg-bg-primary border-b-1 border-border h-full [&).iu-popover-arrow]:fill-bg-primary lg:p-4 lg:border-r-1 lg:border-b-0 relative"
+      className="bg-bg-primary border-b-1 p-4 border-border h-full lg:border-r-1 lg:border-b-0"
+      h
     >
       <Popover
         triggerType="click"
@@ -86,17 +87,21 @@ const DocsSideNavigation = ({data}: DocsSideNavigationProps) => {
           side: 'bottom',
           align: 'start',
           offset: 12,
+          width: '400px',
+          maxWidth: '90vw',
           arrow: {
-            tipRadius: 2,
-            stroke: theme.colors.border,
-            strokeWidth: 2
+            borderRadius: 2,
+            strokeColor: theme.colors.border,
+            fillColor: theme.colors['bg-primary'],
+            strokeWidth: 2,
+            width: 12
           }
         }}
       >
         <Popover.Trigger>
           <Button
             el="button"
-            className="block m-4 lg:hidden"
+            className="block lg:hidden"
             color={theme.colors['bg-muted']}
             variation="sm"
           >
@@ -109,8 +114,7 @@ const DocsSideNavigation = ({data}: DocsSideNavigationProps) => {
         <Popover.Content>
           <Primitive.Box
             el="div"
-            className="flex flex-col bg-bg-primary border-border rounded border-1 mx-4 overflow-y-auto"
-            style={{width: 'calc(100vw - 2rem)'}}
+            className="flex flex-col bg-bg-primary border-border rounded border-[1px] lg:mx-4 overflow-y-auto"
           >
             <NavigationList data={data} />
           </Primitive.Box>

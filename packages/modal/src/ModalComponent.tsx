@@ -1,26 +1,49 @@
 import {
   VisuallyHidden,
   useAccessibleClose,
-  useLockBodyScroll
+  useLockBodyScroll,
+  useOutsideClick
 } from '@interunit/a11y'
 import {P} from '@interunit/primitives'
-import FocusTrap, {type Props as FocusTrapProps} from 'focus-trap-react'
+import _FocusTrap, {type Props as FocusTrapProps} from 'focus-trap-react'
 import React from 'react'
 
 import {type BaseModalProps} from './Modal'
 
+// 'FocusTrapProps' doesn't include children, so we need to redeclare it here
+const FocusTrap = _FocusTrap as React.ElementType<FocusTrapProps>
+
 type FocusType = 'none' | 'default'
 type ModalComponentProps = BaseModalProps &
-  FocusTrapProps & {focusType?: FocusType}
+  Pick<FocusTrapProps, 'focusTrapOptions' | 'active'> & {
+    onInteractOutside?: () => void
+    children: React.ReactNode
+  }
 
 const ModalComponent = React.forwardRef<any, ModalComponentProps>(
-  ({isOpen, onClose, focusType = 'default', children, ...props}, forwardedRef) => {
+  (
+    {
+      isOpen,
+      onClose,
+      onInteractOutside,
+      focusType = 'default',
+      children,
+      ...props
+    },
+    forwardedRef
+  ) => {
     const modalComponentRef = React.useRef(null)
 
     useLockBodyScroll({
       isLocked: isOpen === true || isOpen === undefined,
       enabled: focusType !== 'none'
     })
+
+    useOutsideClick({
+      ref: modalComponentRef,
+      fn: typeof onInteractOutside === 'function' ? onInteractOutside : () => {}
+    })
+
     useAccessibleClose({onClose, KeyDownElement: modalComponentRef})
 
     const calculateFocus = (focusType: FocusType) => {
@@ -42,7 +65,7 @@ const ModalComponent = React.forwardRef<any, ModalComponentProps>(
           el="div"
           role="dialog"
           aria-hidden={!isOpen || isOpen === undefined}
-          ref={el => {
+          ref={(el: React.RefObject<any>) => {
             modalComponentRef.current = el as any
             if (forwardedRef) {
               // TODO: Not sure why TS doesn't like this

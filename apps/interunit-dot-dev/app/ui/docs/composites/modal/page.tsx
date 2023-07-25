@@ -71,7 +71,7 @@ const ModalPage = () => {
           propsToDisplay={[
             {
               name: 'isOpen',
-              type: 'boolean | undefined',
+              type: 'boolean',
               required: false,
               description:
                 "If you plan to control the styling of the modal to be open or closed, you can pass this prop to control the open state of the modal. If you are using conditional rendering, this isn't necessary."
@@ -82,6 +82,22 @@ const ModalPage = () => {
               required: false,
               description:
                 'A function that will be called when the modal is closed'
+            },
+            {
+              name: 'onInteractOutside',
+              type: '() => void',
+              required: false,
+              description:
+                'A function that will be called when the user clicks outside of the modal'
+            },
+
+            {
+              name: 'focusType',
+              type: `'none' | 'default'`,
+              required: false,
+              default: 'default',
+              description:
+                'If you want to disable focus trapping, you can pass "none" to this prop. If you want to enable focus trapping, you can pass "default" to this prop.'
             },
             {
               name: '...props',

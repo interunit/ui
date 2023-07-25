@@ -7,6 +7,7 @@ export const theme = {
     'bg-secondary': '#5E47C4',
     'bg-tertiary': '#292B62',
     'bg-blended': '#16161F',
+    'bg-blended-accent': '#0e0e14',
     'bg-muted': '#4A4A57',
     blue: '#2479BD',
     pink: '#BC2FA4',

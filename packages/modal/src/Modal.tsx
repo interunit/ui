@@ -8,15 +8,16 @@ export type BaseModalProps = {
   isOpen?: boolean | undefined
   onClose: () => void
   children: React.ReactNode
-  focusType: FocusType
+  focusType?: FocusType
+  onInteractOutside?: () => void
 }
 
 type ModalProps = (React.HTMLProps<'div'> | RNModalProps) & BaseModalProps
 
 const Modal = React.forwardRef<any, ModalProps>(
-  ({children, ...props}, forwardedRef) => {
+  ({focusType = 'default', children, ...props}, forwardedRef) => {
     return (
-      <ModalComponent focusType={props.focusType} {...props} ref={forwardedRef}>
+      <ModalComponent focusType={focusType} {...props} ref={forwardedRef}>
         {children}
       </ModalComponent>
     )

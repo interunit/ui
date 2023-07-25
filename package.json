@@ -14,14 +14,12 @@
     "postinstall": "preconstruct dev",
     "publish:all": "npm run util:delete-dist && preconstruct build && changeset version && changeset publish"
   },
-  "dependencies":{
-    "@preconstruct/cli": "^2.7.0"
-  },
   "devDependencies": {
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.21.5",
     "@manypkg/cli": "^0.20.0",
+    "@preconstruct/cli": "^2.7.0",
     "@react-native-community/eslint-config": "^3.2.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/node": "^20.3.1",

@@ -15,7 +15,7 @@ export type PopoverPositioning = {
   align?: 'start' | 'end'
   offset?: number
   width?: 'trigger' | string | number
-  maxWidth?: string
+  maxWidth?: number | string
   zIndex?: number
   arrow?: {
     width?: number

@@ -12,6 +12,7 @@
   "dependencies": {
     "@ctrl/tinycolor": "^3.6.0",
     "@interunit/a11y": "*",
+    "@interunit/collapsible": "*",
     "@interunit/combobox": "*",
     "@interunit/config": "*",
     "@interunit/form": "*",

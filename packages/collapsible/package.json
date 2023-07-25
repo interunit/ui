@@ -1,23 +1,15 @@
----
-to: packages/<%= packageName %>/package.json
----
 {
-  "name": "@interunit/<%=  packageName %>",
+  "name": "@interunit/collapsible",
   "version": "0.0.1",
-  "description": "<%=  packageDescription %>",
-  "main": "dist/interunit-<%= packageName %>.cjs.js",
-  "types": "dist/interunit-<%= packageName %>.cjs.d.ts",
-  "module": "dist/interunit-<%= packageName %>.esm.js",
+  "description": "A component that expands and collapses content",
+  "main": "dist/interunit-collapsible.cjs.js",
+  "types": "dist/interunit-collapsible.cjs.d.ts",
+  "module": "dist/interunit-collapsible.esm.js",
   "react-native": "src/index.ts",
   "dependencies": {
-  <% if (shouldIncludePrimitives && shouldIncludeConfig) { %>
-    "@interunit/primitives": "*",
-    "@interunit/config": "*"
-  <% } else if (shouldIncludePrimitives) { %>
+    "@interunit/a11y": "*",
+    "@interunit/config": "*",
     "@interunit/primitives": "*"
-  <% } else if (shouldIncludeConfig) { %>
-    "@interunit/config": "*"
-  <% } %>
   },
   "devDependencies": {
     "@types/react": "18.2.12",

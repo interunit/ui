@@ -1,3 +1,4 @@
+import {isTouchDevice} from '@interunit/a11y'
 import {InterUnitInternals, useCSSUnitConversion} from '@interunit/config'
 import {Modal} from '@interunit/modal'
 import {Child, Primitive} from '@interunit/primitives'
@@ -7,7 +8,6 @@ import {
   type PopoverPositioning,
   useContentPositioning
 } from './hooks/useContentPositioning'
-import {isTouchDevice} from './utils'
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 
@@ -19,7 +19,6 @@ type TriggerDimensions = {
 }
 
 type PopoverState = {
-  dispatch: React.Dispatch<ReducerAction>
   isOpen: boolean
   focusType: 'none' | 'default'
   popoverPositioning?: PopoverPositioning
@@ -30,8 +29,12 @@ type PopoverState = {
   triggerDimensions: TriggerDimensions
 }
 
+type PopoverContextState = PopoverState & {
+  dispatch: React.Dispatch<ReducerAction>
+  settings: PopoverSettings
+}
+
 const DEFAULT_POPOVER_STATE: PopoverState = {
-  dispatch: () => {},
   isOpen: false,
   setTrigger: null,
   togglePopover: () => {},
@@ -46,7 +49,9 @@ const DEFAULT_POPOVER_STATE: PopoverState = {
   }
 }
 
-const PopoverContext = React.createContext(DEFAULT_POPOVER_STATE)
+const PopoverContext = React.createContext(
+  DEFAULT_POPOVER_STATE as PopoverContextState
+)
 
 type PayloadlessReducerAction = {
   type: 'OPEN' | 'CLOSE' | 'TOGGLE'
@@ -59,19 +64,25 @@ type SetTriggerDimensionsAction = {
 
 type ReducerAction = PayloadlessReducerAction | SetTriggerDimensionsAction
 
+type PopoverSettings = {
+  shouldCloseOnInteractOutside?: boolean
+}
+
 // TODO: option to click outside to close (probably should be default behavior)
 const Popover = ({
   children,
   triggerType,
-  onPopoverStateChange,
+  onPopoverChange,
   popoverPositioning,
-  defaultOpen
+  defaultIsOpen,
+  settings = {shouldCloseOnInteractOutside : true}
 }: {
-  onPopoverStateChange?: (popoverState: PopoverState) => void
+  onPopoverChange?: (popoverState: PopoverState) => void
   triggerType: 'click' | 'hover'
-  defaultOpen?: boolean
+  defaultIsOpen?: boolean
   popoverPositioning?: PopoverPositioning
   ArrowElement?: React.ReactElement | null
+  settings?: PopoverSettings
   children: React.ReactNode
 }) => {
   const [trigger, setTrigger] = React.useState<React.ReactElement | null>(null)
@@ -91,12 +102,16 @@ const Popover = ({
           throw new Error()
       }
     },
-    {...DEFAULT_POPOVER_STATE, popoverPositioning, isOpen: defaultOpen ?? false}
+    {
+      ...DEFAULT_POPOVER_STATE,
+      popoverPositioning,
+      isOpen: defaultIsOpen ?? false
+    }
   )
 
   React.useEffect(() => {
-    if (onPopoverStateChange) {
-      onPopoverStateChange(state)
+    if (onPopoverChange) {
+      onPopoverChange(state)
     }
   }, [state])
 
@@ -105,17 +120,12 @@ const Popover = ({
 
   return (
     <PopoverContext.Provider
-      value={{...state, dispatch, trigger, setTrigger, triggerType}}
+      value={{...state, dispatch, trigger, setTrigger, triggerType, settings}}
     >
       <Primitive.Box
         el="div"
         // TODO: inline block won't work on native
         style={{position: 'relative', overflow: 'visible', display}}
-        // The floating styles are technically correct but React.CSSProperties
-        // doesn't seem to think so
-        //
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         collapsable={false}
       >
         {children}
@@ -124,7 +134,11 @@ const Popover = ({
   )
 }
 
-const PopoverTrigger = ({children}: {children: React.ReactNode}) => {
+const PopoverTrigger = ({
+  children
+}: {
+  children: (({isOpen}: {isOpen: boolean}) => React.ReactNode) | React.ReactNode
+}) => {
   const {dispatch, trigger, setTrigger, triggerType, isOpen} =
     React.useContext(PopoverContext)
 
@@ -182,12 +196,16 @@ const PopoverTrigger = ({children}: {children: React.ReactNode}) => {
       collapsable={false}
       data-popover-state={isOpen}
     >
-      {children}
+      {typeof children === 'function' ? children({isOpen}) : children}
     </Child>
   )
 }
 
-const PopoverContent = ({children}: {children: React.ReactNode}) => {
+const PopoverContent = ({
+  children
+}: {
+  children: (({isOpen}: {isOpen: boolean}) => React.ReactNode) | React.ReactNode
+}) => {
   const {convert} = useCSSUnitConversion()
   const {
     isOpen,
@@ -196,7 +214,8 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
     dispatch,
     triggerDimensions,
     focusType,
-    popoverPositioning
+    popoverPositioning,
+    settings
   } = React.useContext(PopoverContext)
 
   const {positioningStyles, arrowStyles} = useContentPositioning({
@@ -207,6 +226,7 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
   if (isOpen && trigger) {
     return (
       <Modal
+        onInteractOutside={() => settings.shouldCloseOnInteractOutside &&  dispatch({type: 'CLOSE'})}
         style={{
           maxWidth:
             convert({
@@ -247,7 +267,7 @@ const PopoverContent = ({children}: {children: React.ReactNode}) => {
         data-popover-align={popoverPositioning?.align}
       >
         <>
-          {children}
+          {typeof children === 'function' ? children({isOpen}) : children}
           <Primitive.Box
             el="div"
             className="iu-popover-arrow"

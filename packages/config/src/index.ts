@@ -12,4 +12,5 @@ export type {
   WebComponent
 } from './internal/sharedConfig'
 export {createInterUnit} from './createInterUnit'
+export {getEnvironmentName} from './helpers/getEnvironmentName'
 export {InterUnitInternals}

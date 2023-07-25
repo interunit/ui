@@ -1,20 +1,21 @@
 import {TinyColor, isReadable} from '@ctrl/tinycolor'
-import { twMerge} from 'tailwind-merge'
-import {P, type PP, type PE} from '@interunit/primitives'
+import {P} from '@interunit/primitives'
 import React from 'react'
+import {twMerge} from 'tailwind-merge'
 
 import {type ThemeColor, theme} from '@/theme.config'
 
-type ButtonProps = PP['BT'] & {
+type ButtonKind = 'primary' | 'text'
+type ButtonProps = React.ComponentPropsWithoutRef<typeof P.BT> & {
   color: ThemeColor
   variation?: 'xs' | 'sm' | 'md' | 'lg'
-  kind?: 'primary' | 'secondary'
+  kind?: ButtonKind
 }
 
-type ButtonAnchorProps = PP['BT'] & {
+type ButtonAnchorProps = React.ComponentPropsWithoutRef<typeof P.TX> & {
   color: ThemeColor
   variation?: 'xs' | 'sm' | 'md' | 'lg'
-  kind?: 'primary'
+  kind?: ButtonKind
 }
 
 const variationClassName = (variation: ButtonProps['variation']) => {
@@ -33,19 +34,20 @@ const variationClassName = (variation: ButtonProps['variation']) => {
 }
 
 const kindClassName = (kind: ButtonProps['kind']) => {
-  const primary = 'border-transparent'
+  const primary =
+    'border-transparent appearance-none rounded shadow-button cursor-pointer brightness-100 text-md transition-all hover:brightness-105 hover:no-underline focus:no-underline'
   switch (kind) {
     case 'primary':
-      return primary
+      return 'border-transparent appearance-none rounded shadow-button cursor-pointer brightness-100 text-md transition-all hover:brightness-105 hover:no-underline focus:no-underline'
+    case 'text':
+      return `border-transparent bg-transparent hover:opacity-70 transition-opacity rounded`
     default:
       return primary
   }
 }
 
-const baseClassName =
-  'appearance-none rounded shadow-button cursor-pointer brightness-100 text-md transition-all hover:brightness-105 hover:no-underline focus:no-underline'
 const textClassName =
-  'flex flex-row gap-x-2 shadow-button font-normal hover:no-underline'
+  'flex flex-row items-center justify-between gap-x-2 shadow-button font-normal hover:no-underline'
 
 const getColorValue = (color: ThemeColor) => {
   if (theme.colors[color]) {
@@ -76,6 +78,17 @@ const getGradient = (color: string) => {
       border-box`
 }
 
+const getButtonStyle = (kind: ButtonKind, colorValue: string) => {
+  if (kind === 'primary') {
+    return {
+      color: getFontColor(colorValue),
+      background: getGradient(colorValue)
+    }
+  }
+
+  return {}
+}
+
 const Button = React.forwardRef<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   any,
@@ -95,13 +108,12 @@ const Button = React.forwardRef<
     const colorValue = getColorValue(color)
     return (
       <P.BT
-        className={`${baseClassName} ${kindClassName(
-          kind
-        )} ${variationClassName(variation)} ${className}`}
-        style={{
-          color: getFontColor(colorValue),
-          background: getGradient(colorValue)
-        }}
+        className={twMerge(
+          kindClassName(kind),
+          variationClassName(variation),
+          className
+        )}
+        style={getButtonStyle(kind, colorValue)}
         {...props}
         ref={forwardedRef}
       >
@@ -132,12 +144,14 @@ const ButtonAnchor = React.forwardRef<
     const colorValue = getColorValue(color)
     return (
       <P.TX
-        el={el as PE['TX']}
-     className={twMerge('inline-block', baseClassName, kindClassName(kind), variationClassName(variation), className)}
-        style={{
-          color: getFontColor(colorValue),
-          background: getGradient(colorValue)
-        }}
+        el={el}
+        className={twMerge(
+          'inline-block',
+          kindClassName(kind),
+          variationClassName(variation),
+          className
+        )}
+        style={getButtonStyle(kind, colorValue)}
         {...props}
         ref={forwardedRef}
       >

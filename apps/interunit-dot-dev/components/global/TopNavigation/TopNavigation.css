@@ -5,7 +5,9 @@
   transition-duration: 150ms;
 }
 
-.NavigationArrow:has(.iu-popover-content .nav-popover-li:first-child:hover)
-  .iu-popover-arrow {
-  background-color: #4a4a57;
+@media screen(lg) {
+  .NavigationArrow:has(.iu-popover-content .nav-popover-li:first-child:hover)
+    .iu-popover-arrow {
+    background-color: #4a4a57;
+  }
 }

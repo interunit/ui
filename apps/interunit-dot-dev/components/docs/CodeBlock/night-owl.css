@@ -6,6 +6,15 @@
  * Added by Souvik Mandal [@SimpleIndian]
  */
 
+/* Text Highlight Selection */
+::-moz-selection {
+  background: #4a4a57 !important;
+}
+
+::selection {
+  background: #4a4a57 !important;
+}
+
 code[class*='language-'] {
   border: none !important;
 }

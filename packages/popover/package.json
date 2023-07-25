@@ -7,6 +7,7 @@
   "module": "dist/interunit-popover.esm.js",
   "react-native": "src/index.ts",
   "dependencies": {
+    "@interunit/a11y": "*",
     "@interunit/config": "*",
     "@interunit/modal": "*",
     "@interunit/primitives": "*"

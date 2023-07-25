@@ -53,13 +53,13 @@ const SearchBar = () => {
           aria-label="Search"
           className="stroke-text-light-accent"
         />
-        <P.TX el="span" className="text-text-light-accent">
+        <P.TX el="span" className="text-text-light-accent hidden lg:block">
           Quick search...
         </P.TX>
         <Badge
           color="bg-muted"
           className={twMerge(
-            'p-0 flex justify-center items-center transition-opacity',
+            'p-0 hidden lg:flex justify-center items-center transition-opacity ',
             !os ? 'opacity-0' : ''
           )}
         >

@@ -2,7 +2,10 @@ import React from 'react'
 import type {ViewProps} from 'react-native'
 
 import {Construct} from '../../config'
-import {type DiscriminatedProps, filterPropsByEnvironment} from '../../helpers/props'
+import {
+  type DiscriminatedProps,
+  filterPropsByEnvironment
+} from '../../helpers/props'
 import {Child} from '../../utility/Child'
 
 const BoxConstruct = {
@@ -17,7 +20,7 @@ const BoxConstruct = {
 }
 
 export type BoxPrimitiveProps<T extends keyof typeof BoxConstruct> = ViewProps &
-DiscriminatedProps<T>
+  DiscriminatedProps<T>
 
 const Box = React.forwardRef(
   <T extends keyof typeof BoxConstruct>(

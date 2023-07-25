@@ -1,13 +1,34 @@
-import {ThemeColor} from '@/theme.config'
+import type {ThemeColor} from '@/theme.config'
+
+export const gettingStarted = {
+  sections: [
+    {
+      name: 'Introduction',
+      slug: '/docs/ui/introduction'
+    },
+    {
+      name: 'Installation',
+      slug: '/docs/ui/installation'
+    },
+    {
+      name: 'Composition',
+      slug: '/docs/ui/composition'
+    }
+  ]
+}
 
 export const ui = {
   sections: [
     {
       name: 'Primitives',
       description: 'Building blocks of InterUnit',
-      slug: '/primitives',
       color: 'orange' as ThemeColor,
       sections: [
+        {
+          name: 'Overview',
+          slug: '/primitives',
+          color: 'orange' as ThemeColor
+        },
         {
           name: 'Text',
           slug: '/primitives/text',
@@ -29,9 +50,13 @@ export const ui = {
       name: 'Composites',
       description:
         'Components that are made up of other composites and primitves',
-      slug: '/composites',
       color: 'blue' as ThemeColor,
       sections: [
+        {
+          name: 'Overview',
+          slug: '/primitives',
+          color: 'orange' as ThemeColor
+        },
         {
           name: 'Popover',
           slug: '/composites/popover',
@@ -50,6 +75,11 @@ export const ui = {
         {
           name: 'Modal',
           slug: '/composites/modal',
+          color: 'blue' as ThemeColor
+        },
+        {
+          name: 'Collapsible',
+          slug: '/composites/collapsible',
           color: 'blue' as ThemeColor
         }
       ]
