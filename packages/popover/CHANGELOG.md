@@ -1,5 +1,11 @@
 # @interunit/popover
 
+## 0.0.5
+
+### Patch Changes
+
+- Fix useOutsideClick issue
+
 ## 0.0.4
 
 ### Patch Changes

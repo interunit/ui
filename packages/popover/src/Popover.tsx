@@ -70,15 +70,15 @@ type PopoverSettings = {
 }
 
 const Popover = ({
+  triggerType = 'click',
+  settings = {shouldCloseOnInteractOutside: true},
   children,
-  triggerType,
   onPopoverChange,
   popoverPositioning,
-  defaultIsOpen,
-  settings = {shouldCloseOnInteractOutside: true}
+  defaultIsOpen
 }: {
   onPopoverChange?: (popoverState: PopoverState) => void
-  triggerType: 'click' | 'hover'
+  triggerType?: 'click' | 'hover'
   defaultIsOpen?: boolean
   popoverPositioning?: PopoverPositioning
   ArrowElement?: React.ReactElement | null
@@ -112,10 +112,8 @@ const Popover = ({
 
   useOutsideClick({
     ref: popoverRef,
-    fn:
-      settings?.shouldCloseOnInteractOutside && state.isOpen
-        ? state.togglePopover
-        : undefined
+    fn: () => dispatch({type: 'CLOSE'}),
+    isEnabled: settings?.shouldCloseOnInteractOutside && state.isOpen
   })
 
   React.useEffect(() => {

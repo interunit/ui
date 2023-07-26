@@ -3,13 +3,15 @@ import React from 'react'
 
 const useOutsideClick = ({
   ref,
-  fn
+  fn,
+  isEnabled = true
 }: {
   ref: React.RefObject<any>
   fn: () => void
+  isEnabled?: boolean
 }) => {
   const handleClick = (event: MouseEvent) => {
-    if (ref.current && !ref.current.contains(event.target)) {
+    if (isEnabled && ref.current && !ref.current.contains(event.target)) {
       fn()
     }
   }
