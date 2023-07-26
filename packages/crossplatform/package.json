@@ -1,18 +1,15 @@
 {
-  "name": "@interunit/popover",
-  "version": "0.0.6",
-  "description": "A popover component",
-  "main": "dist/interunit-popover.cjs.js",
-  "types": "dist/interunit-popover.cjs.d.ts",
-  "module": "dist/interunit-popover.esm.js",
+  "name": "@interunit/crossplatform",
+  "version": "0.0.1",
+  "description": "Components and helpers to make cross-platform translations and development smooth",
+  "main": "dist/interunit-crossplatform.cjs.js",
+  "types": "dist/interunit-crossplatform.cjs.d.ts",
+  "module": "dist/interunit-crossplatform.esm.js",
   "react-native": "src/index.ts",
   "dependencies": {
-    "@interunit/a11y": "*",
     "@interunit/config": "*",
-    "@interunit/crossplatform": "*",
-    "@interunit/modal": "*",
-    "@interunit/primitives": "*",
-    "@interunit/toolbox": "*"
+    "@interunit/toolbox": "*",
+    "css-to-react-native": "^3.2.0"
   },
   "devDependencies": {
     "@types/react": "18.2.12",

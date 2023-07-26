@@ -1,3 +1,4 @@
+import {type MergeWithOverride} from '@interunit/toolbox'
 import React from 'react'
 import type {PressableProps} from 'react-native'
 
@@ -11,11 +12,17 @@ const ButtonConstruct = {
   button: Construct.Button
 }
 
-export type ButtonPrimitiveProps<T extends keyof typeof ButtonConstruct> =
-  PressableProps &
-    DiscriminatedProps<T> & {
-      onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
-    }
+export type ButtonPrimitiveProps<T extends keyof typeof ButtonConstruct> = Omit<
+  PressableProps & DiscriminatedProps<T>,
+  'style'
+> & {
+  style?: MergeWithOverride<
+    DiscriminatedProps<T>['style'],
+    PressableProps['style']
+  >
+
+  onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
+}
 
 const Button = React.forwardRef(
   <T extends keyof typeof ButtonConstruct>(

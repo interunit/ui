@@ -225,6 +225,8 @@ const PopoverContent = ({
     popoverPositioning
   } = React.useContext(PopoverContext)
 
+  const userDefinedArrowStyle = popoverPositioning?.arrow?.style || {}
+
   const {positioningStyles, arrowStyles} = useContentPositioning({
     trigger,
     positioning: popoverPositioning
@@ -276,9 +278,12 @@ const PopoverContent = ({
           {typeof children === 'function' ? children({isOpen}) : children}
           <Primitive.Box
             el="div"
-            className="iu-popover-arrow"
-            aria-hidden="true"
-            style={{...arrowStyles}}
+            className={`iu-popover-arrow ${popoverPositioning?.arrow?.className}`}
+            aria-hidden={true}
+            style={{
+              ...arrowStyles,
+              ...userDefinedArrowStyle
+            }}
           />
         </>
       </Modal>

@@ -1,3 +1,4 @@
+import {type MergeWithOverride} from '@interunit/toolbox'
 import React from 'react'
 import type {TextProps} from 'react-native'
 
@@ -21,9 +22,12 @@ const TextConstruct = {
   a: Construct.A
 } as const
 
-type TextPrimitiveProps<T extends keyof typeof TextConstruct> = TextProps &
-  DiscriminatedProps<T>
-
+type TextPrimitiveProps<T extends keyof typeof TextConstruct> = Omit<
+  TextProps & DiscriminatedProps<T>,
+  'style'
+> & {
+  style?: MergeWithOverride<DiscriminatedProps<T>['style'], TextProps['style']>
+}
 const Text = React.forwardRef(
   <T extends keyof typeof TextConstruct>(
     {el, children, ...props}: TextPrimitiveProps<T>,

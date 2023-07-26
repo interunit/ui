@@ -1,3 +1,4 @@
+import {type MergeWithOverride} from '@interunit/toolbox'
 import React from 'react'
 import type {ImageProps} from 'react-native'
 
@@ -11,10 +12,11 @@ const ImageConstruct = {
   img: Construct.Image
 }
 export type ImagePrimitiveProps<T extends keyof typeof ImageConstruct> = Omit<
-  ImageProps,
-  'source'
-> &
-  DiscriminatedProps<T>
+  Omit<ImageProps, 'source'> & DiscriminatedProps<T>,
+  'style'
+> & {
+  style?: MergeWithOverride<DiscriminatedProps<T>['style'], ImageProps['style']>
+}
 
 export const Image = React.forwardRef(
   <T extends keyof typeof ImageConstruct>(

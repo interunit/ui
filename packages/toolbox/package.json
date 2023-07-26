@@ -1,18 +1,13 @@
 {
-  "name": "@interunit/popover",
-  "version": "0.0.6",
-  "description": "A popover component",
-  "main": "dist/interunit-popover.cjs.js",
-  "types": "dist/interunit-popover.cjs.d.ts",
-  "module": "dist/interunit-popover.esm.js",
+  "name": "@interunit/toolbox",
+  "version": "0.0.1",
+  "description": "A collection of helpers and utils ",
+  "main": "dist/interunit-toolbox.cjs.js",
+  "types": "dist/interunit-toolbox.cjs.d.ts",
+  "module": "dist/interunit-toolbox.esm.js",
   "react-native": "src/index.ts",
   "dependencies": {
-    "@interunit/a11y": "*",
-    "@interunit/config": "*",
-    "@interunit/crossplatform": "*",
-    "@interunit/modal": "*",
-    "@interunit/primitives": "*",
-    "@interunit/toolbox": "*"
+    "@interunit/config": "*"
   },
   "devDependencies": {
     "@types/react": "18.2.12",

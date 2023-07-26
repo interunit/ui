@@ -1,5 +1,13 @@
 # @interunit/popover
 
+## 0.0.6
+
+### Patch Changes
+
+- Improve inline styles by creating merged types and allowing for some style translation between web and native (more to come).
+- Updated dependencies
+  - @interunit/primitives@0.0.3
+
 ## 0.0.5
 
 ### Patch Changes

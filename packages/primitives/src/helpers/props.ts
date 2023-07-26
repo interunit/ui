@@ -1,4 +1,5 @@
 import {InterUnitInternals} from '@interunit/config'
+import {platformStyleTranslation} from '@interunit/crossplatform'
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 
@@ -29,6 +30,10 @@ export const filterPropsByEnvironment = ({props}: {[prop: string]: any}) => {
         delete props[prop]
       }
     })
+  }
+
+  if (props?.style) {
+    props.style = platformStyleTranslation(props.style)
   }
 
   return props

@@ -1,13 +1,15 @@
 {
   "name": "@interunit/primitives",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/interunit-primitives.cjs.js",
   "types": "dist/interunit-primitives.cjs.d.ts",
   "module": "dist/interunit-primitives.esm.js",
   "react-native": "src/index.ts",
   "dependencies": {
-    "@interunit/config": "*"
+    "@interunit/config": "*",
+    "@interunit/crossplatform": "*",
+    "@interunit/toolbox": "*"
   },
   "devDependencies": {
     "@types/react": "18.2.12",

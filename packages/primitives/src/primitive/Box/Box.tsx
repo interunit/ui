@@ -1,17 +1,16 @@
+import {type MergeWithOverride} from '@interunit/toolbox'
 import React from 'react'
-import type {ViewProps} from 'react-native'
+import type {ViewProps, ViewStyle} from 'react-native'
 
 import {Construct} from '../../config'
 import {
   type DiscriminatedProps,
   filterPropsByEnvironment
 } from '../../helpers/props'
-import {Child} from '../../utility/Child'
 
 const BoxConstruct = {
   div: Construct.Div,
   span: Construct.Span,
-  child: Child,
   section: Construct.Section,
   nav: Construct.Nav,
   // TODO: should these go here?
@@ -19,8 +18,10 @@ const BoxConstruct = {
   li: Construct.LI
 }
 
-export type BoxPrimitiveProps<T extends keyof typeof BoxConstruct> = ViewProps &
-  DiscriminatedProps<T>
+export type BoxPrimitiveProps<T extends keyof typeof BoxConstruct> = Omit<
+  ViewProps & DiscriminatedProps<T>,
+  'style'
+> & {style?: MergeWithOverride<DiscriminatedProps<T>['style'], ViewStyle>}
 
 const Box = React.forwardRef(
   <T extends keyof typeof BoxConstruct>(
@@ -47,14 +48,6 @@ const Box = React.forwardRef(
     const filteredProps = filterPropsByEnvironment({
       props: {...props, ...accessibilityProps}
     })
-
-    if (String(el) === 'child') {
-      return (
-        <Child ref={forwardedRef} {...filteredProps}>
-          {children}
-        </Child>
-      )
-    }
 
     return (
       <Box ref={forwardedRef} {...filteredProps}>

@@ -1,4 +1,6 @@
 import {InterUnitInternals} from '@interunit/config'
+import {type P} from '@interunit/primitives'
+import {type WithRequired} from '@interunit/toolbox'
 import React from 'react'
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
@@ -9,6 +11,11 @@ type Dimensions = {
   width: number
   height: number
 }
+
+type PrimitiveBoxProps = WithRequired<
+  React.ComponentProps<typeof P.BX>,
+  'style'
+>
 
 export type PopoverPositioning = {
   side?: 'top' | 'bottom' | 'left' | 'right'
@@ -23,7 +30,8 @@ export type PopoverPositioning = {
     strokeColor?: string
     fillColor?: string
     strokeWidth?: number
-    style?: React.CSSProperties
+    style?: PrimitiveBoxProps['style']
+    className?: PrimitiveBoxProps['className']
   }
 }
 
@@ -38,11 +46,13 @@ export const useContentPositioning = ({
     offset: 0,
     ..._positioning
   }
-  const [arrowStyles, setArrowStyles] = React.useState<React.CSSProperties>({})
-  React.useState<React.CSSProperties>({})
+  const [arrowStyles, setArrowStyles] = React.useState<
+    PrimitiveBoxProps['style']
+  >({})
 
-  const [positioningStyles, setPositioningStyles] =
-    React.useState<React.CSSProperties>({})
+  const [positioningStyles, setPositioningStyles] = React.useState<
+    PrimitiveBoxProps['style']
+  >({})
 
   const getTriggerDimensions = ({trigger}: {trigger: React.ReactElement}) => {
     if (ENVIRONMENT === 'web') {
@@ -135,11 +145,12 @@ export const useContentPositioning = ({
     const arrowStrokeWidth =
       positioning?.arrow?.strokeWidth || DEFAULT_ARROW_STROKE_WIDTH
 
-    const arrowStyles: React.CSSProperties = {
+    const arrowStyles: PrimitiveBoxProps['style'] = {
       height: `${arrowWidth}px`,
       width: `${arrowWidth}px`,
       position: 'absolute',
-      borderColor: positioning?.arrow?.strokeColor || 'black',
+      borderColor: positioning?.arrow?.strokeColor || 'transparent',
+      backgroundColor: positioning?.arrow?.fillColor || 'transparent',
       borderWidth: `${arrowStrokeWidth}px`,
       borderStyle: 'solid',
       borderTopLeftRadius: positioning?.arrow?.borderRadius || 0,
@@ -147,10 +158,6 @@ export const useContentPositioning = ({
       borderRight: 'none',
       transform: 'rotate(45deg)',
       zIndex: (positioning?.zIndex || 2) + 1
-    }
-
-    if (positioning?.arrow?.fillColor) {
-      arrowStyles.backgroundColor = positioning?.arrow?.fillColor
     }
 
     if (positioning.side === 'bottom') {
