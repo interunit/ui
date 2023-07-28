@@ -14,9 +14,6 @@ const Page = () => {
         <Primitive.Text el="span">Regular Box</Primitive.Text>
       </Primitive.Box>
 
-      <Primitive.Box el="child" sp={{p: [5]}} bg={{c: 'blue'}}>
-        <Primitive.Text el="span">Box Targeting Child</Primitive.Text>
-      </Primitive.Box>
     </>
   )
 }
