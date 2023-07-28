@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "dev:all": "turbo run dev:all",
+    "dev:docs": "turbo run dev:docs",
     "lint:eslint": "eslint --ext .ts,.tsx .",
     "lint:tsc": "tsc",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",

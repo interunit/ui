@@ -11,6 +11,10 @@
       "cache": false,
       "persistent": true
     },
-    "lint": {}
+    "lint": {},
+    "//#preconstruct:dev": {},
+    "dev:docs": {
+      "dependsOn": ["//#preconstruct:dev"]
+    }
   }
 }
