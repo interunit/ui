@@ -62,7 +62,6 @@ type SetTriggerDimensionsAction = {
   type: 'SET_TRIGGER_DIMENSIONS'
   payload: TriggerDimensions
 }
-
 type ReducerAction = PayloadlessReducerAction | SetTriggerDimensionsAction
 
 type PopoverSettings = {
@@ -122,16 +121,22 @@ const Popover = ({
     }
   }, [state])
 
-  // TODO: RN View doesn't like inline-block here
   const display = (ENVIRONMENT === 'web' ? 'inline-block' : 'flex') as 'flex'
 
   return (
     <PopoverContext.Provider
-      value={{...state, dispatch, trigger, setTrigger, triggerType, settings}}
+      value={{
+        ...state,
+        dispatch,
+        trigger,
+        setTrigger,
+        triggerType,
+        settings,
+        popoverPositioning
+      }}
     >
       <Primitive.Box
         el="div"
-        // TODO: inline block won't work on native
         style={{position: 'relative', overflow: 'visible', display}}
         collapsable={false}
         ref={popoverRef}

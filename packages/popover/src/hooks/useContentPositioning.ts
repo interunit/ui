@@ -42,10 +42,13 @@ export const useContentPositioning = ({
   trigger: React.ReactElement | undefined | null
   positioning: PopoverPositioning | undefined
 }) => {
-  const positioning = {
-    offset: 0,
-    ..._positioning
-  }
+  const positioning = React.useMemo(() => {
+    return {
+      offset: 0,
+      ..._positioning
+    }
+  }, [_positioning])
+
   const [arrowStyles, setArrowStyles] = React.useState<
     PrimitiveBoxProps['style']
   >({})
@@ -221,7 +224,7 @@ export const useContentPositioning = ({
         }
       }
     }
-  }, [trigger])
+  }, [trigger, positioning])
 
   return {positioningStyles, arrowStyles}
 }

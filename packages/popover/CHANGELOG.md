@@ -1,5 +1,11 @@
 # @interunit/popover
 
+## 0.0.7
+
+### Patch Changes
+
+- Make Popover update when props changing for popoverPositioning
+
 ## 0.0.6
 
 ### Patch Changes

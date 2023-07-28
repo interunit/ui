@@ -2,18 +2,21 @@
 
 import {Popover} from '@interunit/popover'
 import {Primitive} from '@interunit/primitives'
+import {useSW} from '@interunit/responsive'
 
 import {Button} from '@/components/system/Button'
 import {Text} from '@/components/system/Text'
 import {theme} from '@/theme.config'
 
 const PopoverPage = () => {
+  const {sw} = useSW()
+
   return (
     <div>
       <Popover
         triggerType="click"
         popoverPositioning={{
-          side: 'bottom',
+          side: sw > 1025 ? 'right' : 'bottom',
           offset: 10,
           zIndex: 10,
           width: '200px',
