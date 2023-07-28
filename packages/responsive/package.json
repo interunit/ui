@@ -1,6 +1,6 @@
 {
   "name": "@interunit/responsive",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Utilities to make cross-platform development a breeze 🍃",
   "main": "dist/interunit-responsive.cjs.js",
   "types": "dist/interunit-responsive.cjs.d.ts",
