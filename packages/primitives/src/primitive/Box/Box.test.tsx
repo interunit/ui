@@ -10,7 +10,7 @@ describe('Box', () => {
     expect(await axe(container)).toHaveNoViolations()
   })
   test('should error if not a valid element', () => {
-      // TODO: move this to a matcher
+    // TODO: move this to a matcher
     jest.spyOn(console, 'error')
     console.error = jest.fn()
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
