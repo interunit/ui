@@ -7,6 +7,7 @@
     "dev:docs": "turbo run dev:docs",
     "BARE:lint:eslint": "eslint --ext .ts,.tsx .",
     "lint:eslint": "turbo run BARE:lint:eslint",
+    "lint:eslint:fix": "turbo run BARE:lint:eslint -- --fix",
     "BARE:lint:tsc": "tsc",
     "lint:tsc": "turbo run BARE:lint:tsc",
     "BARE:test:unit": "jest",
@@ -15,7 +16,7 @@
     "test:unit:ci": "turbo run BARE:test:unit:ci",
     "BARE:format:ci": "prettier --check './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "format:ci": "turbo run BARE:format:ci",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "format:fix": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "preconstruct:build": "preconstruct build",
     "preconstruct:dev": "preconstruct dev",
     "create:package": "npx hygen create package",
@@ -25,6 +26,12 @@
     "changeset:add": "changeset add",
     "changeset:version": "changeset version",
     "changeset:publish": "npm run util:delete-dist && preconstruct build && changeset publish"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "npm run eslint:lint:fix",
+      "npm run format:fix"
+    ]
   },
   "devDependencies": {
     "@babel/preset-env": "^7.21.5",
@@ -55,7 +62,7 @@
     "jest": "^29.6.2",
     "jest-axe": "^8.0.0",
     "jest-environment-jsdom": "^29.6.2",
-    "lint-staged": "^13.2.2",
+    "lint-staged": "^13.2.3",
     "prettier": "^2.8.8",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
