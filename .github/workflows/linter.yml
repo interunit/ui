@@ -21,4 +21,4 @@ jobs:
             # - name: Run TSC
             #   run: yarn lint:tsc
             - name: Run ESLint
-              run: yarn lint:estlint
+              run: yarn lint:eslint
