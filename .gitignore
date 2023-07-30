@@ -28,4 +28,7 @@ web-build/
 # Next
 .next
 
+# Tests
+coverage/
+
 

@@ -8,7 +8,7 @@ import {
   filterPropsByEnvironment
 } from '../../helpers/props'
 
-const BoxConstruct = {
+export const BoxConstruct = {
   div: Construct.Div,
   span: Construct.Span,
   section: Construct.Section,

@@ -16,3 +16,6 @@ android/
 
 # Next
 .next
+
+# Tests
+coverage/
