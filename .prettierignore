@@ -7,3 +7,4 @@ __generated__
 **/vendor
 **/.expo
 **/.next
+/coverage
