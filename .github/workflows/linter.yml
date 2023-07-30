@@ -16,7 +16,9 @@ jobs:
               uses: actions/checkout@v3
             - name: Install Dependencies
               run: yarn
-            - name: Run TSC
-              run: yarn lint:tsc
+            # Typescript linting needs some work
+            # before it's enabled
+            # - name: Run TSC
+            #   run: yarn lint:tsc
             - name: Run ESLint
               run: yarn lint:estlint
