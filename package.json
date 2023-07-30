@@ -8,6 +8,7 @@
     "lint:eslint": "eslint --ext .ts,.tsx .",
     "lint:tsc": "tsc",
     "test:unit": "jest",
+    "test:unit:ci": "jest --ci",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "preconstruct:build": "preconstruct build",
     "preconstruct:dev": "preconstruct dev",
