@@ -8,20 +8,30 @@ const ChildElement = React.forwardRef<any, any>(
     ChildElement.displayName = 'ChildElement'
     const child: React.ReactElement = children?.[0] || children
     if (React.isValidElement(child)) {
+      // Combine function props so that both functions execute no matter if
+      // the child component's or parent component's function executes
+      const matchingPropKeys = Object.keys(props).filter(prop => {
+        return Object.keys((child as React.ReactElement).props).includes(prop)
+      })
+
+      const matchingFnProps = matchingPropKeys.filter(prop => {
+        return typeof (child as React.ReactElement).props[prop] === 'function'
+      })
+
+      const combinedFnProps = matchingFnProps.reduce((acc: any, prop: any) => {
+        acc[prop] = (...args: any[]) => {
+            // prettier-ignore
+          (child as React.ReactElement).props[prop](...args)
+          //prettier-ignore
+          props[prop](...args)
+        }
+        return acc
+      }, {})
+
       const combinedProps = {
         ...(child as React.ReactElement)?.props,
         ...props,
-
-        onClick:
-          props?.onClick ??
-          (child as React.ReactElement)?.props?.onClick ??
-          props?.onClickOrPress ??
-          (child as React.ReactElement)?.props.onClickOrPress,
-        onPress:
-          props?.onPress ??
-          (child as React.ReactElement)?.props?.onPress ??
-          props?.onClickOrPress ??
-          (child as React.ReactElement)?.props.onClickOrPress
+        ...combinedFnProps
       }
 
       delete combinedProps.onClickOrPress

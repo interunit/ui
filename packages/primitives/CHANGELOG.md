@@ -1,5 +1,11 @@
 # @interunit/primitives
 
+## 0.0.4
+
+### Patch Changes
+
+- Child component executes functions passed to Child and the same functions that exist on target, previously only one of the matching functions executed
+
 ## 0.0.3
 
 ### Patch Changes
