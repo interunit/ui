@@ -1,5 +1,11 @@
 # @interunit/primitives
 
+## 0.0.5
+
+### Patch Changes
+
+- Click and press was getting deleted in Child, we want to make sure that persists so we can use it in Button and properly implement onClickOrPress
+
 ## 0.0.4
 
 ### Patch Changes

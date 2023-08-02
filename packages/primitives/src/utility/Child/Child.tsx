@@ -34,8 +34,6 @@ const ChildElement = React.forwardRef<any, any>(
         ...combinedFnProps
       }
 
-      delete combinedProps.onClickOrPress
-
       const filteredProps = filterPropsByEnvironment({props: combinedProps})
 
       return React.cloneElement(children, {

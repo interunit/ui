@@ -1,3 +1,4 @@
+import {getEnvironmentName} from '@interunit/config'
 import {type MergeWithOverride} from '@interunit/toolbox'
 import React from 'react'
 import type {PressableProps} from 'react-native'
@@ -47,6 +48,20 @@ const Button = React.forwardRef(
         props?.accessibilityState ?? props?.disabled ?? undefined
     }
 
+    const onClickOrPress = () => {
+      if (props.onClickOrPress) {
+        if (getEnvironmentName() === 'native') {
+          return {
+            onPress: props.onClickOrPress
+          }
+        }
+
+        return {
+          onClick: props.onClickOrPress
+        }
+      }
+    }
+
     const Button = ButtonConstruct?.[el] as React.ElementType
 
     if (Button === undefined) {
@@ -56,7 +71,7 @@ const Button = React.forwardRef(
     }
 
     const filteredProps = filterPropsByEnvironment({
-      props: {...props, ...accessibilityProps}
+      props: {...props, ...accessibilityProps, ...onClickOrPress()}
     })
 
     return (
