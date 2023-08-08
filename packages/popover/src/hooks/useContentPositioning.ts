@@ -19,7 +19,7 @@ type PrimitiveBoxProps = WithRequired<
 
 export type PopoverPositioning = {
   side?: 'top' | 'bottom' | 'left' | 'right'
-  align?: 'start' | 'end'
+  align?: 'start' | 'center' | 'end'
   offset?: number
   width?: 'trigger' | string | number
   maxWidth?: number | string
@@ -117,6 +117,10 @@ export const useContentPositioning = ({
       if (positioning.align === 'start') {
         styles.left = 0
       }
+      if (positioning.align === 'center') {
+        styles.left = '50%'
+        styles.transform = 'translateX(-50%)'
+      }
 
       if (positioning.align === 'end') {
         styles.right = 0
@@ -128,6 +132,10 @@ export const useContentPositioning = ({
         styles.top = 0
       }
 
+      if (positioning.align === 'center') {
+        styles.top = '50%'
+        styles.transform = 'translateY(-50%)'
+      }
       if (positioning.align === 'end') {
         styles.top = 'auto'
         styles.bottom = 0
@@ -190,6 +198,12 @@ export const useContentPositioning = ({
         arrowStyles.left = (triggerDimensions.width - arrowWidth) / 2
       }
 
+      if (positioning.align === 'center') {
+        arrowStyles.left = '0'
+        arrowStyles.right = '0'
+        arrowStyles.marginLeft = 'auto'
+        arrowStyles.marginRight = 'auto'
+      }
       if (positioning.align === 'end') {
         arrowStyles.right = (triggerDimensions.width - arrowWidth) / 2
         arrowStyles.left = 'auto'
@@ -200,6 +214,12 @@ export const useContentPositioning = ({
         arrowStyles.top = (triggerDimensions.height - arrowWidth) / 2
       }
 
+      if (positioning.align === 'center') {
+        arrowStyles.top = '0'
+        arrowStyles.bottom = '0'
+        arrowStyles.marginTop = 'auto'
+        arrowStyles.marginBottom = 'auto'
+      }
       if (positioning.align === 'end') {
         arrowStyles.top = 'auto'
         arrowStyles.bottom = (triggerDimensions.height - arrowWidth) / 2

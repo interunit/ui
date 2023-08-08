@@ -1,5 +1,11 @@
 # @interunit/popover
 
+## 0.0.8
+
+### Patch Changes
+
+- Center aligning popover + arrow support
+
 ## 0.0.7
 
 ### Patch Changes
