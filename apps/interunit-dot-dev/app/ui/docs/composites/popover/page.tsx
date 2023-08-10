@@ -29,28 +29,25 @@ const PopoverPage = () => {
           data={{title: 'Popover', name, description, version, homepage}}
         />
         <ComponentDisplay className="mb-12">
-          <Popover
-            triggerType="click"
-          >
+          <Popover triggerType="click">
             <Popover.Trigger>
               <Button color={'bg-secondary'}>Click me</Button>
             </Popover.Trigger>
             <Popover.Content
-
-            positioning={{
-              side: 'bottom',
-              align: 'center',
-              offset: '1rem',
-              zIndex: 10,
-              width: '200px'
-            }}
-            arrow={{
-              fillColor: theme?.colors['bg-primary'],
-              strokeColor: theme?.colors.border,
-              strokeWidth: 1,
-              width: 10,
-              borderRadius: 2
-            }}
+              positioning={{
+                side: 'bottom',
+                align: 'center',
+                offset: '1rem',
+                zIndex: 10,
+                width: '200px'
+              }}
+              arrow={{
+                fillColor: theme?.colors['bg-primary'],
+                strokeColor: theme?.colors.border,
+                strokeWidth: 1,
+                width: 10,
+                borderRadius: 2
+              }}
             >
               <Primitive.Box
                 el="div"

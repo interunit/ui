@@ -13,7 +13,7 @@ import {type BaseModalProps} from './Modal'
 const FocusTrap = _FocusTrap as React.ElementType<FocusTrapProps>
 
 type FocusType = 'none' | 'default'
- type ModalComponentProps = BaseModalProps &
+type ModalComponentProps = BaseModalProps &
   Pick<FocusTrapProps, 'focusTrapOptions' | 'active'> & {
     children: React.ReactNode
   }

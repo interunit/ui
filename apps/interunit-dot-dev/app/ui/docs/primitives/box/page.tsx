@@ -13,7 +13,6 @@ const Page = () => {
       >
         <Primitive.Text el="span">Regular Box</Primitive.Text>
       </Primitive.Box>
-
     </>
   )
 }

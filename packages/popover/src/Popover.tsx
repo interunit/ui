@@ -112,7 +112,6 @@ const Popover = ({
     isEnabled: settings?.shouldCloseOnInteractOutside && state.isOpen
   })
 
-
   React.useEffect(() => {
     if (onPopoverChange) {
       onPopoverChange(state)

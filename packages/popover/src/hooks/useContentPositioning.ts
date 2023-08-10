@@ -1,8 +1,8 @@
 import {type CSSUnit, getEnvironmentName} from '@interunit/config'
 import {platformCSSUnitTranslation} from '@interunit/crossplatform'
 import {type P} from '@interunit/primitives'
+import {type WithRequired} from '@interunit/toolbox'
 import React from 'react'
-import { type WithRequired } from '@interunit/toolbox'
 
 const ENVIRONMENT = getEnvironmentName()
 
@@ -187,7 +187,6 @@ export const useContentPositioning = ({
       transform: 'rotate(45deg)',
       zIndex: (positioning?.zIndex || 2) + 1
     }
-
 
     if (positioning.side === 'bottom') {
       arrowStyles.top = -(arrowWidth / 2)
