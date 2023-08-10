@@ -1,1 +1,1 @@
-export {Text, type TextPrimitiveProps, type TextConstructEl} from './Text'
+export {Text   } from './Text'

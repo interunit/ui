@@ -8,6 +8,7 @@ export type {
   ConstructTag,
   InterConstruct,
   CSSUnit,
+  CSSUnitValue,
   NativeComponent,
   WebComponent
 } from './internal/sharedConfig'

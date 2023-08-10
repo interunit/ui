@@ -56,8 +56,6 @@ const remToPX = (cssStyles: [string, string][]): [string, string][] => {
   }
 
   return cssStyles.map(([key, value]) => {
-    console.log('key', key)
-    console.log('value', value)
     if (
       typeof key === 'string' &&
       typeof value === 'string' &&

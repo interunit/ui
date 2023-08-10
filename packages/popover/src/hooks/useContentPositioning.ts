@@ -1,9 +1,10 @@
-import {InterUnitInternals} from '@interunit/config'
+import {type CSSUnit, getEnvironmentName} from '@interunit/config'
+import {platformCSSUnitTranslation} from '@interunit/crossplatform'
 import {type P} from '@interunit/primitives'
-import {type WithRequired} from '@interunit/toolbox'
 import React from 'react'
+import { type WithRequired } from '@interunit/toolbox'
 
-const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
+const ENVIRONMENT = getEnvironmentName()
 
 type Dimensions = {
   x: number
@@ -12,35 +13,34 @@ type Dimensions = {
   height: number
 }
 
-type PrimitiveBoxProps = WithRequired<
-  React.ComponentProps<typeof P.BX>,
-  'style'
->
+type PrimitiveBoxProps = React.ComponentProps<typeof P.BX>
+type PrimitiveBoxPropsStyle = WithRequired<PrimitiveBoxProps, 'style'>['style']
 
-export type PopoverPositioning = {
+export type PopoverPositioning = Omit<PrimitiveBoxProps, 'el'> & {
   side?: 'top' | 'bottom' | 'left' | 'right'
   align?: 'start' | 'center' | 'end'
-  offset?: number
-  width?: 'trigger' | string | number
-  maxWidth?: number | string
+  offset?: CSSUnit
+  width?: 'trigger' | CSSUnit
+  maxWidth?: CSSUnit
   zIndex?: number
-  arrow?: {
-    width?: number
-    borderRadius?: number
-    strokeColor?: string
-    fillColor?: string
-    strokeWidth?: number
-    style?: PrimitiveBoxProps['style']
-    className?: PrimitiveBoxProps['className']
-  }
+}
+
+export type PopoverArrow = Omit<PrimitiveBoxProps, 'el'> & {
+  width?: CSSUnit
+  borderRadius?: CSSUnit
+  strokeWidth?: CSSUnit
+  strokeColor?: string
+  fillColor?: string
 }
 
 export const useContentPositioning = ({
   trigger,
-  positioning: _positioning
+  positioning: _positioning,
+  arrow: _arrow
 }: {
   trigger: React.ReactElement | undefined | null
   positioning: PopoverPositioning | undefined
+  arrow: PopoverArrow | undefined
 }) => {
   const positioning = React.useMemo(() => {
     return {
@@ -49,12 +49,19 @@ export const useContentPositioning = ({
     }
   }, [_positioning])
 
-  const [arrowStyles, setArrowStyles] = React.useState<
-    PrimitiveBoxProps['style']
-  >({})
+  const arrow = React.useMemo(() => {
+    return {
+      strokeWidth: 0,
+      ..._arrow
+    }
+  }, [_arrow])
+
+  const [arrowStyles, setArrowStyles] = React.useState<PopoverArrow['style']>(
+    {}
+  )
 
   const [positioningStyles, setPositioningStyles] = React.useState<
-    PrimitiveBoxProps['style']
+    PopoverPositioning['style']
   >({})
 
   const getTriggerDimensions = ({trigger}: {trigger: React.ReactElement}) => {
@@ -95,21 +102,26 @@ export const useContentPositioning = ({
           : positioning.width || 'auto'
     }
 
+    const offset = platformCSSUnitTranslation(
+      positioning.offset,
+      'native'
+    ) as number
+
     if (positioning.side === 'top') {
-      styles.bottom = triggerDimensions.height + positioning.offset
+      styles.bottom = triggerDimensions.height + offset
     }
 
     if (positioning.side === 'bottom') {
-      styles.top = triggerDimensions.height + positioning.offset
+      styles.top = triggerDimensions.height + offset
     }
 
     if (positioning.side === 'left') {
-      styles.right = triggerDimensions.width + positioning.offset
+      styles.right = triggerDimensions.width + offset
       styles.top = 0
     }
 
     if (positioning.side === 'right') {
-      styles.left = triggerDimensions.width + positioning.offset
+      styles.left = triggerDimensions.width + offset
       styles.top = 0
     }
 
@@ -152,24 +164,30 @@ export const useContentPositioning = ({
   }) => {
     const DEFAULT_ARROW_WIDTH = 5
     const DEFAULT_ARROW_STROKE_WIDTH = 0
-    const arrowWidth = positioning?.arrow?.width || DEFAULT_ARROW_WIDTH
+    const arrowWidth =
+      ((arrow?.width &&
+        platformCSSUnitTranslation(arrow?.width, 'native')) as number) ||
+      DEFAULT_ARROW_WIDTH
     const arrowStrokeWidth =
-      positioning?.arrow?.strokeWidth || DEFAULT_ARROW_STROKE_WIDTH
+      (arrow?.strokeWidth &&
+        platformCSSUnitTranslation(arrow?.strokeWidth, 'native')) ||
+      DEFAULT_ARROW_STROKE_WIDTH
 
-    const arrowStyles: PrimitiveBoxProps['style'] = {
+    const arrowStyles: PrimitiveBoxPropsStyle = {
       height: `${arrowWidth}px`,
       width: `${arrowWidth}px`,
       position: 'absolute',
-      borderColor: positioning?.arrow?.strokeColor || 'transparent',
-      backgroundColor: positioning?.arrow?.fillColor || 'transparent',
+      borderColor: arrow?.strokeColor || 'transparent',
+      backgroundColor: arrow?.fillColor || 'transparent',
       borderWidth: `${arrowStrokeWidth}px`,
       borderStyle: 'solid',
-      borderTopLeftRadius: positioning?.arrow?.borderRadius || 0,
+      borderTopLeftRadius: arrow?.borderRadius || 0,
       borderBottom: 'none',
       borderRight: 'none',
       transform: 'rotate(45deg)',
       zIndex: (positioning?.zIndex || 2) + 1
     }
+
 
     if (positioning.side === 'bottom') {
       arrowStyles.top = -(arrowWidth / 2)
@@ -209,6 +227,7 @@ export const useContentPositioning = ({
         arrowStyles.left = 'auto'
       }
     }
+
     if (positioning.side === 'left' || positioning.side === 'right') {
       if (positioning.align === 'start') {
         arrowStyles.top = (triggerDimensions.height - arrowWidth) / 2
@@ -225,7 +244,6 @@ export const useContentPositioning = ({
         arrowStyles.bottom = (triggerDimensions.height - arrowWidth) / 2
       }
     }
-
     return {arrowStyles}
   }
 
@@ -236,7 +254,7 @@ export const useContentPositioning = ({
         const styles = getPositioningStyles({triggerDimensions})
         setPositioningStyles(styles)
 
-        if (positioning.arrow) {
+        if (arrow) {
           const {arrowStyles} = getArrowStyles({
             triggerDimensions
           })
