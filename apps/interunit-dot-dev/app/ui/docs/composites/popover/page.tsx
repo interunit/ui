@@ -257,8 +257,8 @@ const PopoverPage = () => {
                     description: 'The size of the arrow.'
                   },
                   {
-                    name: 'borderRadisu',
-                    type: `string } number`,
+                    name: 'borderRadius',
+                    type: `string | number`,
                     required: false,
                     description: 'The border radius of the arrow tip.'
                   },
