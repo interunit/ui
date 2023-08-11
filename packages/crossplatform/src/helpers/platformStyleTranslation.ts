@@ -68,7 +68,6 @@ const totallyFlattenObject = (
 }
 
 const webToNative = (_cssStyles: CrossPlatformStyle) => {
-
   if (!_cssStyles) return {}
   // We need to pull out the style properties that sometimes
   // come nested depending on how the styles are defined

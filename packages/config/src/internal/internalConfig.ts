@@ -1,6 +1,5 @@
 import {
   type ConstructTag,
-  DEFAULT_CSS_UNIT,
   type Environment,
   type InterConstruct,
   type WebComponent
@@ -8,7 +7,6 @@ import {
 
 export const ENVIRONMENT = {
   NAME: 'web' as Environment,
-  DEFAULT_CSS_UNIT
 }
 
 export const ConstructFromConfig = [

@@ -76,7 +76,10 @@ type SetContentDimensionsAction = {
   type: 'SET_CONTENT_DIMENSIONS'
   payload: Dimensions
 }
-type ReducerAction = PayloadlessReducerAction | SetTriggerDimensionsAction | SetContentDimensionsAction
+type ReducerAction =
+  | PayloadlessReducerAction
+  | SetTriggerDimensionsAction
+  | SetContentDimensionsAction
 
 type PopoverSettings = {
   shouldCloseOnInteractOutside?: boolean
@@ -253,7 +256,6 @@ const PopoverContent = ({
 
   const userDefinedArrowStyle = arrow?.style || {}
 
-
   const {positioningStyles, arrowStyles} = useContentPositioning({
     trigger,
     content,
@@ -295,10 +297,10 @@ const PopoverContent = ({
         onLayout={(e: {
           nativeEvent: {layout: PopoverState['triggerDimensions']}
         }) => {
-            dispatch({
-                type: 'SET_CONTENT_DIMENSIONS',
-                payload: e.nativeEvent.layout
-                })
+          dispatch({
+            type: 'SET_CONTENT_DIMENSIONS',
+            payload: e.nativeEvent.layout
+          })
         }}
         data-popover-state={isOpen}
         data-popover-side={positioning?.side}
