@@ -1,6 +1,6 @@
 {
   "name": "@interunit/modal",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A low-level component to help display content on top of the current page or view",
   "main": "dist/interunit-modal.cjs.js",
   "types": "dist/interunit-modal.cjs.d.ts",

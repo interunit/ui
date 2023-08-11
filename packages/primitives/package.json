@@ -1,6 +1,6 @@
 {
   "name": "@interunit/primitives",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "main": "dist/interunit-primitives.cjs.js",
   "types": "dist/interunit-primitives.cjs.d.ts",
