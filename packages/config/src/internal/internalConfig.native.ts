@@ -1,13 +1,11 @@
 import {
   type ConstructTag,
-  DEFAULT_CSS_UNIT,
   type InterConstruct,
   type NativeComponent
 } from './sharedConfig'
 
 export const ENVIRONMENT = {
-  NAME: 'native',
-  DEFAULT_CSS_UNIT
+  NAME: 'native'
 }
 
 export const ConstructFromConfig = [

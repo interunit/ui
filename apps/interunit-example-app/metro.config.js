@@ -21,6 +21,7 @@ async function getConfig(appDir, options = {}) {
   ]
 
   return {
+    isCSSEnabled: true,
     watchFolders,
     resetCache: true,
     resolver: {

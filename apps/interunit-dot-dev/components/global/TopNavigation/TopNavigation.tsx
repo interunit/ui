@@ -45,23 +45,7 @@ const TopNavigation = () => {
               el="li"
               className={`flex flex-row items-center m-0 NavigationArrow`}
             >
-              <Popover
-                triggerType="hover"
-                popoverPositioning={{
-                  side: 'bottom',
-                  align: 'end',
-                  offset: 12,
-                  width: 600,
-                  maxWidth: '90vw',
-                  zIndex: 11,
-                  arrow: {
-                    strokeColor: theme.colors.border,
-                    width: 12,
-                    borderRadius: 2,
-                    strokeWidth: 2
-                  }
-                }}
-              >
+              <Popover triggerType="hover">
                 <Popover.Trigger>
                   {({isOpen}) => (
                     <Button tabIndex={0} color="bg-secondary" variation="sm">
@@ -77,7 +61,22 @@ const TopNavigation = () => {
                     </Button>
                   )}
                 </Popover.Trigger>
-                <Popover.Content>
+                <Popover.Content
+                  positioning={{
+                    side: 'bottom',
+                    align: 'end',
+                    offset: 12,
+                    width: 600,
+                    maxWidth: '90vw',
+                    zIndex: 11
+                  }}
+                  arrow={{
+                    strokeColor: theme.colors.border,
+                    size: 12,
+                    borderRadius: 2,
+                    strokeWidth: 2
+                  }}
+                >
                   <Primitive.Box
                     el="div"
                     className="rounded bg-bg-primary border"

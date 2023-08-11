@@ -1,7 +1,7 @@
+// TODO: Might not needs this if primitives are automatically
+// converting these values with platformStyleTranslation
 import {ENVIRONMENT} from '../internal/internalConfig'
-import {type CSSUnit, type CSSUnitProperties} from '../internal/sharedConfig'
-
-type CSSUnitProperty = keyof CSSUnitProperties
+import {type CSSUnit, type CSSUnitValue} from '../internal/sharedConfig'
 
 // TODO: This isn't an exhaustive list of units to ignore
 const UnitsToIgnore = [
@@ -27,15 +27,17 @@ const UnitsToIgnore = [
   'pc'
 ]
 
+// Could support:
+// - vh
+// - vw
+
 export const useCSSUnitConversion = () => {
   const convert = ({
     value: RawValue,
-    unit,
-    property
+    unit
   }: {
-    value: number | string | undefined
+    value: CSSUnitValue | undefined
     unit: CSSUnit
-    property: CSSUnitProperty
   }) => {
     if (!RawValue) return undefined
 
@@ -48,43 +50,27 @@ export const useCSSUnitConversion = () => {
 
     const value = typeof RawValue === 'string' ? parseFloat(RawValue) : RawValue
     const passedUnit = unit
-    const configuredUnit = ENVIRONMENT?.DEFAULT_CSS_UNIT?.[property]
 
-    if (!configuredUnit)
-      throw new Error(`Error fetching configuration for ${property}`)
-
-    if (passedUnit === configuredUnit) {
+    if (passedUnit === 'px') {
       if (ENVIRONMENT.NAME === 'native') {
-        if (unit === 'rem') {
-          return value * 16
-        }
-
         return value
       }
-
       if (ENVIRONMENT.NAME === 'web') {
-        return `${value}${unit}`
+        return `${value}px`
       }
     }
 
-    if (passedUnit !== configuredUnit) {
-      if (passedUnit === 'px' && configuredUnit === 'rem') {
-        if (ENVIRONMENT.NAME === 'native') {
-          return value / 16
-        }
-        if (ENVIRONMENT.NAME === 'web') {
-          return `${value / 16}rem`
-        }
+    if (passedUnit === 'rem') {
+      if (ENVIRONMENT.NAME === 'native') {
+        return value * 16
       }
+      if (ENVIRONMENT.NAME === 'web') {
+        return `${value}rem`
+      }
+    }
 
-      if (passedUnit === 'rem' && configuredUnit === 'px') {
-        if (ENVIRONMENT.NAME === 'native') {
-          return value * 16
-        }
-        if (ENVIRONMENT.NAME === 'web') {
-          return `${value * 16}px`
-        }
-      }
+    if (passedUnit === '%') {
+      return `${value}%`
     }
   }
 

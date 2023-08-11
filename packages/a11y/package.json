@@ -1,6 +1,6 @@
 {
   "name": "@interunit/a11y",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A11y utilities to use in InterUnit",
   "main": "dist/interunit-a11y.cjs.js",
   "types": "dist/interunit-a11y.cjs.d.ts",

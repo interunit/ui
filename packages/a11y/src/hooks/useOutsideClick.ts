@@ -1,4 +1,4 @@
-// TODO: Make this work with native
+import {getEnvironmentName} from '@interunit/config'
 import React from 'react'
 
 const useOutsideClick = ({
@@ -10,6 +10,8 @@ const useOutsideClick = ({
   fn: () => void
   isEnabled?: boolean
 }) => {
+  // no-op until we figure out how to get this working in native
+  if (getEnvironmentName() === 'native') return
   const handleClick = (event: MouseEvent) => {
     if (isEnabled && ref.current && !ref.current.contains(event.target)) {
       fn()

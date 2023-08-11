@@ -1,6 +1,6 @@
-# @interunit/config
+# @interunit/crossplatform
 
-## 0.0.3
+## 0.0.2
 
 ### Patch Changes
 
@@ -8,15 +8,5 @@
   - Updated Popover docs
   - Improved platformStyleTranslation + NativeWind dry run
   - useOutsideClick no-op for native until support is created
-
-## 0.0.2
-
-### Patch Changes
-
-- Add getEnvironmentName function to simplify lookup
-
-## 0.0.1
-
-### Patch Changes
-
-- First alpha release of config
+- Updated dependencies
+  - @interunit/config@0.0.3

@@ -1,18 +1,18 @@
-import {isTouchDevice} from '@interunit/a11y'
-import {useOutsideClick} from '@interunit/a11y'
-import {InterUnitInternals, useCSSUnitConversion} from '@interunit/config'
+import {isTouchDevice, useOutsideClick} from '@interunit/a11y'
+import {InterUnitInternals} from '@interunit/config'
 import {Modal} from '@interunit/modal'
 import {Child, Primitive} from '@interunit/primitives'
 import React from 'react'
 
 import {
+  type PopoverArrow,
   type PopoverPositioning,
   useContentPositioning
 } from './hooks/useContentPositioning'
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 
-type TriggerDimensions = {
+type Dimensions = {
   x: number
   y: number
   height: number
@@ -22,12 +22,14 @@ type TriggerDimensions = {
 type PopoverState = {
   isOpen: boolean
   focusType: 'none' | 'default'
-  popoverPositioning?: PopoverPositioning
   setTrigger: ((trigger: React.ReactElement | null) => void) | null
+  setContent: ((content: React.ReactElement | null) => void) | null
   togglePopover: () => void
   trigger?: React.ReactElement | null
+  content?: React.ReactElement | null
   triggerType: 'click' | 'hover'
-  triggerDimensions: TriggerDimensions
+  triggerDimensions: Dimensions
+  contentDimensions: Dimensions
 }
 
 type PopoverContextState = PopoverState & {
@@ -38,11 +40,19 @@ type PopoverContextState = PopoverState & {
 const DEFAULT_POPOVER_STATE: PopoverState = {
   isOpen: false,
   setTrigger: null,
+  setContent: null,
   togglePopover: () => {},
   focusType: 'none',
   trigger: null,
+  content: null,
   triggerType: 'click',
   triggerDimensions: {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0
+  },
+  contentDimensions: {
     x: 0,
     y: 0,
     width: 0,
@@ -60,32 +70,39 @@ type PayloadlessReducerAction = {
 
 type SetTriggerDimensionsAction = {
   type: 'SET_TRIGGER_DIMENSIONS'
-  payload: TriggerDimensions
+  payload: Dimensions
 }
-type ReducerAction = PayloadlessReducerAction | SetTriggerDimensionsAction
+type SetContentDimensionsAction = {
+  type: 'SET_CONTENT_DIMENSIONS'
+  payload: Dimensions
+}
+type ReducerAction =
+  | PayloadlessReducerAction
+  | SetTriggerDimensionsAction
+  | SetContentDimensionsAction
 
 type PopoverSettings = {
   shouldCloseOnInteractOutside?: boolean
 }
 
-const Popover = ({
-  triggerType = 'click',
-  settings = {shouldCloseOnInteractOutside: true},
-  children,
-  onPopoverChange,
-  popoverPositioning,
-  defaultIsOpen
-}: {
-  onPopoverChange?: (popoverState: PopoverState) => void
+type PopoverProps = {
   triggerType?: 'click' | 'hover'
   defaultIsOpen?: boolean
-  popoverPositioning?: PopoverPositioning
-  ArrowElement?: React.ReactElement | null
   settings?: PopoverSettings
+  onPopoverChange?: (popoverState: PopoverState) => void
   children: React.ReactNode
-}) => {
+}
+
+const Popover = ({
+  triggerType = 'click',
+  defaultIsOpen,
+  settings = {shouldCloseOnInteractOutside: true},
+  onPopoverChange,
+  children
+}: PopoverProps) => {
   const popoverRef = React.useRef(null)
   const [trigger, setTrigger] = React.useState<React.ReactElement | null>(null)
+  const [content, setContent] = React.useState<React.ReactElement | null>(null)
 
   const [state, dispatch] = React.useReducer(
     (prevState: PopoverState, action: ReducerAction) => {
@@ -98,13 +115,14 @@ const Popover = ({
           return {...prevState, isOpen: !prevState.isOpen}
         case 'SET_TRIGGER_DIMENSIONS':
           return {...prevState, triggerDimensions: action.payload}
+        case 'SET_CONTENT_DIMENSIONS':
+          return {...prevState, contentDimensions: action.payload}
         default:
           throw new Error()
       }
     },
     {
       ...DEFAULT_POPOVER_STATE,
-      popoverPositioning,
       isOpen: defaultIsOpen ?? false
     }
   )
@@ -131,8 +149,9 @@ const Popover = ({
         trigger,
         setTrigger,
         triggerType,
-        settings,
-        popoverPositioning
+        content,
+        setContent,
+        settings
       }}
     >
       <Primitive.Box
@@ -215,49 +234,49 @@ const PopoverTrigger = ({
 }
 
 const PopoverContent = ({
+  positioning,
+  arrow,
   children
 }: {
+  positioning?: PopoverPositioning
+  arrow?: PopoverArrow
   children: (({isOpen}: {isOpen: boolean}) => React.ReactNode) | React.ReactNode
 }) => {
-  const {convert} = useCSSUnitConversion()
   const {
     isOpen,
     trigger,
+    content,
+    setContent,
     triggerType,
     dispatch,
+    contentDimensions,
     triggerDimensions,
-    focusType,
-    popoverPositioning
+    focusType
   } = React.useContext(PopoverContext)
 
-  const userDefinedArrowStyle = popoverPositioning?.arrow?.style || {}
+  const userDefinedArrowStyle = arrow?.style || {}
 
   const {positioningStyles, arrowStyles} = useContentPositioning({
     trigger,
-    positioning: popoverPositioning
+    content,
+    positioning,
+    arrow,
+    nativeTriggerDimensions: triggerDimensions,
+    nativeContentDimensions: contentDimensions
   })
 
   if (isOpen && trigger) {
     return (
       <Modal
         style={{
-          maxWidth:
-            convert({
-              value: popoverPositioning?.maxWidth,
-              unit: 'px',
-              property: 'SIZING'
-            }) ?? 'auto',
+          maxWidth: positioning?.maxWidth ?? 'auto',
           width:
-            popoverPositioning?.width === 'trigger'
-              ? triggerDimensions?.width
-              : convert({
-                  value: popoverPositioning?.width,
-                  unit: 'px',
-                  property: 'SIZING'
-                })
-              ? popoverPositioning?.width
+            positioning?.width === 'trigger'
+              ? `${triggerDimensions?.width}px`
+              : positioning?.width
+              ? positioning.width
               : 'auto',
-          zIndex: popoverPositioning?.zIndex ?? 1,
+          zIndex: positioning?.zIndex ?? 1,
           ...positioningStyles
         }}
         className="iu-popover-content"
@@ -275,15 +294,24 @@ const PopoverContent = ({
         }}
         onClose={() => dispatch({type: 'CLOSE'})}
         focusType={focusType}
+        onLayout={(e: {
+          nativeEvent: {layout: PopoverState['triggerDimensions']}
+        }) => {
+          dispatch({
+            type: 'SET_CONTENT_DIMENSIONS',
+            payload: e.nativeEvent.layout
+          })
+        }}
         data-popover-state={isOpen}
-        data-popover-side={popoverPositioning?.side}
-        data-popover-align={popoverPositioning?.align}
+        data-popover-side={positioning?.side}
+        data-popover-align={positioning?.align}
+        ref={setContent}
       >
         <>
           {typeof children === 'function' ? children({isOpen}) : children}
           <Primitive.Box
             el="div"
-            className={`iu-popover-arrow ${popoverPositioning?.arrow?.className}`}
+            className={`iu-popover-arrow ${arrow?.className}`}
             aria-hidden={true}
             style={{
               ...arrowStyles,

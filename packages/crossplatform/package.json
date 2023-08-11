@@ -1,6 +1,6 @@
 {
   "name": "@interunit/crossplatform",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Components and helpers to make cross-platform translations and development smooth",
   "main": "dist/interunit-crossplatform.cjs.js",
   "types": "dist/interunit-crossplatform.cjs.d.ts",

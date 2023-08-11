@@ -5,5 +5,5 @@ export const InterUnitInternals = {
   Construct
 }
 
-export {Primitive, P, type PrimitiveProps, type PP} from './primitive'
+export {Primitive, P} from './primitive'
 export {Child} from './utility/Child'

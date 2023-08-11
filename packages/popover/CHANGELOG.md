@@ -1,5 +1,20 @@
 # @interunit/popover
 
+## 0.0.9
+
+### Patch Changes
+
+- - Better ergonomics for the Popover component
+  - Updated Popover docs
+  - Improved platformStyleTranslation + NativeWind dry run
+  - useOutsideClick no-op for native until support is created
+- Updated dependencies
+  - @interunit/crossplatform@0.0.2
+  - @interunit/primitives@0.0.6
+  - @interunit/config@0.0.3
+  - @interunit/modal@0.0.5
+  - @interunit/a11y@0.0.6
+
 ## 0.0.8
 
 ### Patch Changes

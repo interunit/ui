@@ -1,14 +1,12 @@
 import {
   type ConstructTag,
-  DEFAULT_CSS_UNIT,
   type Environment,
   type InterConstruct,
   type WebComponent
 } from './sharedConfig'
 
 export const ENVIRONMENT = {
-  NAME: 'web' as Environment,
-  DEFAULT_CSS_UNIT
+  NAME: 'web' as Environment
 }
 
 export const ConstructFromConfig = [
