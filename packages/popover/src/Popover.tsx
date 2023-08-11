@@ -12,7 +12,7 @@ import {
 
 const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 
-type TriggerDimensions = {
+type Dimensions = {
   x: number
   y: number
   height: number
@@ -23,10 +23,13 @@ type PopoverState = {
   isOpen: boolean
   focusType: 'none' | 'default'
   setTrigger: ((trigger: React.ReactElement | null) => void) | null
+  setContent: ((content: React.ReactElement | null) => void) | null
   togglePopover: () => void
   trigger?: React.ReactElement | null
+  content?: React.ReactElement | null
   triggerType: 'click' | 'hover'
-  triggerDimensions: TriggerDimensions
+  triggerDimensions: Dimensions
+  contentDimensions: Dimensions
 }
 
 type PopoverContextState = PopoverState & {
@@ -37,11 +40,19 @@ type PopoverContextState = PopoverState & {
 const DEFAULT_POPOVER_STATE: PopoverState = {
   isOpen: false,
   setTrigger: null,
+  setContent: null,
   togglePopover: () => {},
   focusType: 'none',
   trigger: null,
+  content: null,
   triggerType: 'click',
   triggerDimensions: {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0
+  },
+  contentDimensions: {
     x: 0,
     y: 0,
     width: 0,
@@ -59,9 +70,13 @@ type PayloadlessReducerAction = {
 
 type SetTriggerDimensionsAction = {
   type: 'SET_TRIGGER_DIMENSIONS'
-  payload: TriggerDimensions
+  payload: Dimensions
 }
-type ReducerAction = PayloadlessReducerAction | SetTriggerDimensionsAction
+type SetContentDimensionsAction = {
+  type: 'SET_CONTENT_DIMENSIONS'
+  payload: Dimensions
+}
+type ReducerAction = PayloadlessReducerAction | SetTriggerDimensionsAction | SetContentDimensionsAction
 
 type PopoverSettings = {
   shouldCloseOnInteractOutside?: boolean
@@ -84,6 +99,7 @@ const Popover = ({
 }: PopoverProps) => {
   const popoverRef = React.useRef(null)
   const [trigger, setTrigger] = React.useState<React.ReactElement | null>(null)
+  const [content, setContent] = React.useState<React.ReactElement | null>(null)
 
   const [state, dispatch] = React.useReducer(
     (prevState: PopoverState, action: ReducerAction) => {
@@ -96,6 +112,8 @@ const Popover = ({
           return {...prevState, isOpen: !prevState.isOpen}
         case 'SET_TRIGGER_DIMENSIONS':
           return {...prevState, triggerDimensions: action.payload}
+        case 'SET_CONTENT_DIMENSIONS':
+          return {...prevState, contentDimensions: action.payload}
         default:
           throw new Error()
       }
@@ -128,6 +146,8 @@ const Popover = ({
         trigger,
         setTrigger,
         triggerType,
+        content,
+        setContent,
         settings
       }}
     >
@@ -219,15 +239,28 @@ const PopoverContent = ({
   arrow?: PopoverArrow
   children: (({isOpen}: {isOpen: boolean}) => React.ReactNode) | React.ReactNode
 }) => {
-  const {isOpen, trigger, triggerType, dispatch, triggerDimensions, focusType} =
-    React.useContext(PopoverContext)
+  const {
+    isOpen,
+    trigger,
+    content,
+    setContent,
+    triggerType,
+    dispatch,
+    contentDimensions,
+    triggerDimensions,
+    focusType
+  } = React.useContext(PopoverContext)
 
   const userDefinedArrowStyle = arrow?.style || {}
 
+
   const {positioningStyles, arrowStyles} = useContentPositioning({
     trigger,
+    content,
     positioning,
-    arrow
+    arrow,
+    nativeTriggerDimensions: triggerDimensions,
+    nativeContentDimensions: contentDimensions
   })
 
   if (isOpen && trigger) {
@@ -259,9 +292,18 @@ const PopoverContent = ({
         }}
         onClose={() => dispatch({type: 'CLOSE'})}
         focusType={focusType}
+        onLayout={(e: {
+          nativeEvent: {layout: PopoverState['triggerDimensions']}
+        }) => {
+            dispatch({
+                type: 'SET_CONTENT_DIMENSIONS',
+                payload: e.nativeEvent.layout
+                })
+        }}
         data-popover-state={isOpen}
         data-popover-side={positioning?.side}
         data-popover-align={positioning?.align}
+        ref={setContent}
       >
         <>
           {typeof children === 'function' ? children({isOpen}) : children}

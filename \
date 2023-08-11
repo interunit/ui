@@ -35,18 +35,14 @@ export type PopoverArrow = Omit<PrimitiveBoxProps, 'el'> & {
 
 export const useContentPositioning = ({
   trigger,
-  content,
   positioning: _positioning,
   arrow: _arrow,
-  nativeTriggerDimensions,
-  nativeContentDimensions
+  nativeTriggerDimensions
 }: {
   trigger: React.ReactElement | undefined | null
-  content: React.ReactElement | undefined | null
   positioning: PopoverPositioning | undefined
   arrow: PopoverArrow | undefined
   nativeTriggerDimensions: Dimensions | undefined
-  nativeContentDimensions: Dimensions | undefined
 }) => {
   const positioning = React.useMemo(() => {
     return {
@@ -70,22 +66,15 @@ export const useContentPositioning = ({
     PopoverPositioning['style']
   >({})
 
-  const getDimensions = ({
-    ref,
-    nativeDimensions
-  }: {
-    ref: React.ReactElement | undefined | null
-    nativeDimensions: Dimensions | undefined
-  }) => {
-    if (!ref) return
+  const getTriggerDimensions = ({trigger}: {trigger: React.ReactElement}) => {
     if (ENVIRONMENT === 'web') {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      if (!ref?.getBoundingClientRect) return
+      if (!trigger?.getBoundingClientRect) return
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      const clientRect = ref.getBoundingClientRect()
+      const clientRect = trigger.getBoundingClientRect()
 
       const dimensions = {
         x: clientRect.x,
@@ -98,16 +87,14 @@ export const useContentPositioning = ({
     }
 
     if (ENVIRONMENT === 'native') {
-      return nativeDimensions
+      return nativeTriggerDimensions
     }
   }
 
   const getPositioningStyles = ({
-    triggerDimensions,
-    contentDimensions
+    triggerDimensions
   }: {
     triggerDimensions: Dimensions
-    contentDimensions: Dimensions | undefined
   }) => {
     const styles: React.CSSProperties = {
       position: 'absolute',
@@ -133,54 +120,43 @@ export const useContentPositioning = ({
     }
 
     if (positioning.side === 'left') {
-      styles.right = `${triggerDimensions.width + offset}px`
-      styles.top = 0 + 'px'
+      styles.right = triggerDimensions.width + offset
+      styles.top = 0
     }
 
     if (positioning.side === 'right') {
-      console.log(triggerDimensions.width, offset)
-      styles.left = `${triggerDimensions.width + offset}px`
-      styles.top = 0 + 'px'
+      styles.left = triggerDimensions.width + offset
+      styles.top = 0
     }
 
     if (positioning.side === 'top' || positioning.side === 'bottom') {
       if (positioning.align === 'start') {
-        styles.left = 0 + 'px'
+        styles.left = 0
       }
       if (positioning.align === 'center') {
-        if (ENVIRONMENT === 'native' && contentDimensions) {
-          styles.left =
-            (triggerDimensions.width - contentDimensions.width) / 2 + 'px'
-        }
-        if (ENVIRONMENT === 'web') {
-          styles.left = '50%'
-          styles.transform = 'translateX(-50%)'
-        }
+        styles.left = 0 + 'px'
+        // styles.marginLeft = 'auto'
+        // styles.marginRight = 'auto'
+        // styles.transform = 'translateX(-50%)'
       }
 
       if (positioning.align === 'end') {
-        styles.right = 0 + 'px'
+        styles.right = 0
       }
     }
 
     if (positioning.side === 'left' || positioning.side === 'right') {
       if (positioning.align === 'start') {
-        styles.top = 0 + 'px'
+        styles.top = 0
       }
 
       if (positioning.align === 'center') {
-        if (ENVIRONMENT === 'native' && contentDimensions) {
-          styles.top =
-            (triggerDimensions.height - contentDimensions.height) / 2 + 'px'
-        }
-        if (ENVIRONMENT === 'web') {
-          styles.top = '50%'
-          styles.transform = 'translateY(-50%)'
-        }
+        styles.top = '50%'
+        // styles.transform = 'translateY(-50%)'
       }
       if (positioning.align === 'end') {
         styles.top = 'auto'
-        styles.bottom = 0 + 'px'
+        styles.bottom = 0
       }
     }
 
@@ -188,11 +164,9 @@ export const useContentPositioning = ({
   }
 
   const getArrowStyles = ({
-    triggerDimensions,
-    contentDimensions
+    triggerDimensions
   }: {
     triggerDimensions: Dimensions
-    contentDimensions: Dimensions | undefined
   }) => {
     const DEFAULT_ARROW_WIDTH = 5
     const DEFAULT_ARROW_STROKE_WIDTH = 0
@@ -202,18 +176,8 @@ export const useContentPositioning = ({
       DEFAULT_ARROW_WIDTH
     const arrowStrokeWidth =
       (arrow?.strokeWidth &&
-        (platformCSSUnitTranslation(arrow?.strokeWidth, 'native') as number)) ||
+        platformCSSUnitTranslation(arrow?.strokeWidth, 'native')) ||
       DEFAULT_ARROW_STROKE_WIDTH
-
-    // TODO: make transform work properly with RN
-    const rotate = (degree: string): any => {
-      if (ENVIRONMENT === 'web') {
-        return `rotate(${degree})`
-      }
-      if (ENVIRONMENT === 'native') {
-        return [{rotate: degree}]
-      }
-    }
 
     const arrowStyles: PrimitiveBoxPropsStyle = {
       height: `${arrowWidth}px`,
@@ -221,12 +185,12 @@ export const useContentPositioning = ({
       position: 'absolute',
       borderColor: arrow?.strokeColor || 'transparent',
       backgroundColor: arrow?.fillColor || 'transparent',
-      borderWidth: arrowStrokeWidth,
+      borderWidth: `${arrowStrokeWidth}px`,
       borderStyle: 'solid',
-      borderTopLeftRadius: (arrow?.borderRadius as number) || 0,
-      borderBottomWidth: 0,
-      borderRightWidth: 0,
-      transform: rotate('45deg'),
+      borderTopLeftRadius: `${arrow?.borderRadius}px` || 0,
+      borderBottom: 'none',
+      borderRight: 'none',
+      transform: 'rotate(45deg)',
       zIndex: (positioning?.zIndex || 2) + 1
     }
 
@@ -237,60 +201,53 @@ export const useContentPositioning = ({
     if (positioning.side === 'top') {
       arrowStyles.bottom = -(arrowWidth / 2) + 'px'
       arrowStyles.left = (triggerDimensions.width - arrowWidth) / 2 + 'px'
-      arrowStyles.transform = rotate('225deg')
+
+      arrowStyles.transform = 'rotate(225deg)'
     }
 
     if (positioning.side === 'left') {
-      arrowStyles.right = -(arrowWidth / 2) + 'px'
-      arrowStyles.top = (triggerDimensions.height - arrowWidth) / 2 + 'px'
-      arrowStyles.transform = rotate('135deg')
+      arrowStyles.right = -(arrowWidth / 2)
+      arrowStyles.top = (triggerDimensions.height - arrowWidth) / 2
+      arrowStyles.transform = 'rotate(135deg)'
     }
 
     if (positioning.side === 'right') {
-      arrowStyles.left = -(arrowWidth / 2) + 'px'
-      arrowStyles.top = (triggerDimensions.height - arrowWidth) / 2 + 'px'
-      arrowStyles.transform = rotate('315deg')
+      arrowStyles.left = -(arrowWidth / 2)
+      arrowStyles.top = (triggerDimensions.height - arrowWidth) / 2
+      arrowStyles.transform = 'rotate(315deg)'
     }
 
     if (positioning.side === 'top' || positioning.side === 'bottom') {
       if (positioning.align === 'start') {
-        arrowStyles.left = (triggerDimensions.width - arrowWidth) / 2 + 'px'
+        arrowStyles.left = (triggerDimensions.width - arrowWidth) / 2
       }
 
       if (positioning.align === 'center') {
-        if (ENVIRONMENT === 'native' && contentDimensions) {
-          arrowStyles.left = contentDimensions.width / 2 - arrowWidth / 2 + 'px'
-        }
-        if (ENVIRONMENT === 'web') {
-          arrowStyles.left = 0 + 'px'
-          arrowStyles.right = 0 + 'px'
-          arrowStyles.margin = 'auto'
-        }
+        arrowStyles.left = '0'
+        arrowStyles.right = '0'
+        arrowStyles.marginLeft = 'auto'
+        arrowStyles.marginRight = 'auto'
       }
       if (positioning.align === 'end') {
-        arrowStyles.right = (triggerDimensions.width - arrowWidth) / 2 + 'px'
+        arrowStyles.right = (triggerDimensions.width - arrowWidth) / 2
         arrowStyles.left = 'auto'
       }
     }
 
     if (positioning.side === 'left' || positioning.side === 'right') {
       if (positioning.align === 'start') {
-        arrowStyles.top = (triggerDimensions.height - arrowWidth) / 2 + 'px'
+        arrowStyles.top = (triggerDimensions.height - arrowWidth) / 2
       }
 
       if (positioning.align === 'center') {
-        if (ENVIRONMENT === 'native' && contentDimensions) {
-          arrowStyles.top = contentDimensions.height / 2 - arrowWidth / 2 + 'px'
-        }
-        if (ENVIRONMENT === 'web') {
-          arrowStyles.top = 0 + 'px'
-          arrowStyles.bottom = 0 + 'px'
-          arrowStyles.margin = 'auto'
-        }
+        arrowStyles.top = '0'
+        arrowStyles.bottom = '0'
+        arrowStyles.marginTop = 'auto'
+        arrowStyles.marginBottom = 'auto'
       }
       if (positioning.align === 'end') {
         arrowStyles.top = 'auto'
-        arrowStyles.bottom = (triggerDimensions.height - arrowWidth) / 2 + 'px'
+        arrowStyles.bottom = (triggerDimensions.height - arrowWidth) / 2
       }
     }
     return {arrowStyles}
@@ -298,34 +255,20 @@ export const useContentPositioning = ({
 
   React.useEffect(() => {
     if (trigger) {
-      const triggerDimensions = getDimensions({
-        ref: trigger,
-        nativeDimensions: nativeTriggerDimensions
-      })
-      const contentDimensions = getDimensions({
-        ref: content,
-        nativeDimensions: nativeContentDimensions
-      })
+      const triggerDimensions = getTriggerDimensions({trigger})
       if (triggerDimensions) {
-        const styles = getPositioningStyles({
-          triggerDimensions,
-          contentDimensions
-        })
-        // TODO: Need to figure why this is happening
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        const styles = getPositioningStyles({triggerDimensions})
         setPositioningStyles(styles)
 
         if (arrow) {
           const {arrowStyles} = getArrowStyles({
-            triggerDimensions,
-            contentDimensions
+            triggerDimensions
           })
           setArrowStyles(arrowStyles)
         }
       }
     }
-  }, [trigger, positioning, nativeTriggerDimensions, nativeContentDimensions])
+  }, [trigger, positioning])
 
   return {positioningStyles, arrowStyles}
 }

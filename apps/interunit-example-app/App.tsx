@@ -1,49 +1,56 @@
-import {Modal} from '@interunit/modal'
-import {Primitive} from '@interunit/primitives'
+import {Popover} from '@interunit/popover'
+import {P} from '@interunit/primitives'
 import React from 'react'
 
 const Test = () => {
-  const [showModal, setShowModal] = React.useState(false)
   return (
-    <Primitive.Box
-      el="div"
-      style={{height: '100%', flex: 1, marginTop: 30, padding: 20}}
-    >
-      <Primitive.Button
-        el="button"
-        onPress={() => setShowModal(true)}
-        style={{
-          width: 200,
-          backgroundColor: 'blue',
-          padding: 20,
-          color: 'white'
-        }}
-      >
-        <Primitive.Text el="span">Open me</Primitive.Text>
-      </Primitive.Button>
-      {showModal && (
-        <Modal
-          style={{backgroundColor: 'red'}}
-          onClose={() => setShowModal(false)}
+    <P.BX el="div" className="relative">
+      <Popover triggerType="click">
+        <Popover.Trigger>
+          <P.BT el="button" className="bg-bg-secondary rounded">
+            <P.TX el="span" className="px-5 py-4 text-text-light">
+              Click me
+            </P.TX>
+          </P.BT>
+        </Popover.Trigger>
+        <Popover.Content
+          positioning={{
+            side: 'bottom',
+            align: 'center',
+            offset: '1rem',
+            zIndex: 10,
+            width: '200px'
+          }}
+          arrow={{
+            fillColor: '#1d1d27',
+            strokeColor: '#363645',
+            strokeWidth: 1,
+            width: 10,
+            borderRadius: 2
+          }}
         >
-          <Primitive.Button
-            el="button"
-            onPress={() => setShowModal(false)}
-            style={{
-              width: 200,
-              backgroundColor: 'blue',
-              padding: 20,
-              color: 'white'
-            }}
+          <P.BX
+            el="div"
+            className="bg-bg-primary border-[1px] border-border rounded p-4"
           >
-            <Primitive.Text el="span">Close me</Primitive.Text>
-          </Primitive.Button>
-        </Modal>
-      )}
-    </Primitive.Box>
+            <P.TX el="span" className="text-text-light">
+              Wow, look at this popover running on react native with shared
+              code!
+            </P.TX>
+          </P.BX>
+        </Popover.Content>
+      </Popover>
+    </P.BX>
   )
 }
 
 export default function App() {
-  return <Test />
+  return (
+    <P.BX
+      el="div"
+      className="flex items-center justify-center h-full bg-bg-primary"
+    >
+      <Test />
+    </P.BX>
+  )
 }
