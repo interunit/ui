@@ -26,7 +26,7 @@ export type PopoverPositioning = Omit<PrimitiveBoxProps, 'el'> & {
 }
 
 export type PopoverArrow = Omit<PrimitiveBoxProps, 'el'> & {
-  width?: CSSUnit
+  size?: CSSUnit
   borderRadius?: CSSUnit
   strokeWidth?: CSSUnit
   strokeColor?: string
@@ -197,8 +197,8 @@ export const useContentPositioning = ({
     const DEFAULT_ARROW_WIDTH = 5
     const DEFAULT_ARROW_STROKE_WIDTH = 0
     const arrowWidth =
-      ((arrow?.width &&
-        platformCSSUnitTranslation(arrow?.width, 'native')) as number) ||
+      ((arrow?.size &&
+        platformCSSUnitTranslation(arrow?.size, 'native')) as number) ||
       DEFAULT_ARROW_WIDTH
     const arrowStrokeWidth =
       (arrow?.strokeWidth &&

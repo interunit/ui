@@ -6,7 +6,7 @@ import {
 } from './sharedConfig'
 
 export const ENVIRONMENT = {
-  NAME: 'web' as Environment,
+  NAME: 'web' as Environment
 }
 
 export const ConstructFromConfig = [

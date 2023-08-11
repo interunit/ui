@@ -5,7 +5,7 @@ import {
 } from './sharedConfig'
 
 export const ENVIRONMENT = {
-  NAME: 'native',
+  NAME: 'native'
 }
 
 export const ConstructFromConfig = [

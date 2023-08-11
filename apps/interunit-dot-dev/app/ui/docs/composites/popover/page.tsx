@@ -45,7 +45,7 @@ const PopoverPage = () => {
                 fillColor: theme?.colors['bg-primary'],
                 strokeColor: theme?.colors.border,
                 strokeWidth: 1,
-                width: 10,
+                size: 10,
                 borderRadius: 2
               }}
             >
@@ -144,12 +144,43 @@ const PopoverPage = () => {
                   'A callback that will be called when the popover state changes.'
               },
               {
-                name: 'popoverPositioning',
+                name: 'children',
+                type: 'React.ReactNode',
+                required: false,
+                description: 'The contents of the popover'
+              }
+            ]}
+          />
+        </P.BX>
+
+        <P.BX el="div" className="mb-12">
+          <P.TX el="h2" className="text-sm-hd mb-4">
+            {'<Popover.Trigger/>'}
+          </P.TX>
+          <PropsTable
+            propsToDisplay={[
+              {
+                name: 'children',
+                type: 'React.ReactNode',
+                required: false,
+                description:
+                  'The contents of the popover trigger, usually a button.'
+              }
+            ]}
+          />
+        </P.BX>
+        <P.BX el="div" className="mb-12">
+          <P.TX el="h2" className="text-sm-hd mb-4">
+            {'<Popover.Content/>'}
+          </P.TX>
+          <PropsTable
+            propsToDisplay={[
+              {
+                name: 'positioning',
                 type: `PopoverPositioning`,
                 required: false,
                 default: '',
-                description:
-                  'Settings for the popover positioning, animation, and other options',
+                description: 'Configuration for the positioning of the Popover',
                 properties: [
                   {
                     name: 'side',
@@ -212,6 +243,47 @@ const PopoverPage = () => {
                   }
                 ]
               },
+              {
+                name: 'arrow',
+                type: `PopoverArrow`,
+                required: false,
+                default: '',
+                description: 'Settings for the popover arrow',
+                properties: [
+                  {
+                    name: 'size',
+                    type: `string | number`,
+                    required: false,
+                    description: 'The size of the arrow.'
+                  },
+                  {
+                    name: 'borderRadisu',
+                    type: `string } number`,
+                    required: false,
+                    description: 'The border radius of the arrow tip.'
+                  },
+                  {
+                    name: 'strokeWidth',
+                    type: `string | number`,
+                    required: false,
+                    default: '0',
+                    description: 'The width of the arrow stroke.'
+                  },
+                  {
+                    name: 'strokeColor',
+                    type: `string`,
+                    required: false,
+                    description: 'The color of the arrow stroke.'
+                  },
+                  {
+                    name: 'fillColor',
+                    type: `string`,
+                    required: false,
+                    description: 'The color of the arrow fill.'
+                  }
+                ]
+              },
+
               {
                 name: 'children',
                 type: 'React.ReactNode',

@@ -47,20 +47,6 @@ const TopNavigation = () => {
             >
               <Popover
                 triggerType="hover"
-                popoverPositioning={{
-                  side: 'bottom',
-                  align: 'end',
-                  offset: 12,
-                  width: 600,
-                  maxWidth: '90vw',
-                  zIndex: 11,
-                  arrow: {
-                    strokeColor: theme.colors.border,
-                    width: 12,
-                    borderRadius: 2,
-                    strokeWidth: 2
-                  }
-                }}
               >
                 <Popover.Trigger>
                   {({isOpen}) => (
@@ -77,7 +63,24 @@ const TopNavigation = () => {
                     </Button>
                   )}
                 </Popover.Trigger>
-                <Popover.Content>
+                <Popover.Content
+
+                positioning={{
+                  side: 'bottom',
+                  align: 'end',
+                  offset: 12,
+                  width: 600,
+                  maxWidth: '90vw',
+                  zIndex: 11,
+                }}
+                  arrow={ {
+                    strokeColor: theme.colors.border,
+                    size: 12,
+                    borderRadius: 2,
+                    strokeWidth: 2
+
+                }}
+                >
                   <Primitive.Box
                     el="div"
                     className="rounded bg-bg-primary border"
