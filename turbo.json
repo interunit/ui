@@ -11,10 +11,25 @@
       "cache": false,
       "persistent": true
     },
-    "lint": {},
     "//#preconstruct:dev": {},
     "dev:docs": {
       "dependsOn": ["//#preconstruct:dev"]
+    },
+    "//#BARE:lint:tsc": {},
+    "//#BARE:lint:eslint": {},
+    "//#BARE:format:ci": {},
+    "//#BARE:test:unit:ci": {},
+    "lint:tsc": {
+      "dependsOn": ["//#lint:tsc", "//#BARE:lint:tsc"]
+    },
+    "lint:eslint": {
+      "dependsOn": ["//#lint:eslint", "//#BARE:lint:eslint"]
+    },
+    "format:ci": {
+      "dependsOn": ["//#format:ci", "//#BARE:format:ci"]
+    },
+    "test:unit:ci": {
+      "dependsOn": ["//#test:unit:ci", "//#BARE:test:unit:ci"]
     }
   }
 }

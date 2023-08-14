@@ -1,0 +1,32 @@
+name: Web Unit Testing
+
+on:
+    pull_request:
+    push:
+      branches:
+        - main
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+    cancel-in-progress: true
+
+jobs:
+    web-unit-testing:
+        if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Latest
+              uses: actions/checkout@v3
+            - name: Setup Chromedriver
+              uses: nanasess/setup-chromedriver@v2
+            - name: Start Chromedriver
+              run: |
+                  export DISPLAY=:99
+                  chromedriver --url-base=/wd/hub &
+                  sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+            - name: Install Dependencies
+              run: yarn
+            - name: Build Packages
+              run: yarn preconstruct:build
+            - name: Run Web Unit Tests
+              run: yarn test:unit:ci

@@ -1,0 +1,20 @@
+name: Formatter
+
+on:
+    pull_request:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+    cancel-in-progress: true
+
+jobs:
+    formatter:
+        if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Latest
+              uses: actions/checkout@v3
+            - name: Install Dependencies
+              run: yarn
+            - name: Run Formatter (Prettier)
+              run: yarn format:ci
