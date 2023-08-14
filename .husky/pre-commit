@@ -1,7 +1,3 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
-
-yarn format
-yarn lint:eslint
-# TODO: Enable this when ts issues are cleaned up
-# yarn lint:tsc
+npx lint-staged

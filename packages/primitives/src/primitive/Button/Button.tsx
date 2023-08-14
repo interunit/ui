@@ -9,7 +9,7 @@ import {
   filterPropsByEnvironment
 } from '../../helpers/props'
 
-const ButtonConstruct = {
+export const ButtonConstruct = {
   button: Construct.Button
 }
 
