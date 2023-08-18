@@ -2,16 +2,40 @@
   "name": "@interunit/primitives",
   "version": "0.0.6",
   "description": "",
+  "homepage": "https://github.com/interunit/ui#readme",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interunit/ui.git"
+  },
+  "license": "ISC",
+  "author": "Kyle McDonald",
   "main": "dist/interunit-primitives.cjs.js",
-  "types": "dist/interunit-primitives.cjs.d.ts",
   "module": "dist/interunit-primitives.esm.js",
   "react-native": "src/index.ts",
+  "types": "dist/interunit-primitives.cjs.d.ts",
+  "scripts": {
+    "build:package": "tsc",
+    "watch:package": "tsc -w",
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test:unit": "jest --config ./jest.config.js --coverage"
+  },
+  "prettier": "@interunit/prettier",
   "dependencies": {
     "@interunit/config": "*",
     "@interunit/crossplatform": "*",
     "@interunit/toolbox": "*"
   },
   "devDependencies": {
+    "@interunit/eslint": "*",
+    "@interunit/jest": "*",
+    "@interunit/prettier": "*",
+    "@interunit/tsconfig": "*",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "@types/react-native": "^0.72.2",
@@ -19,15 +43,5 @@
   },
   "peerDependencies": {
     "react": "^18.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/interunit/ui.git"
-  },
-  "author": "Kyle McDonald",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/interunit/ui/issues"
-  },
-  "homepage": "https://github.com/interunit/ui#readme"
+  }
 }

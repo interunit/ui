@@ -6,12 +6,26 @@
   "types": "dist/interunit-collapsible.cjs.d.ts",
   "module": "dist/interunit-collapsible.esm.js",
   "react-native": "src/index.ts",
+  "prettier": "@interunit/prettier",
+  "scripts": {
+    "build:package": "tsc",
+    "watch:package": "tsc -w",
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test:unit": "jest --config ./jest.config.js --coverage"
+  },
   "dependencies": {
     "@interunit/a11y": "*",
     "@interunit/config": "*",
     "@interunit/primitives": "*"
   },
   "devDependencies": {
+    "@interunit/eslint": "*",
+    "@interunit/jest": "*",
+    "@interunit/prettier": "*",
+    "@interunit/tsconfig": "*",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "@types/react-native": "^0.72.2",

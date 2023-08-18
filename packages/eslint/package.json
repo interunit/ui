@@ -1,0 +1,37 @@
+{
+  "name": "@interunit/eslint",
+  "version": "0.0.1",
+  "description": "The ESLint config for InterUnit",
+  "homepage": "https://github.com/interunit/ui#readme",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interunit/ui.git"
+  },
+  "license": "ISC",
+  "author": "Kyle McDonald",
+  "type": "module",
+  "files": [
+    "base.js"
+  ],
+  "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write"
+  },
+  "prettier": "@interunit/prettier",
+  "devDependencies": {
+    "@interunit/prettier": "*",
+    "@react-native-community/eslint-config": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.11",
+    "@typescript-eslint/parser": "^5.59.11",
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard-with-typescript": "^35.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2"
+  }
+}
