@@ -2,20 +2,30 @@
   "name": "@interunit/collapsible",
   "version": "0.0.1",
   "description": "A component that expands and collapses content",
+  "homepage": "https://github.com/interunit/ui#readme",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interunit/ui.git"
+  },
+  "license": "ISC",
+  "author": "Kyle McDonald",
   "main": "dist/interunit-collapsible.cjs.js",
-  "types": "dist/interunit-collapsible.cjs.d.ts",
   "module": "dist/interunit-collapsible.esm.js",
   "react-native": "src/index.ts",
-  "prettier": "@interunit/prettier",
+  "types": "dist/interunit-collapsible.cjs.d.ts",
   "scripts": {
     "build:package": "tsc",
-    "watch:package": "tsc -w",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test:unit": "jest --config ./jest.config.js --coverage"
+    "test:unit": "jest --config ./jest.config.js --coverage",
+    "watch:package": "tsc -w"
   },
+  "prettier": "@interunit/prettier",
   "dependencies": {
     "@interunit/a11y": "*",
     "@interunit/config": "*",
@@ -33,15 +43,5 @@
   },
   "peerDependencies": {
     "react": "^18.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/interunit/ui.git"
-  },
-  "author": "Kyle McDonald",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/interunit/ui/issues"
-  },
-  "homepage": "https://github.com/interunit/ui#readme"
+  }
 }
