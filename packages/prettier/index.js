@@ -1,8 +1,8 @@
-import sortImports from '@trivago/prettier-plugin-sort-imports'
-import packageJson from 'prettier-plugin-packagejson'
+const sortImports = require('@trivago/prettier-plugin-sort-imports')
+const packageJson = require('prettier-plugin-packagejson')
 
 /** @type {import("prettier").Options} */
-export default {
+module.exports = {
   printWidth: 80,
   tabWidth: 2,
   useTabs: false,
