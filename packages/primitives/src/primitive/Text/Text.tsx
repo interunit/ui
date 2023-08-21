@@ -26,6 +26,7 @@ type TextPrimitiveProps<T extends keyof typeof TextConstruct> = Omit<
   TextProps & DiscriminatedProps<T>,
   'style'
 > & {
+  el: T
   style?: MergeWithOverride<DiscriminatedProps<T>['style'], TextProps['style']>
 }
 const Text = React.forwardRef(

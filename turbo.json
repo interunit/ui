@@ -26,15 +26,10 @@
       "outputMode": "new-only"
     },
     "test:unit": {},
-    "build:package": {
-        "cache": false
-    },
-    "watch:package": {
-        "cache": false,
-        "persistent": true
-    },
     "dev:docs": {
-      "dependsOn": ["//#preconstruct:dev"]
-    }
+      "dependsOn": ["//#dev:packages"]
+    },
+    "//#dev:packages": {},
+    "//#build:packages": {}
   }
 }

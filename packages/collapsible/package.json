@@ -14,16 +14,14 @@
   "author": "Kyle McDonald",
   "main": "dist/interunit-collapsible.cjs.js",
   "module": "dist/interunit-collapsible.esm.js",
-  "react-native": "src/index.ts",
   "types": "dist/interunit-collapsible.cjs.d.ts",
+  "react-native": "src/index.ts",
   "scripts": {
-    "build:package": "tsc",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test:unit": "jest --config ./jest.config.js --coverage",
-    "watch:package": "tsc -w"
+    "test:unit": "jest --config ./jest.config.js --coverage"
   },
   "prettier": "@interunit/prettier",
   "dependencies": {
@@ -39,7 +37,7 @@
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "@types/react-native": "^0.72.2",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "react": "^18.0.0"

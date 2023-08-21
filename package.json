@@ -6,7 +6,7 @@
     "dev:all": "turbo run dev:all",
     "dev:docs": "turbo run dev:docs",
     "watch:package": "turbo run watch:package",
-    "build:package": "turbo run build:package --continue",
+    "build:package": "turbo run build:package --continue -- --build --force",
     "lint": "turbo lint --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache'",
     "lint:fix": "turbo lint:fix --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache'",
     "format": "turbo run format --continue -- --cache --cache-location='node_modules/.cache/.prettiercache'",
@@ -15,10 +15,12 @@
     "create:package": "npx hygen create package",
     "util:clean": "rm -rf node_modules **/node_modules **/**/node_modules **/**/**/node_modules & yarn cache clean",
     "util:delete-dist": "rm -rf packages/**/dist",
-    "postinstall": "husky install",
+    "build:packages": "preconstruct build",
+    "dev:packages": "preconstruct dev",
     "changeset:add": "changeset add",
     "changeset:version": "changeset version",
-    "changeset:publish": "npm run util:delete-dist && npm run build:package && changeset publish",
+    "changeset:publish": "npm run util:delete-dist && npm run build:packages && changeset publish",
+    "postinstall": "husky install",
     "husky": "postinstall"
   },
   "prettier": "@interunit/prettier",
@@ -29,14 +31,18 @@
     ]
   },
   "devDependencies": {
-    "@interunit/prettier": "*",
+    "@babel/preset-env": "^7.22.10",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
     "@changesets/cli": "^2.26.2",
+    "@interunit/prettier": "*",
     "@manypkg/cli": "^0.20.0",
+    "@preconstruct/cli": "^2.8.1",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.0",
     "ts-node": "^10.9.1",
     "turbo": "^1.10.12",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.6"
   },
   "workspaces": [
     "packages/*",
@@ -44,7 +50,15 @@
   ],
   "preconstruct": {
     "packages": [
-      "packages/*"
+      "packages/a11y",
+      "packages/collapsible",
+      "packages/config",
+      "packages/crossplatform",
+      "packages/modal",
+      "packages/popover",
+      "packages/primitives",
+      "packages/responsive",
+      "packages/toolbox"
     ]
   },
   "repository": {

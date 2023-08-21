@@ -3,9 +3,16 @@
   "version": "0.0.2",
   "description": "Utilities to make cross-platform development a breeze 🍃",
   "main": "dist/interunit-responsive.cjs.js",
-  "types": "dist/interunit-responsive.cjs.d.ts",
   "module": "dist/interunit-responsive.esm.js",
+  "types": "dist/interunit-responsive.cjs.d.ts",
   "react-native": "src/index.ts",
+  "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test:unit": "jest --config ./jest.config.js --coverage"
+  },
   "dependencies": {
     "@interunit/config": "*"
   },
@@ -13,7 +20,7 @@
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "@types/react-native": "^0.72.2",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "react": "^18.0.0"

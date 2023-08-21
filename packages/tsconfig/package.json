@@ -2,11 +2,13 @@
   "name": "@interunit/tsconfig",
   "version": "0.0.1",
   "description": "The tsconfig for InterUnit",
-  "files": ["base.json"],
+  "files": [
+    "base.json"
+  ],
   "prettier": "@interunit/prettier",
   "devDependencies": {
     "@interunit/prettier": "*",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "react": "^18.0.0"

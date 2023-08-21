@@ -14,16 +14,14 @@
   "author": "Kyle McDonald",
   "main": "dist/interunit-config.cjs.js",
   "module": "dist/interunit-config.esm.js",
-  "react-native": "src/index.native.ts",
   "types": "dist/interunit-config.cjs.d.ts",
+  "react-native": "src/index.ts",
   "scripts": {
-    "build:package": "tsc",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test:unit": "jest --config ./jest.config.js --coverage",
-    "watch:package": "tsc -w"
+    "test:unit": "jest --config ./jest.config.js --coverage"
   },
   "prettier": "@interunit/prettier",
   "devDependencies": {
@@ -32,7 +30,7 @@
     "@interunit/prettier": "*",
     "@interunit/tsconfig": "*",
     "@types/react": "18.2.12",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "react": "^18.0.0"

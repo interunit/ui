@@ -15,6 +15,7 @@ export type ImagePrimitiveProps<T extends keyof typeof ImageConstruct> = Omit<
   Omit<ImageProps, 'source'> & DiscriminatedProps<T>,
   'style'
 > & {
+  el: T
   style?: MergeWithOverride<DiscriminatedProps<T>['style'], ImageProps['style']>
 }
 

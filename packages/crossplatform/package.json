@@ -3,9 +3,16 @@
   "version": "0.0.2",
   "description": "Components and helpers to make cross-platform translations and development smooth",
   "main": "dist/interunit-crossplatform.cjs.js",
-  "types": "dist/interunit-crossplatform.cjs.d.ts",
   "module": "dist/interunit-crossplatform.esm.js",
+  "types": "dist/interunit-crossplatform.cjs.d.ts",
   "react-native": "src/index.ts",
+  "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test:unit": "jest --config ./jest.config.js --coverage"
+  },
   "dependencies": {
     "@interunit/config": "*",
     "@interunit/toolbox": "*",
@@ -15,7 +22,7 @@
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "@types/react-native": "^0.72.2",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "react": "^18.0.0"
