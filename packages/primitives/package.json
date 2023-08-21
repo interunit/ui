@@ -14,15 +14,15 @@
   "author": "Kyle McDonald",
   "main": "dist/interunit-primitives.cjs.js",
   "module": "dist/interunit-primitives.esm.js",
-  "types": "dist/interunit-primitives.cjs.d.ts",
   "react-native": "src/index.ts",
+  "types": "dist/interunit-primitives.cjs.d.ts",
   "scripts": {
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
     "lint": "eslint .",
-    "tsc": "tsc --build",
     "lint:fix": "eslint . --fix",
-    "test:unit": "jest --config ./jest.config.js --coverage"
+    "test:unit": "jest --config ./jest.config.js --coverage",
+    "tsc": "tsc --build"
   },
   "prettier": "@interunit/prettier",
   "dependencies": {

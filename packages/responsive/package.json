@@ -2,10 +2,20 @@
   "name": "@interunit/responsive",
   "version": "0.0.2",
   "description": "Utilities to make cross-platform development a breeze 🍃",
+  "homepage": "https://github.com/interunit/ui#readme",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interunit/ui.git"
+  },
+  "license": "ISC",
+  "author": "Kyle McDonald",
   "main": "dist/interunit-responsive.cjs.js",
   "module": "dist/interunit-responsive.esm.js",
-  "types": "dist/interunit-responsive.cjs.d.ts",
   "react-native": "src/index.ts",
+  "types": "dist/interunit-responsive.cjs.d.ts",
   "scripts": {
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
@@ -24,15 +34,5 @@
   },
   "peerDependencies": {
     "react": "^18.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/interunit/ui.git"
-  },
-  "author": "Kyle McDonald",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/interunit/ui/issues"
-  },
-  "homepage": "https://github.com/interunit/ui#readme"
+  }
 }

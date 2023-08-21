@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@interunit/tsconfig/base.json",
   "compilerOptions": {
-      "rootDir": "src",
+    "rootDir": "src",
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
     "outDir": "dist"
   },

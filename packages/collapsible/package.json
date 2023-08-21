@@ -14,8 +14,8 @@
   "author": "Kyle McDonald",
   "main": "dist/interunit-collapsible.cjs.js",
   "module": "dist/interunit-collapsible.esm.js",
-  "types": "dist/interunit-collapsible.cjs.d.ts",
   "react-native": "src/index.ts",
+  "types": "dist/interunit-collapsible.cjs.d.ts",
   "scripts": {
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",

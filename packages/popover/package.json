@@ -2,10 +2,20 @@
   "name": "@interunit/popover",
   "version": "0.0.9",
   "description": "A popover component",
+  "homepage": "https://github.com/interunit/ui#readme",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interunit/ui.git"
+  },
+  "license": "ISC",
+  "author": "Kyle McDonald",
   "main": "dist/interunit-popover.cjs.js",
   "module": "dist/interunit-popover.esm.js",
-  "types": "dist/interunit-popover.cjs.d.ts",
   "react-native": "src/index.ts",
+  "types": "dist/interunit-popover.cjs.d.ts",
   "scripts": {
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
@@ -29,15 +39,5 @@
   },
   "peerDependencies": {
     "react": "^18.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/interunit/ui.git"
-  },
-  "author": "Kyle McDonald",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/interunit/ui/issues"
-  },
-  "homepage": "https://github.com/interunit/ui#readme"
+  }
 }
