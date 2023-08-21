@@ -54,6 +54,7 @@
       "packages/collapsible",
       "packages/config",
       "packages/crossplatform",
+      "packages/form",
       "packages/modal",
       "packages/popover",
       "packages/primitives",
