@@ -1,3 +1,3 @@
-const webConfig = require('./webConfig/config')
+const webConfig = require('./web/config')
 
 module.exports = {webConfig}

@@ -16,5 +16,5 @@ module.exports = {
   coverageDirectory: '<rootDir>/coverage',
   collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}'],
   testMatch: ['<rootDir>/**/*.test.{ts,tsx}'],
-  setupFilesAfterEnv: [path.join(__dirname, './web/setupTests.js')]
+  setupFilesAfterEnv: [path.join(__dirname, './setupTests.js')]
 }
