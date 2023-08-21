@@ -27,6 +27,6 @@ jobs:
             - name: Install Dependencies
               run: yarn
             - name: Build Packages
-              run: yarn preconstruct:build
+              run: yarn build:packages
             - name: Run Web Unit Tests
-              run: yarn test:unit:ci
+              run: yarn test:unit

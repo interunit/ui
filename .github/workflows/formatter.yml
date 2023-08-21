@@ -17,4 +17,4 @@ jobs:
             - name: Install Dependencies
               run: yarn
             - name: Run Formatter (Prettier)
-              run: yarn format:ci
+              run: yarn format

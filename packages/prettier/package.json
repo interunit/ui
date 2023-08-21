@@ -1,0 +1,26 @@
+{
+  "name": "@interunit/prettier",
+  "version": "0.0.2",
+  "description": "The prettier config for InterUnit",
+  "homepage": "https://github.com/interunit/ui#readme",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interunit/ui.git"
+  },
+  "license": "ISC",
+  "author": "Kyle McDonald",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write"
+  },
+  "prettier": "./index.js",
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "prettier": "^3.0.2",
+    "prettier-plugin-packagejson": "^2.4.5"
+  }
+}

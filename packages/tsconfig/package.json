@@ -1,0 +1,26 @@
+{
+  "name": "@interunit/tsconfig",
+  "version": "0.0.2",
+  "description": "The tsconfig for InterUnit",
+  "files": [
+    "base.json"
+  ],
+  "prettier": "@interunit/prettier",
+  "devDependencies": {
+    "@interunit/prettier": "*",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interunit/ui.git"
+  },
+  "author": "Kyle McDonald",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
+  },
+  "homepage": "https://github.com/interunit/ui#readme"
+}

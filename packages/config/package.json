@@ -1,26 +1,38 @@
 {
   "name": "@interunit/config",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Handles all config for interactions between packages",
-  "main": "dist/interunit-config.cjs.js",
-  "types": "dist/interunit-config.cjs.d.ts",
-  "module": "dist/interunit-config.esm.js",
-  "react-native": "src/index.native.ts",
-  "devDependencies": {
-    "@types/react": "18.2.12",
-    "typescript": "^5.1.3"
-  },
-  "peerDependencies": {
-    "react": "^18.0.0"
+  "homepage": "https://github.com/interunit/ui#readme",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/interunit/ui.git"
   },
-  "author": "Kyle McDonald",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/interunit/ui/issues"
+  "author": "Kyle McDonald",
+  "main": "dist/interunit-config.cjs.js",
+  "module": "dist/interunit-config.esm.js",
+  "react-native": "src/index.ts",
+  "types": "dist/interunit-config.cjs.d.ts",
+  "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test:unit": "jest --config ./jest.config.js --coverage"
   },
-  "homepage": "https://github.com/interunit/ui#readme"
+  "prettier": "@interunit/prettier",
+  "devDependencies": {
+    "@interunit/eslint": "*",
+    "@interunit/jest": "*",
+    "@interunit/prettier": "*",
+    "@interunit/tsconfig": "*",
+    "@types/react": "18.2.12",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  }
 }

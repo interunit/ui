@@ -1,32 +1,44 @@
 {
   "name": "@interunit/a11y",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A11y utilities to use in InterUnit",
-  "main": "dist/interunit-a11y.cjs.js",
-  "types": "dist/interunit-a11y.cjs.d.ts",
-  "module": "dist/interunit-a11y.esm.js",
-  "react-native": "src/index.ts",
-  "dependencies": {
-    "@interunit/config": "*",
-    "@interunit/primitives": "*"
-  },
-  "devDependencies": {
-    "@types/react": "18.2.12",
-    "@types/react-dom": "18.2.5",
-    "@types/react-native": "^0.72.2",
-    "typescript": "^5.1.3"
-  },
-  "peerDependencies": {
-    "react": "^18.0.0"
+  "homepage": "https://github.com/interunit/ui#readme",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/interunit/ui.git"
   },
-  "author": "Kyle McDonald",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/interunit/ui/issues"
+  "author": "Kyle McDonald",
+  "main": "dist/interunit-a11y.cjs.js",
+  "module": "dist/interunit-a11y.esm.js",
+  "react-native": "src/index.ts",
+  "types": "dist/interunit-a11y.cjs.d.ts",
+  "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test:unit": "jest --config ./jest.config.js --coverage"
   },
-  "homepage": "https://github.com/interunit/ui#readme"
+  "prettier": "@interunit/prettier",
+  "dependencies": {
+    "@interunit/config": "*",
+    "@interunit/primitives": "*"
+  },
+  "devDependencies": {
+    "@interunit/eslint": "*",
+    "@interunit/jest": "*",
+    "@interunit/prettier": "*",
+    "@interunit/tsconfig": "*",
+    "@types/react": "18.2.12",
+    "@types/react-dom": "18.2.5",
+    "@types/react-native": "^0.72.2",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  }
 }

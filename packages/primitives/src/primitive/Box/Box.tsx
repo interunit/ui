@@ -21,7 +21,10 @@ export const BoxConstruct = {
 export type BoxPrimitiveProps<T extends keyof typeof BoxConstruct> = Omit<
   ViewProps & DiscriminatedProps<T>,
   'style'
-> & {style?: MergeWithOverride<DiscriminatedProps<T>['style'], ViewStyle>}
+> & {
+  el: T
+  style?: MergeWithOverride<DiscriminatedProps<T>['style'], ViewStyle>
+}
 
 const Box = React.forwardRef(
   <T extends keyof typeof BoxConstruct>(

@@ -1,11 +1,28 @@
 {
   "name": "@interunit/modal",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A low-level component to help display content on top of the current page or view",
+  "homepage": "https://github.com/interunit/ui#readme",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interunit/ui.git"
+  },
+  "license": "ISC",
+  "author": "Kyle McDonald",
   "main": "dist/interunit-modal.cjs.js",
-  "types": "dist/interunit-modal.cjs.d.ts",
   "module": "dist/interunit-modal.esm.js",
   "react-native": "src/index.ts",
+  "types": "dist/interunit-modal.cjs.d.ts",
+  "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test:unit": "jest --config ./jest.config.js --coverage"
+  },
   "dependencies": {
     "@interunit/a11y": "*",
     "@interunit/config": "*",
@@ -16,19 +33,9 @@
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "@types/react-native": "^0.72.2",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "react": "^18.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/interunit/ui.git"
-  },
-  "author": "Kyle McDonald",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/interunit/ui/issues"
-  },
-  "homepage": "https://github.com/interunit/ui#readme"
+  }
 }

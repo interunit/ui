@@ -11,25 +11,25 @@
       "cache": false,
       "persistent": true
     },
-    "//#preconstruct:dev": {},
+    "lint": {
+        "outputs": ["node_modules/.cache/.eslintcache"]
+    },
+    "lint:fix": {
+        "outputs": ["node_modules/.cache/.eslintcache"]
+    },
+    "format": {
+      "outputs": ["node_modules/.cache/.prettiercache"],
+      "outputMode": "new-only"
+    },
+    "format:fix": {
+      "outputs": ["node_modules/.cache/.prettiercache"],
+      "outputMode": "new-only"
+    },
+    "test:unit": {},
     "dev:docs": {
-      "dependsOn": ["//#preconstruct:dev"]
+      "dependsOn": ["//#dev:packages"]
     },
-    "//#BARE:lint:tsc": {},
-    "//#BARE:lint:eslint": {},
-    "//#BARE:format:ci": {},
-    "//#BARE:test:unit:ci": {},
-    "lint:tsc": {
-      "dependsOn": ["//#lint:tsc", "//#BARE:lint:tsc"]
-    },
-    "lint:eslint": {
-      "dependsOn": ["//#lint:eslint", "//#BARE:lint:eslint"]
-    },
-    "format:ci": {
-      "dependsOn": ["//#format:ci", "//#BARE:format:ci"]
-    },
-    "test:unit:ci": {
-      "dependsOn": ["//#test:unit:ci", "//#BARE:test:unit:ci"]
-    }
+    "//#dev:packages": {},
+    "//#build:packages": {}
   }
 }

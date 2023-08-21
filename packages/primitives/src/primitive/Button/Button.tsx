@@ -17,6 +17,7 @@ export type ButtonPrimitiveProps<T extends keyof typeof ButtonConstruct> = Omit<
   PressableProps & DiscriminatedProps<T>,
   'style'
 > & {
+  el: T
   style?: MergeWithOverride<
     DiscriminatedProps<T>['style'],
     PressableProps['style']
@@ -28,7 +29,7 @@ export type ButtonPrimitiveProps<T extends keyof typeof ButtonConstruct> = Omit<
 const Button = React.forwardRef(
   <T extends keyof typeof ButtonConstruct>(
     {
-      el = 'button',
+      el = 'button' as T,
       type = 'button',
       children,
       ...props
