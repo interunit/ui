@@ -20,9 +20,8 @@ const ChildElement = React.forwardRef<any, any>(
 
       const combinedFnProps = matchingFnProps.reduce((acc: any, prop: any) => {
         acc[prop] = (...args: any[]) => {
-          // prettier-ignore
-          (child as React.ReactElement).props[prop](...args)
-          //prettier-ignore
+          const c = child as React.ReactElement
+          c.props[prop](...args)
           props[prop](...args)
         }
         return acc
