@@ -1,6 +1,6 @@
 {
   "name": "@interunit/prettier",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The prettier config for InterUnit",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {

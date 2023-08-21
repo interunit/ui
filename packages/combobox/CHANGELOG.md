@@ -1,4 +1,4 @@
-# @interunit/responsive
+# @interunit/combobox
 
 ## 0.0.3
 
@@ -6,10 +6,5 @@
 
 - Internal changes to make maintaining the project easier. No changes in functionaity to InterUnit components
 - Updated dependencies
+  - @interunit/primitives@0.0.7
   - @interunit/config@0.0.4
-
-## 0.0.2
-
-### Patch Changes
-
-- Export useSW
