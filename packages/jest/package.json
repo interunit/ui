@@ -1,6 +1,6 @@
 {
   "name": "@interunit/jest",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The jest config for InterUnit",
   "main": "./index.js",
   "prettier": "@interunit/prettier",
@@ -20,7 +20,7 @@
     "ts-jest": "^29.1.1"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "react": "^18.2.0"
   },
   "repository": {
     "type": "git",

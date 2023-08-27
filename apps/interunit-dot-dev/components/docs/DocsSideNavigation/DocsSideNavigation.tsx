@@ -30,7 +30,6 @@ const RecursiveRender = ({data, path}: {path: string; data: DataItem}) => {
         <Primitive.Box el="li">
           <Link href={path + data.slug} legacyBehavior passHref>
             <ButtonAnchor
-              el="a"
               color={data.color as ThemeColor}
               variation="xs"
               data-active={pathname === path + data.slug}

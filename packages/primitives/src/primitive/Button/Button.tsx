@@ -17,12 +17,10 @@ export type ButtonPrimitiveProps<T extends keyof typeof ButtonConstruct> = Omit<
   PressableProps & DiscriminatedProps<T>,
   'style'
 > & {
-  el: T
   style?: MergeWithOverride<
     DiscriminatedProps<T>['style'],
     PressableProps['style']
   >
-
   onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
 }
 

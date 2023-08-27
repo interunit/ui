@@ -1,6 +1,6 @@
 {
   "name": "@interunit/a11y",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A11y utilities to use in InterUnit",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -33,12 +33,12 @@
     "@interunit/jest": "*",
     "@interunit/prettier": "*",
     "@interunit/tsconfig": "*",
-    "@types/react": "18.2.12",
+    "@types/react": "18.2.21",
     "@types/react-dom": "18.2.5",
     "@types/react-native": "^0.72.2",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "react": "^18.2.0"
   }
 }

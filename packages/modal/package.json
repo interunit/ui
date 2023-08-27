@@ -1,6 +1,6 @@
 {
   "name": "@interunit/modal",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A low-level component to help display content on top of the current page or view",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -30,12 +30,12 @@
     "focus-trap-react": "^10.2.1"
   },
   "devDependencies": {
-    "@types/react": "18.2.12",
+    "@types/react": "18.2.21",
     "@types/react-dom": "18.2.5",
     "@types/react-native": "^0.72.2",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "react": "^18.2.0"
   }
 }

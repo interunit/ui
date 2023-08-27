@@ -1,6 +1,6 @@
 {
   "name": "@interunit/config",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Handles all config for interactions between packages",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -29,10 +29,10 @@
     "@interunit/jest": "*",
     "@interunit/prettier": "*",
     "@interunit/tsconfig": "*",
-    "@types/react": "18.2.12",
+    "@types/react": "18.2.21",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "react": "^18.2.0"
   }
 }

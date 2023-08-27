@@ -26,16 +26,15 @@ type TextPrimitiveProps<T extends keyof typeof TextConstruct> = Omit<
   TextProps & DiscriminatedProps<T>,
   'style'
 > & {
-  el: T
   style?: MergeWithOverride<DiscriminatedProps<T>['style'], TextProps['style']>
 }
+
 const Text = React.forwardRef(
   <T extends keyof typeof TextConstruct>(
     {el, children, ...props}: TextPrimitiveProps<T>,
     forwardedRef: any
   ) => {
     const Text = TextConstruct?.[el] as React.ElementType
-
     if (Text === undefined) {
       throw new Error(
         `The element "${el}" doesn't exist in the Text component.`

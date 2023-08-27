@@ -1,5 +1,18 @@
 # @interunit/popover
 
+## 0.0.11
+
+### Patch Changes
+
+- Dependency update to fix some type issues
+- Updated dependencies
+  - @interunit/crossplatform@0.0.4
+  - @interunit/primitives@0.0.8
+  - @interunit/toolbox@0.0.3
+  - @interunit/config@0.0.5
+  - @interunit/modal@0.0.7
+  - @interunit/a11y@0.0.8
+
 ## 0.0.10
 
 ### Patch Changes

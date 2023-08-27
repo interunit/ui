@@ -1,6 +1,6 @@
 {
   "name": "@interunit/tsconfig",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The tsconfig for InterUnit",
   "files": [
     "base.json"
@@ -11,7 +11,7 @@
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "react": "^18.2.0"
   },
   "repository": {
     "type": "git",

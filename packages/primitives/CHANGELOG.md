@@ -1,5 +1,15 @@
 # @interunit/primitives
 
+## 0.0.8
+
+### Patch Changes
+
+- Dependency update to fix some type issues
+- Updated dependencies
+  - @interunit/crossplatform@0.0.4
+  - @interunit/toolbox@0.0.3
+  - @interunit/config@0.0.5
+
 ## 0.0.7
 
 ### Patch Changes
