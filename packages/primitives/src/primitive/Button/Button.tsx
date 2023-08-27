@@ -21,7 +21,6 @@ export type ButtonPrimitiveProps<T extends keyof typeof ButtonConstruct> = Omit<
     DiscriminatedProps<T>['style'],
     PressableProps['style']
   >
-  children: React.ReactNode
   onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
 }
 
