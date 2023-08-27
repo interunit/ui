@@ -32,12 +32,12 @@
     "@interunit/toolbox": "*"
   },
   "devDependencies": {
-    "@types/react": "18.2.12",
+    "@types/react": "18.2.21",
     "@types/react-dom": "18.2.5",
     "@types/react-native": "^0.72.2",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "react": "^18.2.0"
   }
 }
