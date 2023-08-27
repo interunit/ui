@@ -1,6 +1,6 @@
 {
   "name": "@interunit/jest",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The jest config for InterUnit",
   "main": "./index.js",
   "prettier": "@interunit/prettier",

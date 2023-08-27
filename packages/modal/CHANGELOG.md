@@ -1,5 +1,15 @@
 # @interunit/modal
 
+## 0.0.7
+
+### Patch Changes
+
+- Dependency update to fix some type issues
+- Updated dependencies
+  - @interunit/primitives@0.0.8
+  - @interunit/config@0.0.5
+  - @interunit/a11y@0.0.8
+
 ## 0.0.6
 
 ### Patch Changes
