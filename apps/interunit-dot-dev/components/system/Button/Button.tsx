@@ -12,7 +12,10 @@ type ButtonProps = Omit<React.ComponentPropsWithoutRef<typeof P.BT>, 'el'> & {
   kind?: ButtonKind
 }
 
-type ButtonAnchorProps = React.ComponentPropsWithoutRef<typeof P.TX> & {
+type ButtonAnchorProps = Omit<
+  React.ComponentPropsWithoutRef<typeof P.TX>,
+  'el'
+> & {
   color: ThemeColor
   variation?: 'xs' | 'sm' | 'md' | 'lg'
   kind?: ButtonKind
@@ -132,7 +135,6 @@ const ButtonAnchor = React.forwardRef<
 >(
   (
     {
-      el = 'a',
       color = 'bg-secondary',
       variation = 'md',
       kind = 'primary',
@@ -145,7 +147,7 @@ const ButtonAnchor = React.forwardRef<
     const colorValue = getColorValue(color)
     return (
       <P.TX
-        el={el}
+        el={'a'}
         className={twMerge(
           'inline-block',
           kindClassName(kind),
