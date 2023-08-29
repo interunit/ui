@@ -27,7 +27,7 @@
     },
     "test:unit": {},
     "dev:docs": {
-      "dependsOn": ["//#dev:packages"]
+      "dependsOn": ["//#build:packages"]
     },
     "//#dev:packages": {},
     "//#build:packages": {}

@@ -17,6 +17,7 @@ import {FeatureList} from '@/components/docs/FeatureList'
 import {InstallBlock} from '@/components/docs/InstallBlock'
 import {PackageInfo} from '@/components/docs/PackageInfo'
 import {PropsTable} from '@/components/docs/PropsTable'
+import {TypeBlock} from '@/components/docs/TypeBlock'
 import {Button} from '@/components/system/Button'
 import {Text} from '@/components/system/Text'
 import {theme} from '@/theme.config'
@@ -28,6 +29,7 @@ const PopoverPage = () => {
         <PackageInfo
           data={{title: 'Popover', name, description, version, homepage}}
         />
+        <TypeBlock packageName="@interunit/popover" type="PopoverSettings" />
         <ComponentDisplay className="mb-12">
           <Popover triggerType="click">
             <Popover.Trigger>

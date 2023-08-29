@@ -24,7 +24,10 @@ const CodeBlock = ({
   className?: string
 }) => {
   React.useEffect(() => {
-    Prism.highlightAll()
+    // highlighting all instantly doesn't work
+    setTimeout(() => {
+      Prism.highlightAll()
+    }, 100)
   }, [])
 
   const [isCopied, setIsCopied] = React.useState(false)
