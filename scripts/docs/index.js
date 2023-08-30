@@ -1,8 +1,8 @@
 const {ApiModel} = require('@microsoft/api-extractor-model')
-
 const {Extractor, ExtractorConfig} = require('@microsoft/api-extractor')
 const path = require('path')
-const fs = require('fs')
+const fsAsync = require('node:fs/promises')
+const fsSync = require('fs')
 
 const markdownTypesDirectory = path.join(
   __dirname,
@@ -17,7 +17,9 @@ function getRelevantPackages() {
   const allPackages = require(mainPackageJson).preconstruct.packages
 
   const relevantPackages = allPackages.filter(pkg => {
-    return fs.existsSync(path.join(__dirname, '../../', pkg, configFileName))
+    return fsSync.existsSync(
+      path.join(__dirname, '../../', pkg, configFileName)
+    )
   })
 
   return relevantPackages
@@ -25,43 +27,49 @@ function getRelevantPackages() {
 
 // Run the extractor from @microsoft/api-extractor on package
 // so we can use the output to generate files
-const runExtractorOnPackage = packagePath => {
-  const apiExtractorJsonPath = path.join(
-    __dirname,
-    '../../',
-    packagePath,
-    configFileName
-  )
-  const preparedExtractorConfig =
-    ExtractorConfig.loadFileAndPrepare(apiExtractorJsonPath)
-  const extractorResult = Extractor.invoke(preparedExtractorConfig, {
-    // Equivalent to the "--local" command-line parameter
-    localBuild: true
-  })
-
-  if (extractorResult.succeeded) {
-    process.exitCode = 0
-  } else {
-    console.error(
-      `API Extractor completed with ${extractorResult.errorCount} errors` +
-        ` and ${extractorResult.warningCount} warnings`
+async function runExtractorOnPackage(packagePath) {
+  try {
+    const apiExtractorJsonPath = path.join(
+      __dirname,
+      '../../',
+      packagePath,
+      configFileName
     )
-    process.exitCode = 1
+    const preparedExtractorConfig =
+      ExtractorConfig.loadFileAndPrepare(apiExtractorJsonPath)
+
+    const extractorResult = Extractor.invoke(preparedExtractorConfig, {
+      localBuild: true
+    })
+
+    if (!extractorResult.succeeded) {
+      throw new Error(
+        `API Extractor completed with ${extractorResult.errorCount} errors` +
+          ` and ${extractorResult.warningCount} warnings` +
+          ` (see ${apiExtractorJsonPath})`
+      )
+    }
+  } catch (e) {
+    console.error(`Error when running extractor on "${packagePath}": `, e)
   }
 }
 
-function createDirectory(directory) {
-  if (!fs.existsSync(directory)) {
-    fs.mkdirSync(directory, {recursive: true})
+async function createDirectory(directory) {
+  if (!fsSync.existsSync(directory)) {
+    try {
+      await fsAsync.mkdir(directory, {recursive: true})
+    } catch (e) {
+      console.error(`Error when creating directory "${directory}": `, e)
+    }
   }
 }
 
-function deleteDirectoryContents(directory) {
-  fs.rmSync(directory, {recursive: true, force: true})
+async function deleteDirectoryContents(directory) {
+  await fsAsync.rm(directory, {recursive: true, force: true})
 }
 
-function deleteFile(filePath) {
-  fs.unlinkSync(filePath)
+async function deleteFile(filePath) {
+  await fsAsync.unlink(filePath)
 }
 
 // Get all type references from a package and format them
@@ -88,30 +96,32 @@ function getTypeReferences(members) {
 // Create markdown files based on the type references
 // and put them in the public folder of
 // interunit-dot-dev (markdownTypesDirectory)
-function createMarkdownFiles(types) {
-  types.forEach(type => {
+async function createMarkdownFiles(types) {
+  types.map(async type => {
     const directory = path.join(markdownTypesDirectory, type.packageName)
-    if (!fs.existsSync(directory)) {
-      fs.mkdirSync(directory, {recursive: true})
+    if (!fsSync.existsSync(directory)) {
+      fsSync.mkdirSync(directory, {recursive: true})
     }
     const markdown = type.type
     const markdownPath = path.join(
       markdownTypesDirectory,
       `${type.packageName}/${type.name}.md`
     )
-    fs.writeFile(markdownPath, markdown, err => {
+    await fsAsync.writeFile(markdownPath, markdown, err => {
       if (err) throw err
     })
   })
+}
+
+async function createEtcPaths(packagePath) {
+  const etcPath = path.join(__dirname, '../../', packagePath, 'etc')
+  await createDirectory(etcPath)
 }
 
 // Generation & cleanup of files
 async function modelAPI(packagePath) {
   try {
     const packageName = packagePath.split('/').pop()
-    const etcPath = path.join(__dirname, '../../', packagePath, 'etc')
-
-    createDirectory(etcPath)
 
     const apiJsonPath = path.join(
       __dirname,
@@ -130,27 +140,8 @@ async function modelAPI(packagePath) {
       .filter(t => t && t.length)
       .flat()
 
-    deleteDirectoryContents(markdownTypesDirectory)
+    await deleteDirectoryContents(markdownTypesDirectory)
     createMarkdownFiles(types)
-
-    const tempDirectory = path.join(__dirname, '../../', packagePath, 'temp')
-    const generatedDeclarationPath = path.join(
-      __dirname,
-      '../../',
-      packagePath,
-      `dist/${packageName}.d.ts`
-    )
-    const tsDocMetadataPath = path.join(
-      __dirname,
-      '../../',
-      packagePath,
-      'dist/tsdoc-metadata.json'
-    )
-
-    deleteDirectoryContents(tempDirectory)
-    deleteDirectoryContents(etcPath)
-    deleteFile(generatedDeclarationPath)
-    deleteFile(tsDocMetadataPath)
 
     console.log(`Successfully generated files for "${packagePath}"`)
   } catch (e) {
@@ -158,9 +149,34 @@ async function modelAPI(packagePath) {
   }
 }
 
-function main() {
+async function cleanup(packagePath) {
+  const etcPath = path.join(__dirname, '../../', packagePath, 'etc')
+  const packageName = packagePath.split('/').pop()
+  const tempDirectory = path.join(__dirname, '../../', packagePath, 'temp')
+  const generatedDeclarationPath = path.join(
+    __dirname,
+    '../../',
+    packagePath,
+    `dist/${packageName}.d.ts`
+  )
+  const tsDocMetadataPath = path.join(
+    __dirname,
+    '../../',
+    packagePath,
+    'dist/tsdoc-metadata.json'
+  )
+
+  await deleteDirectoryContents(tempDirectory)
+  await deleteDirectoryContents(etcPath)
+  await deleteFile(generatedDeclarationPath)
+  await deleteFile(tsDocMetadataPath)
+}
+
+async function main() {
   // Get only packages that contain an api-extractor.json file
   const packages = getRelevantPackages()
+
+  await Promise.all(packages.map(createEtcPaths))
 
   // Run API Extractor on each package
   packages.forEach(runExtractorOnPackage)
@@ -169,6 +185,9 @@ function main() {
 
   // TODO: only run on successful extractions
   packages.forEach(modelAPI)
+
+  // Cleanup temp files
+  packages.forEach(cleanup)
 }
 
 main()

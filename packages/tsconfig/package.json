@@ -8,7 +8,7 @@
   "prettier": "@interunit/prettier",
   "devDependencies": {
     "@interunit/prettier": "*",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "react": "^18.2.0"
