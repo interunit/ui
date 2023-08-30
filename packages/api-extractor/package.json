@@ -1,0 +1,16 @@
+{
+  "name": "@interunit/api-extractor",
+  "version": "0.0.1",
+  "description": "The API Extractor config for InterUnit",
+  "react-native": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interunit/ui.git"
+  },
+  "author": "Kyle McDonald",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/interunit/ui/issues"
+  },
+  "homepage": "https://github.com/interunit/ui#readme"
+}
