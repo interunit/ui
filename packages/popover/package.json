@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@interunit/a11y": "*",
+    "@interunit/api-extractor": "*",
     "@interunit/config": "*",
     "@interunit/crossplatform": "*",
     "@interunit/modal": "*",

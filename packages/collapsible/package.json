@@ -30,6 +30,7 @@
     "@interunit/primitives": "*"
   },
   "devDependencies": {
+    "@interunit/api-extractor": "*",
     "@interunit/eslint": "*",
     "@interunit/jest": "*",
     "@interunit/prettier": "*",
