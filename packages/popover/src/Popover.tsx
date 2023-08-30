@@ -85,7 +85,7 @@ type PopoverSettings = {
   shouldCloseOnInteractOutside?: boolean
 }
 
-export type PopoverProps = {
+type PopoverProps = {
   triggerType?: 'click' | 'hover'
   defaultIsOpen?: boolean
   settings?: PopoverSettings

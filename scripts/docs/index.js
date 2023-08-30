@@ -50,6 +50,12 @@ const runExtractorOnPackage = packagePath => {
   }
 }
 
+function createDirectory(directory) {
+  if (!fs.existsSync(directory)) {
+    fs.mkdirSync(directory, {recursive: true})
+  }
+}
+
 function deleteDirectoryContents(directory) {
   fs.rmSync(directory, {recursive: true, force: true})
 }
@@ -103,6 +109,10 @@ function createMarkdownFiles(types) {
 async function modelAPI(packagePath) {
   try {
     const packageName = packagePath.split('/').pop()
+    const etcPath = path.join(__dirname, '../../', packagePath, 'etc')
+
+    createDirectory(etcPath)
+
     const apiJsonPath = path.join(
       __dirname,
       '../../',
@@ -122,6 +132,7 @@ async function modelAPI(packagePath) {
 
     deleteDirectoryContents(markdownTypesDirectory)
     createMarkdownFiles(types)
+
     const tempDirectory = path.join(__dirname, '../../', packagePath, 'temp')
     const generatedDeclarationPath = path.join(
       __dirname,
@@ -137,6 +148,7 @@ async function modelAPI(packagePath) {
     )
 
     deleteDirectoryContents(tempDirectory)
+    deleteDirectoryContents(etcPath)
     deleteFile(generatedDeclarationPath)
     deleteFile(tsDocMetadataPath)
 

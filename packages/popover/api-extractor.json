@@ -216,7 +216,7 @@
      *
      * DEFAULT VALUE: "false"
      */
-     "includeForgottenExports": true,
+    "includeForgottenExports": true
 
     /**
      * The base URL where the project's source code can be viewed on a website such as GitHub or
