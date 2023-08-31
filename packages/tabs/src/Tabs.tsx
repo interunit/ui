@@ -1,7 +1,8 @@
 import {P} from '@interunit/primitives'
 import {
   type UseControlledStateParams,
-  useControlledState
+  useControlledState,
+  useKeyboardNavigation
 } from '@interunit/toolbox'
 import React from 'react'
 
@@ -16,6 +17,7 @@ import React from 'react'
 type TabsProps<V> = React.ComponentPropsWithoutRef<typeof P.BX> &
   UseControlledStateParams<V> & {
     children: React.ReactNode
+    orientation?: 'horizontal' | 'vertical'
   }
 
 type TabsContextState<V> = {
@@ -28,16 +30,34 @@ const TabsContext = React.createContext<
 >({})
 
 function Tabs<V>({el = 'div', ...props}: TabsProps<V>) {
+  const tabsContainerRef = React.useRef<HTMLDivElement>(null)
+
   const [value, setValue] = useControlledState({
     value: props.value,
     defaultValue: props.defaultValue,
     onValueChange: props.onValueChange
   } as UseControlledStateParams<V>)
 
+  useKeyboardNavigation({
+    ref: tabsContainerRef,
+    attribute: 'data-tab',
+    onFocusChange: (focusedElement: HTMLElement) => {
+      const tabValue = focusedElement.getAttribute('data-tab-value')
+      if (tabValue) {
+        setValue && setValue(tabValue as V)
+      }
+    }
+  })
+
   return (
     <>
       <TabsContext.Provider value={{value, setValue} as TabsContextState<V>}>
-        <P.BX el={el} {...props} />
+        <P.BX
+          el={el}
+          {...props}
+          ref={tabsContainerRef}
+          aria-orientation={props.orientation}
+        />
       </TabsContext.Provider>
     </>
   )
@@ -55,6 +75,8 @@ function TabsTrigger<V>({el = 'button', value, ...props}: TabsTriggerProps<V>) {
     <P.BT
       el={el}
       role="tab"
+      data-tab
+      data-tab-value={value}
       data-state={currentValue === value ? 'active' : 'inactive'}
       aria-selected={currentValue === value}
       {...props}

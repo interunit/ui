@@ -14,20 +14,22 @@ import {ComponentDisplay} from '@/components/docs/ComponentDisplay'
 import {PackageInfo} from '@/components/docs/PackageInfo'
 
 const TabsPage = () => {
-  const [tab, setTab] = React.useState('home')
   return (
     <P.BX el="div">
       <PackageInfo
         data={{title: 'Tabs', name, description, version, homepage}}
       />
       <ComponentDisplay className="mb-12">
-        <Tabs value={tab} onValueChange={v => setTab(v)}>
-          <Tabs.Trigger value={'home'} aria-label="View the home page">
-            Home
-          </Tabs.Trigger>
-          <Tabs.Trigger value="about" aria-label="View the about page">
-            About
-          </Tabs.Trigger>
+        <Tabs defaultValue="home">
+          <div>
+            <Tabs.Trigger value={'home'} aria-label="View the home page">
+              Home
+            </Tabs.Trigger>
+
+            <Tabs.Trigger value="about" aria-label="View the about page">
+              About
+            </Tabs.Trigger>
+          </div>
           <Tabs.Content value={'home'}>Home</Tabs.Content>
           <Tabs.Content value="about">About</Tabs.Content>
         </Tabs>
