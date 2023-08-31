@@ -154,7 +154,7 @@ function useKeyboardNavigation(params: UseKeyboardNavigationParams) {
 
     focusableElements.forEach(_element => {
       const element = _element as HTMLElement // eslint/prettier battle
-      element.addEventListener('focusin', handleFocusIn)
+      element.removeEventListener('focusin', handleFocusIn)
     })
   }
 
