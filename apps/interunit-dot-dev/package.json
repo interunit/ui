@@ -21,6 +21,7 @@
     "@interunit/popover": "*",
     "@interunit/primitives": "*",
     "@interunit/responsive": "*",
+    "@interunit/tabs": "*",
     "@preconstruct/next": "^4.0.0",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.6",

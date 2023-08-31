@@ -62,6 +62,7 @@
       "packages/popover",
       "packages/primitives",
       "packages/responsive",
+      "packages/tabs",
       "packages/toolbox"
     ]
   },

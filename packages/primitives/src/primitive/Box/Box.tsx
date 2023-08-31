@@ -1,3 +1,5 @@
+// TODO: When extending via ComponentPropsWithoutRef we lose
+// the children prop
 import {type MergeWithOverride} from '@interunit/toolbox'
 import React from 'react'
 import type {ViewProps, ViewStyle} from 'react-native'
