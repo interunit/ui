@@ -8,18 +8,18 @@
   "react-native": "src/index.ts",
   "prettier": "@interunit/prettier",
   "dependencies": {
+    "@interunit/a11y": "*",
     "@interunit/config": "*",
-    "@interunit/primitives": "*",
-    "@interunit/toolbox": "*"
+    "@interunit/primitives": "*"
   },
   "devDependencies": {
-    "@types/react": "18.2.12",
-    "@types/react-dom": "18.2.5",
-    "@types/react-native": "^0.72.2",
     "@interunit/eslint": "*",
     "@interunit/jest": "*",
     "@interunit/prettier": "*",
     "@interunit/tsconfig": "*",
+    "@types/react": "18.2.12",
+    "@types/react-dom": "18.2.5",
+    "@types/react-native": "^0.72.2",
     "typescript": "^5.1.3"
   },
   "peerDependencies": {

@@ -1,8 +1,8 @@
+import {useKeyboardNavigation} from '@interunit/a11y'
 import {P} from '@interunit/primitives'
 import {
   type UseControlledStateParams,
-  useControlledState,
-  useKeyboardNavigation
+  useControlledState
 } from '@interunit/toolbox'
 import React from 'react'
 
