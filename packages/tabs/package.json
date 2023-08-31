@@ -19,6 +19,7 @@
     "@interunit/eslint": "*",
     "@interunit/jest": "*",
     "@interunit/prettier": "*",
+    "@interunit/tsconfig": "*",
     "typescript": "^5.1.3"
   },
   "peerDependencies": {
