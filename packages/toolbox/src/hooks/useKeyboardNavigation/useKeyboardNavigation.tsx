@@ -139,8 +139,9 @@ function useKeyboardNavigation(params: UseKeyboardNavigationParams) {
     const focusableElements =
       params.ref.current?.querySelectorAll(`[${params.attribute}]`) ?? []
 
-    focusableElements.forEach(element => {
-      ;(element as HTMLElement).addEventListener('focusin', handleFocusIn)
+    focusableElements.forEach(_element => {
+      const element = _element as HTMLElement // eslint/prettier battle
+      element.addEventListener('focusin', handleFocusIn)
     })
   }
 
@@ -151,8 +152,9 @@ function useKeyboardNavigation(params: UseKeyboardNavigationParams) {
     const focusableElements =
       params.ref.current?.querySelectorAll(`[${params.attribute}]`) ?? []
 
-    focusableElements.forEach(element => {
-      ;(element as HTMLElement).removeEventListener('focusin', handleFocusIn)
+    focusableElements.forEach(_element => {
+      const element = _element as HTMLElement // eslint/prettier battle
+      element.addEventListener('focusin', handleFocusIn)
     })
   }
 
