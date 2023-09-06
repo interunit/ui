@@ -10,7 +10,7 @@
   "dependencies": {
     "@interunit/a11y": "*",
     "@interunit/config": "*",
-    "@interunit/primitives": "*"
+    "@interunit/primitives": "*",
     "@interunit/toolbox": "*"
   },
   "devDependencies": {
