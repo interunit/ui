@@ -1,5 +1,5 @@
 import {useKeyboardNavigation} from '@interunit/a11y'
-import {P} from '@interunit/primitives'
+import {Child, P} from '@interunit/primitives'
 import {
   type UseControlledStateParams,
   useControlledState
@@ -8,11 +8,6 @@ import React from 'react'
 
 // Ideas:
 // - Allow router to fully control state vs relying on controlled or uncotrolled state
-//
-// Todo:
-// - Add keyboard navigation
-// - Add focus management
-// - Add asChild support for Trigger and Content
 
 type TabsProps<V> = React.ComponentPropsWithoutRef<typeof P.BX> &
   UseControlledStateParams<V> & {
@@ -66,13 +61,17 @@ function Tabs<V>({el = 'div', ...props}: TabsProps<V>) {
 type TabsTriggerProps<T> = React.ComponentPropsWithoutRef<typeof P.BT> & {
   value?: T
   children?: React.ReactNode
+  asChild?: boolean
 }
 
-function TabsTrigger<V>({el = 'button', value, ...props}: TabsTriggerProps<V>) {
+const TabsTrigger: React.FC<TabsTriggerProps<unknown>> = function TabsTrigger<
+  V
+>({el = 'button', value, ...props}: TabsTriggerProps<V>) {
   const {value: currentValue, setValue} = React.useContext(TabsContext)
+  const Button = props.asChild ? Child : P.BT
 
   return (
-    <P.BT
+    <Button
       el={el}
       role="tab"
       data-tab
@@ -87,17 +86,24 @@ function TabsTrigger<V>({el = 'button', value, ...props}: TabsTriggerProps<V>) {
   )
 }
 
-type TabsContentProps<T> = React.ComponentPropsWithoutRef<typeof P.BX> & {
+type TabsContentProps<T> = {
   value?: T
+  asChild?: boolean
   children?: React.ReactNode
-}
+} & React.ComponentPropsWithoutRef<typeof P.BX>
 
-function TabsContent<V>({el = 'div', value, ...props}: TabsContentProps<V>) {
+const TabsContent: React.FC<TabsContentProps<unknown>> = function TabsContent<
+  V
+>({
+  el = 'div',
+  value,
+  ...props
+}: TabsContentProps<V>): React.ReactElement<typeof P.BX> {
   const {value: currentValue, setValue} = React.useContext(TabsContext)
-  console.log(value, currentValue)
+  const Content = props.asChild ? Child : P.BX
 
   return (
-    <P.BX
+    <Content
       el={el}
       role="tabpanel"
       data-state={currentValue === value ? 'active' : 'inactive'}
