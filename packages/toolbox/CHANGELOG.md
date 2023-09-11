@@ -1,5 +1,11 @@
 # @interunit/toolbox
 
+## 0.0.4
+
+### Patch Changes
+
+- First version of the Tabs component. Also adds in a new keyboard navigation hook.
+
 ## 0.0.3
 
 ### Patch Changes

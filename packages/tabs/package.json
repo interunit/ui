@@ -1,6 +1,6 @@
 {
   "name": "@interunit/tabs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Organizes content into easily switchable sections",
   "main": "dist/interunit-tabs.cjs.js",
   "types": "dist/interunit-tabs.cjs.d.ts",
