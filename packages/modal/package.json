@@ -2,7 +2,6 @@
   "name": "@interunit/modal",
   "version": "0.0.7",
   "description": "A low-level component to help display content on top of the current page or view",
-  "type": "module",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
     "url": "https://github.com/interunit/ui/issues"
@@ -13,6 +12,7 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
+  "type": "module",
   "main": "dist/interunit-modal.cjs.js",
   "module": "dist/interunit-modal.esm.js",
   "react-native": "src/index.ts",

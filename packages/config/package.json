@@ -3,7 +3,6 @@
   "version": "0.0.5",
   "description": "Handles all config for interactions between packages",
   "homepage": "https://github.com/interunit/ui#readme",
-  "type": "module",
   "bugs": {
     "url": "https://github.com/interunit/ui/issues"
   },
@@ -13,6 +12,7 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
+  "type": "module",
   "main": "dist/interunit-config.cjs.js",
   "module": "dist/interunit-config.esm.js",
   "react-native": "src/index.ts",

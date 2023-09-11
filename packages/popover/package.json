@@ -3,7 +3,6 @@
   "version": "0.0.11",
   "description": "A popover component",
   "homepage": "https://github.com/interunit/ui#readme",
-  "type": "module",
   "bugs": {
     "url": "https://github.com/interunit/ui/issues"
   },
@@ -13,6 +12,7 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
+  "type": "module",
   "main": "dist/interunit-popover.cjs.js",
   "module": "dist/interunit-popover.esm.js",
   "react-native": "src/index.ts",

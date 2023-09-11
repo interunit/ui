@@ -2,7 +2,6 @@
   "name": "@interunit/a11y",
   "version": "0.0.9",
   "description": "A11y utilities to use in InterUnit",
-  "type": "module",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
     "url": "https://github.com/interunit/ui/issues"
@@ -13,6 +12,7 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
+  "type": "module",
   "main": "dist/interunit-a11y.cjs.js",
   "module": "dist/interunit-a11y.esm.js",
   "react-native": "src/index.ts",
