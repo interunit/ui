@@ -1,3 +1,5 @@
-const webConfig = require('./web/config')
+import {webConfig} from './web/config.js'
 
-module.exports = {webConfig}
+export default {
+  projects: [webConfig]
+}

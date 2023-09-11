@@ -2,6 +2,7 @@
   "name": "@interunit/collapsible",
   "version": "0.0.3",
   "description": "A component that expands and collapses content",
+  "type": "module",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
     "url": "https://github.com/interunit/ui/issues"

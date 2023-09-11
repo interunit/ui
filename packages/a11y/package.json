@@ -2,6 +2,7 @@
   "name": "@interunit/a11y",
   "version": "0.0.9",
   "description": "A11y utilities to use in InterUnit",
+  "type": "module",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
     "url": "https://github.com/interunit/ui/issues"

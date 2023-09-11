@@ -2,6 +2,7 @@
   "name": "@interunit/combobox",
   "version": "0.0.4",
   "private": true,
+  "type": "module",
   "description": "",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {

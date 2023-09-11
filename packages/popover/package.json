@@ -3,6 +3,7 @@
   "version": "0.0.11",
   "description": "A popover component",
   "homepage": "https://github.com/interunit/ui#readme",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/interunit/ui/issues"
   },

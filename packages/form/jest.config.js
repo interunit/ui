@@ -1,5 +1,5 @@
-const config = require('@interunit/jest')
+import config from '@interunit/jest'
 
-module.exports = {
-  ...config.webConfig
+export default {
+  ...config
 }

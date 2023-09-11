@@ -2,6 +2,7 @@
   "name": "@interunit/jest",
   "version": "0.0.3",
   "description": "The jest config for InterUnit",
+  "type": "module",
   "main": "./index.js",
   "prettier": "@interunit/prettier",
   "devDependencies": {
@@ -9,6 +10,7 @@
     "@interunit/eslint": "*",
     "@interunit/prettier": "*",
     "@testing-library/jest-dom": "^6.0.1",
+    "@testing-library/user-event": "^14.4.3",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.3",
     "@types/jest-axe": "^3.5.5",

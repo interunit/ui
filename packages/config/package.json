@@ -3,6 +3,7 @@
   "version": "0.0.5",
   "description": "Handles all config for interactions between packages",
   "homepage": "https://github.com/interunit/ui#readme",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/interunit/ui/issues"
   },

@@ -2,6 +2,7 @@
   "name": "@interunit/toolbox",
   "version": "0.0.4",
   "description": "A collection of helpers and utils ",
+  "type": "module",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
     "url": "https://github.com/interunit/ui/issues"
