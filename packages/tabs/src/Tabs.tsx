@@ -9,9 +9,10 @@ import React from 'react'
 // Ideas:
 // - Allow router to fully control state vs relying on controlled or uncotrolled state
 
-type TabsProps<V> = React.ComponentPropsWithoutRef<typeof P.BX> &
+type TabsProps<V> = Omit<React.ComponentPropsWithoutRef<typeof P.BX>, 'el'> &
   UseControlledStateParams<V> & {
     children: React.ReactNode
+    el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
     orientation?: 'horizontal' | 'vertical'
   }
 
@@ -58,65 +59,100 @@ function Tabs<V>({el = 'div', ...props}: TabsProps<V>) {
   )
 }
 
-type TabsTriggerProps<T> = React.ComponentPropsWithoutRef<typeof P.BT> & {
+type TabsTriggerListProps = Omit<
+  React.ComponentPropsWithoutRef<typeof P.BX>,
+  'el'
+> & {
+  el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
+  children?: React.ReactNode
+  asChild?: boolean
+}
+
+const TabsTriggerList = React.forwardRef(function TabsTriggerList(
+  props: TabsTriggerListProps,
+  forwardedRef: React.Ref<TabsTriggerListProps>
+) {
+  const TriggerList = props.asChild ? Child : P.BX
+  return (
+    <TriggerList el="div" role="tablist" ref={forwardedRef}>
+      {props.children}
+    </TriggerList>
+  )
+})
+
+type TabsTriggerProps<T> = Omit<
+  React.ComponentPropsWithoutRef<typeof P.BT>,
+  'el'
+> & {
+  el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
   value?: T
   children?: React.ReactNode
   asChild?: boolean
 }
 
-const TabsTrigger: React.FC<TabsTriggerProps<unknown>> = function TabsTrigger<
-  V
->({el = 'button', value, ...props}: TabsTriggerProps<V>) {
-  const {value: currentValue, setValue} = React.useContext(TabsContext)
-  const Button = props.asChild ? Child : P.BT
+const TabsTrigger: React.FC<TabsTriggerProps<unknown>> = React.forwardRef(
+  function TabsTrigger<V>(
+    {el = 'button', value, ...props}: TabsTriggerProps<V>,
+    forwardedRef: React.Ref<TabsTriggerProps<V>>
+  ) {
+    const {value: currentValue, setValue} = React.useContext(TabsContext)
+    const Button = props.asChild ? Child : P.BT
 
-  return (
-    <Button
-      el={el}
-      role="tab"
-      data-tab
-      data-tab-value={value}
-      data-state={currentValue === value ? 'active' : 'inactive'}
-      aria-selected={currentValue === value}
-      {...props}
-      onClick={() => {
-        setValue && setValue(value)
-      }}
-    />
-  )
-}
+    return (
+      <Button
+        el={el}
+        role="tab"
+        data-tab
+        data-tab-value={value}
+        data-state={currentValue === value ? 'active' : 'inactive'}
+        aria-selected={currentValue === value}
+        {...props}
+        ref={forwardedRef}
+        onClick={() => {
+          setValue && setValue(value)
+        }}
+      />
+    )
+  }
+)
 
-type TabsContentProps<T> = {
+type TabsContentProps<T> = Omit<
+  React.ComponentPropsWithoutRef<typeof P.BX>,
+  'el'
+> & {
   value?: T
+  el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
   asChild?: boolean
   children?: React.ReactNode
-} & React.ComponentPropsWithoutRef<typeof P.BX>
-
-const TabsContent: React.FC<TabsContentProps<unknown>> = function TabsContent<
-  V
->({
-  el = 'div',
-  value,
-  ...props
-}: TabsContentProps<V>): React.ReactElement<typeof P.BX> {
-  const {value: currentValue, setValue} = React.useContext(TabsContext)
-  const Content = props.asChild ? Child : P.BX
-
-  return (
-    <Content
-      el={el}
-      role="tabpanel"
-      data-state={currentValue === value ? 'active' : 'inactive'}
-      hidden={currentValue !== value}
-      {...props}
-      onClick={() => {
-        setValue && setValue(value)
-      }}
-    />
-  )
 }
+
+const TabsContent: React.FC<TabsContentProps<unknown>> = React.forwardRef(
+  function TabsContent<V>(
+    {el = 'div', value, ...props}: TabsContentProps<V>,
+    forwardedRef: React.Ref<TabsContentProps<V>>
+  ): React.ReactElement<typeof P.BX> {
+    const {value: currentValue, setValue} = React.useContext(TabsContext)
+    const Content = props.asChild ? Child : P.BX
+
+    return (
+      <Content
+        el={el}
+        role="tabpanel"
+        data-state={currentValue === value ? 'active' : 'inactive'}
+        data-tab-content={value}
+        hidden={currentValue !== value}
+        {...props}
+        ref={forwardedRef}
+        onClick={() => {
+          setValue && setValue(value)
+        }}
+      />
+    )
+  }
+)
 
 Tabs.Trigger = TabsTrigger
+Tabs.TriggerList = TabsTriggerList
 Tabs.Content = TabsContent
 
 export {Tabs}

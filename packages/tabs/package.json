@@ -2,11 +2,20 @@
   "name": "@interunit/tabs",
   "version": "0.0.2",
   "description": "Organizes content into easily switchable sections",
+  "type": "module",
   "main": "dist/interunit-tabs.cjs.js",
   "types": "dist/interunit-tabs.cjs.d.ts",
   "module": "dist/interunit-tabs.esm.js",
   "react-native": "src/index.ts",
   "prettier": "@interunit/prettier",
+  "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test:unit": "jest --config ./jest.config.js --coverage",
+    "tsc": "tsc --build"
+  },
   "dependencies": {
     "@interunit/a11y": "*",
     "@interunit/config": "*",
