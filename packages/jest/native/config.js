@@ -12,20 +12,10 @@ export const nativeConfig = {
   clearMocks: true,
   resetMocks: true,
   restoreMocks: true,
-  moduleFileExtensions: [
-    'native.ts',
-    'native.tsx',
-    'native.js',
-    'native.jsx',
-    'ts',
-    'tsx',
-    'js',
-    'jsx'
-  ],
   setupFilesAfterEnv: [path.resolve(__dirname, './setupTests.js')],
   testMatch: ['**/*.test.native.{ts,tsx}'],
   transform: {
-    '^.+\\.[t|j]sx?$': [
+    '^.+\\.(ts|tsx|js|jsx)?$': [
       'babel-jest',
       {
         configFile: path.resolve(__dirname, './babel.cjs')

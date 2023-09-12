@@ -26,4 +26,4 @@ jobs:
             - name: Build Packages
               run: yarn build:packages
             - name: Run Native Unit Tests
-              run: yarn test:unit --selectProjects native
+              run: TEST_ENV_NAME=native yarn test:unit --selectProjects native

@@ -33,4 +33,4 @@ jobs:
             - name: Build Packages
               run: yarn build:packages
             - name: Run Web Unit Tests
-              run: yarn test:unit --selectProjects web
+              run: TEST_ENV_NAME=web yarn test:unit --selectProjects web
