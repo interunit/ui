@@ -25,5 +25,5 @@ jobs:
               run: yarn
             - name: Build Packages
               run: yarn build:packages
-            - name: Run Web Unit Tests
+            - name: Run Native Unit Tests
               run: yarn test:unit --selectProjects native
