@@ -69,10 +69,10 @@ type TabsTriggerListProps = Omit<
 }
 
 const TabsTriggerList = React.forwardRef(function TabsTriggerList(
-  props: TabsTriggerListProps,
+  {asChild, ...props}: TabsTriggerListProps,
   forwardedRef: React.Ref<TabsTriggerListProps>
 ) {
-  const TriggerList = props.asChild ? Child : P.BX
+  const TriggerList = asChild ? Child : P.BX
   return (
     <TriggerList el="div" role="tablist" ref={forwardedRef} {...props}>
       {props.children}
@@ -92,11 +92,11 @@ type TabsTriggerProps<T> = Omit<
 
 const TabsTrigger: React.FC<TabsTriggerProps<unknown>> = React.forwardRef(
   function TabsTrigger<V>(
-    {el = 'button', value, ...props}: TabsTriggerProps<V>,
+    {el = 'button', value, asChild, ...props}: TabsTriggerProps<V>,
     forwardedRef: React.Ref<TabsTriggerProps<V>>
   ) {
     const {value: currentValue, setValue} = React.useContext(TabsContext)
-    const Button = props.asChild ? Child : P.BT
+    const Button = asChild ? Child : P.BT
 
     return (
       <Button
@@ -105,6 +105,7 @@ const TabsTrigger: React.FC<TabsTriggerProps<unknown>> = React.forwardRef(
         data-tab
         data-tab-value={value}
         data-state={currentValue === value ? 'active' : 'inactive'}
+        tabIndex={currentValue === value ? 0 : -1}
         aria-selected={currentValue === value}
         {...props}
         ref={forwardedRef}
@@ -146,6 +147,7 @@ const TabsContent: React.FC<TabsContentProps<unknown>> = React.forwardRef(
         hidden={currentValue !== value}
         {...props}
         ref={forwardedRef}
+        tabIndex={0}
         onClick={() => {
           setValue && setValue(value)
         }}
