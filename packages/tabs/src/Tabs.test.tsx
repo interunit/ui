@@ -1,4 +1,4 @@
-import {axe, fireEvent, render, userEvent} from '@interunit/jest/web'
+import {axe, fireEvent, render, userEvent, waitFor} from '@interunit/jest/web'
 
 import {Tabs} from './Tabs'
 
@@ -88,7 +88,7 @@ describe('Tabs', () => {
 
     expect(outside1).toHaveFocus()
 
-    await user.keyboard('{tab}')
+    await user.keyboard('{Tab}')
 
     expect(tab1).toHaveFocus()
   })
@@ -108,7 +108,7 @@ describe('Tabs', () => {
 
     expect(outside1).toHaveFocus()
 
-    await user.keyboard('{tab}')
+    await user.keyboard('{Tab}')
 
     expect(tab2).toHaveFocus()
   })
@@ -126,8 +126,8 @@ describe('Tabs', () => {
 
     expect(tab2Content).toHaveFocus()
 
-    await user.keyboard('{Shift}{tab}')
+    await user.keyboard('{Shift>}Tab{/Shift}')
 
-    expect(tab2).toHaveFocus()
+    await waitFor(() => expect(tab2).toHaveFocus())
   })
 })
