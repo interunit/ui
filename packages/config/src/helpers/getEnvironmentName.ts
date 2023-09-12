@@ -1,4 +1,3 @@
-// import {InterUnitInternals} from '../index"
 import {ENVIRONMENT} from '../internal/internalConfig'
 
 export const getEnvironmentName = () => {
@@ -16,5 +15,4 @@ export const getEnvironmentName = () => {
     return process.env.TEST_ENV_NAME
   }
   return ENVIRONMENT.NAME
-  // return InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 }
