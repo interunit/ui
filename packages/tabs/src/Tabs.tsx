@@ -36,7 +36,7 @@ function Tabs<V>({el = 'div', ...props}: TabsProps<V>) {
 
   useKeyboardNavigation({
     ref: tabsContainerRef,
-    attribute: 'data-tab',
+    attribute: 'data-tab-trigger',
     onFocusChange: (focusedElement: HTMLElement) => {
       const tabValue = focusedElement.getAttribute('data-tab-value')
       if (tabValue) {
@@ -102,7 +102,7 @@ const TabsTrigger: React.FC<TabsTriggerProps<unknown>> = React.forwardRef(
       <Button
         el={el}
         role="tab"
-        data-tab
+        data-tab-trigger
         data-tab-value={value}
         data-state={currentValue === value ? 'active' : 'inactive'}
         tabIndex={currentValue === value ? 0 : -1}
