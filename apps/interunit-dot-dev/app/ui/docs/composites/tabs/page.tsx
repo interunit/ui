@@ -25,7 +25,7 @@ const TabsPage = () => {
       />
       <ComponentDisplay className="mb-12">
         <Tabs defaultValue="home">
-          <P.BX el="div" className="flex gap-2">
+          <Tabs.TriggerList el="div" className="flex gap-2">
             <Tabs.Trigger
               value={'home'}
               aria-label="View the home content"
@@ -47,7 +47,7 @@ const TabsPage = () => {
             >
               <Button color="bg-secondary">Contact</Button>
             </Tabs.Trigger>
-          </P.BX>
+          </Tabs.TriggerList>
           <div className="w-full border-border border-[2px] rounded p-4 mt-4">
             <Tabs.Content value="home">Home</Tabs.Content>
             <Tabs.Content value="about">About</Tabs.Content>
