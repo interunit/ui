@@ -1,4 +1,4 @@
-name: Web Unit Testing
+name: Native Unit Testing
 
 on:
     pull_request:
@@ -21,16 +21,9 @@ jobs:
               uses: actions/setup-node@v3
               with:
                 node-version-file: 'package.json'
-            - name: Setup Chromedriver
-              uses: nanasess/setup-chromedriver@v2
-            - name: Start Chromedriver
-              run: |
-                  export DISPLAY=:99
-                  chromedriver --url-base=/wd/hub &
-                  sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
             - name: Install Dependencies
               run: yarn
             - name: Build Packages
               run: yarn build:packages
             - name: Run Web Unit Tests
-              run: yarn test:unit --selectProjects web
+              run: yarn test:unit --selectProjects native
