@@ -1,5 +1,16 @@
 # @interunit/popover
 
+## 0.0.12
+
+### Patch Changes
+
+- Tabs keyboard navigation improvements + overhaul to testing stack
+- Updated dependencies
+  - @interunit/crossplatform@0.0.5
+  - @interunit/primitives@0.0.10
+  - @interunit/toolbox@0.0.5
+  - @interunit/config@0.0.6
+
 ## 0.0.11
 
 ### Patch Changes

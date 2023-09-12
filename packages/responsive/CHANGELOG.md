@@ -1,5 +1,13 @@
 # @interunit/responsive
 
+## 0.0.5
+
+### Patch Changes
+
+- Tabs keyboard navigation improvements + overhaul to testing stack
+- Updated dependencies
+  - @interunit/config@0.0.6
+
 ## 0.0.4
 
 ### Patch Changes
