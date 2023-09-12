@@ -73,6 +73,10 @@ const Button = React.forwardRef(
       props: {...props, ...accessibilityProps, ...onClickOrPress()}
     })
 
+    if (filteredProps.hidden && getEnvironmentName() === 'native') {
+      return
+    }
+
     return (
       <Button type={type} ref={forwardedRef} {...filteredProps}>
         {children}

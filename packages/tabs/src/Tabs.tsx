@@ -63,7 +63,7 @@ type TabsTriggerListProps = Omit<
   React.ComponentPropsWithoutRef<typeof P.BX>,
   'el'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
+  el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
   children?: React.ReactNode
   asChild?: boolean
 }
@@ -74,7 +74,7 @@ const TabsTriggerList = React.forwardRef(function TabsTriggerList(
 ) {
   const TriggerList = props.asChild ? Child : P.BX
   return (
-    <TriggerList el="div" role="tablist" ref={forwardedRef}>
+    <TriggerList el="div" role="tablist" ref={forwardedRef} {...props}>
       {props.children}
     </TriggerList>
   )
@@ -109,6 +109,9 @@ const TabsTrigger: React.FC<TabsTriggerProps<unknown>> = React.forwardRef(
         {...props}
         ref={forwardedRef}
         onClick={() => {
+          setValue && setValue(value)
+        }}
+        onPress={() => {
           setValue && setValue(value)
         }}
       />

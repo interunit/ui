@@ -1,5 +1,6 @@
 // TODO: When extending via ComponentPropsWithoutRef we lose
 // the children prop
+import {getEnvironmentName} from '@interunit/config'
 import {type MergeWithOverride} from '@interunit/toolbox'
 import React from 'react'
 import type {ViewProps, ViewStyle} from 'react-native'
@@ -53,6 +54,12 @@ const Box = React.forwardRef(
     const filteredProps = filterPropsByEnvironment({
       props: {...props, ...accessibilityProps}
     })
+
+    // Might make sense to move this along with other things to some
+    // sort of HOC pattern for matching parity on props across platforms
+    if (filteredProps.hidden && getEnvironmentName() === 'native') {
+      return
+    }
 
     return (
       <Box ref={forwardedRef} {...filteredProps}>

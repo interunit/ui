@@ -12,13 +12,13 @@ export const nativeConfig = {
   clearMocks: true,
   resetMocks: true,
   restoreMocks: true,
-  setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
+  setupFilesAfterEnv: [path.resolve(__dirname, './setupTests.js')],
   testMatch: ['**/*.test.native.{ts,tsx}'],
   transform: {
     '^.+\\.[t|j]sx?$': [
       'babel-jest',
       {
-        configFile: path.resolve(__dirname, './native/babel.cjs')
+        configFile: path.resolve(__dirname, './babel.cjs')
       }
     ]
   },
@@ -26,10 +26,10 @@ export const nativeConfig = {
     __DEV__: true
   },
   moduleNameMapper: {
-    '^@testing-library/react-native$': path.resolve(
-      __dirname,
-      '../../node_modules/@testing-library/react-native/build'
-    ),
-    '^react-native$': path.resolve(__dirname, '../../node_modules/react-native')
+    // '^@testing-library/react-native$': path.resolve(
+    //   __dirname,
+    //   '../../node_modules/@testing-library/react-native/build'
+    // )
+    // '^react-native$': path.resolve(__dirname, '../../node_modules/react-native')
   }
 }

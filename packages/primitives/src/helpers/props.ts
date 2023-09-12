@@ -11,7 +11,8 @@ const nativeOnlyProps = [
   'accessibilityHint',
   'accessibilityRole',
   'accessibilityState',
-  'onPress'
+  'onPress',
+  'testID'
 ]
 
 const webOnlyProps = ['onClick']
