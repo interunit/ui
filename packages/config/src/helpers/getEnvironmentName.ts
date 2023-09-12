@@ -1,4 +1,4 @@
-import {InterUnitInternals} from '../index'
+import {ENVIRONMENT} from '../internal/internalConfig'
 
 export const getEnvironmentName = () => {
   // Jest doesn't seem to crawl to this file correctly
@@ -14,5 +14,5 @@ export const getEnvironmentName = () => {
     }
     return process.env.TEST_ENV_NAME
   }
-  return InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
+  return ENVIRONMENT.NAME
 }
