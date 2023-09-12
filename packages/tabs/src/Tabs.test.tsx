@@ -92,7 +92,7 @@ describe('Tabs', () => {
 
     expect(tab1).toHaveFocus()
   })
-  test.skip('shift tabbing into Tabs selects active tab', async () => {
+  test('shift tabbing into Tabs selects active tab', async () => {
     const user = userEvent.setup()
     const {container} = render(
       <div>
@@ -112,7 +112,7 @@ describe('Tabs', () => {
 
     expect(tab2).toHaveFocus()
   })
-  test.skip('shift tabbing into Tabs selects active tab', async () => {
+  test('shift tabbing into Tabs selects active tab', async () => {
     const user = userEvent.setup()
     const {container} = render(
       <div>
