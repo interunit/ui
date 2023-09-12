@@ -1,4 +1,4 @@
-import {axe, fireEvent, render, userEvent, waitFor} from '@interunit/jest/web'
+import {axe, fireEvent, render, userEvent} from '@interunit/jest/web'
 
 import {Tabs} from './Tabs'
 
@@ -13,6 +13,17 @@ const TabsComponent = ({defaultValue = '1'}) => {
       <Tabs.Content value="1">Tab 1 content</Tabs.Content>
       <Tabs.Content value="2">Tab 2 content</Tabs.Content>
       <Tabs.Content value="3">Tab 3 content</Tabs.Content>
+    </Tabs>
+  )
+}
+const TabsComponentWithoutContent = ({defaultValue = '1'}) => {
+  return (
+    <Tabs defaultValue={defaultValue}>
+      <Tabs.TriggerList>
+        <Tabs.Trigger value="1">Tab 1</Tabs.Trigger>
+        <Tabs.Trigger value="2">Tab 2</Tabs.Trigger>
+        <Tabs.Trigger value="3">Tab 3</Tabs.Trigger>
+      </Tabs.TriggerList>
     </Tabs>
   )
 }
@@ -88,11 +99,11 @@ describe('Tabs', () => {
 
     expect(outside1).toHaveFocus()
 
-    await user.keyboard('{Tab}')
+    await user.tab()
 
     expect(tab1).toHaveFocus()
   })
-  test('shift tabbing into Tabs selects active tab', async () => {
+  test('tabbing into Tabs selects active tab', async () => {
     const user = userEvent.setup()
     const {container} = render(
       <div>
@@ -108,7 +119,7 @@ describe('Tabs', () => {
 
     expect(outside1).toHaveFocus()
 
-    await user.keyboard('{Tab}')
+    await user.tab()
 
     expect(tab2).toHaveFocus()
   })
@@ -120,14 +131,61 @@ describe('Tabs', () => {
       </div>
     )
     const tab2 = container.querySelector('[data-tab-value="2"]')
-    const tab2Content = container.querySelector('[data-tab-value="2"]')
+    const tab2Content = container.querySelector('[data-tab-content="2"]')
 
     tab2Content.focus()
 
     expect(tab2Content).toHaveFocus()
 
-    await user.keyboard('{Shift>}Tab{/Shift}')
+    await user.tab({shift: true})
 
-    await waitFor(() => expect(tab2).toHaveFocus())
+    expect(tab2).toHaveFocus()
+  })
+  test('tabbing from Tabs trigger focuses content', async () => {
+    const user = userEvent.setup()
+    const {container} = render(
+      <div>
+        <TabsComponent defaultValue={'2'} />
+      </div>
+    )
+    const tab2 = container.querySelector('[data-tab-value="2"]')
+    const tab2Content = container.querySelector('[data-tab-content="2"]')
+
+    tab2.focus()
+
+    expect(tab2).toHaveFocus()
+
+    await user.tab()
+
+    expect(tab2Content).toHaveFocus()
+  })
+  test('works without Tabs.Content', async () => {
+    const user = userEvent.setup()
+    const {container} = render(
+      <div>
+        <button data-outside="1">Button</button>
+        <TabsComponentWithoutContent defaultValue={'2'} />
+        <button data-outside="2">Button</button>
+      </div>
+    )
+    const outside1 = container.querySelector('[data-outside="1"]')
+    const outside2 = container.querySelector('[data-outside="2"]')
+    const tab2 = container.querySelector('[data-tab-value="2"]')
+
+    tab2.focus()
+
+    expect(tab2).toHaveFocus()
+
+    await user.tab()
+
+    expect(outside2).toHaveFocus()
+
+    await user.tab({shift: true})
+
+    expect(tab2).toHaveFocus()
+
+    await user.tab({shift: true})
+
+    expect(outside1).toHaveFocus()
   })
 })
