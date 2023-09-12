@@ -1,6 +1,6 @@
 {
   "name": "@interunit/toolbox",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A collection of helpers and utils ",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -12,6 +12,7 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
+  "type": "module",
   "main": "dist/interunit-toolbox.cjs.js",
   "module": "dist/interunit-toolbox.esm.js",
   "react-native": "src/index.ts",

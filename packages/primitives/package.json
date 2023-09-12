@@ -1,6 +1,6 @@
 {
   "name": "@interunit/primitives",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -12,6 +12,7 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
+  "type": "module",
   "main": "dist/interunit-primitives.cjs.js",
   "module": "dist/interunit-primitives.esm.js",
   "react-native": "src/index.ts",

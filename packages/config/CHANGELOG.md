@@ -1,5 +1,11 @@
 # @interunit/config
 
+## 0.0.6
+
+### Patch Changes
+
+- Tabs keyboard navigation improvements + overhaul to testing stack
+
 ## 0.0.5
 
 ### Patch Changes

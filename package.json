@@ -62,8 +62,12 @@
       "packages/popover",
       "packages/primitives",
       "packages/responsive",
+      "packages/tabs",
       "packages/toolbox"
     ]
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "repository": {
     "type": "git",

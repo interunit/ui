@@ -1,6 +1,6 @@
 {
   "name": "@interunit/crossplatform",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Components and helpers to make cross-platform translations and development smooth",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -12,6 +12,7 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
+  "type": "module",
   "main": "dist/interunit-crossplatform.cjs.js",
   "module": "dist/interunit-crossplatform.esm.js",
   "react-native": "src/index.ts",

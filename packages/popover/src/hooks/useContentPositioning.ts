@@ -138,7 +138,6 @@ export const useContentPositioning = ({
     }
 
     if (positioning.side === 'right') {
-      console.log(triggerDimensions.width, offset)
       styles.left = `${triggerDimensions.width + offset}px`
       styles.top = 0 + 'px'
     }

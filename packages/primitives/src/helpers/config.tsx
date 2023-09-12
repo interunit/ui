@@ -9,7 +9,9 @@ import type React from 'react'
 
 import {getConstruct} from './getConstruct'
 
-const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
+const ENVIRONMENT =
+  process.env.TEST_ENV_NAME ??
+  InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
 
 type ConstructObject = {
   inter: InterConstruct

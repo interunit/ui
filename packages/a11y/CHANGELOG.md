@@ -1,5 +1,13 @@
 # @interunit/a11y
 
+## 0.0.9
+
+### Patch Changes
+
+- First version of the Tabs component. Also adds in a new keyboard navigation hook.
+- Updated dependencies
+  - @interunit/primitives@0.0.9
+
 ## 0.0.8
 
 ### Patch Changes

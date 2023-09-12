@@ -1,5 +1,23 @@
 # @interunit/primitives
 
+## 0.0.10
+
+### Patch Changes
+
+- Tabs keyboard navigation improvements + overhaul to testing stack
+- Updated dependencies
+  - @interunit/crossplatform@0.0.5
+  - @interunit/toolbox@0.0.5
+  - @interunit/config@0.0.6
+
+## 0.0.9
+
+### Patch Changes
+
+- First version of the Tabs component. Also adds in a new keyboard navigation hook.
+- Updated dependencies
+  - @interunit/toolbox@0.0.4
+
 ## 0.0.8
 
 ### Patch Changes

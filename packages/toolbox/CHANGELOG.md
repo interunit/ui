@@ -1,5 +1,19 @@
 # @interunit/toolbox
 
+## 0.0.5
+
+### Patch Changes
+
+- Tabs keyboard navigation improvements + overhaul to testing stack
+- Updated dependencies
+  - @interunit/config@0.0.6
+
+## 0.0.4
+
+### Patch Changes
+
+- First version of the Tabs component. Also adds in a new keyboard navigation hook.
+
 ## 0.0.3
 
 ### Patch Changes

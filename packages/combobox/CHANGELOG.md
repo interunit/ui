@@ -1,5 +1,14 @@
 # @interunit/combobox
 
+## 0.0.5
+
+### Patch Changes
+
+- Tabs keyboard navigation improvements + overhaul to testing stack
+- Updated dependencies
+  - @interunit/primitives@0.0.10
+  - @interunit/config@0.0.6
+
 ## 0.0.4
 
 ### Patch Changes

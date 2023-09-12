@@ -1,5 +1,8 @@
 require('@testing-library/jest-dom')
 require('@testing-library/jest-dom/jest-globals.js')
-const {toHaveNoViolations} = require('jest-axe')
+const pkg = require('jest-axe')
+
+const toHaveNoViolations = pkg.toHaveNoViolations
+
 // eslint-disable-next-line no-undef
 expect.extend(toHaveNoViolations)

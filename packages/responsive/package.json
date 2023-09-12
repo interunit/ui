@@ -1,6 +1,6 @@
 {
   "name": "@interunit/responsive",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Utilities to make cross-platform development a breeze 🍃",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -12,6 +12,7 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
+  "type": "module",
   "main": "dist/interunit-responsive.cjs.js",
   "module": "dist/interunit-responsive.esm.js",
   "react-native": "src/index.ts",

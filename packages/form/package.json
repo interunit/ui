@@ -13,6 +13,7 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
+  "type": "module",
   "main": "dist/interunit-form.cjs.js",
   "module": "dist/interunit-form.esm.js",
   "react-native": "src/index.ts",

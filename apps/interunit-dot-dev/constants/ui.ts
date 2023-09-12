@@ -58,13 +58,8 @@ export const ui = {
           color: 'orange' as ThemeColor
         },
         {
-          name: 'Popover',
-          slug: '/composites/popover',
-          color: 'blue' as ThemeColor
-        },
-        {
-          name: 'Form',
-          slug: '/composites/form',
+          name: 'Collapsible',
+          slug: '/composites/collapsible',
           color: 'blue' as ThemeColor
         },
         {
@@ -73,13 +68,23 @@ export const ui = {
           color: 'blue' as ThemeColor
         },
         {
+          name: 'Form',
+          slug: '/composites/form',
+          color: 'blue' as ThemeColor
+        },
+        {
           name: 'Modal',
           slug: '/composites/modal',
           color: 'blue' as ThemeColor
         },
         {
-          name: 'Collapsible',
-          slug: '/composites/collapsible',
+          name: 'Popover',
+          slug: '/composites/popover',
+          color: 'blue' as ThemeColor
+        },
+        {
+          name: 'Tabs',
+          slug: '/composites/tabs',
           color: 'blue' as ThemeColor
         }
       ]

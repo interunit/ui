@@ -1,6 +1,6 @@
-import {InterUnitInternals} from '@interunit/config'
+import {getEnvironmentName} from '@interunit/config'
 
-const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
+const ENVIRONMENT = getEnvironmentName()
 export const isTouchDevice = () => {
   if (ENVIRONMENT === 'native') return true
   return 'ontouchstart' in window || navigator.maxTouchPoints > 0

@@ -14,6 +14,10 @@ jobs:
         steps:
             - name: Checkout Latest
               uses: actions/checkout@v3
+            - name: Change NodeJS to verison from package.json
+              uses: actions/setup-node@v3
+              with:
+                node-version-file: 'package.json'
             - name: Install Dependencies
               run: yarn
             - name: Run Formatter (Prettier)
