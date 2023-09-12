@@ -1,4 +1,3 @@
-import {getEnvironmentName} from '@interunit/config'
 import {fireEvent, render} from '@interunit/jest/native'
 import {P} from '@interunit/primitives'
 
@@ -65,7 +64,6 @@ const TabsComponent = ({defaultValue = 'home'}) => {
 describe('Tabs', () => {
   test('renders tabs component', async () => {
     const {getByTestId} = render(<TabsComponent />)
-    console.log('getEnvironmentName', getEnvironmentName())
     expect(getByTestId('tabs')).toBeVisible()
   })
   test('pressing tab shows the content', async () => {
