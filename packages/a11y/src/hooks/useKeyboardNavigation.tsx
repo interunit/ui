@@ -48,61 +48,13 @@ function useKeyboardNavigation(params: UseKeyboardNavigationParams) {
   }
 
   //
-  // Move focus when user wants the focus to leave
-  // the current focusable elements
-  //
-  function moveFocusOutside({direction}: {direction: 'forward' | 'backward'}) {
-    const insideFocusableElements =
-      params.ref.current?.querySelectorAll(`[${params.attribute}]`) ?? []
-
-    const outsideFocusableElements = document.body.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    )
-
-    const edgeOfInsideFocusableElements = Array.from(
-      outsideFocusableElements
-    ).indexOf(
-      direction === 'forward'
-        ? insideFocusableElements[insideFocusableElements.length - 1]
-        : insideFocusableElements[0]
-    )
-
-    const edgeOfOutsideFocusableElements =
-      direction === 'forward' ? outsideFocusableElements.length - 1 : 0
-
-    if (edgeOfInsideFocusableElements === edgeOfOutsideFocusableElements) {
-      const nextIndex =
-        direction === 'forward' ? 0 : outsideFocusableElements.length - 1
-      const nextElement = outsideFocusableElements[nextIndex] as HTMLElement
-      nextElement?.focus()
-      return nextElement
-    }
-
-    const nextIndex =
-      direction === 'forward'
-        ? edgeOfInsideFocusableElements + 1
-        : edgeOfInsideFocusableElements - 1
-
-    const nextElement = outsideFocusableElements[nextIndex] as HTMLElement
-    nextElement?.focus()
-  }
-
-  //
   // Move focus when user interacts with keyboard
   //
   function handleKeyDown(event: KeyboardEvent) {
     const orientation =
       params.ref.current?.getAttribute('aria-orientation') ?? 'horizontal'
 
-    if (event.key === 'Tab') {
-      event.preventDefault()
-      if (event.shiftKey) {
-        moveFocusOutside({direction: 'backward'})
-      }
-      if (!event.shiftKey) {
-        moveFocusOutside({direction: 'forward'})
-      }
-    }
+    if (!(event.target as HTMLElement)?.hasAttribute(params.attribute)) return
 
     if (orientation === 'horizontal') {
       if (event.key === 'ArrowRight') {
