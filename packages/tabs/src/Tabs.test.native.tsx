@@ -4,7 +4,6 @@ import {P} from '@interunit/primitives'
 import {Tabs} from './Tabs'
 
 const TabsComponent = ({defaultValue = 'home'}) => {
-  console.log('ENV NAME', getEnvironmentName())
   return (
     <Tabs defaultValue={defaultValue} testID="tabs">
       <Tabs.TriggerList className="flex flex-row justify-between w-screen bg-white p-4">
