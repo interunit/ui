@@ -1,4 +1,4 @@
-import {axe, fireEvent, render, userEvent} from '@interunit/jest/web'
+import {axe, render, userEvent} from '@interunit/jest/web'
 
 import {Tabs} from './Tabs'
 
@@ -49,6 +49,8 @@ describe('Tabs', () => {
     expect(tab3Content).toHaveAttribute('hidden')
   })
   test('prev and next keyboard navigation works', async () => {
+    const user = userEvent.setup()
+
     const {container} = render(<TabsComponent />)
     const tab1 = container.querySelector('[data-tab-value="1"]')
     const tab2 = container.querySelector('[data-tab-value="2"]')
@@ -56,19 +58,21 @@ describe('Tabs', () => {
 
     tab1.focus()
 
-    fireEvent.keyDown(tab1, {key: 'ArrowRight'})
+    await user.keyboard('{ArrowRight}')
 
     expect(tab1).toHaveAttribute('data-state', 'inactive')
     expect(tab2).toHaveAttribute('data-state', 'active')
     expect(tab1Content).toHaveAttribute('hidden')
 
-    fireEvent.keyDown(tab2, {key: 'ArrowLeft'})
+    await user.keyboard('{ArrowLeft}')
 
     expect(tab1).toHaveAttribute('data-state', 'active')
     expect(tab2).toHaveAttribute('data-state', 'inactive')
     expect(tab1Content).not.toHaveAttribute('hidden')
   })
   test('keyboard navigation looping works', async () => {
+    const user = userEvent.setup()
+
     const {container} = render(<TabsComponent />)
     const tab1 = container.querySelector('[data-tab-value="1"]')
     const tab3 = container.querySelector('[data-tab-value="3"]')
@@ -76,7 +80,7 @@ describe('Tabs', () => {
 
     tab1.focus()
 
-    fireEvent.keyDown(tab1, {key: 'ArrowLeft'})
+    await user.keyboard('{ArrowLeft}')
 
     expect(tab1).toHaveAttribute('data-state', 'inactive')
     expect(tab3).toHaveAttribute('data-state', 'active')
