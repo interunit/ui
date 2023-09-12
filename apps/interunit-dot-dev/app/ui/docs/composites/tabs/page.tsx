@@ -25,7 +25,7 @@ const TabsPage = () => {
       />
       <ComponentDisplay className="mb-12">
         <Tabs defaultValue="home">
-          <Tabs.TriggerList el="div" className="flex gap-2">
+          <Tabs.TriggerList className="flex gap-2">
             <Tabs.Trigger
               value={'home'}
               aria-label="View the home content"

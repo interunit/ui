@@ -69,12 +69,12 @@ type TabsTriggerListProps = Omit<
 }
 
 const TabsTriggerList = React.forwardRef(function TabsTriggerList(
-  {asChild, ...props}: TabsTriggerListProps,
+  {el = 'div', asChild, ...props}: TabsTriggerListProps,
   forwardedRef: React.Ref<TabsTriggerListProps>
 ) {
   const TriggerList = asChild ? Child : P.BX
   return (
-    <TriggerList el="div" role="tablist" ref={forwardedRef} {...props}>
+    <TriggerList el={el} role="tablist" ref={forwardedRef} {...props}>
       {props.children}
     </TriggerList>
   )
