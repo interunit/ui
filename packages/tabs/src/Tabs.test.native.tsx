@@ -1,4 +1,3 @@
-import {getEnvironmentName} from '@interunit/config'
 import {fireEvent, render} from '@interunit/jest/native'
 import {P} from '@interunit/primitives'
 

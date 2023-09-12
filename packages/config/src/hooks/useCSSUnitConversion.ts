@@ -54,19 +54,19 @@ export const useCSSUnitConversion = () => {
     const passedUnit = unit
 
     if (passedUnit === 'px') {
-      if (ENVIRONMENT.NAME === 'native') {
+      if (ENVIRONMENT === 'native') {
         return value
       }
-      if (ENVIRONMENT.NAME === 'web') {
+      if (ENVIRONMENT === 'web') {
         return `${value}px`
       }
     }
 
     if (passedUnit === 'rem') {
-      if (ENVIRONMENT.NAME === 'native') {
+      if (ENVIRONMENT === 'native') {
         return value * 16
       }
-      if (ENVIRONMENT.NAME === 'web') {
+      if (ENVIRONMENT === 'web') {
         return `${value}rem`
       }
     }
