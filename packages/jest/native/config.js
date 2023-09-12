@@ -12,6 +12,7 @@ export const nativeConfig = {
   clearMocks: true,
   resetMocks: true,
   restoreMocks: true,
+  testEnvironment: 'node',
   setupFilesAfterEnv: [path.resolve(__dirname, './setupTests.js')],
   testMatch: ['**/*.test.native.{ts,tsx}'],
   transform: {
@@ -26,10 +27,7 @@ export const nativeConfig = {
     __DEV__: true
   },
   moduleNameMapper: {
-    // '^@testing-library/react-native$': path.resolve(
-    //   __dirname,
-    //   '../../node_modules/@testing-library/react-native/build'
-    // )
-    // '^react-native$': path.resolve(__dirname, '../../node_modules/react-native')
+    '^@interunit/((?!jest|babel|eslint|prettier|tsconfig|api-extractor).*)':
+      path.resolve(__dirname, '../../$1/src/index.ts')
   }
 }
