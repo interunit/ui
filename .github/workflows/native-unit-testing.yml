@@ -11,7 +11,7 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    web-unit-testing:
+    native-unit-testing:
         if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
         runs-on: ubuntu-latest
         steps:
