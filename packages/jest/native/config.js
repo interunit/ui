@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename)
 export const nativeConfig = {
   ...tsjPreset.defaults,
   displayName: 'native',
-  preset: 'jest-expo',
+  preset: 'react-native',
   clearMocks: true,
   resetMocks: true,
   restoreMocks: true,
