@@ -1,4 +1,4 @@
-import {InterUnitInternals} from '@interunit/config'
+import {getEnvironmentName} from '@interunit/config'
 import {
   type ConstructTag,
   type InterConstruct,
@@ -9,8 +9,7 @@ import type React from 'react'
 
 import {getConstruct} from './getConstruct'
 
-const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
-
+const ENVIRONMENT = getEnvironmentName()
 type ConstructObject = {
   inter: InterConstruct
   tag: ConstructTag

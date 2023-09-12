@@ -1,10 +1,9 @@
-import {InterUnitInternals} from '@interunit/config'
+import {getEnvironmentName} from '@interunit/config'
 
 import {getScreenWidth} from '../helpers/getScreenWidth'
 import {type PixelString, isPixelString} from '../helpers/isPixelString'
 
-const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
-
+const ENVIRONMENT = getEnvironmentName()
 const prepareCssString = (template: TemplateStringsArray, props: string[]) => {
   let str = ''
   template.forEach((item: string, index: number) => {

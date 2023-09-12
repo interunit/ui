@@ -1,7 +1,9 @@
 // TODO: Might not needs this if primitives are automatically
 // converting these values with platformStyleTranslation
-import {ENVIRONMENT} from '../internal/internalConfig'
+import {getEnvironmentName} from '../helpers/getEnvironmentName'
 import {type CSSUnit, type CSSUnitValue} from '../internal/sharedConfig'
+
+const ENVIRONMENT = getEnvironmentName()
 
 // TODO: This isn't an exhaustive list of units to ignore
 const UnitsToIgnore = [

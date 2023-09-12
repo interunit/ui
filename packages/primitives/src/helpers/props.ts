@@ -1,7 +1,7 @@
-import {InterUnitInternals} from '@interunit/config'
+import {getEnvironmentName} from '@interunit/config'
 import {platformStyleTranslation} from '@interunit/crossplatform'
 
-const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
+const ENVIRONMENT = getEnvironmentName()
 
 const nativeOnlyProps = [
   'onLayout',
