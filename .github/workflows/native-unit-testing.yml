@@ -1,14 +1,17 @@
-name: Formatter
+name: Native Unit Testing
 
 on:
     pull_request:
+    push:
+      branches:
+        - main
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
     cancel-in-progress: true
 
 jobs:
-    formatter:
+    native-unit-testing:
         if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
         runs-on: ubuntu-latest
         steps:
@@ -20,5 +23,9 @@ jobs:
                 node-version-file: 'package.json'
             - name: Install Dependencies
               run: yarn
-            - name: Run Formatter (Prettier)
-              run: yarn format
+            - name: Build Packages
+              run: yarn build:packages
+            - name: Run Native Unit Tests
+              run: yarn test:unit --selectProjects native
+              env:
+                TEST_ENV_NAME: native

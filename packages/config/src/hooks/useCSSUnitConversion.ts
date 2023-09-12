@@ -1,7 +1,9 @@
 // TODO: Might not needs this if primitives are automatically
 // converting these values with platformStyleTranslation
-import {ENVIRONMENT} from '../internal/internalConfig'
+import {getEnvironmentName} from '../helpers/getEnvironmentName'
 import {type CSSUnit, type CSSUnitValue} from '../internal/sharedConfig'
+
+const ENVIRONMENT = getEnvironmentName()
 
 // TODO: This isn't an exhaustive list of units to ignore
 const UnitsToIgnore = [
@@ -52,19 +54,19 @@ export const useCSSUnitConversion = () => {
     const passedUnit = unit
 
     if (passedUnit === 'px') {
-      if (ENVIRONMENT.NAME === 'native') {
+      if (ENVIRONMENT === 'native') {
         return value
       }
-      if (ENVIRONMENT.NAME === 'web') {
+      if (ENVIRONMENT === 'web') {
         return `${value}px`
       }
     }
 
     if (passedUnit === 'rem') {
-      if (ENVIRONMENT.NAME === 'native') {
+      if (ENVIRONMENT === 'native') {
         return value * 16
       }
-      if (ENVIRONMENT.NAME === 'web') {
+      if (ENVIRONMENT === 'web') {
         return `${value}rem`
       }
     }

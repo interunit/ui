@@ -17,6 +17,10 @@ jobs:
         steps:
             - name: Checkout Latest
               uses: actions/checkout@v3
+            - name: Change NodeJS to verison from package.json
+              uses: actions/setup-node@v3
+              with:
+                node-version-file: 'package.json'
             - name: Setup Chromedriver
               uses: nanasess/setup-chromedriver@v2
             - name: Start Chromedriver
@@ -29,4 +33,6 @@ jobs:
             - name: Build Packages
               run: yarn build:packages
             - name: Run Web Unit Tests
-              run: yarn test:unit
+              run: yarn test:unit --selectProjects web
+              env:
+                TEST_ENV_NAME: web

@@ -1,5 +1,5 @@
 import {isTouchDevice, useOutsideClick} from '@interunit/a11y'
-import {InterUnitInternals} from '@interunit/config'
+import {getEnvironmentName} from '@interunit/config'
 import {Modal} from '@interunit/modal'
 import {Child, Primitive} from '@interunit/primitives'
 import React from 'react'
@@ -10,7 +10,7 @@ import {
   useContentPositioning
 } from './hooks/useContentPositioning'
 
-const ENVIRONMENT = InterUnitInternals.InterUnitInternalConfig.ENVIRONMENT.NAME
+const ENVIRONMENT = getEnvironmentName()
 
 type Dimensions = {
   x: number

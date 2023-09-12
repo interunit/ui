@@ -15,7 +15,7 @@ export const nativeConfig = {
   setupFilesAfterEnv: [path.resolve(__dirname, './setupTests.js')],
   testMatch: ['**/*.test.native.{ts,tsx}'],
   transform: {
-    '^.+\\.[t|j]sx?$': [
+    '^.+\\.(ts|tsx|js|jsx)?$': [
       'babel-jest',
       {
         configFile: path.resolve(__dirname, './babel.cjs')
