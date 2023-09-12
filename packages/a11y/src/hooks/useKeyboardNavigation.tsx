@@ -1,3 +1,4 @@
+import {getEnvironmentName} from '@interunit/config'
 import React from 'react'
 
 type UseKeyboardNavigationParams = {
@@ -7,6 +8,8 @@ type UseKeyboardNavigationParams = {
 }
 
 function useKeyboardNavigation(params: UseKeyboardNavigationParams) {
+  if (getEnvironmentName() === 'native') return
+
   //
   // Move focus when user wants the focus to stay inside
   // the current focusable elements
