@@ -35,6 +35,7 @@ const TabsPage = () => {
             </Tabs.Trigger>
             <Tabs.Trigger
               value="about"
+              className="text-primary"
               aria-label="View the about content"
               asChild
             >
@@ -49,7 +50,9 @@ const TabsPage = () => {
             </Tabs.Trigger>
           </Tabs.TriggerList>
           <div className="w-full border-border border-[2px] rounded p-4 mt-4">
-            <Tabs.Content value="home">Home</Tabs.Content>
+            <Tabs.Content value="home" className="test">
+              Home
+            </Tabs.Content>
             <Tabs.Content value="about">About</Tabs.Content>
             <Tabs.Content value="contact">Contact</Tabs.Content>
           </div>

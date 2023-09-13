@@ -13,16 +13,17 @@ export const ButtonConstruct = {
   button: Construct.Button
 }
 
-export type ButtonPrimitiveProps<T extends keyof typeof ButtonConstruct> = Omit<
-  PressableProps & DiscriminatedProps<T>,
-  'style'
-> & {
-  style?: MergeWithOverride<
-    DiscriminatedProps<T>['style'],
-    PressableProps['style']
-  >
-  onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
-}
+export type ButtonPrimitiveProps<V> = V extends infer T
+  ? T extends keyof typeof ButtonConstruct
+    ? Omit<PressableProps & DiscriminatedProps<T>, 'style'> & {
+        style?: MergeWithOverride<
+          DiscriminatedProps<T>['style'],
+          PressableProps['style']
+        >
+        onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
+      }
+    : never
+  : never
 
 const Button = React.forwardRef(
   <T extends keyof typeof ButtonConstruct>(
