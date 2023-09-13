@@ -1,5 +1,11 @@
 # @interunit/config
 
+## 0.0.7
+
+### Patch Changes
+
+- Step `"type":"module"` back from packages because of compatibility issues
+
 ## 0.0.6
 
 ### Patch Changes

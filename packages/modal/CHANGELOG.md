@@ -1,5 +1,15 @@
 # @interunit/modal
 
+## 0.0.8
+
+### Patch Changes
+
+- Step `"type":"module"` back from packages because of compatibility issues
+- Updated dependencies
+  - @interunit/primitives@0.0.11
+  - @interunit/config@0.0.7
+  - @interunit/a11y@0.0.10
+
 ## 0.0.7
 
 ### Patch Changes

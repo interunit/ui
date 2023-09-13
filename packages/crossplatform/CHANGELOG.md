@@ -1,5 +1,14 @@
 # @interunit/crossplatform
 
+## 0.0.6
+
+### Patch Changes
+
+- Step `"type":"module"` back from packages because of compatibility issues
+- Updated dependencies
+  - @interunit/toolbox@0.0.6
+  - @interunit/config@0.0.7
+
 ## 0.0.5
 
 ### Patch Changes
