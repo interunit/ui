@@ -23,23 +23,26 @@ type TabsContextState<V> = {
 
 const TabsContext = React.createContext<TabsContextState<any>>({})
 
-function combineRefs<T extends any>(...refs: Array<React.Ref<T>>) {
+function combineRefs<T>(...refs: Array<React.Ref<T>>) {
   return (value: T) => {
     refs.forEach(ref => {
       if (typeof ref === 'function') {
         ref(value)
       } else if (ref != null) {
-        ;(ref as React.MutableRefObject<T>).current = value
+        const _ref = ref as React.MutableRefObject<T>
+        _ref.current = value
       }
     })
   }
 }
 
-const Tabs = React.forwardRef(function Tabs<V>(
-  {el = 'div', children, ...props}: TabsProps<V>,
-  forwardedRef: React.Ref<TabsProps<V>>
-) {
+function useCombinedRefs<T>(...refs: Array<React.Ref<T>>) {
+  return React.useCallback(() => combineRefs(...refs), refs)
+}
+
+const Tabs = function Tabs<V>({el = 'div', children, ...props}: TabsProps<V>) {
   const tabsContainerRef = React.useRef<HTMLDivElement>(null)
+  const combinedRefs = useCombinedRefs(tabsContainerRef)
 
   const [value, setValue] = useControlledState({
     value: props.value,
@@ -62,7 +65,7 @@ const Tabs = React.forwardRef(function Tabs<V>(
     <P.BX
       el={el}
       {...props}
-      ref={combineRefs([tabsContainerRef, forwardedRef])}
+      ref={combinedRefs}
       aria-orientation={props.orientation}
     >
       <TabsContext.Provider value={{value, setValue} as TabsContextState<V>}>
@@ -70,7 +73,7 @@ const Tabs = React.forwardRef(function Tabs<V>(
       </TabsContext.Provider>
     </P.BX>
   )
-})
+}
 
 type TabsTriggerListProps = Omit<
   React.ComponentPropsWithoutRef<typeof P.BX>,
