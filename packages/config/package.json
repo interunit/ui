@@ -1,6 +1,6 @@
 {
   "name": "@interunit/config",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Handles all config for interactions between packages",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -12,7 +12,6 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
-  "type": "module",
   "main": "dist/interunit-config.cjs.js",
   "module": "dist/interunit-config.esm.js",
   "react-native": "src/index.ts",
@@ -22,7 +21,7 @@
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test:unit": "jest --config ./jest.config.js --coverage"
+    "test:unit": "jest --config ./jest.config.mjs --coverage"
   },
   "prettier": "@interunit/prettier",
   "devDependencies": {
