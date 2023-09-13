@@ -1,5 +1,11 @@
 # @interunit/tabs
 
+## 0.0.3
+
+### Patch Changes
+
+- Tests + Keyboard navigation improvements
+
 ## 0.0.2
 
 ### Patch Changes
