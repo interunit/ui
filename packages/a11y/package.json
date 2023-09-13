@@ -12,7 +12,6 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
-  "type": "module",
   "main": "dist/interunit-a11y.cjs.js",
   "module": "dist/interunit-a11y.esm.js",
   "react-native": "src/index.ts",
@@ -22,7 +21,7 @@
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test:unit": "jest --config ./jest.config.js --coverage"
+    "test:unit": "jest --config ./jest.config.mjs --coverage"
   },
   "prettier": "@interunit/prettier",
   "dependencies": {

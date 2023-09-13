@@ -13,7 +13,6 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
-  "type": "module",
   "main": "dist/interunit-combobox.cjs.js",
   "module": "dist/interunit-combobox.esm.js",
   "react-native": "src/index.ts",
@@ -23,7 +22,7 @@
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test:unit": "jest --config ./jest.config.js --coverage"
+    "test:unit": "jest --config ./jest.config.mjs --coverage"
   },
   "prettier": "@interunit/prettier",
   "dependencies": {
