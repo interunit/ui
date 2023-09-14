@@ -14,11 +14,14 @@ jobs:
         steps:
             - name: Checkout Latest
               uses: actions/checkout@v3
+            - uses: oven-sh/setup-bun@v1
+              with:
+                bun-version: latest
             - name: Change NodeJS to verison from package.json
               uses: actions/setup-node@v3
               with:
                 node-version-file: 'package.json'
             - name: Install Dependencies
-              run: yarn
+              run: bun install
             - name: Run Formatter (Prettier)
-              run: yarn format
+              run: bun run format

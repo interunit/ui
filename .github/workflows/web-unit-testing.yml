@@ -17,6 +17,9 @@ jobs:
         steps:
             - name: Checkout Latest
               uses: actions/checkout@v3
+            - uses: oven-sh/setup-bun@v1
+              with:
+                bun-version: latest
             - name: Change NodeJS to verison from package.json
               uses: actions/setup-node@v3
               with:
@@ -29,10 +32,10 @@ jobs:
                   chromedriver --url-base=/wd/hub &
                   sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
             - name: Install Dependencies
-              run: yarn
+              run: bun install
             - name: Build Packages
-              run: yarn build:packages
+              run: bun run build:packages
             - name: Run Web Unit Tests
-              run: yarn test:unit --selectProjects web
+              run: bun run test:unit --selectProjects web
               env:
                 TEST_ENV_NAME: web
