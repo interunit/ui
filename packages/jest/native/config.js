@@ -5,6 +5,8 @@ import {fileURLToPath} from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+console.log(path.resolve(__dirname, '../../$1/src/index.ts'))
+
 export const nativeConfig = {
   ...tsjPreset.defaults,
   displayName: 'native',

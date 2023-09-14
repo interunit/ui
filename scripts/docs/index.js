@@ -1,3 +1,4 @@
+// TODO: This is broken with build changes
 const {ApiModel} = require('@microsoft/api-extractor-model')
 const {Extractor, ExtractorConfig} = require('@microsoft/api-extractor')
 const path = require('path')
@@ -10,17 +11,15 @@ const markdownTypesDirectory = path.join(
 )
 const configFileName = 'api-extractor.json'
 
-// Get packages based on ones we have in preconstruct config (actual packages)
-// and ones that have an api-extractor.json file (packages that we want to generate types for)
+// Get packages that have an api-extractor.json file (packages that we want to generate types for)
 function getRelevantPackages() {
-  const mainPackageJson = path.join(__dirname, '../../package.json')
-  const allPackages = require(mainPackageJson).preconstruct.packages
-
-  const relevantPackages = allPackages.filter(pkg => {
-    return fsSync.existsSync(
-      path.join(__dirname, '../../', pkg, configFileName)
-    )
-  })
+  const relevantPackages = fsSync
+    .readdirSync(path.join(__dirname, '../../packages'))
+    .filter(pkg => {
+      return fsSync.existsSync(
+        path.join(__dirname, '../../packages', pkg, configFileName)
+      )
+    })
 
   return relevantPackages
 }
@@ -31,10 +30,11 @@ async function runExtractorOnPackage(packagePath) {
   try {
     const apiExtractorJsonPath = path.join(
       __dirname,
-      '../../',
+      '../../packages',
       packagePath,
       configFileName
     )
+
     const preparedExtractorConfig =
       ExtractorConfig.loadFileAndPrepare(apiExtractorJsonPath)
 
@@ -151,17 +151,16 @@ async function modelAPI(packagePath) {
 
 async function cleanup(packagePath) {
   const etcPath = path.join(__dirname, '../../', packagePath, 'etc')
-  const packageName = packagePath.split('/').pop()
   const tempDirectory = path.join(__dirname, '../../', packagePath, 'temp')
   const generatedDeclarationPath = path.join(
     __dirname,
-    '../../',
+    '../../packages',
     packagePath,
-    `dist/${packageName}.d.ts`
+    `dist/index.d.ts`
   )
   const tsDocMetadataPath = path.join(
     __dirname,
-    '../../',
+    '../../packages',
     packagePath,
     'dist/tsdoc-metadata.json'
   )

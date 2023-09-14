@@ -1,4 +1,4 @@
 {
   "extends": "@interunit/api-extractor/config.json",
-  "mainEntryPointFilePath": "<projectFolder>/dist/interunit-popover.cjs.d.ts"
+  "mainEntryPointFilePath": "<projectFolder>/dist/index.d.ts"
 }

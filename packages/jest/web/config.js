@@ -15,5 +15,9 @@ export const webConfig = {
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   testMatch: ['**/*.test.{ts,tsx}'],
-  setupFilesAfterEnv: [path.resolve(__dirname, './setupTests.js')]
+  setupFilesAfterEnv: [path.resolve(__dirname, './setupTests.js')],
+  moduleNameMapper: {
+    '^@interunit/((?!jest|babel|eslint|prettier|tsconfig|api-extractor).*)':
+      path.resolve(__dirname, '../../$1/dist/index.js')
+  }
 }

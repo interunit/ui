@@ -2,47 +2,36 @@ import {useKeyboardNavigation} from '@interunit/a11y'
 import {Child, P} from '@interunit/primitives'
 import {
   type UseControlledStateParams,
+  useCombinedRefs,
   useControlledState
 } from '@interunit/toolbox'
 import React from 'react'
 
-// Ideas:
-// - Allow router to fully control state vs relying on controlled or uncotrolled state
-
-type TabsProps<V> = Omit<React.ComponentPropsWithoutRef<typeof P.BX>, 'el'> &
-  UseControlledStateParams<V> & {
-    children?: React.ReactNode
-    el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
-    orientation?: 'horizontal' | 'vertical'
-  }
+type TabsProps = Omit<React.ComponentPropsWithoutRef<typeof P.BX>, 'el'> & {
+  el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
+  orientation?: 'horizontal' | 'vertical'
+  asChild?: boolean
+}
 
 type TabsContextState<V> = {
   value?: V
   setValue?: (value: V) => void
 }
 
-const TabsContext = React.createContext<TabsContextState<any>>({})
+const TabsContext = React.createContext<TabsContextState<string>>({})
 
-function combineRefs<T>(...refs: Array<React.Ref<T>>) {
-  return (value: T) => {
-    refs.forEach(ref => {
-      if (typeof ref === 'function') {
-        ref(value)
-      } else if (ref != null) {
-        const _ref = ref as React.MutableRefObject<T>
-        _ref.current = value
-      }
-    })
-  }
-}
-
-function useCombinedRefs<T>(...refs: Array<React.Ref<T>>) {
-  return React.useCallback(() => combineRefs(...refs), refs)
-}
-
-const Tabs = function Tabs<V>({el = 'div', children, ...props}: TabsProps<V>) {
-  const tabsContainerRef = React.useRef<HTMLDivElement>(null)
-  const combinedRefs = useCombinedRefs(tabsContainerRef)
+const Tabs = React.forwardRef(function Tabs(
+  {
+    el = 'div',
+    asChild,
+    children,
+    ...props
+  }: TabsProps & UseControlledStateParams<string>,
+  forwardedRef
+) {
+  const tabsContainerRef = React.useRef<typeof P.BX>(null)
+  const combinedRefs = useCombinedRefs(tabsContainerRef, forwardedRef)
+  const Box = asChild ? Child : P.BX
 
   const [value, setValue] = useControlledState({
     value: props.value,
@@ -51,36 +40,32 @@ const Tabs = function Tabs<V>({el = 'div', children, ...props}: TabsProps<V>) {
   } as UseControlledStateParams<string>)
 
   useKeyboardNavigation({
-    ref: tabsContainerRef,
+    // Force casting to HTMLElement because this
+    // can only be used on web and not native
+    ref: tabsContainerRef as unknown as React.RefObject<HTMLElement>,
     attribute: 'data-tab-trigger',
-    onFocusChange: (focusedElement: HTMLElement) => {
-      const tabValue = focusedElement.getAttribute('data-tab-value')
+    onFocusChange: focusedElement => {
+      const tabValue = focusedElement?.getAttribute('data-tab-value')
       if (tabValue) {
-        setValue && setValue(tabValue as string)
+        setValue && setValue(tabValue)
       }
     }
   })
 
   return (
-    <P.BX
-      el={el}
-      {...props}
-      ref={combinedRefs}
-      aria-orientation={props.orientation}
-    >
-      <TabsContext.Provider value={{value, setValue} as TabsContextState<V>}>
+    <TabsContext.Provider value={{value, setValue} as TabsContextState<string>}>
+      <Box el={el} {...props} ref={combinedRefs}>
         {children}
-      </TabsContext.Provider>
-    </P.BX>
+      </Box>
+    </TabsContext.Provider>
   )
-}
+})
 
 type TabsTriggerListProps = Omit<
   React.ComponentPropsWithoutRef<typeof P.BX>,
   'el'
 > & {
   el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
-  children?: React.ReactNode
   asChild?: boolean
 }
 
@@ -102,7 +87,6 @@ type TabsTriggerProps<V> = Omit<
 > & {
   el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
   value?: V
-  children?: React.ReactNode
   asChild?: boolean
 }
 
@@ -141,13 +125,12 @@ type TabsContentProps<V> = Omit<
   value?: V
   el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
   asChild?: boolean
-  children?: React.ReactNode
 }
 
 const TabsContent = React.forwardRef(function TabsContent<V>(
   {el = 'div', value, ...props}: TabsContentProps<V>,
   forwardedRef: React.Ref<TabsContentProps<V>>
-): React.ReactElement<typeof P.BX> {
+) {
   const {value: currentValue, setValue} = React.useContext(TabsContext)
   const Content = props.asChild ? Child : P.BX
 
@@ -168,8 +151,10 @@ const TabsContent = React.forwardRef(function TabsContent<V>(
   )
 })
 
-Tabs.Trigger = TabsTrigger
-Tabs.TriggerList = TabsTriggerList
-Tabs.Content = TabsContent
+const TabsNamespace = Object.assign(Tabs, {
+  Trigger: TabsTrigger,
+  TriggerList: TabsTriggerList,
+  Content: TabsContent
+})
 
-export {Tabs}
+export {TabsNamespace as Tabs}
