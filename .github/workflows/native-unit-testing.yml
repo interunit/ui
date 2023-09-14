@@ -27,7 +27,7 @@ jobs:
             - name: Install Dependencies
               run: bun install
             - name: Build Packages
-              run: bun run build:packages
+              run: bun run build:package
             - name: Run Native Unit Tests
               run: bun run test:unit --selectProjects native
               env:

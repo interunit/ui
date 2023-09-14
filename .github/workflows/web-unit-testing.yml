@@ -34,7 +34,7 @@ jobs:
             - name: Install Dependencies
               run: bun install
             - name: Build Packages
-              run: bun run build:packages
+              run: bun run build:package
             - name: Run Web Unit Tests
               run: bun run test:unit --selectProjects web
               env:
