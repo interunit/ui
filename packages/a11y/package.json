@@ -1,6 +1,6 @@
 {
   "name": "@interunit/a11y",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "description": "A11y utilities to use in InterUnit",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {

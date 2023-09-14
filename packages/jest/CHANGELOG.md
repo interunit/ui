@@ -1,5 +1,17 @@
 # @interunit/jest
 
+## 0.0.6
+
+### Patch Changes
+
+- Emit type fix?
+
+## 0.0.5
+
+### Patch Changes
+
+- Attempting to fix type emit
+
 ## 0.0.4
 
 ### Patch Changes

@@ -1,5 +1,31 @@
 # @interunit/popover
 
+## 0.0.16
+
+### Patch Changes
+
+- Emit type fix?
+- Updated dependencies
+  - @interunit/crossplatform@0.0.9
+  - @interunit/primitives@0.0.14
+  - @interunit/toolbox@0.0.9
+  - @interunit/config@0.0.10
+  - @interunit/modal@0.0.11
+  - @interunit/a11y@0.0.13
+
+## 0.0.15
+
+### Patch Changes
+
+- Attempting to fix type emit
+- Updated dependencies
+  - @interunit/crossplatform@0.0.8
+  - @interunit/primitives@0.0.13
+  - @interunit/toolbox@0.0.8
+  - @interunit/config@0.0.9
+  - @interunit/modal@0.0.10
+  - @interunit/a11y@0.0.12
+
 ## 0.0.14
 
 ### Patch Changes

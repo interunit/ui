@@ -1,5 +1,25 @@
 # @interunit/primitives
 
+## 0.0.14
+
+### Patch Changes
+
+- Emit type fix?
+- Updated dependencies
+  - @interunit/crossplatform@0.0.9
+  - @interunit/toolbox@0.0.9
+  - @interunit/config@0.0.10
+
+## 0.0.13
+
+### Patch Changes
+
+- Attempting to fix type emit
+- Updated dependencies
+  - @interunit/crossplatform@0.0.8
+  - @interunit/toolbox@0.0.8
+  - @interunit/config@0.0.9
+
 ## 0.0.12
 
 ### Patch Changes

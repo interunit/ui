@@ -1,31 +1,45 @@
 import {getEnvironmentName} from '@interunit/config'
-import {type MergeWithOverride} from '@interunit/toolbox'
+import {type Merge} from '@interunit/toolbox'
 import React from 'react'
-import type {ImageProps} from 'react-native'
+import type {Image as RNImage} from 'react-native'
 
 import {Construct} from '../../config'
-import {
-  type DiscriminatedProps,
-  filterPropsByEnvironment
-} from '../../helpers/props'
+import {filterPropsByEnvironment} from '../../helpers/props'
 
 const ImageConstruct = {
   img: Construct.Image
 }
-export type ImagePrimitiveProps<T extends keyof typeof ImageConstruct> = Omit<
-  Omit<ImageProps, 'source'> & DiscriminatedProps<T>,
-  'style'
-> & {
+export type ImagePrimitiveProps<T extends keyof typeof ImageConstruct> = {
   el: T
-  style?: MergeWithOverride<DiscriminatedProps<T>['style'], ImageProps['style']>
 }
 
 export const Image = React.forwardRef(
   <T extends keyof typeof ImageConstruct>(
-    {src, alt, ...props}: ImagePrimitiveProps<T>,
+    {
+      src,
+      alt,
+      ..._props
+    }: ImagePrimitiveProps<T> & {
+      style?: Merge<
+        [
+          React.ComponentPropsWithoutRef<typeof RNImage>,
+          React.JSX.IntrinsicElements[T]['style']
+        ]
+      >
+    } & Merge<
+        [
+          React.ComponentPropsWithoutRef<typeof RNImage>,
+          React.JSX.IntrinsicElements[T]
+        ]
+      >,
     forwardedRef: any
   ) => {
     const Image = ImageConstruct.img
+    // TODO: Why does this need to be re-casted to work
+    // internally?
+    const props = _props as unknown as React.JSX.IntrinsicElements[T] &
+      React.ComponentPropsWithoutRef<typeof RNImage> &
+      ImagePrimitiveProps<T>
 
     const accessibilityProps = {
       accessible: props.accessible ?? true,

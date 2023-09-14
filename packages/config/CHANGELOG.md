@@ -1,5 +1,17 @@
 # @interunit/config
 
+## 0.0.10
+
+### Patch Changes
+
+- Emit type fix?
+
+## 0.0.9
+
+### Patch Changes
+
+- Attempting to fix type emit
+
 ## 0.0.8
 
 ### Patch Changes

@@ -1,29 +1,19 @@
 import {getEnvironmentName} from '@interunit/config'
-import {type MergeWithOverride} from '@interunit/toolbox'
+import {type Merge} from '@interunit/toolbox'
 import React from 'react'
-import type {PressableProps} from 'react-native'
+import type {Pressable} from 'react-native'
 
 import {Construct} from '../../config'
-import {
-  type DiscriminatedProps,
-  filterPropsByEnvironment
-} from '../../helpers/props'
+import {filterPropsByEnvironment} from '../../helpers/props'
 
 export const ButtonConstruct = {
   button: Construct.Button
 }
 
-export type ButtonPrimitiveProps<V> = V extends infer T
-  ? T extends keyof typeof ButtonConstruct
-    ? Omit<PressableProps & DiscriminatedProps<T>, 'style'> & {
-        style?: MergeWithOverride<
-          DiscriminatedProps<T>['style'],
-          PressableProps['style']
-        >
-        onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
-      }
-    : never
-  : never
+export type ButtonPrimitiveProps<T extends keyof typeof ButtonConstruct> = {
+  el: T
+  onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
+}
 
 const Button = React.forwardRef(
   <T extends keyof typeof ButtonConstruct>(
@@ -31,14 +21,33 @@ const Button = React.forwardRef(
       el = 'button' as T,
       type = 'button',
       children,
-      ...props
-    }: ButtonPrimitiveProps<T>,
+      ..._props
+    }: ButtonPrimitiveProps<T> & {
+      style?: Merge<
+        [
+          React.ComponentPropsWithoutRef<typeof Pressable>,
+          React.JSX.IntrinsicElements[T]['style']
+        ]
+      >
+    } & Merge<
+        [
+          React.ComponentPropsWithoutRef<typeof Pressable>,
+          React.JSX.IntrinsicElements[T]
+        ]
+      >,
     forwardedRef: any
   ) => {
+    // TODO: Why does this need to be re-casted to work
+    // internally?
+    const props = _props as React.JSX.IntrinsicElements[T] &
+      React.ComponentPropsWithoutRef<typeof Pressable> &
+      ButtonPrimitiveProps<T>
+
     /*
      * Map similar accessibility props between React Native and Web
      */
     // TODO: probably makes sense to centralize this
+    //
     const accessibilityProps = {
       accessible: props.accessible ?? undefined,
       accessibilityLabel:

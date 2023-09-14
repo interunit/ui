@@ -1,5 +1,17 @@
 # @interunit/tsconfig
 
+## 0.0.7
+
+### Patch Changes
+
+- Emit type fix?
+
+## 0.0.6
+
+### Patch Changes
+
+- Attempting to fix type emit
+
 ## 0.0.5
 
 ### Patch Changes

@@ -1,5 +1,23 @@
 # @interunit/crossplatform
 
+## 0.0.9
+
+### Patch Changes
+
+- Emit type fix?
+- Updated dependencies
+  - @interunit/toolbox@0.0.9
+  - @interunit/config@0.0.10
+
+## 0.0.8
+
+### Patch Changes
+
+- Attempting to fix type emit
+- Updated dependencies
+  - @interunit/toolbox@0.0.8
+  - @interunit/config@0.0.9
+
 ## 0.0.7
 
 ### Patch Changes
