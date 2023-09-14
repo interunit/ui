@@ -18,7 +18,7 @@
     "util:delete-dist": "rm -rf packages/**/dist",
     "changeset:add": "changeset add",
     "changeset:version": "changeset version",
-    "changeset:publish": "bun run util:delete-dist && bun run build:packages && changeset publish",
+    "changeset:publish": "bun run util:delete-dist && bun run build:package && changeset publish",
     "postinstall": "husky install",
     "husky": "postinstall"
   },

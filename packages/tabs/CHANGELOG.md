@@ -1,5 +1,16 @@
 # @interunit/tabs
 
+## 0.0.5
+
+### Patch Changes
+
+- Internal tools migration, preconstruct > tsup. Attempt to fix emit issues in Tabs to then apply elsewhere if successful. Added Bun.
+- Updated dependencies
+  - @interunit/primitives@0.0.12
+  - @interunit/toolbox@0.0.7
+  - @interunit/config@0.0.8
+  - @interunit/a11y@0.0.11
+
 ## 0.0.4
 
 ### Patch Changes

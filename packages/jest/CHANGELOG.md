@@ -1,5 +1,11 @@
 # @interunit/jest
 
+## 0.0.4
+
+### Patch Changes
+
+- Internal tools migration, preconstruct > tsup. Attempt to fix emit issues in Tabs to then apply elsewhere if successful. Added Bun.
+
 ## 0.0.3
 
 ### Patch Changes

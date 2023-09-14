@@ -1,5 +1,11 @@
 # @interunit/config
 
+## 0.0.8
+
+### Patch Changes
+
+- Internal tools migration, preconstruct > tsup. Attempt to fix emit issues in Tabs to then apply elsewhere if successful. Added Bun.
+
 ## 0.0.7
 
 ### Patch Changes
