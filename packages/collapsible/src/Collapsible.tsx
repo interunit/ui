@@ -1,148 +1,126 @@
-import {isTouchDevice} from '@interunit/a11y'
-import {getEnvironmentName} from '@interunit/config'
-import {Child} from '@interunit/primitives'
+import {Child, P} from '@interunit/primitives'
+import {
+  type UseControlledStateParams,
+  useControlledState,
+  useIdString
+} from '@interunit/toolbox'
 import React from 'react'
 
-type CollapsibleState = {
-  isOpen: boolean
-  triggerType: 'click' | 'hover'
-  defaultIsOpen?: boolean
+type CollapsibleContextState = {
+  value: boolean
+  setValue: (value: boolean) => void
+  idString: string
 }
 
-type CollapsibleContextState = CollapsibleState & {
-  dispatch: React.Dispatch<ReducerAction>
-  a11y?: A11yProps
-}
-
-type ReducerAction = {
-  type: 'OPEN' | 'CLOSE' | 'TOGGLE'
-}
-
-type A11yProps = {
-  contentId?: string
-  contentLabelledBy?: string
-}
-
-const DEFAULT_COLLAPSIBLE_STATE: CollapsibleState = {
-  isOpen: false,
-  triggerType: 'click'
-}
-
-const CollapsibleContext = React.createContext(
-  DEFAULT_COLLAPSIBLE_STATE as CollapsibleContextState
-)
+const CollapsibleContext = React.createContext<CollapsibleContextState>({
+  value: false,
+  setValue: () => {},
+  idString: ''
+})
 
 type CollapsibleProps = {
-  defaultIsOpen?: boolean
-  triggerType?: 'click' | 'hover'
-  onCollapsibleChange?: (collapsibleState: CollapsibleState) => void
-  a11y?: A11yProps
   children: React.ReactNode
 }
 
 const Collapsible = ({
-  defaultIsOpen,
-  triggerType = 'click',
-  onCollapsibleChange,
-  a11y,
-  children
-}: CollapsibleProps) => {
-  const [state, dispatch] = React.useReducer(
-    (prevState: CollapsibleState, action: ReducerAction) => {
-      switch (action.type) {
-        case 'OPEN':
-          return {...prevState, isOpen: true}
-        case 'CLOSE':
-          return {...prevState, isOpen: false}
-        case 'TOGGLE':
-          return {...prevState, isOpen: !prevState.isOpen}
-        default:
-          throw new Error(
-            `Invalid Collapsible reducer action type: ${action.type}`
-          )
-      }
-    },
-    {
-      ...DEFAULT_COLLAPSIBLE_STATE,
-      isOpen: defaultIsOpen ?? false,
-      triggerType,
-      defaultIsOpen
-    }
-  )
-
-  React.useEffect(() => {
-    if (onCollapsibleChange) {
-      onCollapsibleChange(state)
-    }
-  }, [state])
+  children,
+  ...props
+}: CollapsibleProps & UseControlledStateParams<boolean>) => {
+  const idString = useIdString()
+  const [value, setValue] = useControlledState({
+    ...props
+  })
 
   return (
-    <CollapsibleContext.Provider value={{...state, a11y, dispatch}}>
+    <CollapsibleContext.Provider value={{value, setValue, idString}}>
       {children}
     </CollapsibleContext.Provider>
   )
 }
 
-const CollapsibleTrigger = ({
-  children
-}: {
-  children: (({isOpen}: {isOpen: boolean}) => React.ReactNode) | React.ReactNode
-}) => {
-  const {isOpen, dispatch, triggerType, a11y} =
-    React.useContext(CollapsibleContext)
-
-  return (
-    <Child
-      onClickOrPress={(event: MouseEvent) => {
-        event.preventDefault()
-        if (
-          triggerType === 'click' ||
-          (triggerType === 'hover' && isTouchDevice())
-        ) {
-          dispatch({type: 'TOGGLE'})
-        }
-      }}
-      onMouseEnter={() => {
-        if (triggerType === 'hover' && getEnvironmentName() === 'web') {
-          dispatch({type: 'OPEN'})
-        }
-      }}
-      onKeyDown={(event: KeyboardEvent) => {
-        if (event.key === 'Enter') {
-          dispatch({type: 'TOGGLE'})
-        }
-
-        if (event.key === 'Escape') {
-          dispatch({type: 'CLOSE'})
-        }
-      }}
-      data-popover-state={isOpen}
-      aria-expanded={isOpen}
-      aria-controls={a11y?.contentId}
-    >
-      {typeof children === 'function' ? children({isOpen}) : children}
-    </Child>
-  )
+type CollapsibleTriggerProps = Omit<
+  React.ComponentPropsWithoutRef<typeof P.BT>,
+  'el'
+> & {
+  el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
+  asChild?: boolean
+  children: (({value}: {value: boolean}) => React.ReactNode) | React.ReactNode
 }
 
-const CollapsibleContent = ({
-  children
-}: {
-  children: (({isOpen}: {isOpen: boolean}) => React.ReactNode) | React.ReactNode
-}) => {
-  const {isOpen, a11y} = React.useContext(CollapsibleContext)
-  if (isOpen) {
+const CollapsibleTrigger = React.forwardRef(
+  (
+    {el = 'button', asChild, children, ...props}: CollapsibleTriggerProps,
+    forwardedRef
+  ) => {
+    const {value, setValue, idString} = React.useContext(CollapsibleContext)
+
+    const Trigger = asChild ? Child : P.BT
+
     return (
-      <Child
-        role="region"
-        id={a11y?.contentId}
-        aria-labelledby={a11y?.contentLabelledBy}
+      <Trigger
+        el={el}
+        onClick={() => {
+          setValue(!value)
+        }}
+        onPress={() => {
+          setValue(!value)
+        }}
+        onKeyDown={(event: React.KeyboardEvent<HTMLButtonElement>) => {
+          if (event.key === 'Enter') {
+            setValue(!value)
+          }
+        }}
+        role="button"
+        data-popover-state={value}
+        aria-expanded={value}
+        aria-controls={props['aria-controls'] || idString}
+        ref={forwardedRef}
       >
-        {typeof children === 'function' ? children({isOpen}) : children}
-      </Child>
+        {typeof children === 'function' ? children({value}) : children}
+      </Trigger>
     )
   }
+)
+
+type CollapsibleContentProps = Omit<
+  React.ComponentPropsWithoutRef<typeof P.BX>,
+  'el'
+> & {
+  el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
+  asChild?: boolean
+  children: (({value}: {value: boolean}) => React.ReactNode) | React.ReactNode
 }
+
+const CollapsibleContent = React.forwardRef(
+  (
+    {el = 'div', asChild, children, ...props}: CollapsibleContentProps,
+    forwardedRef
+  ) => {
+    const {value, idString} = React.useContext(CollapsibleContext)
+    const Content = asChild ? Child : P.BX
+
+    // TODO: Why is this being funny?
+    Object.assign(
+      props.hidden === true
+        ? {
+            hidden: !value
+          }
+        : {}
+    )
+
+    return (
+      <Content
+        el={el}
+        role="region"
+        id={props['id'] || idString}
+        {...props}
+        ref={forwardedRef}
+      >
+        {typeof children === 'function' ? children({value}) : children}
+      </Content>
+    )
+  }
+)
 
 Collapsible.Trigger = CollapsibleTrigger
 Collapsible.Content = CollapsibleContent

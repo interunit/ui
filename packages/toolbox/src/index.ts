@@ -1,5 +1,6 @@
 export {useControlledState} from './hooks/useControlledState'
 export {useCombinedRefs} from './hooks/useCombinedRefs'
+export {useIdString} from './hooks/useIdString'
 
 export type {WithRequired, MergeWithOverride, Merge} from './types'
 export type {

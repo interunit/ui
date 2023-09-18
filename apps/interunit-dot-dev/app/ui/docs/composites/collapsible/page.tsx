@@ -40,22 +40,19 @@ const CollapsiblePage = () => {
         className="mb-12"
         contentClassName="max-w-[300px] w-full flex flex-col justify-center items-center"
       >
-        <Collapsible a11y={{contentId: 'collapsible-content-demo'}}>
-          <Collapsible.Trigger>
-            {({isOpen}) => (
-              <Button kind="text" className="w-full max-w-md bg-bg-muted">
-                Click me
-                <ChevronDown
-                  size={16}
-                  className={twMerge(
-                    'fill-text-light-accent transition-transform',
-                    isOpen && 'rotate-180'
-                  )}
-                />
-              </Button>
-            )}
+        <Collapsible defaultValue={false}>
+          <Collapsible.Trigger asChild>
+            <Button kind="text" className="w-full max-w-md bg-bg-muted">
+              Click me
+              <ChevronDown
+                size={16}
+                className={twMerge(
+                  'fill-text-light-accent transition-transform'
+                )}
+              />
+            </Button>
           </Collapsible.Trigger>
-          <Collapsible.Content>
+          <Collapsible.Content asChild>
             <P.BX
               el="div"
               className="bg-bg-primary border rounded p-4 mt-2 w-full"
