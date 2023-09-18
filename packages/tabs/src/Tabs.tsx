@@ -119,10 +119,10 @@ const TabsTrigger = React.forwardRef(function TabsTrigger<V>(
       {...props}
       ref={forwardedRef}
       onClick={() => {
-        setValue && setValue(value)
+        setValue(value)
       }}
       onPress={() => {
-        setValue && setValue(value)
+        setValue(value)
       }}
     />
   )

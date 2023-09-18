@@ -17,7 +17,8 @@ export type UseControlledStateParams<V> =
   | UncontrolledStateParams<V>
 
 function useControlledState<V = any>(params: UseControlledStateParams<V>) {
-  const isStateAlreadyControlled = params.value !== undefined
+  const isStateAlreadyControlled =
+    params.value !== undefined && params.onValueChange !== undefined
 
   if (isStateAlreadyControlled) {
     return [params.value, params.onValueChange] as const
