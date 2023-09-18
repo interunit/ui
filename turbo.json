@@ -7,10 +7,6 @@
       "outputs": ["dist/**", "types/**"],
       "cache": false
     },
-    "dev:all": {
-      "cache": false,
-      "persistent": true
-    },
     "lint": {
         "outputs": ["node_modules/.cache/.eslintcache"]
     },
@@ -26,10 +22,23 @@
       "outputMode": "new-only"
     },
     "test:unit": {},
-    "dev:docs": {
-      "dependsOn": ["//#dev:packages"]
+    "clean": {},
+    "build:package": {
+        "cache": false,
+        "outputs": ["dist/**"],
+        "dependsOn": ["^//#util:delete-dist", "^build:package"]
     },
+    "watch:package": {
+        "cache": false,
+        "persistent": true,
+        "outputs": ["dist/**"],
+        "dependsOn": ["^//#util:delete-dist", "^build:package"]
+    },
+    "dev:docs": {},
     "//#dev:packages": {},
+    "//#util:delete-dist": {
+        "cache": false
+    },
     "//#build:packages": {}
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@interunit/combobox",
-  "version": "0.0.6",
+  "version": "0.0.10",
   "private": true,
   "description": "",
   "homepage": "https://github.com/interunit/ui#readme",
@@ -13,16 +13,18 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
-  "main": "dist/interunit-combobox.cjs.js",
-  "module": "dist/interunit-combobox.esm.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "react-native": "src/index.ts",
-  "types": "dist/interunit-combobox.cjs.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build:package": "tsup src/index.ts --dts --minify --format cjs,esm --clean --sourcemap",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test:unit": "jest --config ./jest.config.mjs --coverage"
+    "test:unit": "jest --config ./jest.config.mjs --coverage",
+    "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },
   "prettier": "@interunit/prettier",
   "dependencies": {

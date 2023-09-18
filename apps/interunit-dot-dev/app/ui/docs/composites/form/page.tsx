@@ -9,7 +9,6 @@ import {
 } from '@interunit/form/package.json'
 import {P} from '@interunit/primitives'
 import React from 'react'
-import {useTheme} from 'styled-components'
 
 import {AnchoredHeading} from '@/components/docs/AnchoredHeading'
 import {CodeBlock} from '@/components/docs/CodeBlock'
@@ -26,8 +25,6 @@ import {Text} from '@/components/system/Text'
 import {TextInput} from '@/components/system/TextInput'
 
 const FormPage = () => {
-  const theme = useTheme()
-
   type FormValues = {
     firstName: string
     lastName: string
@@ -106,7 +103,7 @@ const FormPage = () => {
                   </Field.ValidityMessage>
                 </Field>
               </InputGroup>
-              <Button type="submit" color={theme?.color.background.secondary}>
+              <Button type="submit" color={'bg-secondary'}>
                 Submit
               </Button>
             </>

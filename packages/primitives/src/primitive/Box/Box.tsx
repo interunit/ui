@@ -1,15 +1,12 @@
 // TODO: When extending via ComponentPropsWithoutRef we lose
 // the children prop
 import {getEnvironmentName} from '@interunit/config'
-import {type MergeWithOverride} from '@interunit/toolbox'
+import {type Merge} from '@interunit/toolbox'
 import React from 'react'
-import type {ViewProps, ViewStyle} from 'react-native'
+import type {View} from 'react-native'
 
 import {Construct} from '../../config'
-import {
-  type DiscriminatedProps,
-  filterPropsByEnvironment
-} from '../../helpers/props'
+import {filterPropsByEnvironment} from '../../helpers/props'
 
 export const BoxConstruct = {
   div: Construct.Div,
@@ -21,19 +18,37 @@ export const BoxConstruct = {
   li: Construct.LI
 }
 
-export type BoxPrimitiveProps<T extends keyof typeof BoxConstruct> = Omit<
-  ViewProps & DiscriminatedProps<T>,
-  'style'
-> & {
+export type BoxPrimitiveProps<T extends keyof typeof BoxConstruct> = {
   el: T
-  style?: MergeWithOverride<DiscriminatedProps<T>['style'], ViewStyle>
 }
 
 const Box = React.forwardRef(
   <T extends keyof typeof BoxConstruct>(
-    {el, children, ...props}: BoxPrimitiveProps<T>,
+    {
+      el,
+      children,
+      ..._props
+    }: BoxPrimitiveProps<T> & {
+      style?: Merge<
+        [
+          React.ComponentPropsWithoutRef<typeof View>,
+          React.JSX.IntrinsicElements[T]['style']
+        ]
+      >
+    } & Merge<
+        [
+          React.ComponentPropsWithoutRef<typeof View>,
+          React.JSX.IntrinsicElements[T]
+        ]
+      >,
     forwardedRef: any
   ) => {
+    // TODO: Why does this need to be re-casted to work
+    // internally?
+    const props = _props as React.JSX.IntrinsicElements[T] &
+      React.ComponentPropsWithoutRef<typeof View> &
+      BoxPrimitiveProps<T>
+
     const Box = BoxConstruct?.[el] as React.ElementType
 
     if (Box === undefined) {

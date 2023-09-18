@@ -16,16 +16,15 @@ export type UseControlledStateParams<V> =
   | ControlledStateParams<V>
   | UncontrolledStateParams<V>
 
-// TODO: Catch runtime error if props are invalid
-
-function useControlledState<V>(params: UseControlledStateParams<V>) {
-  const isStateAlreadyControlled = params.value !== undefined
+function useControlledState<V = any>(params: UseControlledStateParams<V>) {
+  const isStateAlreadyControlled =
+    params.value !== undefined && params.onValueChange !== undefined
 
   if (isStateAlreadyControlled) {
     return [params.value, params.onValueChange] as const
   }
 
-  const [value, setValue] = React.useState<V>(params.defaultValue as V)
+  const [value, setValue] = React.useState(params.defaultValue as V)
 
   return [value, setValue] as const
 }

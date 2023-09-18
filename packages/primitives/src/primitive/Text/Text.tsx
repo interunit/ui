@@ -1,13 +1,10 @@
 import {getEnvironmentName} from '@interunit/config'
-import {type MergeWithOverride} from '@interunit/toolbox'
+import {type Merge} from '@interunit/toolbox'
 import React from 'react'
-import type {TextProps} from 'react-native'
+import type {Text as RNText} from 'react-native'
 
 import {Construct} from '../../config'
-import {
-  type DiscriminatedProps,
-  filterPropsByEnvironment
-} from '../../helpers/props'
+import {filterPropsByEnvironment} from '../../helpers/props'
 
 // TODO: Add strong, em, etc
 const TextConstruct = {
@@ -23,16 +20,29 @@ const TextConstruct = {
   a: Construct.A
 } as const
 
-type TextPrimitiveProps<T extends keyof typeof TextConstruct> = Omit<
-  TextProps & DiscriminatedProps<T>,
-  'style'
-> & {
-  style?: MergeWithOverride<DiscriminatedProps<T>['style'], TextProps['style']>
+type TextPrimitiveProps<T extends keyof typeof TextConstruct> = {
+  el: T
 }
 
 const Text = React.forwardRef(
   <T extends keyof typeof TextConstruct>(
-    {el, children, ...props}: TextPrimitiveProps<T>,
+    {
+      el,
+      children,
+      ...props
+    }: TextPrimitiveProps<T> & {
+      style?: Merge<
+        [
+          React.ComponentPropsWithoutRef<typeof RNText>,
+          React.JSX.IntrinsicElements[T]['style']
+        ]
+      >
+    } & Merge<
+        [
+          React.ComponentPropsWithoutRef<typeof RNText>,
+          React.JSX.IntrinsicElements[T]
+        ]
+      >,
     forwardedRef: any
   ) => {
     const Text = TextConstruct?.[el] as React.ElementType

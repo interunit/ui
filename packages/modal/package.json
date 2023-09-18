@@ -1,6 +1,6 @@
 {
   "name": "@interunit/modal",
-  "version": "0.0.8",
+  "version": "0.0.12",
   "description": "A low-level component to help display content on top of the current page or view",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -12,16 +12,18 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
-  "main": "dist/interunit-modal.cjs.js",
-  "module": "dist/interunit-modal.esm.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "react-native": "src/index.ts",
-  "types": "dist/interunit-modal.cjs.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build:package": "tsup src/index.ts --dts --minify --format cjs,esm --clean --sourcemap",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test:unit": "jest --config ./jest.config.mjs --coverage"
+    "test:unit": "jest --config ./jest.config.mjs --coverage",
+    "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },
   "dependencies": {
     "@interunit/a11y": "*",

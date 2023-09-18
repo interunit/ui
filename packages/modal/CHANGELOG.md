@@ -1,5 +1,45 @@
 # @interunit/modal
 
+## 0.0.12
+
+### Patch Changes
+
+- Improving Tabs typechecking with generics
+- Updated dependencies
+  - @interunit/primitives@0.0.15
+  - @interunit/config@0.0.11
+  - @interunit/a11y@0.0.14
+
+## 0.0.11
+
+### Patch Changes
+
+- Emit type fix?
+- Updated dependencies
+  - @interunit/primitives@0.0.14
+  - @interunit/config@0.0.10
+  - @interunit/a11y@0.0.13
+
+## 0.0.10
+
+### Patch Changes
+
+- Attempting to fix type emit
+- Updated dependencies
+  - @interunit/primitives@0.0.13
+  - @interunit/config@0.0.9
+  - @interunit/a11y@0.0.12
+
+## 0.0.9
+
+### Patch Changes
+
+- Internal tools migration, preconstruct > tsup. Attempt to fix emit issues in Tabs to then apply elsewhere if successful. Added Bun.
+- Updated dependencies
+  - @interunit/primitives@0.0.12
+  - @interunit/config@0.0.8
+  - @interunit/a11y@0.0.11
+
 ## 0.0.8
 
 ### Patch Changes

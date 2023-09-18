@@ -1,5 +1,45 @@
 # @interunit/primitives
 
+## 0.0.15
+
+### Patch Changes
+
+- Improving Tabs typechecking with generics
+- Updated dependencies
+  - @interunit/crossplatform@0.0.10
+  - @interunit/toolbox@0.0.10
+  - @interunit/config@0.0.11
+
+## 0.0.14
+
+### Patch Changes
+
+- Emit type fix?
+- Updated dependencies
+  - @interunit/crossplatform@0.0.9
+  - @interunit/toolbox@0.0.9
+  - @interunit/config@0.0.10
+
+## 0.0.13
+
+### Patch Changes
+
+- Attempting to fix type emit
+- Updated dependencies
+  - @interunit/crossplatform@0.0.8
+  - @interunit/toolbox@0.0.8
+  - @interunit/config@0.0.9
+
+## 0.0.12
+
+### Patch Changes
+
+- Internal tools migration, preconstruct > tsup. Attempt to fix emit issues in Tabs to then apply elsewhere if successful. Added Bun.
+- Updated dependencies
+  - @interunit/crossplatform@0.0.7
+  - @interunit/toolbox@0.0.7
+  - @interunit/config@0.0.8
+
 ## 0.0.11
 
 ### Patch Changes
