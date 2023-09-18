@@ -1,5 +1,14 @@
 # @interunit/a11y
 
+## 0.0.14
+
+### Patch Changes
+
+- Improving Tabs typechecking with generics
+- Updated dependencies
+  - @interunit/primitives@0.0.15
+  - @interunit/config@0.0.11
+
 ## 0.0.13
 
 ### Patch Changes

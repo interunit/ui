@@ -1,5 +1,14 @@
 # @interunit/crossplatform
 
+## 0.0.10
+
+### Patch Changes
+
+- Improving Tabs typechecking with generics
+- Updated dependencies
+  - @interunit/toolbox@0.0.10
+  - @interunit/config@0.0.11
+
 ## 0.0.9
 
 ### Patch Changes

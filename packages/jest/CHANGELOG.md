@@ -1,5 +1,11 @@
 # @interunit/jest
 
+## 0.0.7
+
+### Patch Changes
+
+- Improving Tabs typechecking with generics
+
 ## 0.0.6
 
 ### Patch Changes

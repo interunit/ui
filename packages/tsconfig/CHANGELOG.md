@@ -1,5 +1,11 @@
 # @interunit/tsconfig
 
+## 0.0.8
+
+### Patch Changes
+
+- Improving Tabs typechecking with generics
+
 ## 0.0.7
 
 ### Patch Changes

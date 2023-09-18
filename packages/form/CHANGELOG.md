@@ -1,5 +1,15 @@
 # @interunit/form
 
+## 0.0.8
+
+### Patch Changes
+
+- Improving Tabs typechecking with generics
+- Updated dependencies
+  - @interunit/primitives@0.0.15
+  - @interunit/config@0.0.11
+  - @interunit/a11y@0.0.14
+
 ## 0.0.7
 
 ### Patch Changes

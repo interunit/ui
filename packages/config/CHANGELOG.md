@@ -1,5 +1,11 @@
 # @interunit/config
 
+## 0.0.11
+
+### Patch Changes
+
+- Improving Tabs typechecking with generics
+
 ## 0.0.10
 
 ### Patch Changes
