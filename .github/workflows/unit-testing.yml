@@ -1,4 +1,4 @@
-name: Native Unit Testing
+name: Unit Testing
 
 on:
     pull_request:
@@ -11,7 +11,7 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    native-unit-testing:
+    unit-testing:
         if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
         runs-on: macos-latest
         steps:
@@ -32,3 +32,24 @@ jobs:
               run: bun run test:unit --selectProjects native --coverageDirectory ./coverage/native
               env:
                 TEST_ENV_NAME: native
+            - name: Setup Chromedriver
+              uses: nanasess/setup-chromedriver@v2
+            - name: Start Chromedriver
+              run: |
+                  export DISPLAY=:99
+                  chromedriver --url-base=/wd/hub &
+                  sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+            - name: Run Web Unit Tests
+              run: bun run test:unit --selectProjects web --coverageDirectory ./coverage/web
+              env:
+                TEST_ENV_NAME: web
+            - name: Merge Coverage Reports
+              run: bun run test:unit:coverage-merge
+            - name: Generate Coverage Report
+              run: bun run test:unit:coverage-report
+            - name: Add Report to PR Comment
+              uses: Nef10/lcov-reporter-action@v0.3.0
+              with:
+                lcov-file: ./coverage/lcov.info
+
+

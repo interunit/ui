@@ -36,6 +36,6 @@ jobs:
             - name: Build Packages
               run: bun run build:package
             - name: Run Web Unit Tests
-              run: bun run test:unit --selectProjects web
+              run: bun run test:unit --selectProjects web --coverageDirectory ./coverage/web
               env:
                 TEST_ENV_NAME: web

@@ -30,4 +30,6 @@ web-build/
 
 # Tests
 coverage/
+.nyc_output
+
 

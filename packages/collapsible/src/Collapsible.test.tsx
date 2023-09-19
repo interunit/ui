@@ -64,7 +64,7 @@ describe('Collapsible', () => {
     const content = container.querySelector('[role="region"]')
     expect(content).toBeVisible()
 
-    await user.keyboard(trigger, '{Space}')
+    await user.type(trigger, '{Space}')
     expect(content).not.toBeVisible()
 
     await user.type(trigger, '{Enter}', {skipClick: true})

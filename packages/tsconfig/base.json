@@ -17,6 +17,7 @@
     "importHelpers": true,
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "types": ["node", "jest", "@testing-library/jest-dom", "@types/jest-axe"],
+    "typeRoots": ["node_modules/@types"],
     "noImplicitAny": false
   },
 "references": [

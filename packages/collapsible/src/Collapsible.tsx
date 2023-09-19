@@ -76,6 +76,7 @@ const CollapsibleTrigger = React.forwardRef(
         data-popover-state={value}
         aria-expanded={value}
         aria-controls={props['aria-controls'] || idString}
+        {...props}
         ref={forwardedRef}
       >
         {typeof children === 'function' ? children({value}) : children}
