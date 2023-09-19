@@ -2,9 +2,13 @@
 // No longer have to use position fixed on the body :)
 import {useEffect} from 'react'
 
-const useLockBodyScroll = (
-  {isLocked, enabled = true}: {isLocked: boolean; enabled: boolean}
-) => {
+const useLockBodyScroll = ({
+  isLocked,
+  enabled = true
+}: {
+  isLocked: boolean
+  enabled: boolean
+}) => {
   useEffect(() => {
     if (enabled) {
       const body = document.querySelector('body')

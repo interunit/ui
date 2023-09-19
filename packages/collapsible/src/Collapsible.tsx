@@ -22,9 +22,10 @@ type CollapsibleProps = {
   children: React.ReactNode
 }
 
-const Collapsible = (
-  {children, ...props}: CollapsibleProps & UseControlledStateParams<boolean>
-) => {
+const Collapsible = ({
+  children,
+  ...props
+}: CollapsibleProps & UseControlledStateParams<boolean>) => {
   const idString = useIdString()
   const [value, setValue] = useControlledState({
     ...props

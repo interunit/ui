@@ -16,7 +16,7 @@
     "test:unit:coverage-report": "nyc report --reporter=text --reporter=lcov --report-dir=coverage",
     "create:package": "npx hygen create package",
     "generate:docs": "node ./scripts/docs/index.js",
-    "util:clean": "rm -rf node_modules **/node_modules **/**/node_modules **/**/**/node_modules & yarn cache clean",
+    "util:clean": "rm -rf node_modules **/node_modules **/**/node_modules **/**/**/node_modules & bun pm cache rm",
     "util:delete-dist": "rm -rf packages/**/dist",
     "changeset:add": "changeset add",
     "changeset:version": "changeset version",

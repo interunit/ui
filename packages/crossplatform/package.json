@@ -18,8 +18,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build:package": "tsup src/index.ts --dts --minify --format cjs,esm --clean --sourcemap",
-    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
-    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "format": "prettier ./src/**/* --check",
+    "format:fix": "prettier ./src/**/* --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test:unit": "jest --config ./jest.config.mjs --coverage",

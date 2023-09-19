@@ -16,11 +16,6 @@
   "files": [
     "base.js"
   ],
-  "scripts": {
-    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
-    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write"
-  },
-  "prettier": "@interunit/prettier",
   "devDependencies": {
     "@interunit/prettier": "*",
     "@react-native-community/eslint-config": "^3.2.0",
@@ -35,4 +30,3 @@
     "eslint-plugin-react": "^7.32.2"
   }
 }
-
