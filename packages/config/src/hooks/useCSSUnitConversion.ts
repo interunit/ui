@@ -34,13 +34,9 @@ const UnitsToIgnore = [
 // - vw
 
 export const useCSSUnitConversion = () => {
-  const convert = ({
-    value: RawValue,
-    unit
-  }: {
-    value: CSSUnitValue | undefined
-    unit: CSSUnit
-  }) => {
+  const convert = (
+    {value: RawValue, unit}: {value: CSSUnitValue | undefined; unit: CSSUnit}
+  ) => {
     if (!RawValue) return undefined
 
     if (

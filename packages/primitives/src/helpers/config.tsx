@@ -18,11 +18,9 @@ type ConstructObject = {
   tag: ConstructTag
   component?: NativeComponent | WebComponent
 }
-export const createWrappedConstruct = ({
-  Construct
-}: {
-  Construct: ConstructObject[]
-}) => {
+export const createWrappedConstruct = (
+  {Construct}: {Construct: ConstructObject[]}
+) => {
   return Construct.reduce(
     (acc: any, {inter, tag, component}: ConstructObject) => {
       if (ENVIRONMENT === 'web') {
