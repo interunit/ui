@@ -13,7 +13,7 @@
     "format:fix": "turbo run format:fix --continue -- --cache --cache-location='node_modules/.cache/.prettiercache'",
     "test:unit": "turbo run test:unit --continue -- --cache --cache-location='node_modules/.cache/.jestcache' --passWithNoTests",
     "create:package": "npx hygen create package",
-    "generate:docs": "bun run ./scripts/docs/index.js",
+    "generate:docs": "node ./scripts/docs/index.js",
     "util:clean": "rm -rf node_modules **/node_modules **/**/node_modules **/**/**/node_modules & yarn cache clean",
     "util:delete-dist": "rm -rf packages/**/dist",
     "changeset:add": "changeset add",

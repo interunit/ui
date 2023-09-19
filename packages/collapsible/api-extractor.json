@@ -1,0 +1,4 @@
+{
+  "extends": "@interunit/api-extractor/config.json",
+  "mainEntryPointFilePath": "<projectFolder>/dist/index.d.ts"
+}

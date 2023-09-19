@@ -1,4 +1,4 @@
-export type PopoverArrow = Omit<PrimitiveBoxProps, 'el'> & {
+type PopoverArrow = Omit<PrimitiveBoxProps, 'el'> & {
     size?: CSSUnit;
     borderRadius?: CSSUnit;
     strokeWidth?: CSSUnit;
