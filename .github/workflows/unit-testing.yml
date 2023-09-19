@@ -48,7 +48,7 @@ jobs:
             - name: Generate Coverage Report
               run: bun run test:unit:coverage-report
             - name: Add Report to PR Comment
-              uses: Nef10/lcov-reporter-action@0.4.0
+              uses: Nef10/lcov-reporter-action@v0.4.0
               with:
                 lcov-file: ./coverage/lcov.info
                 github-token: ${{ github.token }}
