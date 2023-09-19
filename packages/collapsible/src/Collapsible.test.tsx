@@ -1,4 +1,4 @@
-import {axe, render, userEvent, waitFor} from '@interunit/jest/web'
+import {axe, render, userEvent} from '@interunit/jest/web'
 
 import {Collapsible} from './Collapsible'
 
@@ -13,9 +13,18 @@ const CollapsibleComponent = ({defaultValue = false, ...props}) => {
 
 describe('Collapsible', () => {
   test('should have no accessibility violations', async () => {
+    const user = userEvent.setup()
     const {container} = render(<CollapsibleComponent />)
     const results = await axe(container)
+    const trigger = container.querySelector('[role="button"]')
+
     expect(results).toHaveNoViolations()
+
+    trigger.focus()
+    await user.type(trigger, '{Space}')
+
+    const openResults = await axe(container)
+    expect(openResults).toHaveNoViolations()
   })
   test('generated id should match', () => {
     const {getByText} = render(<CollapsibleComponent />)
@@ -37,19 +46,31 @@ describe('Collapsible', () => {
     expect(trigger).toHaveAttribute('aria-controls', 'test')
     expect(content).toHaveAttribute('id', 'test')
   })
-  test('basic keyboard navigation should work', async () => {
+  test('a11y keyboard navigation should work', async () => {
+    // For some reason user.keyboard doesn't seem to work here?
     const user = userEvent.setup()
-    const {getByText} = render(<CollapsibleComponent />)
-    const trigger = getByText('Trigger')
-    const content = getByText('Content')
+    const {container} = render(
+      <div>
+        <CollapsibleComponent />
+      </div>
+    )
 
+    const trigger = container.querySelector('[role="button"]')
     trigger.focus()
 
     expect(trigger).toHaveFocus()
+    await user.type(trigger, '{Space}')
 
-    await user.keyboard('{Space}')
-    await waitFor(() => expect(content).toBeVisible())
-    user.keyboard('{Space}')
-    await waitFor(() => expect(content).not.toBeVisible())
+    const content = container.querySelector('[role="region"]')
+    expect(content).toBeVisible()
+
+    await user.keyboard(trigger, '{Space}')
+    expect(content).not.toBeVisible()
+
+    await user.type(trigger, '{Enter}', {skipClick: true})
+    expect(content).toBeVisible()
+
+    await user.type(trigger, '{Enter}', {skipClick: true})
+    expect(content).not.toBeVisible()
   })
 })

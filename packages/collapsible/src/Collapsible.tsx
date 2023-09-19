@@ -65,8 +65,10 @@ const CollapsibleTrigger = React.forwardRef(
         onPress={() => {
           setValue(!value)
         }}
+        type="button"
         onKeyDown={(event: React.KeyboardEvent<HTMLButtonElement>) => {
           if (event.key === 'Enter') {
+            event.preventDefault()
             setValue(!value)
           }
         }}
@@ -99,20 +101,12 @@ const CollapsibleContent = React.forwardRef(
     const {value, idString} = React.useContext(CollapsibleContext)
     const Content = asChild ? Child : P.BX
 
-    // TODO: Why is this being funny?
-    Object.assign(
-      props.hidden === true
-        ? {
-            hidden: !value
-          }
-        : {}
-    )
-
     return (
       <Content
         el={el}
         role="region"
         id={props['id'] || idString}
+        hidden={!value}
         {...props}
         ref={forwardedRef}
       >
