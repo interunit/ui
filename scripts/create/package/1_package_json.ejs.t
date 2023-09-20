@@ -11,12 +11,12 @@ to: packages/<%= packageName %>/package.json
   "react-native": "src/index.ts",
   "dependencies": {
   <% if (shouldIncludePrimitives && shouldIncludeConfig) { %>
-    "@interunit/primitives": "*",
-    "@interunit/config": "*"
+    "@interunit/primitives": "workspace:*",
+    "@interunit/config": "workspace:*"
   <% } else if (shouldIncludePrimitives) { %>
-    "@interunit/primitives": "*"
+    "@interunit/primitives": "workspace:*"
   <% } else if (shouldIncludeConfig) { %>
-    "@interunit/config": "*"
+    "@interunit/config": "workspace:*"
   <% } %>
   },
   "devDependencies": {

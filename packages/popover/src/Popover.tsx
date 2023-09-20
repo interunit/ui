@@ -248,7 +248,7 @@ const PopoverTrigger = React.forwardRef(
         collapsable={false}
         data-popover-state={value}
       >
-        {typeof children === 'function' ? children({value}) : children}
+        {children}
       </Button>
     )
   }

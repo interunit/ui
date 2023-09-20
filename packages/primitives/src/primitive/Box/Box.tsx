@@ -1,5 +1,5 @@
 import {getEnvironmentName} from '@interunit/config'
-import {type Merge} from '@interunit/toolbox'
+import {type MergedCrossPlatformProps} from '@interunit/toolbox'
 import React from 'react'
 import type {View} from 'react-native'
 
@@ -26,19 +26,7 @@ const Box = React.forwardRef(
       el,
       children,
       ..._props
-    }: BoxPrimitiveProps<T> & {
-      style?: Merge<
-        [
-          React.ComponentPropsWithoutRef<typeof View>['style'],
-          React.JSX.IntrinsicElements[T]['style']
-        ]
-      >
-    } & Merge<
-        [
-          React.ComponentPropsWithoutRef<typeof View>,
-          React.JSX.IntrinsicElements[T]
-        ]
-      >,
+    }: BoxPrimitiveProps<T> & MergedCrossPlatformProps<T, typeof View>,
     forwardedRef: any
   ) => {
     // TODO: Why does this need to be re-casted to work
@@ -80,6 +68,8 @@ const Box = React.forwardRef(
       </Box>
     )
   }
-)
+) as <T extends keyof typeof BoxConstruct>(
+  props: BoxPrimitiveProps<T> & MergedCrossPlatformProps<T, typeof Box>
+) => React.JSX.Element
 
 export {Box}

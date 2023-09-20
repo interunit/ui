@@ -26,8 +26,8 @@
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },
   "dependencies": {
-    "@interunit/config": "*",
-    "@interunit/toolbox": "*",
+    "@interunit/config": "workspace:*",
+    "@interunit/toolbox": "workspace:*",
     "css-to-react-native": "^3.2.0"
   },
   "devDependencies": {

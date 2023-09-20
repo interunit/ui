@@ -1,6 +1,7 @@
 import {Child, P} from '@interunit/primitives'
 import {
   type UseControlledStateParams,
+  useCombinedRefs,
   useControlledState,
   useIdString
 } from '@interunit/toolbox'
@@ -44,7 +45,7 @@ type CollapsibleTriggerProps = Omit<
 > & {
   el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
   asChild?: boolean
-  children: (({value}: {value: boolean}) => React.ReactNode) | React.ReactNode
+  children: React.ReactNode
 }
 
 const CollapsibleTrigger = React.forwardRef(
@@ -53,6 +54,7 @@ const CollapsibleTrigger = React.forwardRef(
     forwardedRef
   ) => {
     const {value, setValue, idString} = React.useContext(CollapsibleContext)
+    const combinedRef = useCombinedRefs(forwardedRef)
 
     const Trigger = asChild ? Child : P.BT
 
@@ -77,9 +79,9 @@ const CollapsibleTrigger = React.forwardRef(
         aria-expanded={value}
         aria-controls={props['aria-controls'] || idString}
         {...props}
-        ref={forwardedRef}
+        ref={combinedRef}
       >
-        {typeof children === 'function' ? children({value}) : children}
+        {children}
       </Trigger>
     )
   }

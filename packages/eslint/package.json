@@ -17,7 +17,7 @@
     "base.js"
   ],
   "devDependencies": {
-    "@interunit/prettier": "*",
+    "@interunit/prettier": "workspace:*",
     "@react-native-community/eslint-config": "^3.2.0",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",

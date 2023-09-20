@@ -27,15 +27,15 @@
   },
   "prettier": "@interunit/prettier",
   "dependencies": {
-    "@interunit/config": "*",
-    "@interunit/crossplatform": "*",
-    "@interunit/toolbox": "*"
+    "@interunit/config": "workspace:*",
+    "@interunit/crossplatform": "workspace:*",
+    "@interunit/toolbox": "workspace:*"
   },
   "devDependencies": {
-    "@interunit/eslint": "*",
-    "@interunit/jest": "*",
-    "@interunit/prettier": "*",
-    "@interunit/tsconfig": "*",
+    "@interunit/eslint": "workspace:*",
+    "@interunit/jest": "workspace:*",
+    "@interunit/prettier": "workspace:*",
+    "@interunit/tsconfig": "workspace:*",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.5",
     "@types/react-native": "^0.72.2",
@@ -45,4 +45,3 @@
     "react": "^18.2.0"
   }
 }
-

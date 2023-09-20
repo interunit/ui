@@ -26,7 +26,7 @@
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },
   "dependencies": {
-    "@interunit/config": "*"
+    "@interunit/config": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "18.2.21",

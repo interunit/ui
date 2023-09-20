@@ -26,13 +26,13 @@
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },
   "dependencies": {
-    "@interunit/a11y": "*",
-    "@interunit/api-extractor": "*",
-    "@interunit/config": "*",
-    "@interunit/crossplatform": "*",
-    "@interunit/modal": "*",
-    "@interunit/primitives": "*",
-    "@interunit/toolbox": "*"
+    "@interunit/a11y": "workspace:*",
+    "@interunit/api-extractor": "workspace:*",
+    "@interunit/config": "workspace:*",
+    "@interunit/crossplatform": "workspace:*",
+    "@interunit/modal": "workspace:*",
+    "@interunit/primitives": "workspace:*",
+    "@interunit/toolbox": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "18.2.21",

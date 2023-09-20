@@ -27,10 +27,10 @@
   },
   "prettier": "@interunit/prettier",
   "devDependencies": {
-    "@interunit/eslint": "*",
-    "@interunit/jest": "*",
-    "@interunit/prettier": "*",
-    "@interunit/tsconfig": "*",
+    "@interunit/eslint": "workspace:*",
+    "@interunit/jest": "workspace:*",
+    "@interunit/prettier": "workspace:*",
+    "@interunit/tsconfig": "workspace:*",
     "@types/react": "18.2.21",
     "typescript": "^5.2.2"
   },
@@ -38,4 +38,3 @@
     "react": "^18.2.0"
   }
 }
-

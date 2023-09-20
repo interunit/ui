@@ -7,7 +7,7 @@
   ],
   "prettier": "@interunit/prettier",
   "devDependencies": {
-    "@interunit/prettier": "*",
+    "@interunit/prettier": "workspace:*",
     "typescript": "^5.2.2"
   },
   "peerDependencies": {

@@ -1,5 +1,5 @@
 import {getEnvironmentName} from '@interunit/config'
-// import {type Merge} from '@interunit/toolbox'
+import {type MergedCrossPlatformProps} from '@interunit/toolbox'
 import React from 'react'
 import type {Pressable} from 'react-native'
 
@@ -14,9 +14,6 @@ export type ButtonPrimitiveProps<T extends keyof typeof ButtonConstruct> = {
   el?: T
   onClickOrPress?: (e: React.MouseEvent | React.TouchEvent) => void
 }
-type MergedCrossPlatformProps<T extends keyof typeof ButtonConstruct> =
-  React.ComponentPropsWithoutRef<typeof Pressable> &
-    React.JSX.IntrinsicElements[T]
 
 const Button = React.forwardRef(function Button<
   T extends keyof typeof ButtonConstruct
@@ -26,7 +23,7 @@ const Button = React.forwardRef(function Button<
     type = 'button',
     children,
     ..._props
-  }: ButtonPrimitiveProps<T> & MergedCrossPlatformProps<T>,
+  }: ButtonPrimitiveProps<T> & MergedCrossPlatformProps<T, typeof Pressable>,
   forwardedRef
 ) {
   // TODO: Why does this need to be re-casted to work
@@ -85,7 +82,7 @@ const Button = React.forwardRef(function Button<
     </Button>
   )
 }) as <T extends keyof typeof ButtonConstruct>(
-  props: ButtonPrimitiveProps<T> & MergedCrossPlatformProps<T>
+  props: ButtonPrimitiveProps<T> & MergedCrossPlatformProps<T, typeof Pressable>
 ) => React.JSX.Element
 
 export {Button}

@@ -26,9 +26,9 @@
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },
   "dependencies": {
-    "@interunit/a11y": "*",
-    "@interunit/config": "*",
-    "@interunit/primitives": "*",
+    "@interunit/a11y": "workspace:*",
+    "@interunit/config": "workspace:*",
+    "@interunit/primitives": "workspace:*",
     "focus-trap-react": "^10.2.1"
   },
   "devDependencies": {
