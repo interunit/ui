@@ -26,13 +26,13 @@ const PropsTableRow = ({
   return (
     <React.Fragment>
       <td className="border-r-[1px] border-b-[1px] border-border-accent">
-        <P.BX el="div" className="text-md">
+        <P.TX el="span" className="text-md block">
           {prop.name}
           {prop.required && '*'}
-        </P.BX>
-        <P.BX el="div" className="text-sm text-text-light-accent">
+        </P.TX>
+        <P.TX el="span" className="block text-sm text-text-light-accent">
           {children ? children : prop.type}
-        </P.BX>
+        </P.TX>
       </td>
       <td className="text-sm text-text-light-accent border-r-[1px] border-b-[1px] border-border-accent">
         {prop.default ? prop.default : '-'}
@@ -61,10 +61,10 @@ const PropsTable = ({propsToDisplay}: {propsToDisplay: PropToDisplay[]}) => {
             <React.Fragment key={index}>
               {prop?.properties && prop?.properties?.length > 0 ? (
                 <Collapsible>
-                  <tr className="bg-bg-blended border [&>div]:p-4 overflow-x-auto">
+                  <tr className="bg-bg-blended border [&>span]:p-4 overflow-x-auto">
                     <PropsTableRow prop={prop} key={index}>
-                      <Collapsible.Trigger>
-                        {({isOpen}) => (
+                      <Collapsible.Trigger asChild>
+                        {({value}) => (
                           <Button
                             kind="text"
                             className="!p-0 [&_*]:text-sm [&_*]:gap-1"
@@ -72,7 +72,7 @@ const PropsTable = ({propsToDisplay}: {propsToDisplay: PropToDisplay[]}) => {
                             <ChevronRight
                               size="16"
                               className={`fill-text-light-accent transition-transform ${
-                                isOpen && 'rotate-90'
+                                value && 'rotate-90'
                               }`}
                             />
                             {prop.type}
@@ -82,7 +82,7 @@ const PropsTable = ({propsToDisplay}: {propsToDisplay: PropToDisplay[]}) => {
                     </PropsTableRow>
                   </tr>
                   {prop?.properties?.map((childProp, childIndex) => (
-                    <Collapsible.Content key={index + ' ' + childIndex}>
+                    <Collapsible.Content key={index + ' ' + childIndex} asChild>
                       <tr className="bg-bg-blended-accent border  [&>div]:p-4 overflow-x-auto">
                         <PropsTableRow prop={childProp} />
                       </tr>
@@ -90,7 +90,7 @@ const PropsTable = ({propsToDisplay}: {propsToDisplay: PropToDisplay[]}) => {
                   ))}
                 </Collapsible>
               ) : (
-                <tr className="bg-bg-blended border[&>div]:p-4 overflow-x-auto">
+                <tr className="bg-bg-blended border[&>span]:p-4 overflow-x-auto">
                   <PropsTableRow prop={prop} key={index} />
                 </tr>
               )}

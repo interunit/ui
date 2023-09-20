@@ -114,7 +114,7 @@ async function createMarkdownFiles(types) {
 }
 
 async function createEtcPaths(packagePath) {
-  const etcPath = path.join(__dirname, '../../', packagePath, 'etc')
+  const etcPath = path.join(__dirname, '../../packages', packagePath, 'etc')
   await createDirectory(etcPath)
 }
 
@@ -125,7 +125,7 @@ async function modelAPI(packagePath) {
 
     const apiJsonPath = path.join(
       __dirname,
-      '../../',
+      '../../packages',
       packagePath,
       'temp',
       `${packageName}.api.json`
@@ -150,13 +150,19 @@ async function modelAPI(packagePath) {
 }
 
 async function cleanup(packagePath) {
-  const etcPath = path.join(__dirname, '../../', packagePath, 'etc')
-  const tempDirectory = path.join(__dirname, '../../', packagePath, 'temp')
+  const etcPath = path.join(__dirname, '../../packages', packagePath, 'etc')
+  const tempDirectory = path.join(
+    __dirname,
+    '../../packages',
+    packagePath,
+    'temp'
+  )
+  const packageName = packagePath.split('/').pop()
   const generatedDeclarationPath = path.join(
     __dirname,
     '../../packages',
     packagePath,
-    `dist/index.d.ts`
+    `dist/${packageName}.d.ts`
   )
   const tsDocMetadataPath = path.join(
     __dirname,

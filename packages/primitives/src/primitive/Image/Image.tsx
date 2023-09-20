@@ -1,5 +1,5 @@
 import {getEnvironmentName} from '@interunit/config'
-import {type Merge} from '@interunit/toolbox'
+import {type MergedCrossPlatformProps} from '@interunit/toolbox'
 import React from 'react'
 import type {Image as RNImage} from 'react-native'
 
@@ -11,6 +11,7 @@ const ImageConstruct = {
 }
 export type ImagePrimitiveProps<T extends keyof typeof ImageConstruct> = {
   el: T
+  source?: React.ComponentPropsWithoutRef<typeof RNImage>['source']
 }
 
 export const Image = React.forwardRef(
@@ -19,19 +20,7 @@ export const Image = React.forwardRef(
       src,
       alt,
       ..._props
-    }: ImagePrimitiveProps<T> & {
-      style?: Merge<
-        [
-          React.ComponentPropsWithoutRef<typeof RNImage>,
-          React.JSX.IntrinsicElements[T]['style']
-        ]
-      >
-    } & Merge<
-        [
-          React.ComponentPropsWithoutRef<typeof RNImage>,
-          React.JSX.IntrinsicElements[T]
-        ]
-      >,
+    }: ImagePrimitiveProps<T> & MergedCrossPlatformProps<T, typeof RNImage>,
     forwardedRef: any
   ) => {
     const Image = ImageConstruct.img
@@ -56,6 +45,16 @@ export const Image = React.forwardRef(
       return
     }
 
-    return <Image src={src} alt={alt} ref={forwardedRef} {...filteredProps} />
+    return (
+      <Image
+        src={src}
+        source={props.source}
+        alt={alt}
+        ref={forwardedRef}
+        {...filteredProps}
+      />
+    )
   }
-)
+) as <T extends keyof typeof ImageConstruct>(
+  props: ImagePrimitiveProps<T> & MergedCrossPlatformProps<T, typeof RNImage>
+) => React.JSX.Element

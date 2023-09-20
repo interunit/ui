@@ -7,7 +7,6 @@ import {
   name,
   version
 } from '@interunit/popover/package.json'
-import {Primitive} from '@interunit/primitives'
 import {P} from '@interunit/primitives'
 import React from 'react'
 
@@ -29,11 +28,12 @@ const PopoverPage = () => {
           data={{title: 'Popover', name, description, version, homepage}}
         />
         <ComponentDisplay className="mb-12">
-          <Popover triggerType="click">
-            <Popover.Trigger>
+          <Popover defaultValue={false}>
+            <Popover.Trigger asChild>
               <Button color={'bg-secondary'}>Click me</Button>
             </Popover.Trigger>
             <Popover.Content
+              asChild
               positioning={{
                 side: 'bottom',
                 align: 'center',
@@ -49,7 +49,7 @@ const PopoverPage = () => {
                 borderRadius: 2
               }}
             >
-              <Primitive.Box
+              <P.BX
                 el="div"
                 className={
                   'bg-bg-primary border-[1px] border-border rounded p-4'
@@ -58,7 +58,7 @@ const PopoverPage = () => {
                 <Text el="span">
                   The content test test <br /> test <br /> test
                 </Text>
-              </Primitive.Box>
+              </P.BX>
             </Popover.Content>
           </Popover>
         </ComponentDisplay>

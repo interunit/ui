@@ -1,6 +1,6 @@
 {
   "name": "@interunit/crossplatform",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Components and helpers to make cross-platform translations and development smooth",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -18,16 +18,16 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build:package": "tsup src/index.ts --dts --minify --format cjs,esm --clean --sourcemap",
-    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
-    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "format": "prettier ./src/**/* --check",
+    "format:fix": "prettier ./src/**/* --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test:unit": "jest --config ./jest.config.mjs --coverage",
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },
   "dependencies": {
-    "@interunit/config": "*",
-    "@interunit/toolbox": "*",
+    "@interunit/config": "workspace:*",
+    "@interunit/toolbox": "workspace:*",
     "css-to-react-native": "^3.2.0"
   },
   "devDependencies": {

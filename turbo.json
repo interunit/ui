@@ -18,8 +18,8 @@
       "outputMode": "new-only"
     },
     "format:fix": {
-      "outputs": ["node_modules/.cache/.prettiercache"],
-      "outputMode": "new-only"
+      "outputMode": "new-only",
+      "cache": false
     },
     "test:unit": {},
     "clean": {},

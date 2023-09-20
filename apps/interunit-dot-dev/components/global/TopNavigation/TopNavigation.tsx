@@ -45,16 +45,16 @@ const TopNavigation = () => {
               el="li"
               className={`flex flex-row items-center m-0 NavigationArrow`}
             >
-              <Popover triggerType="hover">
-                <Popover.Trigger>
-                  {({isOpen}) => (
+              <Popover defaultValue={false}>
+                <Popover.Trigger asChild>
+                  {({value}) => (
                     <Button tabIndex={0} color="bg-secondary" variation="sm">
                       <Text el="span">Docs</Text>
                       <ChevronDown
                         color={theme.colors['text-light-accent']}
                         role="img"
                         className={`transition-transform ${
-                          isOpen && 'rotate-180'
+                          value && 'rotate-180'
                         }`}
                         aria-label="Arrow pointing down"
                       />
@@ -76,6 +76,7 @@ const TopNavigation = () => {
                     borderRadius: 2,
                     strokeWidth: 2
                   }}
+                  asChild
                 >
                   <Primitive.Box
                     el="div"
@@ -93,8 +94,8 @@ const TopNavigation = () => {
                           el="ul"
                           className="list-none py-2 flex flex-col gap-1 px-2"
                         >
-                          {gettingStarted.sections.map(section => (
-                            <Primitive.Box el="li">
+                          {gettingStarted.sections.map((section, index) => (
+                            <Primitive.Box el="li" key={index}>
                               <Link
                                 href={section.slug}
                                 passHref

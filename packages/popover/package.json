@@ -1,6 +1,6 @@
 {
   "name": "@interunit/popover",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "A popover component",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -18,21 +18,21 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build:package": "tsup src/index.ts --dts --minify --format cjs,esm --clean --sourcemap",
-    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
-    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "format": "prettier ./src/**/* --check",
+    "format:fix": "prettier ./src/**/* --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test:unit": "jest --config ./jest.config.mjs --coverage",
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },
   "dependencies": {
-    "@interunit/a11y": "*",
-    "@interunit/api-extractor": "*",
-    "@interunit/config": "*",
-    "@interunit/crossplatform": "*",
-    "@interunit/modal": "*",
-    "@interunit/primitives": "*",
-    "@interunit/toolbox": "*"
+    "@interunit/a11y": "workspace:*",
+    "@interunit/api-extractor": "workspace:*",
+    "@interunit/config": "workspace:*",
+    "@interunit/crossplatform": "workspace:*",
+    "@interunit/modal": "workspace:*",
+    "@interunit/primitives": "workspace:*",
+    "@interunit/toolbox": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "18.2.21",

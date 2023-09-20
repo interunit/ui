@@ -1,6 +1,6 @@
 {
   "name": "interunit-example-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "dev:all": "expo start --dev-client",
@@ -11,14 +11,14 @@
     "start": "expo start --dev-client"
   },
   "dependencies": {
-    "@interunit/config": "*",
-    "@interunit/combobox": "*",
-    "@interunit/form": "*",
-    "@interunit/modal": "*",
-    "@interunit/popover": "*",
-    "@interunit/primitives": "*",
-    "@interunit/responsive": "*",
-    "@interunit/tabs": "*",
+    "@interunit/combobox": "workspace:*",
+    "@interunit/config": "workspace:*",
+    "@interunit/form": "workspace:*",
+    "@interunit/modal": "workspace:*",
+    "@interunit/popover": "workspace:*",
+    "@interunit/primitives": "workspace:*",
+    "@interunit/responsive": "workspace:*",
+    "@interunit/tabs": "workspace:*",
     "expo": "~48.0.18",
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",

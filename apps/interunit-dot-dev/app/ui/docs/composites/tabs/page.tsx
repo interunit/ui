@@ -31,7 +31,9 @@ const TabsPage = () => {
               aria-label="View the home content"
               asChild
             >
-              <Button color="bg-secondary">Home</Button>
+              <P.BT el="button" className="hi">
+                Home
+              </P.BT>
             </Tabs.Trigger>
             <Tabs.Trigger
               value="about"

@@ -1,4 +1,4 @@
-name: Web Unit Testing
+name: Unit Testing
 
 on:
     pull_request:
@@ -11,7 +11,7 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    web-unit-testing:
+    unit-testing:
         if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
         runs-on: macos-latest
         steps:
@@ -24,6 +24,14 @@ jobs:
               uses: actions/setup-node@v3
               with:
                 node-version-file: 'package.json'
+            - name: Install Dependencies
+              run: bun install
+            - name: Build Packages
+              run: bun run build:package
+            - name: Run Native Unit Tests
+              run: bun run test:unit --selectProjects native --coverageDirectory ./coverage/native
+              env:
+                TEST_ENV_NAME: native
             - name: Setup Chromedriver
               uses: nanasess/setup-chromedriver@v2
             - name: Start Chromedriver
@@ -31,11 +39,17 @@ jobs:
                   export DISPLAY=:99
                   chromedriver --url-base=/wd/hub &
                   sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
-            - name: Install Dependencies
-              run: bun install
-            - name: Build Packages
-              run: bun run build:package
             - name: Run Web Unit Tests
-              run: bun run test:unit --selectProjects web
+              run: bun run test:unit --selectProjects web --coverageDirectory ./coverage/web
               env:
                 TEST_ENV_NAME: web
+            - name: Merge Coverage Reports
+              run: bun run test:unit:coverage-merge
+            - name: Generate Coverage Report
+              run: bun run test:unit:coverage-report
+            - name: Upload coverage reports to Codecov
+              uses: codecov/codecov-action@v3
+              env:
+                CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+

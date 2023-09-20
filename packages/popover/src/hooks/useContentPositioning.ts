@@ -48,27 +48,24 @@ export const useContentPositioning = ({
   nativeTriggerDimensions: Dimensions | undefined
   nativeContentDimensions: Dimensions | undefined
 }) => {
-  const positioning = React.useMemo(() => {
+  const positioning = React.useMemo<PopoverPositioning>(() => {
     return {
       offset: 0,
       ..._positioning
     }
   }, [_positioning])
 
-  const arrow = React.useMemo(() => {
+  const arrow = React.useMemo<PopoverArrow>(() => {
     return {
       strokeWidth: 0,
       ..._arrow
     }
   }, [_arrow])
 
-  const [arrowStyles, setArrowStyles] = React.useState<PopoverArrow['style']>(
-    {}
-  )
+  const [arrowStyles, setArrowStyles] = React.useState<React.CSSProperties>({})
 
-  const [positioningStyles, setPositioningStyles] = React.useState<
-    PopoverPositioning['style']
-  >({})
+  const [positioningStyles, setPositioningStyles] =
+    React.useState<React.CSSProperties>({})
 
   const getDimensions = ({
     ref,
@@ -120,7 +117,7 @@ export const useContentPositioning = ({
     }
 
     const offset = platformCSSUnitTranslation(
-      positioning.offset,
+      positioning.offset ?? 0,
       'native'
     ) as number
 

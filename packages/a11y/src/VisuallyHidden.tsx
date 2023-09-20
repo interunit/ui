@@ -14,12 +14,9 @@ const visuallyHiddenStyles = {
   pointerEvents: 'none'
 } as CSSProperties
 
-export const VisuallyHidden = ({
-  children,
-  ...otherProps
-}: {
-  children: React.ReactNode
-}) => {
+export const VisuallyHidden = (
+  {children, ...otherProps}: {children: React.ReactNode}
+) => {
   return (
     <Child style={visuallyHiddenStyles} {...otherProps}>
       {children}

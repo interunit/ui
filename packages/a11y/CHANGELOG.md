@@ -1,5 +1,14 @@
 # @interunit/a11y
 
+## 0.0.15
+
+### Patch Changes
+
+- Workspaces update + Types fixes
+- Updated dependencies
+  - @interunit/primitives@0.0.17
+  - @interunit/config@0.0.12
+
 ## 0.0.14
 
 ### Patch Changes

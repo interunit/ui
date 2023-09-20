@@ -1,6 +1,6 @@
 {
   "name": "@interunit/toolbox",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A collection of helpers and utils ",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -18,15 +18,15 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build:package": "tsup src/index.ts --dts --minify --format cjs,esm --clean --sourcemap",
-    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
-    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "format": "prettier ./src/**/* --check",
+    "format:fix": "prettier ./src/**/* --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test:unit": "jest --config ./jest.config.mjs --coverage",
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },
   "dependencies": {
-    "@interunit/config": "*"
+    "@interunit/config": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "18.2.21",

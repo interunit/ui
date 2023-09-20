@@ -7,15 +7,18 @@ import {type ThemeColor, theme} from '@/theme.config'
 
 type ButtonKind = 'primary' | 'text'
 type ButtonProps = Omit<React.ComponentPropsWithoutRef<typeof P.BT>, 'el'> & {
+  el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
   color: ThemeColor
   variation?: 'xs' | 'sm' | 'md' | 'lg'
   kind?: ButtonKind
+  children: React.ReactNode
 }
 
 type ButtonAnchorProps = Omit<
   React.ComponentPropsWithoutRef<typeof P.TX>,
   'el'
 > & {
+  el?: React.ComponentPropsWithoutRef<typeof P.TX>['el']
   color: ThemeColor
   variation?: 'xs' | 'sm' | 'md' | 'lg'
   kind?: ButtonKind
@@ -92,26 +95,23 @@ const getButtonStyle = (kind: ButtonKind, colorValue: string) => {
   return {}
 }
 
-const Button = React.forwardRef<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  any,
-  ButtonProps
->(
+const Button = React.forwardRef(
   (
     {
+      el = 'button',
       color = 'bg-secondary' as ThemeColor,
       variation = 'md',
       kind = 'primary',
       className,
       children,
       ...props
-    },
+    }: ButtonProps,
     forwardedRef
   ) => {
     const colorValue = getColorValue(color)
     return (
       <P.BT
-        el="button"
+        el={el}
         className={twMerge(
           kindClassName(kind),
           variationClassName(variation),

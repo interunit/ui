@@ -79,8 +79,10 @@ const TabsTriggerList = React.forwardRef(function TabsTriggerList(
   forwardedRef: React.Ref<TabsTriggerListProps>
 ) {
   const TriggerList = asChild ? Child : P.BX
+
+  const combinedRef = useCombinedRefs(forwardedRef)
   return (
-    <TriggerList el={el} role="tablist" ref={forwardedRef} {...props}>
+    <TriggerList el={el} role="tablist" ref={combinedRef} {...props}>
       {children}
     </TriggerList>
   )
@@ -102,10 +104,11 @@ type TabsTriggerProps<V> = Omit<
 
 const TabsTrigger = React.forwardRef(function TabsTrigger<V>(
   {el = 'button', value, asChild, ...props}: TabsTriggerProps<V>,
-  forwardedRef: React.Ref<TabsTriggerProps<V>>
+  forwardedRef
 ) {
   const {value: currentValue, setValue} = React.useContext(TabsContext)
   const Button = asChild ? Child : P.BT
+  const combinedRef = useCombinedRefs(forwardedRef)
 
   return (
     <Button
@@ -117,7 +120,7 @@ const TabsTrigger = React.forwardRef(function TabsTrigger<V>(
       tabIndex={currentValue === value ? 0 : -1}
       aria-selected={currentValue === value}
       {...props}
-      ref={forwardedRef}
+      ref={combinedRef}
       onClick={() => {
         setValue(value)
       }}
@@ -148,6 +151,7 @@ const TabsContent = React.forwardRef(function TabsContent<V>(
 ) {
   const {value: currentValue, setValue} = React.useContext(TabsContext)
   const Content = props.asChild ? Child : P.BX
+  const combinedRef = useCombinedRefs(forwardedRef)
 
   return (
     <Content
@@ -157,7 +161,7 @@ const TabsContent = React.forwardRef(function TabsContent<V>(
       data-tab-content={value}
       hidden={currentValue !== value}
       {...props}
-      ref={forwardedRef}
+      ref={combinedRef}
       tabIndex={0}
       onClick={() => {
         setValue(value)

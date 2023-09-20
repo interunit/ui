@@ -1,5 +1,5 @@
 import {getEnvironmentName} from '@interunit/config'
-import {type Merge} from '@interunit/toolbox'
+import {type MergedCrossPlatformProps} from '@interunit/toolbox'
 import React from 'react'
 import type {Text as RNText} from 'react-native'
 
@@ -30,19 +30,7 @@ const Text = React.forwardRef(
       el,
       children,
       ...props
-    }: TextPrimitiveProps<T> & {
-      style?: Merge<
-        [
-          React.ComponentPropsWithoutRef<typeof RNText>,
-          React.JSX.IntrinsicElements[T]['style']
-        ]
-      >
-    } & Merge<
-        [
-          React.ComponentPropsWithoutRef<typeof RNText>,
-          React.JSX.IntrinsicElements[T]
-        ]
-      >,
+    }: TextPrimitiveProps<T> & MergedCrossPlatformProps<T, typeof RNText>,
     forwardedRef: any
   ) => {
     const Text = TextConstruct?.[el] as React.ElementType
@@ -66,6 +54,8 @@ const Text = React.forwardRef(
       </Text>
     )
   }
-)
+) as <T extends keyof typeof TextConstruct>(
+  props: TextPrimitiveProps<T> & MergedCrossPlatformProps<T, typeof RNText>
+) => React.JSX.Element
 
 export {Text}

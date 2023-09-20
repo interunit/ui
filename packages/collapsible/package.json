@@ -1,6 +1,6 @@
 {
   "name": "@interunit/collapsible",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A component that expands and collapses content",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -18,8 +18,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build:package": "tsup src/index.ts --dts --minify --format cjs,esm --clean --sourcemap",
-    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
-    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "format": "prettier ./src/**/* --check",
+    "format:fix": "prettier ./src/**/* --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test:unit": "jest --config ./jest.config.mjs --coverage",
@@ -27,16 +27,16 @@
   },
   "prettier": "@interunit/prettier",
   "dependencies": {
-    "@interunit/a11y": "*",
-    "@interunit/config": "*",
-    "@interunit/primitives": "*"
+    "@interunit/a11y": "workspace:*",
+    "@interunit/config": "workspace:*",
+    "@interunit/primitives": "workspace:*"
   },
   "devDependencies": {
-    "@interunit/api-extractor": "*",
-    "@interunit/eslint": "*",
-    "@interunit/jest": "*",
-    "@interunit/prettier": "*",
-    "@interunit/tsconfig": "*",
+    "@interunit/api-extractor": "workspace:*",
+    "@interunit/eslint": "workspace:*",
+    "@interunit/jest": "workspace:*",
+    "@interunit/prettier": "workspace:*",
+    "@interunit/tsconfig": "workspace:*",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.5",
     "@types/react-native": "^0.72.2",

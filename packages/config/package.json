@@ -1,6 +1,6 @@
 {
   "name": "@interunit/config",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Handles all config for interactions between packages",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -18,8 +18,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build:package": "tsup src/index.ts --dts --minify --format cjs,esm --clean --sourcemap",
-    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
-    "format:fix": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --write",
+    "format": "prettier ./src/**/* --check",
+    "format:fix": "prettier ./src/**/* --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test:unit": "jest --config ./jest.config.mjs --coverage",
@@ -27,10 +27,10 @@
   },
   "prettier": "@interunit/prettier",
   "devDependencies": {
-    "@interunit/eslint": "*",
-    "@interunit/jest": "*",
-    "@interunit/prettier": "*",
-    "@interunit/tsconfig": "*",
+    "@interunit/eslint": "workspace:*",
+    "@interunit/jest": "workspace:*",
+    "@interunit/prettier": "workspace:*",
+    "@interunit/tsconfig": "workspace:*",
     "@types/react": "18.2.21",
     "typescript": "^5.2.2"
   },
