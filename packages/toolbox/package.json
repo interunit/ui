@@ -1,6 +1,6 @@
 {
   "name": "@interunit/toolbox",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A collection of helpers and utils ",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -38,4 +38,3 @@
     "react": "^18.2.0"
   }
 }
-

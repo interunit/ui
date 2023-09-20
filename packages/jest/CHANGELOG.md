@@ -1,5 +1,11 @@
 # @interunit/jest
 
+## 0.0.8
+
+### Patch Changes
+
+- Workspaces update + Types fixes
+
 ## 0.0.7
 
 ### Patch Changes

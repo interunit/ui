@@ -1,6 +1,6 @@
 {
   "name": "@interunit/eslint",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The ESLint config for InterUnit",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {

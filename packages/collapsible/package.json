@@ -1,6 +1,6 @@
 {
   "name": "@interunit/collapsible",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A component that expands and collapses content",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -46,4 +46,3 @@
     "react": "^18.2.0"
   }
 }
-

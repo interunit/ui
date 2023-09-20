@@ -1,6 +1,6 @@
 {
   "name": "@interunit/modal",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A low-level component to help display content on top of the current page or view",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -41,4 +41,3 @@
     "react": "^18.2.0"
   }
 }
-

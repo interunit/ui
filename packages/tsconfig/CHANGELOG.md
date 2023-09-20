@@ -1,5 +1,11 @@
 # @interunit/tsconfig
 
+## 0.0.9
+
+### Patch Changes
+
+- Workspaces update + Types fixes
+
 ## 0.0.8
 
 ### Patch Changes

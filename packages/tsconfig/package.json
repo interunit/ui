@@ -1,6 +1,6 @@
 {
   "name": "@interunit/tsconfig",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "The tsconfig for InterUnit",
   "files": [
     "base.json"

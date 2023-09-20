@@ -1,5 +1,15 @@
 # @interunit/form
 
+## 0.0.9
+
+### Patch Changes
+
+- Workspaces update + Types fixes
+- Updated dependencies
+  - @interunit/primitives@0.0.17
+  - @interunit/config@0.0.12
+  - @interunit/a11y@0.0.15
+
 ## 0.0.8
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@interunit/combobox",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": true,
   "description": "",
   "homepage": "https://github.com/interunit/ui#readme",
@@ -45,4 +45,3 @@
     "react": "^18.2.0"
   }
 }
-

@@ -1,6 +1,6 @@
 {
   "name": "@interunit/form",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "private": true,
   "description": "Components for easily creating accessible forms",
   "homepage": "https://github.com/interunit/ui/tree/main/packages/form",
@@ -41,4 +41,3 @@
     "react": "^18.2.0"
   }
 }
-

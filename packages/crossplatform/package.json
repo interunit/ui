@@ -1,6 +1,6 @@
 {
   "name": "@interunit/crossplatform",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Components and helpers to make cross-platform translations and development smooth",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -40,4 +40,3 @@
     "react": "^18.2.0"
   }
 }
-

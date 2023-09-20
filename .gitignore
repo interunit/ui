@@ -32,4 +32,8 @@ web-build/
 coverage/
 .nyc_output
 
-
+# Yarn
+.yarnrc.yml
+.pnp.cjs
+.pnp.loader.mjs
+.yarn

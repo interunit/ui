@@ -1,6 +1,6 @@
 {
   "name": "@interunit/responsive",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Utilities to make cross-platform development a breeze 🍃",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -38,4 +38,3 @@
     "react": "^18.2.0"
   }
 }
-

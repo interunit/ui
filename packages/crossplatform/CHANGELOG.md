@@ -1,5 +1,14 @@
 # @interunit/crossplatform
 
+## 0.0.11
+
+### Patch Changes
+
+- Workspaces update + Types fixes
+- Updated dependencies
+  - @interunit/toolbox@0.0.11
+  - @interunit/config@0.0.12
+
 ## 0.0.10
 
 ### Patch Changes

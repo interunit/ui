@@ -20,7 +20,7 @@
     "util:delete-dist": "rm -rf packages/**/dist",
     "changeset:add": "changeset add",
     "changeset:version": "changeset version",
-    "changeset:publish": "bun run util:delete-dist && bun run build:package && changeset publish",
+    "changeset:publish": "bun run util:delete-dist && bun run build:package && yarn && yarn workspaces foreach --exclude apps/interunit-dot-dev --exclude apps/interunit-example-app npm publish --tolerate-republish --access public && rm -rf yarn.lock",
     "postinstall": "husky install",
     "husky": "postinstall"
   },
@@ -69,5 +69,6 @@
     "url": "https://github.com/interunit/ui/issues"
   },
   "homepage": "https://github.com/interunit/ui#readme",
-  "private": true
+  "private": true,
+  "packageManager": "yarn@3.6.3"
 }
