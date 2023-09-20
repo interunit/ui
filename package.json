@@ -69,6 +69,5 @@
     "url": "https://github.com/interunit/ui/issues"
   },
   "homepage": "https://github.com/interunit/ui#readme",
-  "private": true,
-  "packageManager": "yarn@3.6.3"
+  "private": true
 }

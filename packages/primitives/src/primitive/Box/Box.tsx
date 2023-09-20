@@ -69,7 +69,7 @@ const Box = React.forwardRef(
     )
   }
 ) as <T extends keyof typeof BoxConstruct>(
-  props: BoxPrimitiveProps<T> & MergedCrossPlatformProps<T, typeof Box>
+  props: BoxPrimitiveProps<T> & MergedCrossPlatformProps<T, typeof View>
 ) => React.JSX.Element
 
 export {Box}
