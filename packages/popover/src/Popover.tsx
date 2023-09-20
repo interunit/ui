@@ -263,6 +263,7 @@ type PopoverContentProps = Omit<
   arrow?: PopoverArrow
   children: (({value}: {value: boolean}) => React.ReactNode) | React.ReactNode
 }
+
 // Handle outside click passing here
 const PopoverContent = React.forwardRef(
   (
@@ -283,7 +284,7 @@ const PopoverContent = React.forwardRef(
       focusType
     } = React.useContext(PopoverContext)
 
-    const userDefinedArrowStyle = arrow?.style || {}
+    const userDefinedArrowStyle = arrow?.style ?? {}
 
     const combinedRefs = useCombinedRefs(setContentRef, forwardedRef)
 
@@ -341,7 +342,7 @@ const PopoverContent = React.forwardRef(
               aria-hidden={true}
               style={{
                 ...arrowStyles,
-                ...userDefinedArrowStyle
+                ...(userDefinedArrowStyle as any)
               }}
             />
           </>
