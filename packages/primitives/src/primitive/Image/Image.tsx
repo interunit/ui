@@ -11,6 +11,7 @@ const ImageConstruct = {
 }
 export type ImagePrimitiveProps<T extends keyof typeof ImageConstruct> = {
   el: T
+  source?: React.ComponentPropsWithoutRef<typeof RNImage>['source']
 }
 
 export const Image = React.forwardRef(
@@ -22,13 +23,13 @@ export const Image = React.forwardRef(
     }: ImagePrimitiveProps<T> & {
       style?: Merge<
         [
-          React.ComponentPropsWithoutRef<typeof RNImage>,
+          React.ComponentPropsWithoutRef<typeof RNImage>['style'],
           React.JSX.IntrinsicElements[T]['style']
         ]
       >
     } & Merge<
         [
-          React.ComponentPropsWithoutRef<typeof RNImage>,
+          Omit<React.ComponentPropsWithoutRef<typeof RNImage>, 'source'>,
           React.JSX.IntrinsicElements[T]
         ]
       >,
@@ -56,6 +57,14 @@ export const Image = React.forwardRef(
       return
     }
 
-    return <Image src={src} alt={alt} ref={forwardedRef} {...filteredProps} />
+    return (
+      <Image
+        src={src}
+        source={props.source}
+        alt={alt}
+        ref={forwardedRef}
+        {...filteredProps}
+      />
+    )
   }
 )

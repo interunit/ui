@@ -19,7 +19,7 @@
     "types": ["node", "jest", "@testing-library/jest-dom", "@types/jest-axe"],
     "noImplicitAny": false
   },
-"references": [
+  "references": [
     { "path": "../a11y" },
     { "path": "../collapsible" },
     { "path": "../combobox" },
@@ -32,5 +32,5 @@
     { "path": "../responsive" },
     { "path": "../tabs" },
     { "path": "../toolbox" }
-]
+  ]
 }

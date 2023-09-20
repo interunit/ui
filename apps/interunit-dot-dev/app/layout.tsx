@@ -1,4 +1,3 @@
-import {InterUnitProvider} from '@/components/utility/InterUnitProvider'
 import {inter} from '@/fonts'
 
 import './globals.css'
@@ -11,9 +10,7 @@ export const metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={inter.className}>
-      <body>
-        <InterUnitProvider>{children}</InterUnitProvider>
-      </body>
+      <body>{children}</body>
     </html>
   )
 }

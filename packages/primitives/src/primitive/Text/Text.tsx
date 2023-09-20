@@ -33,7 +33,7 @@ const Text = React.forwardRef(
     }: TextPrimitiveProps<T> & {
       style?: Merge<
         [
-          React.ComponentPropsWithoutRef<typeof RNText>,
+          React.ComponentPropsWithoutRef<typeof RNText>['style'],
           React.JSX.IntrinsicElements[T]['style']
         ]
       >

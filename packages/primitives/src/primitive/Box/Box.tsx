@@ -1,5 +1,3 @@
-// TODO: When extending via ComponentPropsWithoutRef we lose
-// the children prop
 import {getEnvironmentName} from '@interunit/config'
 import {type Merge} from '@interunit/toolbox'
 import React from 'react'
@@ -31,7 +29,7 @@ const Box = React.forwardRef(
     }: BoxPrimitiveProps<T> & {
       style?: Merge<
         [
-          React.ComponentPropsWithoutRef<typeof View>,
+          React.ComponentPropsWithoutRef<typeof View>['style'],
           React.JSX.IntrinsicElements[T]['style']
         ]
       >

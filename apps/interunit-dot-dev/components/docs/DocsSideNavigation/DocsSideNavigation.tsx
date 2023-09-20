@@ -78,30 +78,13 @@ const DocsSideNavigation = ({data}: DocsSideNavigationProps) => {
     <Primitive.Box
       el="nav"
       className="bg-bg-primary border-b-1 p-4 border-border h-full lg:border-r-1 lg:border-b-0"
-      h
     >
-      <Popover
-        triggerType="click"
-        popoverPositioning={{
-          side: 'bottom',
-          align: 'start',
-          offset: 12,
-          width: '400px',
-          maxWidth: '90vw',
-          arrow: {
-            borderRadius: 2,
-            strokeColor: theme.colors.border,
-            fillColor: theme.colors['bg-primary'],
-            strokeWidth: 2,
-            width: 12
-          }
-        }}
-      >
-        <Popover.Trigger>
+      <Popover defaultValue={false}>
+        <Popover.Trigger asChild>
           <Button
             el="button"
             className="block lg:hidden"
-            color={theme.colors['bg-muted']}
+            color="bg-muted"
             variation="sm"
           >
             <VisuallyHidden>
@@ -110,7 +93,23 @@ const DocsSideNavigation = ({data}: DocsSideNavigationProps) => {
             <Menu size={24} role="img" />
           </Button>
         </Popover.Trigger>
-        <Popover.Content>
+        <Popover.Content
+          positioning={{
+            side: 'bottom',
+            align: 'start',
+            offset: 12,
+            width: '400px',
+            maxWidth: '90vw'
+          }}
+          arrow={{
+            borderRadius: 2,
+            strokeColor: theme.colors.border,
+            fillColor: theme.colors['bg-primary'],
+            strokeWidth: 2,
+            size: 12
+          }}
+          asChild
+        >
           <Primitive.Box
             el="div"
             className="flex flex-col bg-bg-primary border-border rounded border-[1px] lg:mx-4 overflow-y-auto"
