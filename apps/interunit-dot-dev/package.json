@@ -17,6 +17,7 @@
     "@interunit/combobox": "workspace:*",
     "@interunit/config": "workspace:*",
     "@interunit/form": "workspace:*",
+    "@interunit/eslint": "workspace:*",
     "@interunit/modal": "workspace:*",
     "@interunit/popover": "workspace:*",
     "@interunit/primitives": "workspace:*",
