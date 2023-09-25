@@ -1,5 +1,19 @@
 # interunit-dot-dev
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/collapsible@0.0.12
+
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/collapsible@0.0.11
+
 ## 0.1.2
 
 ### Patch Changes

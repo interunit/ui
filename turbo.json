@@ -28,6 +28,9 @@
         "outputs": ["dist/**"],
         "dependsOn": ["^//#util:delete-dist", "^build:package"]
     },
+    "publish:package": {
+        "cache": false
+    },
     "watch:package": {
         "cache": false,
         "persistent": true,

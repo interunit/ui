@@ -1,6 +1,6 @@
 {
   "name": "@interunit/collapsible",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "description": "A component that expands and collapses content",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -23,7 +23,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test:unit": "jest --config ./jest.config.mjs --coverage",
-    "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
+    "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch",
+    "publish:package": "pnpm publish --access public"
   },
   "prettier": "@interunit/prettier",
   "dependencies": {

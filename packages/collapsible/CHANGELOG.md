@@ -1,5 +1,17 @@
 # @interunit/collapsible
 
+## 0.0.12
+
+### Patch Changes
+
+- Add npm ignore to fix build
+
+## 0.0.11
+
+### Patch Changes
+
+- Last publish didn't build correctly
+
 ## 0.0.10
 
 ### Patch Changes
