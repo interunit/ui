@@ -1,5 +1,15 @@
 # @interunit/modal
 
+## 0.0.15
+
+### Patch Changes
+
+- Fixing package.json exports
+- Updated dependencies
+  - @interunit/primitives@0.0.19
+  - @interunit/config@0.0.14
+  - @interunit/a11y@0.0.17
+
 ## 0.0.14
 
 ### Patch Changes

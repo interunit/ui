@@ -1,5 +1,13 @@
 # @interunit/toolbox
 
+## 0.0.13
+
+### Patch Changes
+
+- Fixing package.json exports
+- Updated dependencies
+  - @interunit/config@0.0.14
+
 ## 0.0.12
 
 ### Patch Changes
