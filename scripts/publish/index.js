@@ -200,6 +200,8 @@ async function main() {
       publishCommand.push(args.otp)
     }
 
+    console.info("Publish command being run: ", publishCommand.join(' '))
+
     const publish = await Bun.spawn(publishCommand, {})
     const publishOutput = await Bun.readableStreamToText(publish.stdout)
 

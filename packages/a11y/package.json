@@ -1,6 +1,6 @@
 {
   "name": "@interunit/a11y",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "A11y utilities to use in InterUnit",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -21,7 +21,7 @@
     "format": "prettier ./src/**/* --check",
     "format:fix": "prettier ./src/**/* --write",
     "lint": "eslint . --config ./.eslintrc.js",
-   "lint:fix": "eslint . --fix --config ./.eslintrc.js",
+    "lint:fix": "eslint . --fix --config ./.eslintrc.js",
     "test:unit": "jest --config ./jest.config.mjs --coverage",
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },

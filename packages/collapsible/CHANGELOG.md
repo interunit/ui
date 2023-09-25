@@ -1,5 +1,15 @@
 # @interunit/collapsible
 
+## 0.0.14
+
+### Patch Changes
+
+- Updates for eslint tooling
+- Updated dependencies
+  - @interunit/primitives@0.0.18
+  - @interunit/config@0.0.13
+  - @interunit/a11y@0.0.16
+
 ## 0.0.13
 
 ### Patch Changes

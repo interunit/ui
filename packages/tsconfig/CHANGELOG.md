@@ -1,5 +1,11 @@
 # @interunit/tsconfig
 
+## 0.0.10
+
+### Patch Changes
+
+- Updates for eslint tooling
+
 ## 0.0.9
 
 ### Patch Changes

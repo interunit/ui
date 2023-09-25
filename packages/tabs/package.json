@@ -1,6 +1,6 @@
 {
   "name": "@interunit/tabs",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Organizes content into easily switchable sections",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -21,7 +21,7 @@
     "format": "prettier ./src/**/* --check",
     "format:fix": "prettier ./src/**/* --write",
     "lint": "eslint . --config ./.eslintrc.js",
-   "lint:fix": "eslint . --fix --config ./.eslintrc.js",
+    "lint:fix": "eslint . --fix --config ./.eslintrc.js",
     "test:unit": "jest --config ./jest.config.mjs --coverage",
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },

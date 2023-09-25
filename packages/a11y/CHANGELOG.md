@@ -1,5 +1,14 @@
 # @interunit/a11y
 
+## 0.0.16
+
+### Patch Changes
+
+- Updates for eslint tooling
+- Updated dependencies
+  - @interunit/primitives@0.0.18
+  - @interunit/config@0.0.13
+
 ## 0.0.15
 
 ### Patch Changes

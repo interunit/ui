@@ -1,6 +1,6 @@
 {
   "name": "@interunit/primitives",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -21,7 +21,7 @@
     "format": "prettier ./src/**/* --check",
     "format:fix": "prettier ./src/**/* --write",
     "lint": "eslint . --config ./.eslintrc.js",
-   "lint:fix": "eslint . --fix --config ./.eslintrc.js",
+    "lint:fix": "eslint . --fix --config ./.eslintrc.js",
     "test:unit": "jest --config ./jest.config.mjs --coverage",
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },

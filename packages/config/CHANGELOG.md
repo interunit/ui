@@ -1,5 +1,11 @@
 # @interunit/config
 
+## 0.0.13
+
+### Patch Changes
+
+- Updates for eslint tooling
+
 ## 0.0.12
 
 ### Patch Changes
