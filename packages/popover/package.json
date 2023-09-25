@@ -1,6 +1,6 @@
 {
   "name": "@interunit/popover",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "A popover component",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -12,8 +12,8 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "react-native": "src/index.ts",
   "types": "dist/index.d.ts",
   "scripts": {

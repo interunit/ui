@@ -1,5 +1,11 @@
 # @interunit/config
 
+## 0.0.14
+
+### Patch Changes
+
+- Fixing package.json exports
+
 ## 0.0.13
 
 ### Patch Changes

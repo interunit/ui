@@ -1,5 +1,15 @@
 # @interunit/primitives
 
+## 0.0.19
+
+### Patch Changes
+
+- Fixing package.json exports
+- Updated dependencies
+  - @interunit/crossplatform@0.0.13
+  - @interunit/toolbox@0.0.13
+  - @interunit/config@0.0.14
+
 ## 0.0.18
 
 ### Patch Changes

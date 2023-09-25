@@ -1,6 +1,6 @@
 {
   "name": "@interunit/form",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": true,
   "description": "Components for easily creating accessible forms",
   "homepage": "https://github.com/interunit/ui/tree/main/packages/form",
@@ -13,8 +13,8 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "react-native": "src/index.ts",
   "types": "dist/index.d.ts",
   "scripts": {

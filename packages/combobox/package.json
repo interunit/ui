@@ -1,6 +1,6 @@
 {
   "name": "@interunit/combobox",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "private": true,
   "description": "",
   "homepage": "https://github.com/interunit/ui#readme",
@@ -13,8 +13,8 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "react-native": "src/index.ts",
   "types": "dist/index.d.ts",
   "scripts": {

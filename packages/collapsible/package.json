@@ -1,6 +1,6 @@
 {
   "name": "@interunit/collapsible",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "A component that expands and collapses content",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -12,8 +12,8 @@
   },
   "license": "ISC",
   "author": "Kyle McDonald",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "react-native": "src/index.ts",
   "types": "dist/index.d.ts",
   "scripts": {
