@@ -200,11 +200,10 @@ async function main() {
       publishCommand.push(args.otp)
     }
 
-    console.log(publishCommand)
-
     const publish = await Bun.spawn(publishCommand, {})
+    const publishOutput = await Bun.readableStreamToText(publish.stdout)
 
-    console.log(publish.stdout.toString())
+    console.log(publishOutput)
 
     await writePackageJsonFiles(currentPackageJsonFiles)
   } catch (error) {
