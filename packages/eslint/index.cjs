@@ -1,6 +1,5 @@
 /** @type {import("eslint").Linter.Config} */
-export default {
-  root: true,
+module.exports = {
   settings: {
     'import/resolver': {
       typescript: {}

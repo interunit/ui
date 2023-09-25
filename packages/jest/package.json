@@ -1,6 +1,6 @@
 {
   "name": "@interunit/jest",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "The jest config for InterUnit",
   "type": "module",
   "main": "./index.js",

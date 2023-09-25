@@ -1,5 +1,11 @@
 # @interunit/prettier
 
+## 0.0.4
+
+### Patch Changes
+
+- Updates for eslint tooling
+
 ## 0.0.3
 
 ### Patch Changes

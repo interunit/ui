@@ -1,5 +1,19 @@
 # @interunit/popover
 
+## 0.0.19
+
+### Patch Changes
+
+- Updates for eslint tooling
+- Updated dependencies
+  - @interunit/api-extractor@0.0.2
+  - @interunit/crossplatform@0.0.12
+  - @interunit/primitives@0.0.18
+  - @interunit/toolbox@0.0.12
+  - @interunit/config@0.0.13
+  - @interunit/modal@0.0.14
+  - @interunit/a11y@0.0.16
+
 ## 0.0.18
 
 ### Patch Changes

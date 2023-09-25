@@ -1,5 +1,15 @@
 # @interunit/primitives
 
+## 0.0.18
+
+### Patch Changes
+
+- Updates for eslint tooling
+- Updated dependencies
+  - @interunit/crossplatform@0.0.12
+  - @interunit/toolbox@0.0.12
+  - @interunit/config@0.0.13
+
 ## 0.0.17
 
 ### Patch Changes

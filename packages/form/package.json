@@ -1,6 +1,6 @@
 {
   "name": "@interunit/form",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "private": true,
   "description": "Components for easily creating accessible forms",
   "homepage": "https://github.com/interunit/ui/tree/main/packages/form",
@@ -21,8 +21,8 @@
     "build:package": "tsup src/index.ts --dts --minify --format cjs,esm --clean --sourcemap",
     "format": "prettier ./src/**/* --check",
     "format:fix": "prettier ./src/**/* --write",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint . --config ./.eslintrc.js",
+    "lint:fix": "eslint . --fix --config ./.eslintrc.js",
     "test:unit": "jest --config ./jest.config.mjs --coverage",
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },

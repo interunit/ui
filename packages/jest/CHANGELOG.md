@@ -1,5 +1,11 @@
 # @interunit/jest
 
+## 0.0.9
+
+### Patch Changes
+
+- Updates for eslint tooling
+
 ## 0.0.8
 
 ### Patch Changes

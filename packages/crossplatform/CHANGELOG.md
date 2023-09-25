@@ -1,5 +1,14 @@
 # @interunit/crossplatform
 
+## 0.0.12
+
+### Patch Changes
+
+- Updates for eslint tooling
+- Updated dependencies
+  - @interunit/toolbox@0.0.12
+  - @interunit/config@0.0.13
+
 ## 0.0.11
 
 ### Patch Changes

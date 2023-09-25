@@ -1,6 +1,6 @@
 {
   "name": "@interunit/modal",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "A low-level component to help display content on top of the current page or view",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -20,8 +20,8 @@
     "build:package": "tsup src/index.ts --dts --minify --format cjs,esm --clean --sourcemap",
     "format": "prettier ./src/**/* --check",
     "format:fix": "prettier ./src/**/* --write",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint . --config ./.eslintrc.js",
+    "lint:fix": "eslint . --fix --config ./.eslintrc.js",
     "test:unit": "jest --config ./jest.config.mjs --coverage",
     "watch:package": "tsup src/index.ts --dts --format cjs,esm  --watch"
   },

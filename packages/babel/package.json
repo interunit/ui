@@ -1,6 +1,6 @@
 {
   "name": "@interunit/babel",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The babel config for use with react native in InterUnit",
   "devDependencies": {
     "@babel/preset-env": "^7.22.10",
