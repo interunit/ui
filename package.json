@@ -21,7 +21,7 @@
     "util:delete-dist": "rm -rf packages/**/dist",
     "changeset:add": "changeset add",
     "changeset:version": "changeset version",
-    "changeset:publish": "yarn util:delete-dist && yarn &&  yarn build:package && yarn workspaces foreach --exclude apps/interunit-dot-dev --exclude apps/interunit-example-app npm publish --tolerate-republish --access public && rm -rf yarn.lock",
+    "changeset:publish": "bun run util:delete-dist && bun install && bun build:package && bun run scripts/publish/index.js" ,
     "postinstall": "husky install",
     "husky": "postinstall"
   },
@@ -55,7 +55,8 @@
     "ts-node": "^10.9.1",
     "tsup": "^7.2.0",
     "turbo": "^1.10.14",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "yargs-parser": "^21.1.1"
   },
   "workspaces": [
     "packages/*",
