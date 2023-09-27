@@ -109,7 +109,7 @@ export const useContentPositioning = ({
   }: {
     triggerDimensions: Dimensions
     contentDimensions: Dimensions | undefined
-    popoverDimensions: Dimensions
+    popoverDimensions: Dimensions | undefined
   }) => {
     const styles: React.CSSProperties = {
       position: 'absolute',
@@ -131,7 +131,7 @@ export const useContentPositioning = ({
     }
 
     if (positioning.side === 'bottom') {
-      styles.top = `${popoverDimensions.height + offset}px`
+      styles.top = `${popoverDimensions?.height ?? 0 + offset}px`
     }
 
     if (positioning.side === 'left') {

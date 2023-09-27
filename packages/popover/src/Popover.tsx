@@ -191,7 +191,9 @@ const Popover = React.forwardRef(function Popover(
         {...props}
         ref={combinedRefs}
         onLayout={(e: {nativeEvent: {layout: Dimensions}}) => {
-          setPopoverDimensions(e.nativeEvent.layout)
+          if (e?.nativeEvent?.layout) {
+            setPopoverDimensions(e.nativeEvent.layout)
+          }
         }}
       >
         {children}
@@ -265,7 +267,7 @@ const PopoverTrigger = React.forwardRef(
         onPress={() => {
           setValue(!value)
         }}
-        onClick={(event: React.MouseEvent<HTMLElement>) => {
+        onClick={event => {
           event.preventDefault()
           if (
             triggerInteraction === 'click' ||
@@ -279,7 +281,7 @@ const PopoverTrigger = React.forwardRef(
             setValue(true)
           }
         }}
-        onKeyDown={(event: React.KeyboardEvent<HTMLElement>) => {
+        onKeyDown={event => {
           if (event.key === 'Enter') {
             setValue(!value)
           }
@@ -289,7 +291,9 @@ const PopoverTrigger = React.forwardRef(
           }
         }}
         onLayout={(e: {nativeEvent: {layout: Dimensions}}) => {
-          setTriggerDimensions(e.nativeEvent.layout)
+          if (e?.nativeEvent?.layout) {
+            setTriggerDimensions(e.nativeEvent.layout)
+          }
         }}
         ref={combinedRefs}
         collapsable={false}
@@ -302,10 +306,10 @@ const PopoverTrigger = React.forwardRef(
   }
 )
 type PopoverContentProps = Omit<
-  React.ComponentPropsWithoutRef<typeof P.BX>,
+  React.ComponentPropsWithoutRef<typeof P.BX<'div'>>,
   'el'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
+  el?: React.ComponentPropsWithoutRef<typeof P.BX<'div'>>['el']
   asChild?: boolean
   positioning?: PopoverPositioning
   arrow?: PopoverArrow
@@ -357,6 +361,7 @@ const PopoverContent = React.forwardRef(
 
     return (
       <Modal
+        ref={combinedRefs}
         style={{
           maxWidth: positioning?.maxWidth ?? 'auto',
           width:
@@ -375,9 +380,7 @@ const PopoverContent = React.forwardRef(
             setValue(false)
           }
         }}
-        onKeyDown={(_event: unknown) => {
-          const event = _event as KeyboardEvent
-
+        onKeyDown={event => {
           if (event.key === 'Escape') {
             setValue(false)
           }
@@ -385,12 +388,13 @@ const PopoverContent = React.forwardRef(
         onClose={() => setValue(false)}
         focusType={focusType}
         onLayout={(e: {nativeEvent: {layout: Dimensions}}) => {
-          setContentDimensions(e.nativeEvent.layout)
+          if (e?.nativeEvent?.layout) {
+            setContentDimensions(e.nativeEvent.layout)
+          }
         }}
         data-popover-state={value}
         data-popover-side={positioning?.side}
         data-popover-align={positioning?.align}
-        ref={combinedRefs}
         {...props}
       >
         <>
