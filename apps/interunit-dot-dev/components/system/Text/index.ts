@@ -1,1 +1,1 @@
-export {Text} from './Text'
+export {Text, Link} from './Text'

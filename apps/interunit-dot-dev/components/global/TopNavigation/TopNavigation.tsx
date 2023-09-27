@@ -3,18 +3,18 @@
 import {Popover} from '@interunit/popover'
 import {Primitive} from '@interunit/primitives'
 import {ArrowRight, ChevronDown, Github, Twitter} from 'lucide-react'
-import Link from 'next/link'
 import React from 'react'
 
 import {SearchBar} from '@/components/global/SearchBar'
 import {Button} from '@/components/system/Button'
-import {Text} from '@/components/system/Text'
+import {Link, Text} from '@/components/system/Text'
 import {gettingStarted, ui} from '@/constants/ui'
 import {theme} from '@/theme.config'
 
 import './TopNavigation.css'
 
 const TopNavigation = () => {
+  const [isOpen, setIsOpen] = React.useState(false)
   return (
     <Primitive.Box el="div" className="bg-bg-primary border-b-[1px]">
       <Primitive.Box
@@ -45,111 +45,115 @@ const TopNavigation = () => {
               el="li"
               className={`flex flex-row items-center m-0 NavigationArrow`}
             >
-              <Popover defaultValue={false}>
+              <Popover
+                value={isOpen}
+                onValueChange={setIsOpen}
+                className="relative"
+              >
                 <Popover.Trigger asChild>
-                  {({value}) => (
-                    <Button tabIndex={0} color="bg-secondary" variation="sm">
-                      <Text el="span">Docs</Text>
-                      <ChevronDown
-                        color={theme.colors['text-light-accent']}
-                        role="img"
-                        className={`transition-transform ${
-                          value && 'rotate-180'
-                        }`}
-                        aria-label="Arrow pointing down"
-                      />
-                    </Button>
-                  )}
+                  <Button tabIndex={0} color="bg-secondary" variation="sm">
+                    <Text el="span">Docs</Text>
+                    <ChevronDown
+                      color={theme.colors['text-light-accent']}
+                      role="img"
+                      className={`transition-transform
+                      ${isOpen && 'rotate-180'}
+                        `}
+                      aria-label="Arrow pointing down"
+                    />
+                  </Button>
                 </Popover.Trigger>
-                <Popover.Content
-                  positioning={{
-                    side: 'bottom',
-                    align: 'end',
-                    offset: 12,
-                    width: 600,
-                    maxWidth: '90vw',
-                    zIndex: 11
-                  }}
-                  arrow={{
-                    strokeColor: theme.colors.border,
-                    size: 12,
-                    borderRadius: 2,
-                    strokeWidth: 2
-                  }}
-                  asChild
-                >
-                  <Primitive.Box
-                    el="div"
-                    className="rounded bg-bg-primary border"
+                {isOpen && (
+                  <Popover.Content
+                    positioning={{
+                      side: 'bottom',
+                      align: 'end',
+                      offset: 12,
+                      width: 600,
+                      maxWidth: '90vw',
+                      zIndex: 11
+                    }}
+                    arrow={{
+                      strokeColor: theme.colors.border,
+                      size: 12,
+                      borderRadius: 2,
+                      strokeWidth: 2
+                    }}
+                    asChild
                   >
                     <Primitive.Box
                       el="div"
-                      className="flex flex-col lg:flex-row"
+                      className="rounded bg-bg-primary border"
                     >
-                      <Primitive.Box el="div" className="flex flex-col p-6">
-                        <Text el="span" className="text-md font-medium">
-                          Getting Started
-                        </Text>
+                      <Primitive.Box
+                        el="div"
+                        className="flex flex-col lg:flex-row"
+                      >
+                        <Primitive.Box el="div" className="flex flex-col p-6">
+                          <Text el="span" className="text-md font-medium">
+                            Getting Started
+                          </Text>
+                          <Primitive.Box
+                            el="ul"
+                            className="list-none py-2 flex flex-col gap-1 px-2"
+                          >
+                            {gettingStarted.sections.map((section, index) => (
+                              <Primitive.Box el="li" key={index}>
+                                <Link
+                                  href={section.slug}
+                                  passHref
+                                  className="hover:no-underline"
+                                >
+                                  <Text
+                                    el="span"
+                                    className="group text-md flex items-center gap-2 hover:no-underline"
+                                  >
+                                    {section.name}
+                                    <ArrowRight
+                                      className="group-hover:translate-x-1 transition-transform"
+                                      size={16}
+                                      color={theme.colors['text-light-accent']}
+                                    />
+                                  </Text>
+                                </Link>
+                              </Primitive.Box>
+                            ))}
+                          </Primitive.Box>
+                        </Primitive.Box>
                         <Primitive.Box
                           el="ul"
-                          className="list-none py-2 flex flex-col gap-1 px-2"
+                          className="m-0 flex-1 list-none p-0 flex flex-col bg-bg-primary border-t-[1px] lg:border-l-[1px] lg:border-t-[0px] hover:no-underline rounded-br rounded-bl lg:rounded-bl-none lg:rounded-tr lg:rounded-br"
                         >
-                          {gettingStarted.sections.map((section, index) => (
-                            <Primitive.Box el="li" key={index}>
+                          {ui.sections.map((section, index) => (
+                            <Primitive.Box
+                              el="li"
+                              className={`nav-popover-li first:border-b-[1px] hover:bg-bg-muted lg:first:rounded-tl-[7px] lg:first:rounded-tr-[7px] last:rounded-bl-[7px] last:rounded-br-[7px] transition-all`}
+                              key={index}
+                            >
                               <Link
-                                href={section.slug}
-                                passHref
-                                className="hover:no-underline"
+                                href={`/docs/ui/${section?.slug}`}
+                                className="flex flex-col hover:no-underline focus:no-underline"
                               >
-                                <Text
-                                  el="a"
-                                  className="group text-md flex items-center gap-2 hover:no-underline"
+                                <Primitive.Box
+                                  el="div"
+                                  className="border-border p-6 transition-all flex flex-col full-width gap-2  hover:no-underline"
+                                  key={index}
                                 >
-                                  {section.name}
-                                  <ArrowRight
-                                    className="group-hover:translate-x-1 transition-transform"
-                                    size={16}
-                                    color={theme.colors['text-light-accent']}
-                                  />
-                                </Text>
+                                  <Text el="h2" className="text-md font-medium">
+                                    {section.name}
+                                  </Text>
+                                  <Text el="p" className="text-md">
+                                    {section.description}
+                                  </Text>
+                                </Primitive.Box>
                               </Link>
                             </Primitive.Box>
                           ))}
                         </Primitive.Box>
                       </Primitive.Box>
-                      <Primitive.Box
-                        el="ul"
-                        className="m-0 flex-1 list-none p-0 flex flex-col bg-bg-primary border-t-[1px] lg:border-l-[1px] lg:border-t-[0px] hover:no-underline rounded-br rounded-bl lg:rounded-bl-none lg:rounded-tr lg:rounded-br"
-                      >
-                        {ui.sections.map((section, index) => (
-                          <Primitive.Box
-                            el="li"
-                            className={`nav-popover-li first:border-b-[1px] hover:bg-bg-muted lg:first:rounded-tl-[7px] lg:first:rounded-tr-[7px] last:rounded-bl-[7px] last:rounded-br-[7px] transition-all`}
-                            key={index}
-                          >
-                            <Link
-                              href={`/docs/ui/${section?.slug}`}
-                              className="flex flex-col hover:no-underline focus:no-underline"
-                            >
-                              <Primitive.Box
-                                el="div"
-                                className="border-border p-6 transition-all flex flex-col full-width gap-2  hover:no-underline"
-                                key={index}
-                              >
-                                <Text el="h2" className="text-md font-medium">
-                                  {section.name}
-                                </Text>
-                                <Text el="p" className="text-md">
-                                  {section.description}
-                                </Text>
-                              </Primitive.Box>
-                            </Link>
-                          </Primitive.Box>
-                        ))}
-                      </Primitive.Box>
                     </Primitive.Box>
-                  </Primitive.Box>
-                </Popover.Content>
+                  </Popover.Content>
+                )}
               </Popover>
             </Primitive.Box>
           </Primitive.Box>

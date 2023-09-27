@@ -12,7 +12,7 @@ function setRef<T>(ref: PossibleRef<T>, value: T) {
 }
 
 function combineRefs<T>(...refs: Array<PossibleRef<T>>) {
-  return (node: T) => refs.forEach(ref => setRef(ref, node))
+  return (node: T) => refs.length > 0 && refs.forEach(ref => setRef(ref, node))
 }
 
 function useCombinedRefs<T>(...refs: Array<PossibleRef<T>>) {
