@@ -16,42 +16,44 @@ Full documentation is being written and will soon exist at [interunit.dev](https
 
 InterUnit welcomes contributions from anyone willing to help! A roadmap will soon be available for those interested in contributing to the future development of InterUnit.
 
-This repository is a monorepo that leverages yarn and turbo repo, simplifying cross-platform and multi-packaage development. We utilize [preconstruct](https://preconstruct.tools/) to instantly update changes from the `packages` directory across projects in the `apps` directory. Here are a few steps to get started:
+This repository is a monorepo that leverages bun and turborepo, simplifying cross-platform and multi-package development. We utilize [tsup](https://tsup.egoist.dev/) to instantly update changes from the `packages` directory across projects in the `apps` directory. Here are a few steps to get started:
 
 **Installation**
 
 ```
-yarn
+bun install
 ```
 
-**Run docs website**
+**Develop docs site**
 
 ```
-cd apps/interunit-dot-dev && yarn dev
+bun run dev:docs
 ```
 
-**Run example app**
+**Develop packages**
 
 ```
-cd apps/interunit-example-app && yarn dev
+bun run watch:package
 ```
 
 **Create a new package**
 
 ```
-yarn create:package
+bun run create:package
 ```
 
-**Resume package compilation**
+**Build packages for publish**
 
 ```
-yarn preconstruct:dev
+bun run build:package
 ```
 
-**Build packages for production bundling**
+**Publish package**
 
 ```
-yarn preconstruct:build
+bun run changeset:add
+bun run changeset:version
+bun run changeset:publish (may need --otp)
 ```
 
 # Authors
