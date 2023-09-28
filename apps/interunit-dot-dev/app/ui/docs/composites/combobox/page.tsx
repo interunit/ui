@@ -20,7 +20,7 @@ import {Button} from '@/components/system/Button'
 import {Text} from '@/components/system/Text'
 
 const Page = () => {
-  const [value, setValue] = React.useState<string>('Item 1')
+  const [value, setValue] = React.useState('Item 1')
   return (
     <P.BX el="div">
       <P.BX el="div" className="mb-8">
@@ -59,7 +59,7 @@ const Page = () => {
               <Combobox.Item value="Item 1" asChild>
                 <Button
                   kind="text"
-                  className="w-full block aria-[focused=true]:bg-bg-muted aria-[selected=true]:outline rounded-none hover:bg-bg-muted"
+                  className="w-full block data-[combobox-item-focused=true]:bg-bg-muted aria-[selected=true]:outline rounded-none hover:bg-bg-muted"
                 >
                   Item 1
                 </Button>
@@ -67,7 +67,7 @@ const Page = () => {
               <Combobox.Item value="Item 2" asChild>
                 <Button
                   kind="text"
-                  className="aria-[focused=true]:bg-bg-muted aria-[selected=true]:outline rounded-none hover:bg-bg-muted"
+                  className="data-[combobox-item-focused=true]:bg-bg-muted aria-[selected=true]:outline rounded-none hover:bg-bg-muted"
                 >
                   Item 2
                 </Button>
@@ -75,7 +75,7 @@ const Page = () => {
               <Combobox.Item value="Item 3" asChild>
                 <Button
                   kind="text"
-                  className="aria-[focused=true]:bg-bg-muted aria-[selected=true]:outline rounded-none hover:bg-bg-muted"
+                  className="data-[combobox-item-focused=true]:bg-bg-muted aria-[selected=true]:outline rounded-none hover:bg-bg-muted"
                 >
                   Item 3
                 </Button>

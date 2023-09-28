@@ -10,10 +10,10 @@ import React from 'react'
 
 type ComboboxProps = Omit<
   React.ComponentPropsWithoutRef<typeof Popover>,
-  'value' | 'onValueChange' | 'defaultValue'
+  'value' | 'defaultValue' | 'onValueChange'
 > & {
-  children: React.ReactNode
   defaultIsOpen?: boolean
+  children: React.ReactNode
 }
 
 type HandleVisualFocusChangeParams = {
@@ -21,8 +21,8 @@ type HandleVisualFocusChangeParams = {
 }
 
 type ComboboxContextState<V> = {
-  value: V
-  setValue: (value: V) => void
+  cbValue: V
+  setCbValue: (value: V) => void
   isOpen: boolean
   setIsOpen: (value: boolean) => void
   idString: string
@@ -32,8 +32,8 @@ type ComboboxContextState<V> = {
 }
 
 const ComboboxContext = React.createContext<ComboboxContextState<any>>({
-  value: undefined,
-  setValue: () => {},
+  cbValue: '',
+  setCbValue: () => {},
   isOpen: false,
   setIsOpen: () => {},
   idString: '',
@@ -44,7 +44,7 @@ const ComboboxContext = React.createContext<ComboboxContextState<any>>({
 
 const Combobox = React.forwardRef(function Combobox<V>(
   {
-    value: propsValue,
+    value,
     onValueChange,
     defaultValue,
     defaultIsOpen,
@@ -54,27 +54,24 @@ const Combobox = React.forwardRef(function Combobox<V>(
   forwardedRef
 ) {
   const containerRef = React.useRef<HTMLDivElement>(null)
+  const idString = useIdString()
+  const ref = useCombinedRefs(containerRef, forwardedRef)
 
-  const [value, setValue] = useControlledState({
-    value: propsValue,
+  const [cbValue, setCbValue] = useControlledState({
+    value,
     defaultValue,
     onValueChange
   } as UseControlledStateParams<V>)
+
+  const [isOpen, setIsOpen] = useControlledState({
+    defaultValue: !!defaultIsOpen
+  } as UseControlledStateParams<boolean>)
 
   const [visuallyFocusedItem, setVisuallyFocusedItem] = React.useState(
     value as string
   )
 
-  const ref = useCombinedRefs(containerRef, forwardedRef)
-
-  const [isOpen, setIsOpen] = useControlledState({
-    defaultValue: !!defaultIsOpen,
-    value: undefined,
-    onValueChange: undefined
-  }) as [boolean, (value: boolean) => void]
-
-  const idString = useIdString()
-
+  // We can abstract this into it's own hook if we end up needing this elsewhere
   function handleVisualFocusChange({direction}: HandleVisualFocusChangeParams) {
     const items = containerRef.current?.querySelectorAll(`[data-combobox-item]`)
 
@@ -107,8 +104,8 @@ const Combobox = React.forwardRef(function Combobox<V>(
   return (
     <ComboboxContext.Provider
       value={{
-        value,
-        setValue,
+        cbValue,
+        setCbValue,
         isOpen,
         setIsOpen,
         idString,
@@ -117,13 +114,7 @@ const Combobox = React.forwardRef(function Combobox<V>(
         handleVisualFocusChange
       }}
     >
-      <Popover
-        value={isOpen}
-        onValueChange={setIsOpen}
-        aria-orientation="vertical"
-        {...props}
-        ref={ref}
-      >
+      <Popover value={isOpen} onValueChange={setIsOpen} {...props} ref={ref}>
         {children}
       </Popover>
     </ComboboxContext.Provider>
@@ -143,7 +134,7 @@ const ComoboxTrigger = React.forwardRef(function ComoboxTrigger(
   const ref = useCombinedRefs(forwardedRef)
   const {
     visuallyFocusedItem,
-    setValue,
+    setCbValue,
     idString,
     isOpen,
     setIsOpen,
@@ -170,7 +161,7 @@ const ComoboxTrigger = React.forwardRef(function ComoboxTrigger(
 
         if (isOpen && (event.key === 'Enter' || event.key === ' ')) {
           event.preventDefault()
-          setValue(visuallyFocusedItem)
+          setCbValue(visuallyFocusedItem)
           setIsOpen(false)
         }
       }}
@@ -178,6 +169,7 @@ const ComoboxTrigger = React.forwardRef(function ComoboxTrigger(
         setIsOpen(false)
       }}
       aria-controls={idString}
+      data-combobox-trigger
       {...props}
     />
   )
@@ -189,10 +181,21 @@ const ComoboxContent = React.forwardRef(function ComoboxContent(
   props: ComboboxContentProps,
   forwardedRef
 ) {
+  const {idString, isOpen} = React.useContext(ComboboxContext)
   const ref = useCombinedRefs(forwardedRef)
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  return <Popover.Content role="listbox" {...props} ref={ref} />
+  return (
+    <Popover.Content
+      // TODO: Why is this role just not showing up in our types?
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      role="listbox"
+      id={idString}
+      {...props}
+      ref={ref}
+      data-combobox-content
+      aria-expanded={isOpen}
+    />
+  )
 })
 
 type ComboboxLabelProps = Omit<
@@ -224,7 +227,7 @@ const ComboboxList = React.forwardRef(function ComboboxList(
   forwardedRef
 ) {
   const ref = useCombinedRefs(forwardedRef)
-  return <Primitive.Box el={el} {...props} ref={ref} />
+  return <Primitive.Box el={el} {...props} ref={ref} data-combobox-list />
 })
 
 type ComboboxItemProps = Omit<
@@ -242,8 +245,8 @@ const ComboboxItem = React.forwardRef(function ComboboxItem(
   const ref = useCombinedRefs(forwardedRef)
   const {
     visuallyFocusedItem,
-    value,
-    setValue,
+    cbValue,
+    setCbValue,
     setIsOpen,
     setVisuallyFocusedItem
   } = React.useContext(ComboboxContext)
@@ -253,17 +256,17 @@ const ComboboxItem = React.forwardRef(function ComboboxItem(
       ref={ref}
       data-combobox-item
       data-combobox-item-value={props.value}
+      data-combobox-item-focused={visuallyFocusedItem === props.value}
       role="option"
-      aria-focused={visuallyFocusedItem === props.value}
-      aria-selected={value === props.value}
+      aria-selected={cbValue === props.value}
       tabIndex={-1}
       onMouseDown={() => {
-        setValue(props.value)
+        setCbValue(props.value)
         setVisuallyFocusedItem(props.value as string)
         setIsOpen(false)
       }}
       onPress={() => {
-        setValue(props.value)
+        setCbValue(props.value)
         setVisuallyFocusedItem(props.value as string)
         setIsOpen(false)
       }}

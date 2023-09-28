@@ -53,7 +53,7 @@ const Box = React.forwardRef(
     }
 
     const filteredProps = filterPropsByEnvironment({
-      props: {...props, ...accessibilityProps}
+      props: {...accessibilityProps, ...props}
     })
 
     // Might make sense to move this along with other things to some

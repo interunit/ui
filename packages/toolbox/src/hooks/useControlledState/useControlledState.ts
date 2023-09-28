@@ -3,7 +3,7 @@ import React from 'react'
 export type ControlledStateParams<V> = {
   value: V
   defaultValue?: never
-  onValueChange: (value: V) => void
+  onValueChange: (value: V) => void | React.SetStateAction<V>
 }
 
 export type UncontrolledStateParams<V> = {

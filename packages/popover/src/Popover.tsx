@@ -79,7 +79,7 @@ const PopoverContext = React.createContext<PopoverContextState>({
 
 type PopoverProps = Omit<
   React.ComponentPropsWithRef<typeof P.BX>,
-  'el' | 'defaultValue'
+  'el' | 'defaultValue' | 'value' | 'onValueChange'
 > & {
   el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
   asChild?: boolean
@@ -93,7 +93,6 @@ const Popover = React.forwardRef(function Popover(
     value: propValue,
     defaultValue,
     onValueChange,
-    onChange,
     asChild,
     children,
     ...props
@@ -103,7 +102,6 @@ const Popover = React.forwardRef(function Popover(
   const [value, setValue] = useControlledState<boolean>({
     value: propValue,
     onValueChange,
-    onChange,
     defaultValue
   } as UseControlledStateParams<boolean>)
 
