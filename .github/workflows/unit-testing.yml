@@ -42,6 +42,11 @@ jobs:
          runs-on: ubuntu-latest
          needs: setup-unit-tests
          steps:
+            - name: Checkout Latest
+              uses: actions/checkout@v3
+            - uses: oven-sh/setup-bun@v1
+              with:
+                bun-version: latest
             - name: Cache Dependencies
               id: dependencies-cache
               uses: actions/cache@v3
@@ -78,6 +83,11 @@ jobs:
         runs-on: ubuntu-latest
         needs: setup-unit-tests
         steps:
+            - name: Checkout Latest
+              uses: actions/checkout@v3
+            - uses: oven-sh/setup-bun@v1
+              with:
+                bun-version: latest
             - name: Cache Dependencies
               id: dependencies-cache
               uses: actions/cache@v3
@@ -121,6 +131,11 @@ jobs:
         runs-on: ubuntu-latest
         needs: [web-unit-tests, native-unit-tests]
         steps:
+            - name: Checkout Latest
+              uses: actions/checkout@v3
+            - uses: oven-sh/setup-bun@v1
+              with:
+                bun-version: latest
             - uses: actions/download-artifact@v3
               with:
                 name: web-coverage-reports
