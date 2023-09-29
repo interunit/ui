@@ -3,39 +3,38 @@ name: PR Checks
 on:
   pull_request:
 
-
 jobs:
     install-dependencies:
       name: Install Dependencies
       uses: ./.github/workflows/install-dependencies.yml
-      with:
+      env:
         TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
         TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     build-packages:
       name: Build Packages
       needs: install-dependencies
       uses: ./.github/workflows/build-packages.yml
-      with:
+      env:
         TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
         TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     formatter:
       name: Formatter
       needs: install-dependencies
       uses: ./.github/workflows/formatter.yml
-      with:
+      env:
         TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
         TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     linter:
       name: Linter
       needs: install-dependencies
       uses: ./.github/workflows/linter.yml
-      with:
+      env:
         TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
         TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     unit-testing:
       name: Unit Testing
       needs: [install-dependencies, build-packages]
       uses: ./.github/workflows/unit-testing.yml
-      with:
+      env:
         TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
         TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
