@@ -1,5 +1,27 @@
 # @interunit/popover
 
+## 0.0.21
+
+### Patch Changes
+
+- - Combobox
+    - Alpha version ready for testing
+    - Tests
+    - Initial Docs
+  - Popover
+    - Make sure Props are passing through Popover Elements
+    - Calculate alignment based on content and not just the trigger height (may need to adjust this some more
+  - Toolbox
+    - Add dispatch type as optional union type for onValueChange
+  - Modal
+    - Adjust ModalProps to use intrinsic elements instead of HTMLProps (Modal generally needs more attention)
+- Updated dependencies
+  - @interunit/primitives@0.0.20
+  - @interunit/toolbox@0.0.14
+  - @interunit/modal@0.0.16
+  - @interunit/a11y@0.0.18
+  - @interunit/crossplatform@0.0.14
+
 ## 0.0.20
 
 ### Patch Changes

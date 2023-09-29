@@ -1,7 +1,6 @@
 {
   "name": "@interunit/combobox",
-  "version": "0.0.13",
-  "private": true,
+  "version": "0.0.2",
   "description": "",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -28,8 +27,11 @@
   },
   "prettier": "@interunit/prettier",
   "dependencies": {
+    "@interunit/a11y": "workspace:*",
     "@interunit/config": "workspace:*",
-    "@interunit/primitives": "workspace:*"
+    "@interunit/popover": "workspace:*",
+    "@interunit/primitives": "workspace:*",
+    "@interunit/toolbox": "workspace:*"
   },
   "devDependencies": {
     "@interunit/eslint": "workspace:*",

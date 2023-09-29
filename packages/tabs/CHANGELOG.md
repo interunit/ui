@@ -1,5 +1,14 @@
 # @interunit/tabs
 
+## 0.0.12
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/primitives@0.0.20
+  - @interunit/toolbox@0.0.14
+  - @interunit/a11y@0.0.18
+
 ## 0.0.11
 
 ### Patch Changes

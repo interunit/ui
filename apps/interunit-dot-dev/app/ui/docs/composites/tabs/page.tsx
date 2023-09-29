@@ -18,13 +18,14 @@ import {PropsTable} from '@/components/docs/PropsTable'
 import {Button} from '@/components/system/Button'
 
 const TabsPage = () => {
+  const [value, setValue] = React.useState('hi')
   return (
     <P.BX el="div">
       <PackageInfo
         data={{title: 'Tabs', name, description, version, homepage}}
       />
       <ComponentDisplay className="mb-12">
-        <Tabs defaultValue="home">
+        <Tabs value={value} onValueChange={setValue}>
           <Tabs.TriggerList className="flex gap-2">
             <Tabs.Trigger
               value={'home'}

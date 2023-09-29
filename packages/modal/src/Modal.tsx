@@ -11,7 +11,8 @@ export type BaseModalProps = {
   focusType?: FocusType
 }
 
-type ModalProps = (React.HTMLProps<'div'> | RNModalProps) & BaseModalProps
+type ModalProps = (React.JSX.IntrinsicElements['div'] | RNModalProps) &
+  BaseModalProps
 
 const Modal = React.forwardRef<any, ModalProps>(
   ({focusType = 'default', children, ...props}, forwardedRef) => {

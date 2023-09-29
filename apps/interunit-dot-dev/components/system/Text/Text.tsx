@@ -1,4 +1,5 @@
 import {P} from '@interunit/primitives'
+import NextLink, {type LinkProps as NextLinkProps} from 'next/link'
 import React from 'react'
 
 type TextProps = React.ComponentPropsWithoutRef<typeof P.TX> & {
@@ -26,4 +27,24 @@ const Text = React.forwardRef<TextRef, TextProps>(
   }
 )
 
-export {Text}
+type LinkProps = NextLinkProps &
+  Omit<React.ComponentPropsWithRef<typeof P.TX<'a'>>, 'el'>
+
+const Link = React.forwardRef(function Link(
+  {className, children, ...props}: LinkProps,
+  forwardedRef
+) {
+  return (
+    <NextLink
+      className={`${className ? className : 'text-md'} ${
+        className?.includes('-hd') ? 'font-medium' : ''
+      }`}
+      ref={forwardedRef}
+      {...props}
+    >
+      {children}
+    </NextLink>
+  )
+})
+
+export {Text, Link}

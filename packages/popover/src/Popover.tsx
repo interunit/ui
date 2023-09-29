@@ -1,4 +1,4 @@
-import {isTouchDevice, useOutsideClick} from '@interunit/a11y'
+import {isTouchDevice} from '@interunit/a11y'
 import {getEnvironmentName} from '@interunit/config'
 import {Modal} from '@interunit/modal'
 import {Child, P} from '@interunit/primitives'
@@ -25,7 +25,7 @@ type Dimensions = {
 }
 
 type PopoverContextState = {
-  value: boolean
+  value?: boolean
   setValue: (value: boolean) => void
   focusType: 'none' | 'default'
   triggerRef?: React.ReactElement | null
@@ -34,11 +34,13 @@ type PopoverContextState = {
   setContentRef: ((content: React.ReactElement | null) => void) | null
   triggerDimensions: Dimensions
   contentDimensions: Dimensions
+  popoverDimensions: Dimensions
+  setPopoverDimensions: (dimensions: Dimensions) => void
   setTriggerDimensions: (dimensions: Dimensions) => void
   setContentDimensions: (dimensions: Dimensions) => void
   triggerInteraction: 'click' | 'hover'
   setTriggerInteraction: (type: 'click' | 'hover') => void
-  popoverRef: React.RefObject<typeof P.BX>
+  popoverRef: React.ReactElement | null
 }
 
 const PopoverContext = React.createContext<PopoverContextState>({
@@ -61,16 +63,23 @@ const PopoverContext = React.createContext<PopoverContextState>({
     width: 0,
     height: 0
   },
+  popoverDimensions: {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0
+  },
   setTriggerDimensions: () => {},
   setContentDimensions: () => {},
+  setPopoverDimensions: () => {},
   triggerInteraction: 'click',
   setTriggerInteraction: () => {},
-  popoverRef: React.createRef()
+  popoverRef: null
 })
 
 type PopoverProps = Omit<
-  React.ComponentPropsWithoutRef<typeof P.BX>,
-  'el' | 'defaultValue'
+  React.ComponentPropsWithRef<typeof P.BX>,
+  'el' | 'defaultValue' | 'value' | 'onValueChange'
 > & {
   el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
   asChild?: boolean
@@ -81,20 +90,28 @@ const Popover = React.forwardRef(function Popover(
   {
     el = 'div',
     focusType = 'none',
+    value: propValue,
+    defaultValue,
+    onValueChange,
     asChild,
     children,
     ...props
   }: PopoverProps & UseControlledStateParams<boolean>,
   forwardedRef
 ) {
-  const [value, setValue] = useControlledState<boolean>({...props})
-  const popoverRef = React.useRef(null)
-  const combinedRefs = useCombinedRefs(popoverRef, forwardedRef)
+  const [value, setValue] = useControlledState<boolean>({
+    value: propValue,
+    onValueChange,
+    defaultValue
+  } as UseControlledStateParams<boolean>)
 
   const [triggerRef, setTriggerRef] = React.useState<React.ReactElement | null>(
     null
   )
   const [contentRef, setContentRef] = React.useState<React.ReactElement | null>(
+    null
+  )
+  const [popoverRef, setPopoverRef] = React.useState<React.ReactElement | null>(
     null
   )
   const [triggerInteraction, setTriggerInteraction] = React.useState<
@@ -112,14 +129,36 @@ const Popover = React.forwardRef(function Popover(
     width: 0,
     height: 0
   })
-
-  useOutsideClick({
-    ref: popoverRef,
-    fn: () => setValue(false)
-    // isEnabled: settings?.shouldCloseOnInteractOutside && value
+  const [popoverDimensions, setPopoverDimensions] = React.useState<Dimensions>({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0
   })
 
-  const display = (ENVIRONMENT === 'web' ? 'inline-block' : 'flex') as 'flex'
+  const combinedRefs = useCombinedRefs(setPopoverRef, forwardedRef)
+  // useOutsideClick({
+  //   ref: combinedRefs,
+  //   fn: () => setValue(false)
+  //   // isEnabled: settings?.shouldCloseOnInteractOutside && value
+  // })
+
+  React.useEffect(() => {
+    const PopoverElement = popoverRef as unknown as HTMLElement
+
+    if (PopoverElement && ENVIRONMENT === 'web') {
+      if (!PopoverElement?.getBoundingClientRect) return
+      const clientRect = PopoverElement.getBoundingClientRect()
+      const dimensions = {
+        x: clientRect.x,
+        y: clientRect.y,
+        width: clientRect.width,
+        height: clientRect.height
+      }
+
+      setPopoverDimensions(dimensions)
+    }
+  }, [popoverRef])
 
   const Box = asChild ? Child : P.BX
 
@@ -137,6 +176,8 @@ const Popover = React.forwardRef(function Popover(
         setTriggerDimensions,
         contentDimensions,
         setContentDimensions,
+        popoverDimensions,
+        setPopoverDimensions,
         popoverRef,
         triggerInteraction,
         setTriggerInteraction
@@ -144,9 +185,14 @@ const Popover = React.forwardRef(function Popover(
     >
       <Box
         el={el}
-        style={{position: 'relative', overflow: 'visible', display}}
         collapsable={false}
+        {...props}
         ref={combinedRefs}
+        onLayout={(e: {nativeEvent: {layout: Dimensions}}) => {
+          if (e?.nativeEvent?.layout) {
+            setPopoverDimensions(e.nativeEvent.layout)
+          }
+        }}
       >
         {children}
       </Box>
@@ -172,7 +218,8 @@ const PopoverTrigger = React.forwardRef(
       el = 'button',
       interaction = 'click',
       asChild,
-      children
+      children,
+      ...props
     }: PopoverTriggerProps,
     forwardedRef
   ) => {
@@ -218,7 +265,7 @@ const PopoverTrigger = React.forwardRef(
         onPress={() => {
           setValue(!value)
         }}
-        onClick={(event: React.MouseEvent<HTMLElement>) => {
+        onClick={event => {
           event.preventDefault()
           if (
             triggerInteraction === 'click' ||
@@ -232,7 +279,7 @@ const PopoverTrigger = React.forwardRef(
             setValue(true)
           }
         }}
-        onKeyDown={(event: React.KeyboardEvent<HTMLElement>) => {
+        onKeyDown={event => {
           if (event.key === 'Enter') {
             setValue(!value)
           }
@@ -242,11 +289,14 @@ const PopoverTrigger = React.forwardRef(
           }
         }}
         onLayout={(e: {nativeEvent: {layout: Dimensions}}) => {
-          setTriggerDimensions(e.nativeEvent.layout)
+          if (e?.nativeEvent?.layout) {
+            setTriggerDimensions(e.nativeEvent.layout)
+          }
         }}
         ref={combinedRefs}
         collapsable={false}
         data-popover-state={value}
+        {...props}
       >
         {children}
       </Button>
@@ -254,10 +304,10 @@ const PopoverTrigger = React.forwardRef(
   }
 )
 type PopoverContentProps = Omit<
-  React.ComponentPropsWithoutRef<typeof P.BX>,
+  React.ComponentPropsWithoutRef<typeof P.BX<'div'>>,
   'el'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
+  el?: React.ComponentPropsWithoutRef<typeof P.BX<'div'>>['el']
   asChild?: boolean
   positioning?: PopoverPositioning
   arrow?: PopoverArrow
@@ -267,7 +317,15 @@ type PopoverContentProps = Omit<
 // Handle outside click passing here
 const PopoverContent = React.forwardRef(
   (
-    {el = 'div', asChild, positioning, arrow, children}: PopoverContentProps,
+    {
+      el = 'div',
+      asChild,
+      positioning,
+      arrow,
+      children,
+      className,
+      ...props
+    }: PopoverContentProps,
     forwardedRef
   ) => {
     const Box = asChild ? P.BX : Child
@@ -281,6 +339,7 @@ const PopoverContent = React.forwardRef(
       setContentDimensions,
       triggerDimensions,
       triggerInteraction,
+      popoverDimensions,
       focusType
     } = React.useContext(PopoverContext)
 
@@ -294,63 +353,62 @@ const PopoverContent = React.forwardRef(
       positioning,
       arrow,
       nativeTriggerDimensions: triggerDimensions,
-      nativeContentDimensions: contentDimensions
+      nativeContentDimensions: contentDimensions,
+      nativePopoverDimensions: popoverDimensions
     })
 
-    if (value && triggerRef) {
-      return (
-        <Modal
-          style={{
-            maxWidth: positioning?.maxWidth ?? 'auto',
-            width:
-              positioning?.width === 'trigger'
-                ? `${triggerDimensions?.width}px`
-                : positioning?.width
-                ? positioning.width
-                : 'auto',
-            zIndex: positioning?.zIndex ?? 1,
-            ...positioningStyles
-          }}
-          className="iu-popover-content"
-          onMouseLeave={() => {
-            if (triggerInteraction === 'hover' && ENVIRONMENT === 'web') {
-              setValue(false)
-            }
-          }}
-          onKeyDown={(_event: unknown) => {
-            const event = _event as KeyboardEvent
-
-            if (event.key === 'Escape') {
-              setValue(false)
-            }
-          }}
-          onClose={() => setValue(false)}
-          focusType={focusType}
-          onLayout={(e: {nativeEvent: {layout: Dimensions}}) => {
+    return (
+      <Modal
+        ref={combinedRefs}
+        style={{
+          maxWidth: positioning?.maxWidth ?? 'auto',
+          width:
+            positioning?.width === 'trigger'
+              ? `${triggerDimensions?.width}px`
+              : positioning?.width
+              ? positioning.width
+              : 'auto',
+          zIndex: positioning?.zIndex ?? 1,
+          ...positioningStyles
+        }}
+        hidden={!value}
+        className={`iu-popover-content ${className}`}
+        onMouseLeave={() => {
+          if (triggerInteraction === 'hover' && ENVIRONMENT === 'web') {
+            setValue(false)
+          }
+        }}
+        onKeyDown={event => {
+          if (event.key === 'Escape') {
+            setValue(false)
+          }
+        }}
+        onClose={() => setValue(false)}
+        focusType={focusType}
+        onLayout={(e: {nativeEvent: {layout: Dimensions}}) => {
+          if (e?.nativeEvent?.layout) {
             setContentDimensions(e.nativeEvent.layout)
-          }}
-          data-popover-state={value}
-          data-popover-side={positioning?.side}
-          data-popover-align={positioning?.align}
-          ref={combinedRefs}
-        >
-          <>
-            {typeof children === 'function' ? children({value}) : children}
-            <Box
-              el={el}
-              className={`iu-popover-arrow ${arrow?.className}`}
-              aria-hidden={true}
-              style={{
-                ...arrowStyles,
-                ...(userDefinedArrowStyle as any)
-              }}
-            />
-          </>
-        </Modal>
-      )
-    }
-
-    return <></>
+          }
+        }}
+        data-popover-state={value}
+        data-popover-side={positioning?.side}
+        data-popover-align={positioning?.align}
+        {...props}
+      >
+        <>
+          {children}
+          <Box
+            el={el}
+            className={`iu-popover-arrow ${arrow?.className}`}
+            aria-hidden={true}
+            style={{
+              ...arrowStyles,
+              ...(userDefinedArrowStyle as any)
+            }}
+          />
+        </>
+      </Modal>
+    )
   }
 )
 

@@ -11,7 +11,6 @@ type ButtonProps = Omit<React.ComponentPropsWithoutRef<typeof P.BT>, 'el'> & {
   color: ThemeColor
   variation?: 'xs' | 'sm' | 'md' | 'lg'
   kind?: ButtonKind
-  children: React.ReactNode
 }
 
 type ButtonAnchorProps = Omit<

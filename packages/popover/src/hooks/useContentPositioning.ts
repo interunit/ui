@@ -1,3 +1,4 @@
+// TODO: This file needs some love
 import {type CSSUnit, getEnvironmentName} from '@interunit/config'
 import {platformCSSUnitTranslation} from '@interunit/crossplatform'
 import {type P} from '@interunit/primitives'
@@ -39,7 +40,8 @@ export const useContentPositioning = ({
   positioning: _positioning,
   arrow: _arrow,
   nativeTriggerDimensions,
-  nativeContentDimensions
+  nativeContentDimensions,
+  nativePopoverDimensions
 }: {
   trigger: React.ReactElement | undefined | null
   content: React.ReactElement | undefined | null
@@ -47,6 +49,7 @@ export const useContentPositioning = ({
   arrow: PopoverArrow | undefined
   nativeTriggerDimensions: Dimensions | undefined
   nativeContentDimensions: Dimensions | undefined
+  nativePopoverDimensions: Dimensions | undefined
 }) => {
   const positioning = React.useMemo<PopoverPositioning>(() => {
     return {
@@ -101,10 +104,12 @@ export const useContentPositioning = ({
 
   const getPositioningStyles = ({
     triggerDimensions,
-    contentDimensions
+    contentDimensions,
+    popoverDimensions
   }: {
     triggerDimensions: Dimensions
     contentDimensions: Dimensions | undefined
+    popoverDimensions: Dimensions | undefined
   }) => {
     const styles: React.CSSProperties = {
       position: 'absolute',
@@ -126,7 +131,7 @@ export const useContentPositioning = ({
     }
 
     if (positioning.side === 'bottom') {
-      styles.top = `${triggerDimensions.height + offset}px`
+      styles.top = `${popoverDimensions?.height ?? 0 + offset}px`
     }
 
     if (positioning.side === 'left') {
@@ -305,7 +310,8 @@ export const useContentPositioning = ({
       if (triggerDimensions) {
         const styles = getPositioningStyles({
           triggerDimensions,
-          contentDimensions
+          contentDimensions,
+          popoverDimensions: nativePopoverDimensions
         })
         // TODO: Need to figure why this is happening
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -321,7 +327,13 @@ export const useContentPositioning = ({
         }
       }
     }
-  }, [trigger, positioning, nativeTriggerDimensions, nativeContentDimensions])
+  }, [
+    trigger,
+    positioning,
+    nativeTriggerDimensions,
+    nativeContentDimensions,
+    nativePopoverDimensions
+  ])
 
   return {positioningStyles, arrowStyles}
 }

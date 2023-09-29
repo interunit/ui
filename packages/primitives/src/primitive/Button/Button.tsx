@@ -69,7 +69,7 @@ const Button = React.forwardRef(function Button<
   }
 
   const filteredProps = filterPropsByEnvironment({
-    props: {...props, ...accessibilityProps, ...onClickOrPress()}
+    props: {...accessibilityProps, ...onClickOrPress(), ...props}
   })
 
   if (filteredProps.hidden && getEnvironmentName() === 'native') {
