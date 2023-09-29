@@ -5,7 +5,7 @@ on:
 
 
 jobs:
-    pr-checks:
+    setup:
         if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
         runs-on: ubuntu-latest
         steps:
@@ -21,8 +21,11 @@ jobs:
             - name: Install Dependencies
               run: bun install
     formatter:
+        needs: setup
         uses: ./.github/workflows/formatter.yml
     linter:
+        needs: setup
         uses: ./.github/workflows/linter.yml
     unit-testing:
+        needs: setup
         uses: ./.github/workflows/unit-testing.yml
