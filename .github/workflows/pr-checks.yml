@@ -7,34 +7,19 @@ jobs:
     install-dependencies:
       name: Install Dependencies
       uses: ./.github/workflows/install-dependencies.yml
-      env:
-        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-        TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     build-packages:
       name: Build Packages
       needs: install-dependencies
       uses: ./.github/workflows/build-packages.yml
-      env:
-        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-        TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     formatter:
       name: Formatter
       needs: install-dependencies
       uses: ./.github/workflows/formatter.yml
-      env:
-        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-        TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     linter:
       name: Linter
       needs: install-dependencies
       uses: ./.github/workflows/linter.yml
-      env:
-        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-        TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     unit-testing:
       name: Unit Testing
       needs: [install-dependencies, build-packages]
       uses: ./.github/workflows/unit-testing.yml
-      env:
-        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-        TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
