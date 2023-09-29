@@ -119,7 +119,7 @@ const Combobox = React.forwardRef(function Combobox<V>(
       </Popover>
     </ComboboxContext.Provider>
   )
-})
+}) as <V>(props: ComboboxProps & UseControlledStateParams<V>) => JSX.Element
 
 type ComboboxTriggerProps = React.ComponentPropsWithRef<
   typeof Popover.Trigger
@@ -190,10 +190,11 @@ const ComoboxContent = React.forwardRef(function ComoboxContent(
       // @ts-ignore
       role="listbox"
       id={idString}
-      {...props}
       ref={ref}
       data-combobox-content
       aria-expanded={isOpen}
+      accessibilityState={{expanded: isOpen ? true : undefined}}
+      {...props}
     />
   )
 })

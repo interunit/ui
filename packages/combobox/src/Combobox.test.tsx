@@ -8,7 +8,7 @@ const ComboboxComponent = () => {
   return (
     <Combobox value={value} onValueChange={setValue}>
       <Combobox.Label>Label</Combobox.Label>
-      <Combobox.Trigger>Trigger</Combobox.Trigger>
+      <Combobox.Trigger>{value}</Combobox.Trigger>
       <Combobox.Content>
         <Combobox.List>
           <Combobox.Item value="Item 1">Item 1</Combobox.Item>
@@ -90,5 +90,46 @@ describe('Combobox', () => {
     trigger.focus()
 
     expect(item2).toHaveAttribute('aria-selected', 'true')
+    expect(trigger).toHaveTextContent('Item 2')
+  })
+  test('the combobox closes onBlur', async () => {
+    const user = userEvent.setup()
+
+    const {container} = render(<ComboboxComponent />)
+
+    const trigger = container.querySelector('[data-combobox-trigger]')
+    expect(trigger).toBeInTheDocument()
+
+    const content = container.querySelector('[data-combobox-content]')
+    expect(content).toBeInTheDocument()
+
+    await user.click(trigger)
+
+    expect(content).toHaveAttribute('aria-expanded', 'true')
+
+    await user.tab()
+
+    expect(content).toHaveAttribute('aria-expanded', 'false')
+    expect(content).not.toBeVisible()
+  })
+  test('clicking on an item should change the value', async () => {
+    const user = userEvent.setup()
+
+    const {container} = render(<ComboboxComponent />)
+
+    const trigger = container.querySelector('[data-combobox-trigger]')
+    expect(trigger).toBeInTheDocument()
+
+    const content = container.querySelector('[data-combobox-content]')
+    expect(content).toBeInTheDocument()
+
+    await user.click(trigger)
+
+    const item2 = container.querySelector('[data-combobox-item-value="Item 2"]')
+    expect(item2).toBeInTheDocument()
+
+    await user.click(item2)
+
+    expect(trigger).toHaveTextContent('Item 2')
   })
 })
