@@ -9,7 +9,7 @@ on:
 jobs:
     unit-testing:
         if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
-        runs-on: macos-latest
+        runs-on: ubuntu-latest
         steps:
             - name: Checkout Latest
               uses: actions/checkout@v3
