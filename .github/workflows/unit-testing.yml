@@ -119,7 +119,7 @@ jobs:
     report:
         name: Report Test Coverage
         runs-on: ubuntu-latest
-        needs: [web-unit-tests,native-unit-test]
+        needs: [web-unit-tests, native-unit-tests]
         steps:
             - uses: actions/download-artifact@v3
               with:
