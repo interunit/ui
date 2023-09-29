@@ -1,7 +1,7 @@
 name: Unit Testing
 
 on:
-    pull_request:
+    workflow_dispatch:
     push:
       branches:
         - main
@@ -15,17 +15,6 @@ jobs:
         if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
         runs-on: macos-latest
         steps:
-            - name: Checkout Latest
-              uses: actions/checkout@v3
-            - uses: oven-sh/setup-bun@v1
-              with:
-                bun-version: latest
-            - name: Change NodeJS to verison from package.json
-              uses: actions/setup-node@v3
-              with:
-                node-version-file: 'package.json'
-            - name: Install Dependencies
-              run: bun install
             - name: Build Packages
               run: bun run build:package
             - name: Run Native Unit Tests
