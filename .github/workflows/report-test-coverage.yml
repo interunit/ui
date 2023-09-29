@@ -1,6 +1,11 @@
 name: Report Test Coverage
 on:
   workflow_call:
+      secrets:
+        TURBO_TOKEN:
+          required: false
+        TURBO_TEAM:
+          required: false
 
 jobs:
       report-test-coverage:

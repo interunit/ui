@@ -2,6 +2,11 @@ name: Install Dependencies
 
 on:
     workflow_call:
+      secrets:
+        TURBO_TOKEN:
+          required: false
+        TURBO_TEAM:
+          required: false
 
 
 jobs:
