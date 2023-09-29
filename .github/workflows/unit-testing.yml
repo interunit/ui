@@ -157,7 +157,7 @@ jobs:
                   **/coverage/native
                 key: native-coverage-reports-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
             - name: Check Native Test Coverage
-              if: steps.web-native-coverage.outputs.cache-hit != 'true'
+              if: steps.native-test-coverage.outputs.cache-hit != 'true'
               uses: actions/github-script@v3
               with:
                 script: |
