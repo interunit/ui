@@ -2,9 +2,6 @@ name: Unit Testing
 
 on:
     workflow_call:
-    push:
-      branches:
-        - main
 
 jobs:
     native-unit-tests:

@@ -3,7 +3,7 @@
 ![InterUnit Logo](https://github.com/interunit/ui/assets/29106675/9a79cc13-10ca-4e03-abf8-b82930a48c24)
 
  <div align="center">
-    <img alt="GitHub Workflow Status (with event)" src="https://img.shields.io/github/actions/workflow/status/interunit/ui/unit-testing.yml?style=for-the-badge&logo=github&logoColor=white&label=Tests&labelColor=%231D1D27&color=%235E47C4">
+    <img alt="GitHub Workflow Status (with event)" src="https://img.shields.io/github/actions/workflow/status/interunit/ui/pr-checks.yml?style=for-the-badge&logo=github&logoColor=white&label=Tests&labelColor=%231D1D27&color=%235E47C4">
     <a href="https://codecov.io/gh/interunit/ui">
         <img alt="Codecov" src="https://img.shields.io/codecov/c/github/interunit/ui?style=for-the-badge&logo=codecov&logoColor=white&labelColor=%231D1D27&color=%235E47C4">
     </a>
