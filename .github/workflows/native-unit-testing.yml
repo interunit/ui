@@ -1,11 +1,6 @@
 name: Native Unit Testing
 on:
   workflow_call:
-      secrets:
-        TURBO_TOKEN:
-          required: false
-        TURBO_TEAM:
-          required: false
 
 jobs:
       native-unit-tests:
