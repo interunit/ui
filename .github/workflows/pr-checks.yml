@@ -5,36 +5,21 @@ on:
 
 
 jobs:
-    setup:
-        name: Setup PR Checks
-        if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout Latest
-              uses: actions/checkout@v3
-            - uses: oven-sh/setup-bun@v1
-              with:
-                bun-version: latest
-            - name: Cache Dependencies
-              id: cache
-              uses: actions/cache@v3
-              with:
-                path: |
-                  ./node_modules
-                  **/node_modules
-                key: node_modules-${{ hashFiles('bun.lockb') }}
-            - name: Install Dependencies
-              if: steps.cache.outputs.cache-hit != 'true'
-              run: bun install
+    install-dependencies:
+        name: Install Dependencies
+        uses: ./.github/workflows/install-dependencies.yml
+    build-packages:
+        name: Build Packages
+        uses: ./.github/workflows/build-packages.yml
     formatter:
         name: Formatter
-        needs: setup
+        needs: install-dependencies
         uses: ./.github/workflows/formatter.yml
     linter:
         name: Linter
-        needs: setup
+        needs: install-dependencies
         uses: ./.github/workflows/linter.yml
     unit-testing:
         name: Unit Testing
-        needs: setup
+        needs: [install-dependencies, build-packages]
         uses: ./.github/workflows/unit-testing.yml
