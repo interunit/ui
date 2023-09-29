@@ -23,10 +23,10 @@ type CollapsibleProps = {
   children: React.ReactNode
 }
 
-const Collapsible = ({
+const Collapsible = function Collapsible({
   children,
   ...props
-}: CollapsibleProps & UseControlledStateParams<boolean>) => {
+}: CollapsibleProps & UseControlledStateParams<boolean>) {
   const idString = useIdString()
   const [value, setValue] = useControlledState({
     ...props
@@ -40,52 +40,49 @@ const Collapsible = ({
 }
 
 type CollapsibleTriggerProps = Omit<
-  React.ComponentPropsWithoutRef<typeof P.BT>,
+  React.ComponentPropsWithRef<typeof P.BT>,
   'el'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
+  el?: React.ComponentPropsWithRef<typeof P.BT>['el']
   asChild?: boolean
-  children: React.ReactNode
 }
 
-const CollapsibleTrigger = React.forwardRef(
-  (
-    {el = 'button', asChild, children, ...props}: CollapsibleTriggerProps,
-    forwardedRef
-  ) => {
-    const {value, setValue, idString} = React.useContext(CollapsibleContext)
-    const combinedRef = useCombinedRefs(forwardedRef)
+const CollapsibleTrigger = React.forwardRef(function CollapsibleTrigger(
+  {el = 'button', asChild, children, ...props}: CollapsibleTriggerProps,
+  forwardedRef
+) {
+  const {value, setValue, idString} = React.useContext(CollapsibleContext)
+  const combinedRef = useCombinedRefs(forwardedRef)
 
-    const Trigger = asChild ? Child : P.BT
+  const Trigger = asChild ? Child : P.BT
 
-    return (
-      <Trigger
-        el={el}
-        onClick={() => {
+  return (
+    <Trigger
+      el={el}
+      onClick={() => {
+        setValue(!value)
+      }}
+      onPress={() => {
+        setValue(!value)
+      }}
+      type="button"
+      onKeyDown={(event: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (event.key === 'Enter') {
+          event.preventDefault()
           setValue(!value)
-        }}
-        onPress={() => {
-          setValue(!value)
-        }}
-        type="button"
-        onKeyDown={(event: React.KeyboardEvent<HTMLButtonElement>) => {
-          if (event.key === 'Enter') {
-            event.preventDefault()
-            setValue(!value)
-          }
-        }}
-        role="button"
-        data-popover-state={value}
-        aria-expanded={value}
-        aria-controls={props['aria-controls'] || idString}
-        {...props}
-        ref={combinedRef}
-      >
-        {children}
-      </Trigger>
-    )
-  }
-)
+        }
+      }}
+      role="button"
+      data-popover-state={value}
+      aria-expanded={value}
+      aria-controls={props['aria-controls'] || idString}
+      {...props}
+      ref={combinedRef}
+    >
+      {children}
+    </Trigger>
+  )
+}) as (props: CollapsibleTriggerProps) => JSX.Element
 
 type CollapsibleContentProps = Omit<
   React.ComponentPropsWithoutRef<typeof P.BX>,
@@ -93,33 +90,33 @@ type CollapsibleContentProps = Omit<
 > & {
   el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
   asChild?: boolean
-  children: (({value}: {value: boolean}) => React.ReactNode) | React.ReactNode
 }
 
-const CollapsibleContent = React.forwardRef(
-  (
-    {el = 'div', asChild, children, ...props}: CollapsibleContentProps,
-    forwardedRef
-  ) => {
-    const {value, idString} = React.useContext(CollapsibleContext)
-    const Content = asChild ? Child : P.BX
+const CollapsibleContent = React.forwardRef(function CollapsibleContent(
+  {el = 'div', asChild, children, ...props}: CollapsibleContentProps,
+  forwardedRef
+) {
+  const combinedRef = useCombinedRefs(forwardedRef)
+  const {value, idString} = React.useContext(CollapsibleContext)
+  const Content = asChild ? Child : P.BX
 
-    return (
-      <Content
-        el={el}
-        role="region"
-        id={props['id'] || idString}
-        hidden={!value}
-        {...props}
-        ref={forwardedRef}
-      >
-        {typeof children === 'function' ? children({value}) : children}
-      </Content>
-    )
-  }
-)
+  return (
+    <Content
+      el={el}
+      role="region"
+      id={props['id'] || idString}
+      hidden={!value}
+      {...props}
+      ref={combinedRef}
+    >
+      {children}
+    </Content>
+  )
+}) as (props: CollapsibleContentProps) => JSX.Element
 
-Collapsible.Trigger = CollapsibleTrigger
-Collapsible.Content = CollapsibleContent
+const CollapsibleNamespace = Object.assign(Collapsible, {
+  Trigger: CollapsibleTrigger,
+  Content: CollapsibleContent
+})
 
-export {Collapsible}
+export {CollapsibleNamespace as Collapsible}
