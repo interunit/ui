@@ -25,7 +25,7 @@ jobs:
                   **/node_modules
                 key: node_modules-${{ hashFiles('bun.lockb') }}
             - name: Cache Build
-              id: build:package:ci-cache
+              id: build-package-ci-cache
               uses: actions/cache@v3
               with:
                 path: |
