@@ -2,6 +2,13 @@
 
 ![InterUnit Logo](https://github.com/interunit/ui/assets/29106675/9a79cc13-10ca-4e03-abf8-b82930a48c24)
 
+<p align="center">
+    <img src="https://github.com/interunit/ui/actions/workflows/unit-testing.yml/badge.svg?event=push" alt="Tests Passing"/>
+    <a href="https://codecov.io/gh/interunit/ui">
+        <img src="https://codecov.io/gh/interunit/ui/graph/badge.svg?token=UCDJAO7E2C" alt="Codcov Test Coverage"/>
+    </a>
+</p>
+
 # InterUnit
 
 > Effortless cross-platform development with React and React Native
