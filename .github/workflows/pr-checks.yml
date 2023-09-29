@@ -9,7 +9,7 @@ concurrency:
 
 
 jobs:
-    formatter:
+    pr-checks:
         if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
         runs-on: ubuntu-latest
         steps:
