@@ -15,7 +15,7 @@ jobs:
                 bun-version: latest
             - name: Cache Dependencies
               id: dependencies-cache
-              uses: actions/cache@v3
+              uses: actions/cache/restore@v3
               with:
                 path: |
                   ./node_modules

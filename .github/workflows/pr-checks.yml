@@ -10,6 +10,7 @@ jobs:
         uses: ./.github/workflows/install-dependencies.yml
     build-packages:
         name: Build Packages
+        needs: install-dependencies
         uses: ./.github/workflows/build-packages.yml
     formatter:
         name: Formatter

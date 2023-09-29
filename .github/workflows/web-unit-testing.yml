@@ -14,7 +14,7 @@ jobs:
                 bun-version: latest
             - name: Cache Dependencies
               id: dependencies-cache
-              uses: actions/cache@v3
+              uses: actions/cache/restore@v3
               with:
                 path: |
                   ./node_modules
@@ -22,7 +22,7 @@ jobs:
                 key: node_modules-${{ hashFiles('bun.lockb') }}
             - name: Cache Build
               id: build-package-ci-cache
-              uses: actions/cache@v3
+              uses: actions/cache/restore@v3
               with:
                 path: |
                   **/dist
@@ -49,4 +49,4 @@ jobs:
               with:
                 path: |
                   **/coverage/web
-                key: web-coverage-reports-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+                key: web-coverage-reports-${{ github.run_id }}
