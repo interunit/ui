@@ -7,6 +7,7 @@
     "dev:docs": "turbo run dev:docs",
     "watch:package": "turbo run watch:package --concurrency 50",
     "build:package": "turbo run build:package",
+    "build:package:ci": "turbo run build:package:ci",
     "publish:package": "turbo run publish:package --",
     "lint": "turbo lint --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache'",
     "lint:fix": "turbo lint:fix --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache'",

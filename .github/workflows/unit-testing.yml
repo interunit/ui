@@ -24,11 +24,18 @@ jobs:
                   ./node_modules
                   **/node_modules
                 key: node_modules-${{ hashFiles('bun.lockb') }}
+            - name: Cache Build
+              id: cache
+              uses: actions/cache@v3
+              with:
+                path: |
+                  **/dist
+                key: build:package:ci
             - name: Install Dependencies
               if: steps.cache.outputs.cache-hit != 'true'
               run: bun install
             - name: Build Packages
-              run: bun run build:package
+              run: bun run build:package:ci
             - name: Run Native Unit Tests
               run: bun run test:unit --selectProjects native --coverageDirectory ./coverage/native
               env:
