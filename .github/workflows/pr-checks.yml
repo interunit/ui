@@ -18,6 +18,7 @@ jobs:
     linter:
       name: Linter
       needs: install-dependencies
+      uses: ./.github/workflows/linter.yml
     unit-testing:
       name: Unit Testing
       needs: [install-dependencies, build-packages]
