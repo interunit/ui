@@ -1,0 +1,25 @@
+name: PR Checks
+
+on:
+  pull_request:
+
+jobs:
+    install-dependencies:
+      name: Install Dependencies
+      uses: ./.github/workflows/install-dependencies.yml
+    build-packages:
+      name: Build Packages
+      needs: install-dependencies
+      uses: ./.github/workflows/build-packages.yml
+    formatter:
+      name: Formatter
+      needs: install-dependencies
+      uses: ./.github/workflows/formatter.yml
+    linter:
+      name: Linter
+      needs: install-dependencies
+      uses: ./.github/workflows/linter.yml
+    unit-testing:
+      name: Unit Testing
+      needs: [install-dependencies, build-packages]
+      uses: ./.github/workflows/unit-testing.yml

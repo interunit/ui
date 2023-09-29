@@ -1,10 +1,15 @@
-name: Formatter
-
+name: Build Packages
 on:
-  workflow_call:
+    workflow_call:
+      secrets:
+        TURBO_TOKEN:
+          required: false
+        TURBO_TEAM:
+          required: false
 
 jobs:
-    formatter:
+    build-packages:
+        name: Build Packages
         if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
         runs-on: ubuntu-latest
         steps:
@@ -14,15 +19,22 @@ jobs:
               with:
                 bun-version: latest
             - name: Cache Dependencies
-              id: cache
+              id: dependencies-cache
               uses: actions/cache/restore@v3
               with:
                 path: |
                   ./node_modules
                   **/node_modules
                 key: node_modules-${{ hashFiles('bun.lockb') }}
+            - name: Cache Build
+              id: build-package-ci-cache
+              uses: actions/cache@v3
+              with:
+                path: |
+                  **/dist
+                key: build:package:ci
             - name: Install Dependencies
-              if: steps.cache.outputs.cache-hit != 'true'
+              if: steps.dependencies-cache.outputs.cache-hit != 'true'
               run: bun install
-            - name: Run Formatter (Prettier)
-              run: bun run format
+            - name: Build Packages
+              run: bun run build:package:ci

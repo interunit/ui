@@ -1,11 +1,7 @@
 name: Linter
 
 on:
-    pull_request:
-
-concurrency:
-    group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-    cancel-in-progress: true
+    workflow_call:
 
 jobs:
     linter:
@@ -17,11 +13,16 @@ jobs:
             - uses: oven-sh/setup-bun@v1
               with:
                 bun-version: latest
-            - name: Change NodeJS to verison from package.json
-              uses: actions/setup-node@v3
+            - name: Cache Dependencies
+              id: cache
+              uses: actions/cache/restore@v3
               with:
-                node-version-file: 'package.json'
+                path: |
+                  ./node_modules
+                  **/node_modules
+                key: node_modules-${{ hashFiles('bun.lockb') }}
             - name: Install Dependencies
+              if: steps.cache.outputs.cache-hit != 'true'
               run: bun install
             - name: Run ESLint
               run: bun run lint

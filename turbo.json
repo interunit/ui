@@ -23,6 +23,10 @@
     },
     "test:unit": {},
     "clean": {},
+    "build:package:ci": {
+        "outputs": ["dist/**"],
+        "dependsOn": ["^build:package:ci"]
+    },
     "build:package": {
         "cache": false,
         "outputs": ["dist/**"],

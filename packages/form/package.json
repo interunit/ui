@@ -19,6 +19,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build:package": "tsup src/index.ts --dts --minify --format cjs,esm --clean --sourcemap",
+    "build:package:ci": "tsup src/index.ts --dts --minify --format cjs,esm",
     "format": "prettier ./src/**/* --check",
     "format:fix": "prettier ./src/**/* --write",
     "lint": "eslint . --config ./.eslintrc.js",

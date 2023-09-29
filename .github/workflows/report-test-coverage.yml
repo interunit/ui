@@ -1,0 +1,61 @@
+name: Report Test Coverage
+on:
+  workflow_call:
+
+jobs:
+      report-test-coverage:
+        name: Report Test Coverage
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Latest
+              uses: actions/checkout@v3
+            - uses: oven-sh/setup-bun@v1
+              with:
+                bun-version: latest
+            - name: Get Web Test Coverage
+              id: web-test-coverage
+              uses: actions/cache/restore@v3
+              with:
+                path: |
+                  **/coverage/web
+                key: web-coverage-reports-${{ github.run_id }}
+            - name: Check Web Test Coverage
+              if: steps.web-test-coverage.outputs.cache-hit != 'true'
+              uses: actions/github-script@v3
+              with:
+                script: |
+                    core.setFailed('Web Test Coverage was not found!')
+            - name: Cache Native Test Coverage
+              id: native-test-coverage
+              uses: actions/cache/restore@v3
+              with:
+                path: |
+                  **/coverage/native
+                key: native-coverage-reports-${{ github.run_id }}
+            - name: Check Native Test Coverage
+              if: steps.native-test-coverage.outputs.cache-hit != 'true'
+              uses: actions/github-script@v3
+              with:
+                script: |
+                    core.setFailed('Native Test Coverage was not found!')
+            - name: Cache Dependencies
+              id: dependencies-cache
+              uses: actions/cache/restore@v3
+              with:
+                path: |
+                  ./node_modules
+                  **/node_modules
+                key: node_modules-${{ hashFiles('bun.lockb') }}
+            - name: Install Dependencies
+              if: steps.dependencies-cache.outputs.cache-hit != 'true'
+              run: bun install
+            - name: Merge Coverage Reports
+              run: bun run test:unit:coverage-merge
+            - name: Generate Coverage Report
+              run: bun run test:unit:coverage-report
+            - name: Upload coverage reports to Codecov
+              uses: codecov/codecov-action@v3
+              env:
+                CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+

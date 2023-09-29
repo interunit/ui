@@ -1,55 +1,19 @@
 name: Unit Testing
 
 on:
-    pull_request:
+    workflow_call:
     push:
       branches:
         - main
 
-concurrency:
-    group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-    cancel-in-progress: true
-
 jobs:
-    unit-testing:
-        if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
-        runs-on: macos-latest
-        steps:
-            - name: Checkout Latest
-              uses: actions/checkout@v3
-            - uses: oven-sh/setup-bun@v1
-              with:
-                bun-version: latest
-            - name: Change NodeJS to verison from package.json
-              uses: actions/setup-node@v3
-              with:
-                node-version-file: 'package.json'
-            - name: Install Dependencies
-              run: bun install
-            - name: Build Packages
-              run: bun run build:package
-            - name: Run Native Unit Tests
-              run: bun run test:unit --selectProjects native --coverageDirectory ./coverage/native
-              env:
-                TEST_ENV_NAME: native
-            - name: Setup Chromedriver
-              uses: nanasess/setup-chromedriver@v2
-            - name: Start Chromedriver
-              run: |
-                  export DISPLAY=:99
-                  chromedriver --url-base=/wd/hub &
-                  sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
-            - name: Run Web Unit Tests
-              run: bun run test:unit --selectProjects web --coverageDirectory ./coverage/web
-              env:
-                TEST_ENV_NAME: web
-            - name: Merge Coverage Reports
-              run: bun run test:unit:coverage-merge
-            - name: Generate Coverage Report
-              run: bun run test:unit:coverage-report
-            - name: Upload coverage reports to Codecov
-              uses: codecov/codecov-action@v3
-              env:
-                CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
-
+    native-unit-tests:
+      name: Native Unit Testing
+      uses: ./.github/workflows/native-unit-testing.yml
+    web-unit-tests:
+      name: Web Unit Testing
+      uses: ./.github/workflows/web-unit-testing.yml
+    report-test-coverage:
+      name: Report Test Coverage
+      needs: [native-unit-tests, web-unit-tests]
+      uses: ./.github/workflows/report-test-coverage.yml

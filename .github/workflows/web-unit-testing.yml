@@ -1,0 +1,53 @@
+name: Web Unit Testing
+
+on:
+    workflow_call:
+
+jobs:
+    web-unit-tests:
+        name: Web Unit Tests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Latest
+              uses: actions/checkout@v3
+            - uses: oven-sh/setup-bun@v1
+              with:
+                bun-version: latest
+            - name: Cache Dependencies
+              id: dependencies-cache
+              uses: actions/cache/restore@v3
+              with:
+                path: |
+                  ./node_modules
+                  **/node_modules
+                key: node_modules-${{ hashFiles('bun.lockb') }}
+            - name: Cache Build
+              id: build-package-ci-cache
+              uses: actions/cache/restore@v3
+              with:
+                path: |
+                  **/dist
+                key: build:package:ci
+            - name: Install Dependencies
+              if: steps.dependencies-cache.outputs.cache-hit != 'true'
+              run: bun install
+            - name: Build Packages
+              if: steps.build-package-ci-cache.outputs.cache-hit != 'true'
+              run: bun run build:package:ci
+            - name: Setup Chromedriver
+              uses: nanasess/setup-chromedriver@v2
+            - name: Start Chromedriver
+              run: |
+                  export DISPLAY=:99
+                  chromedriver --url-base=/wd/hub &
+                  sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+            - name: Run Web Unit Tests
+              run: bun run test:unit --selectProjects web --coverageDirectory ./coverage/web
+              env:
+                TEST_ENV_NAME: web
+            - name: Cache Test Coverage
+              uses: actions/cache@v3
+              with:
+                path: |
+                  **/coverage/web
+                key: web-coverage-reports-${{ github.run_id }}
