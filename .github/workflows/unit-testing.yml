@@ -72,12 +72,12 @@ jobs:
               run: bun run test:unit --selectProjects native --coverageDirectory ./coverage/native
               env:
                 TEST_ENV_NAME: native
-            - name: Upload Test Coverage
-              uses: actions/upload-artifact@v3
+            - name: Cache Test Coverage
+              uses: actions/cache@v3
               with:
-                name: native-coverage-reports
                 path: |
                   **/coverage/native
+                key: native-coverage-reports-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
     web-unit-tests:
         name: Web Unit Tests
         runs-on: ubuntu-latest
@@ -120,12 +120,12 @@ jobs:
               run: bun run test:unit --selectProjects web --coverageDirectory ./coverage/web
               env:
                 TEST_ENV_NAME: web
-            - name: Upload Test Coverage
-              uses: actions/upload-artifact@v3
+            - name: Cache Test Coverage
+              uses: actions/cache@v3
               with:
-                name: web-coverage-reports
                 path: |
                   **/coverage/web
+                key: web-coverage-reports-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
     report:
         name: Report Test Coverage
         runs-on: ubuntu-latest
@@ -136,16 +136,43 @@ jobs:
             - uses: oven-sh/setup-bun@v1
               with:
                 bun-version: latest
-            - uses: actions/download-artifact@v3
+            - name: Get Web Test Coverage
+              id: web-test-coverage
+              uses: actions/cache@v3
               with:
-                name: web-coverage-reports
                 path: |
                   **/coverage/web
-            - uses: actions/download-artifact@v3
+                key: web-coverage-reports-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+            - name: Check Web Test Coverage
+              if: steps.web-test-coverage.outputs.cache-hit != 'true'
+              uses: actions/github-script@v3
               with:
-                name: native-coverage-reports
+                script: |
+                    core.setFailed('Web Test Coverage was not found!')
+            - name: Cache Native Test Coverage
+              id: native-test-coverage
+              uses: actions/cache@v3
+              with:
                 path: |
                   **/coverage/native
+                key: native-coverage-reports-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+            - name: Check Native Test Coverage
+              if: steps.web-native-coverage.outputs.cache-hit != 'true'
+              uses: actions/github-script@v3
+              with:
+                script: |
+                    core.setFailed('Native Test Coverage was not found!')
+            - name: Cache Dependencies
+              id: dependencies-cache
+              uses: actions/cache@v3
+              with:
+                path: |
+                  ./node_modules
+                  **/node_modules
+                key: node_modules-${{ hashFiles('bun.lockb') }}
+            - name: Install Dependencies
+              if: steps.dependencies-cache.outputs.cache-hit != 'true'
+              run: bun install
             - name: Merge Coverage Reports
               run: bun run test:unit:coverage-merge
             - name: Generate Coverage Report
