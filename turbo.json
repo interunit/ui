@@ -25,7 +25,7 @@
     "clean": {},
     "build:package:ci": {
         "outputs": ["dist/**"],
-        "dependsOn": ["^build:package"]
+        "dependsOn": ["^build:package:ci"]
     },
     "build:package": {
         "cache": false,
