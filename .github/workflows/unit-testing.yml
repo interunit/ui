@@ -16,6 +16,9 @@ jobs:
             - uses: oven-sh/setup-bun@v1
               with:
                 bun-version: latest
+            - uses: actions/download-artifact@v3
+              with:
+                name: node_modules
             - name: Build Packages
               run: bun run build:package
             - name: Run Native Unit Tests

@@ -20,6 +20,11 @@ jobs:
                 node-version-file: 'package.json'
             - name: Install Dependencies
               run: bun install
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v3
+              with:
+                name: node_modules
+                path: node_modules
     formatter:
         needs: setup
         uses: ./.github/workflows/formatter.yml
