@@ -24,9 +24,9 @@ jobs:
                 node-version-file: 'package.json'
             - name: Install Dependencies
               run: bun install
-            - name: Formatter
-              uses: ./.github/workflows/formatter.yml
-            - name: Linter
-              uses: ./.github/workflows/linter.yml
-            - name: Unit Testing
-              uses: ./.github/workflows/unit-testing.yml
+    formatter:
+        uses: ./.github/workflows/formatter.yml
+    linter:
+        uses: ./.github/workflows/linter.yml
+    unit-testing:
+        uses: ./.github/workflows/unit-testing.yml
