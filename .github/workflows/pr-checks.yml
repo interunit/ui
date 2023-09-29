@@ -18,13 +18,15 @@ jobs:
               uses: actions/setup-node@v3
               with:
                 node-version-file: 'package.json'
-            - name: Install Dependencies
-              run: bun install
-            - name: Upload Artifacts
-              uses: actions/upload-artifact@v3
+            - name: Cache Dependencies
+              id: cache
+              uses: actions/cache@v3
               with:
-                name: node_modules
-                path: node_modules
+                name: ./node_modules
+                key: node_modules-${{ hashFiles('bun.lockb') }}
+            - name: Install Dependencies
+              if: steps.cache.outputs.cache-hit != 'true'
+              run: bun install
     formatter:
         needs: setup
         uses: ./.github/workflows/formatter.yml

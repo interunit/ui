@@ -13,8 +13,14 @@ jobs:
             - uses: oven-sh/setup-bun@v1
               with:
                 bun-version: latest
-            - uses: actions/download-artifact@v3
+            - name: Cache Dependencies
+              id: cache
+              uses: actions/cache@v3
               with:
-                name: node_modules
+                name: ./node_modules
+                key: node_modules-${{ hashFiles('bun.lockb') }}
+            - name: Install Dependencies
+              if: steps.cache.outputs.cache-hit != 'true'
+              run: bun install
             - name: Run Formatter (Prettier)
               run: bun run format
