@@ -26,11 +26,14 @@ jobs:
               if: steps.cache.outputs.cache-hit != 'true'
               run: bun install
     formatter:
+        name: Formatter
         needs: setup
         uses: ./.github/workflows/formatter.yml
     linter:
+        name: Linter
         needs: setup
         uses: ./.github/workflows/linter.yml
     unit-testing:
+        name: Unit Testing
         needs: setup
         uses: ./.github/workflows/unit-testing.yml
