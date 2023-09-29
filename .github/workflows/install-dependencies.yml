@@ -2,16 +2,17 @@ name: Install Dependencies
 
 on:
     workflow_call:
-
+      secrets:
+        TURBO_TOKEN:
+          required: false
+        TURBO_TEAM:
+          required: false
 
 jobs:
     install-dependencies:
         name: Install Dependencies
         if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
         runs-on: ubuntu-latest
-        env:
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
         steps:
             - name: Checkout Latest
               uses: actions/checkout@v3
