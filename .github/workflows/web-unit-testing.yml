@@ -6,6 +6,7 @@ jobs:
     web-unit-tests:
         name: Web Unit Tests
         runs-on: ubuntu-latest
+        secrets: inherit
         steps:
             - name: Checkout Latest
               uses: actions/checkout@v3

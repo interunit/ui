@@ -10,10 +10,13 @@ jobs:
     native-unit-tests:
       name: Native Unit Testing
       uses: ./.github/workflows/native-unit-testing.yml
+      secrets: inherit
     web-unit-tests:
       name: Web Unit Testing
       uses: ./.github/workflows/web-unit-testing.yml
+      secrets: inherit
     report-test-coverage:
       name: Web Unit Testing
       needs: [native-unit-tests, web-unit-tests]
       uses: ./.github/workflows/report-test-coverage.yml
+      secrets: inherit

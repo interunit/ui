@@ -9,6 +9,7 @@ jobs:
         name: Install Dependencies
         if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip-ci') }}
         runs-on: ubuntu-latest
+        secrets: inherit
         steps:
             - name: Checkout Latest
               uses: actions/checkout@v3
