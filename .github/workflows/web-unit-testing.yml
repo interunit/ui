@@ -42,9 +42,16 @@ jobs:
                   chromedriver --url-base=/wd/hub &
                   sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
             - name: Run Web Unit Tests
-              run: bun run test:unit --selectProjects web --coverageDirectory ./coverage/web
+              run: bun run test:unit --selectProjects web
               env:
                 TEST_ENV_NAME: web
+            - run: |
+                curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov
+                for dir in packages/*; do
+                  ./codecov --dir "${dir}" --flags "$(basename "web-${dir}")" --token "${CODECOV_TOKEN}" --verbose
+                done
+              env:
+                CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
             - name: Cache Test Coverage
               uses: actions/cache@v3
               with:

@@ -1,5 +1,6 @@
 import {isTouchDevice, useOutsideClick} from '@interunit/a11y'
 import {getEnvironmentName} from '@interunit/config'
+import {platformCSSUnitTranslation} from '@interunit/crossplatform'
 import {Modal} from '@interunit/modal'
 import {Child, P} from '@interunit/primitives'
 import {
@@ -196,6 +197,13 @@ const Popover = React.forwardRef(function Popover(
             setPopoverDimensions(e.nativeEvent.layout)
           }
         }}
+        onMouseLeave={() => {
+          if (triggerInteraction === 'none') return
+
+          if (triggerInteraction === 'hover' && ENVIRONMENT === 'web') {
+            setValue(false)
+          }
+        }}
       >
         {children}
       </Box>
@@ -286,10 +294,6 @@ const PopoverTrigger = React.forwardRef(
           }
         }}
         onKeyDown={event => {
-          if (event.key === 'Enter') {
-            setValue(!value)
-          }
-
           if (event.key === 'Escape') {
             setValue(false)
           }
@@ -301,6 +305,7 @@ const PopoverTrigger = React.forwardRef(
         }}
         ref={combinedRefs}
         collapsable={false}
+        data-popover-trigger
         data-popover-state={value}
         {...props}
       >
@@ -337,14 +342,12 @@ const PopoverContent = React.forwardRef(
     const Box = asChild ? P.BX : Child
     const {
       value,
-      setValue,
       triggerRef,
       contentRef,
       setContentRef,
       contentDimensions,
       setContentDimensions,
       triggerDimensions,
-      triggerInteraction,
       popoverDimensions,
       focusType
     } = React.useContext(PopoverContext)
@@ -379,26 +382,17 @@ const PopoverContent = React.forwardRef(
         }}
         hidden={!value}
         className={`iu-popover-content ${className}`}
-        onMouseLeave={() => {
-          if (triggerInteraction === 'hover' && ENVIRONMENT === 'web') {
-            setValue(false)
-          }
-        }}
-        onKeyDown={event => {
-          if (event.key === 'Escape') {
-            setValue(false)
-          }
-        }}
-        onClose={() => setValue(false)}
         focusType={focusType}
         onLayout={(e: {nativeEvent: {layout: Dimensions}}) => {
           if (e?.nativeEvent?.layout) {
             setContentDimensions(e.nativeEvent.layout)
           }
         }}
+        data-popover-content
         data-popover-state={value}
         data-popover-side={positioning?.side}
         data-popover-align={positioning?.align}
+        aria-hidden={!value}
         {...props}
       >
         <>
@@ -410,6 +404,23 @@ const PopoverContent = React.forwardRef(
             style={{
               ...arrowStyles,
               ...(userDefinedArrowStyle as any)
+            }}
+          />
+          {/* Hover Helper */}
+          <P.BX
+            el="span"
+            style={{
+              position: 'absolute',
+              height: `${platformCSSUnitTranslation(
+                positioning?.offset ?? 0,
+                'native'
+              )}px`,
+              top: `-${platformCSSUnitTranslation(
+                positioning?.offset ?? 0,
+                'native'
+              )}px`,
+
+              width: '100%'
             }}
           />
         </>

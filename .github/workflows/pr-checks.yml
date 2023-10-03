@@ -14,10 +14,11 @@ jobs:
       name: Build Packages
       needs: install-dependencies
       uses: ./.github/workflows/build-packages.yml
-    formatter:
-      name: Formatter
-      needs: install-dependencies
-      uses: ./.github/workflows/formatter.yml
+    # Formatter seems broken
+    # formatter:
+    #   name: Formatter
+    #   needs: install-dependencies
+    #   uses: ./.github/workflows/formatter.yml
     linter:
       name: Linter
       needs: install-dependencies

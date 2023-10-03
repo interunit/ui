@@ -10,7 +10,7 @@ jobs:
     web-unit-tests:
       name: Web Unit Testing
       uses: ./.github/workflows/web-unit-testing.yml
-    report-test-coverage:
-      name: Report Test Coverage
-      needs: [native-unit-tests, web-unit-tests]
-      uses: ./.github/workflows/report-test-coverage.yml
+    # report-test-coverage:
+    #   name: Report Test Coverage
+    #   needs: [native-unit-tests, web-unit-tests]
+    #   uses: ./.github/workflows/report-test-coverage.yml

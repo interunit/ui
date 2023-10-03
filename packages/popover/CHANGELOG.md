@@ -1,5 +1,15 @@
 # @interunit/popover
 
+## 0.0.24
+
+### Patch Changes
+
+- Improvements from testing and other small adjustments.
+- Updated dependencies
+  - @interunit/primitives@0.0.22
+  - @interunit/modal@0.0.18
+  - @interunit/a11y@0.0.20
+
 ## 0.0.23
 
 ### Patch Changes

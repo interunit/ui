@@ -6,7 +6,7 @@ import {ModalComponent} from './ModalComponent'
 type FocusType = 'none' | 'default'
 export type BaseModalProps = {
   isOpen?: boolean | undefined
-  onClose: () => void
+  onClose?: () => void
   children: React.ReactNode
   focusType?: FocusType
 }

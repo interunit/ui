@@ -21,7 +21,9 @@
       "outputMode": "new-only",
       "cache": false
     },
-    "test:unit": {},
+    "test:unit": {
+        "cache": false
+    },
     "clean": {},
     "build:package:ci": {
         "outputs": ["dist/**"],
