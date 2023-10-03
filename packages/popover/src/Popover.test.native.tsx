@@ -6,10 +6,10 @@ import {Popover} from './Popover'
 const PopoverComponent = () => {
   return (
     <Popover defaultValue={false}>
-      <Popover.Trigger>
+      <Popover.Trigger testID="trigger">
         <P.TX el="span">Trigger</P.TX>
       </Popover.Trigger>
-      <Popover.Content>
+      <Popover.Content testID="content">
         <P.TX el="span">Content</P.TX>
       </Popover.Content>
     </Popover>
@@ -18,22 +18,21 @@ const PopoverComponent = () => {
 
 describe('Popover', () => {
   test('renders component', () => {
-    const {getByText} = render(<PopoverComponent />)
-    expect(getByText('Trigger')).toBeTruthy()
+    const {queryByTestId} = render(<PopoverComponent />)
+    expect(queryByTestId('trigger')).toBeTruthy()
   })
   test('it should open the content when the trigger is pressed', async () => {
-    const {getByText} = render(<PopoverComponent />)
-    const trigger = getByText('Trigger')
+    const {queryByTestId} = render(<PopoverComponent />)
+    const trigger = queryByTestId('trigger')
     fireEvent.press(trigger)
-    const content = getByText('Content')
+    const content = queryByTestId('content')
     expect(content).toBeVisible()
   })
   test('it should close the content when the trigger is pressed again', async () => {
-    const {getByText} = render(<PopoverComponent />)
-    const trigger = getByText('Trigger')
-    fireEvent.press(trigger)
-    fireEvent.press(trigger)
-    const content = getByText('Content')
-    expect(content).not.toBeVisible()
+    const {queryByTestId} = render(<PopoverComponent />)
+    fireEvent.press(queryByTestId('trigger'))
+    expect(queryByTestId('content')).toBeVisible()
+    fireEvent.press(queryByTestId('trigger'))
+    expect(queryByTestId('content')).toBeNull()
   })
 })
