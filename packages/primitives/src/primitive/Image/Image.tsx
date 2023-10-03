@@ -6,7 +6,7 @@ import type {Image as RNImage} from 'react-native'
 import {Construct} from '../../config'
 import {filterPropsByEnvironment} from '../../helpers/props'
 
-const ImageConstruct = {
+export const ImageConstruct = {
   img: Construct.Image
 }
 export type ImagePrimitiveProps<T extends keyof typeof ImageConstruct> = {
@@ -20,14 +20,15 @@ export const Image = React.forwardRef(
       src,
       alt,
       ..._props
-    }: ImagePrimitiveProps<T> & MergedCrossPlatformProps<T, typeof RNImage>,
+    }: ImagePrimitiveProps<T> &
+      Omit<MergedCrossPlatformProps<T, typeof RNImage>, 'source'>,
     forwardedRef: any
   ) => {
     const Image = ImageConstruct.img
     // TODO: Why does this need to be re-casted to work
     // internally?
     const props = _props as unknown as React.JSX.IntrinsicElements[T] &
-      React.ComponentPropsWithoutRef<typeof RNImage> &
+      Omit<React.ComponentPropsWithoutRef<typeof RNImage>, 'source'> &
       ImagePrimitiveProps<T>
 
     const accessibilityProps = {
@@ -48,7 +49,7 @@ export const Image = React.forwardRef(
     return (
       <Image
         src={src}
-        source={props.source}
+        source={src || props.source}
         alt={alt}
         ref={forwardedRef}
         {...filteredProps}
@@ -56,5 +57,6 @@ export const Image = React.forwardRef(
     )
   }
 ) as <T extends keyof typeof ImageConstruct>(
-  props: ImagePrimitiveProps<T> & MergedCrossPlatformProps<T, typeof RNImage>
+  props: ImagePrimitiveProps<T> &
+    Omit<MergedCrossPlatformProps<T, typeof RNImage>, 'source'>
 ) => React.JSX.Element

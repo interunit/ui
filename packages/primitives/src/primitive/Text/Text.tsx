@@ -7,7 +7,7 @@ import {Construct} from '../../config'
 import {filterPropsByEnvironment} from '../../helpers/props'
 
 // TODO: Add strong, em, etc
-const TextConstruct = {
+export const TextConstruct = {
   h1: Construct.H1,
   h2: Construct.H2,
   h3: Construct.H3,
