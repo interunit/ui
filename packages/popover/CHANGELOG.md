@@ -1,5 +1,11 @@
 # @interunit/popover
 
+## 0.0.22
+
+### Patch Changes
+
+- event.preventDefault() shouldn't be prescribed here
+
 ## 0.0.21
 
 ### Patch Changes

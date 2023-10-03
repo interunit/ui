@@ -265,8 +265,7 @@ const PopoverTrigger = React.forwardRef(
         onPress={() => {
           setValue(!value)
         }}
-        onClick={event => {
-          event.preventDefault()
+        onClick={() => {
           if (
             triggerInteraction === 'click' ||
             (triggerInteraction === 'hover' && isTouchDevice())
