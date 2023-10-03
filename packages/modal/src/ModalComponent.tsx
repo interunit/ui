@@ -1,8 +1,4 @@
-import {
-  VisuallyHidden,
-  useAccessibleClose,
-  useLockBodyScroll
-} from '@interunit/a11y'
+import {useAccessibleClose, useLockBodyScroll} from '@interunit/a11y'
 import {P} from '@interunit/primitives'
 import _FocusTrap, {type Props as FocusTrapProps} from 'focus-trap-react'
 import React from 'react'
@@ -62,11 +58,6 @@ const ModalComponent = React.forwardRef<any, ModalComponentProps>(
           }}
           {...props}
         >
-          <VisuallyHidden>
-            <P.BT el="button" type="button" onClick={onClose}>
-              Close Modal
-            </P.BT>
-          </VisuallyHidden>
           {children}
         </P.BX>
       </FocusTrap>

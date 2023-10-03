@@ -29,7 +29,7 @@ const PopoverPage = () => {
         />
         <ComponentDisplay className="mb-12">
           <Popover defaultValue={false} className="relative">
-            <Popover.Trigger asChild>
+            <Popover.Trigger asChild interaction="click">
               <Button color={'bg-secondary'}>Click me</Button>
             </Popover.Trigger>
             <Popover.Content
