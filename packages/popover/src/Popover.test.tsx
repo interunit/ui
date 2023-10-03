@@ -3,14 +3,24 @@ import {axe, render, userEvent} from '@interunit/jest/web'
 import {Popover} from './Popover'
 
 const PopoverComponent = ({
-  interaction = 'click'
+  interaction = 'click',
+  side = 'bottom',
+  align = 'center',
+  offset = 0,
+  width = undefined
 }: {
   interaction?: 'click' | 'hover' | 'none'
+  side?: 'top' | 'bottom' | 'left' | 'right'
+  align?: 'start' | 'center' | 'end'
+  offset?: number
+  width?: number | 'trigger'
 }) => {
   return (
     <Popover defaultValue={false}>
       <Popover.Trigger interaction={interaction}>Trigger</Popover.Trigger>
-      <Popover.Content>Content</Popover.Content>
+      <Popover.Content positioning={{side, align, offset, width}}>
+        Content
+      </Popover.Content>
     </Popover>
   )
 }
@@ -150,5 +160,136 @@ describe('Popover', () => {
 
     expect(content).toHaveAttribute('aria-hidden', 'true')
     expect(content).not.toBeVisible()
+  })
+  describe('positioning', () => {
+    test('opens top', async () => {
+      const user = userEvent.setup()
+      const {container} = render(<PopoverComponent side="top" />)
+
+      const trigger = container.querySelector('[data-popover-trigger]')
+      const content = container.querySelector('[data-popover-content]')
+
+      await user.click(trigger)
+
+      expect(content).toHaveAttribute('data-popover-side', 'top')
+      expect(content).toHaveAttribute('data-popover-align', 'center')
+
+      expect(content).toHaveAttribute('aria-hidden', 'false')
+      expect(content).toBeVisible()
+    })
+    test('opens bottom', async () => {
+      const user = userEvent.setup()
+      const {container} = render(<PopoverComponent side="bottom" />)
+
+      const trigger = container.querySelector('[data-popover-trigger]')
+      const content = container.querySelector('[data-popover-content]')
+
+      await user.click(trigger)
+
+      expect(content).toHaveAttribute('data-popover-side', 'bottom')
+      expect(content).toHaveAttribute('data-popover-align', 'center')
+
+      expect(content).toHaveAttribute('aria-hidden', 'false')
+      expect(content).toBeVisible()
+    })
+    test('opens left', async () => {
+      const user = userEvent.setup()
+      const {container} = render(<PopoverComponent side="left" />)
+
+      const trigger = container.querySelector('[data-popover-trigger]')
+      const content = container.querySelector('[data-popover-content]')
+
+      await user.click(trigger)
+
+      expect(content).toHaveAttribute('data-popover-side', 'left')
+      expect(content).toHaveAttribute('data-popover-align', 'center')
+
+      expect(content).toHaveAttribute('aria-hidden', 'false')
+      expect(content).toBeVisible()
+    })
+    test('opens right', async () => {
+      const user = userEvent.setup()
+      const {container} = render(<PopoverComponent side="right" />)
+
+      const trigger = container.querySelector('[data-popover-trigger]')
+      const content = container.querySelector('[data-popover-content]')
+
+      await user.click(trigger)
+
+      expect(content).toHaveAttribute('data-popover-side', 'right')
+      expect(content).toHaveAttribute('data-popover-align', 'center')
+
+      expect(content).toHaveAttribute('aria-hidden', 'false')
+      expect(content).toBeVisible()
+    })
+    test('aligns center', async () => {
+      const user = userEvent.setup()
+      const {container} = render(<PopoverComponent align="center" />)
+
+      const trigger = container.querySelector('[data-popover-trigger]')
+      const content = container.querySelector('[data-popover-content]')
+
+      await user.click(trigger)
+
+      expect(content).toHaveAttribute('data-popover-side', 'bottom')
+      expect(content).toHaveAttribute('data-popover-align', 'center')
+
+      expect(content).toHaveAttribute('aria-hidden', 'false')
+      expect(content).toBeVisible()
+    })
+    test('aligns start', async () => {
+      const user = userEvent.setup()
+      const {container} = render(<PopoverComponent align="start" />)
+
+      const trigger = container.querySelector('[data-popover-trigger]')
+      const content = container.querySelector('[data-popover-content]')
+
+      await user.click(trigger)
+
+      expect(content).toHaveAttribute('data-popover-side', 'bottom')
+      expect(content).toHaveAttribute('data-popover-align', 'start')
+
+      expect(content).toHaveAttribute('aria-hidden', 'false')
+      expect(content).toBeVisible()
+    })
+    test('aligns end', async () => {
+      const user = userEvent.setup()
+      const {container} = render(<PopoverComponent align="end" />)
+
+      const trigger = container.querySelector('[data-popover-trigger]')
+      const content = container.querySelector('[data-popover-content]')
+
+      await user.click(trigger)
+
+      expect(content).toHaveAttribute('data-popover-side', 'bottom')
+      expect(content).toHaveAttribute('data-popover-align', 'end')
+
+      expect(content).toHaveAttribute('aria-hidden', 'false')
+      expect(content).toBeVisible()
+    })
+  })
+  test('still renders with offset', async () => {
+    const user = userEvent.setup()
+    const {container} = render(<PopoverComponent offset={10} />)
+
+    const trigger = container.querySelector('[data-popover-trigger]')
+    const content = container.querySelector('[data-popover-content]')
+
+    await user.click(trigger)
+
+    expect(content).toHaveAttribute('aria-hidden', 'false')
+    expect(content).toBeVisible()
+  })
+  test('still renders with trigger width', async () => {
+    const user = userEvent.setup()
+    const {container} = render(<PopoverComponent width={'trigger'} />)
+
+    const trigger = container.querySelector('[data-popover-trigger]')
+    const content = container.querySelector('[data-popover-content]')
+
+    await user.click(trigger)
+
+    expect(content).toHaveAttribute('aria-hidden', 'false')
+    expect(content).toBeVisible()
   })
 })
