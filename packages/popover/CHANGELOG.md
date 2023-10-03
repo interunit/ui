@@ -1,5 +1,26 @@
 # @interunit/popover
 
+## 0.0.23
+
+### Patch Changes
+
+- - A11y
+    - Fix onOutsideClick hook
+  - Config
+    - Optional change the env var to avoid issues
+  - Popover
+    - Update docs
+    - re-enable outside click
+    - Add 'none' option for trigger interactionA
+    - Fix offset calculation
+- Updated dependencies
+  - @interunit/config@0.0.15
+  - @interunit/a11y@0.0.19
+  - @interunit/crossplatform@0.0.15
+  - @interunit/modal@0.0.17
+  - @interunit/primitives@0.0.21
+  - @interunit/toolbox@0.0.15
+
 ## 0.0.22
 
 ### Patch Changes

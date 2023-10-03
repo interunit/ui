@@ -1,5 +1,12 @@
 # @interunit/toolbox
 
+## 0.0.15
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/config@0.0.15
+
 ## 0.0.14
 
 ### Patch Changes

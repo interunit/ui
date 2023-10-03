@@ -1,5 +1,14 @@
 # @interunit/collapsible
 
+## 0.0.17
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/config@0.0.15
+  - @interunit/a11y@0.0.19
+  - @interunit/primitives@0.0.21
+
 ## 0.0.16
 
 ### Patch Changes

@@ -131,7 +131,7 @@ export const useContentPositioning = ({
     }
 
     if (positioning.side === 'bottom') {
-      styles.top = `${popoverDimensions?.height ?? 0 + offset}px`
+      styles.top = `${(popoverDimensions?.height ?? 0) + offset}px`
     }
 
     if (positioning.side === 'left') {

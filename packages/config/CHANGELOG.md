@@ -1,5 +1,19 @@
 # @interunit/config
 
+## 0.0.15
+
+### Patch Changes
+
+- - A11y
+    - Fix onOutsideClick hook
+  - Config
+    - Optional change the env var to avoid issues
+  - Popover
+    - Update docs
+    - re-enable outside click
+    - Add 'none' option for trigger interactionA
+    - Fix offset calculation
+
 ## 0.0.14
 
 ### Patch Changes
