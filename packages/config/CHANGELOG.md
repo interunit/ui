@@ -1,5 +1,11 @@
 # @interunit/config
 
+## 0.0.16
+
+### Patch Changes
+
+- Try catch on env name block
+
 ## 0.0.15
 
 ### Patch Changes

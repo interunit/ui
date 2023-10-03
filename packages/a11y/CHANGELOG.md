@@ -1,5 +1,13 @@
 # @interunit/a11y
 
+## 0.0.21
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/config@0.0.16
+  - @interunit/primitives@0.0.23
+
 ## 0.0.20
 
 ### Patch Changes

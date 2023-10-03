@@ -1,5 +1,14 @@
 # @interunit/primitives
 
+## 0.0.23
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/config@0.0.16
+  - @interunit/crossplatform@0.0.16
+  - @interunit/toolbox@0.0.16
+
 ## 0.0.22
 
 ### Patch Changes
