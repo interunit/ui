@@ -1,4 +1,4 @@
-import {isTouchDevice} from '@interunit/a11y'
+import {isTouchDevice, useOutsideClick} from '@interunit/a11y'
 import {getEnvironmentName} from '@interunit/config'
 import {Modal} from '@interunit/modal'
 import {Child, P} from '@interunit/primitives'
@@ -38,8 +38,8 @@ type PopoverContextState = {
   setPopoverDimensions: (dimensions: Dimensions) => void
   setTriggerDimensions: (dimensions: Dimensions) => void
   setContentDimensions: (dimensions: Dimensions) => void
-  triggerInteraction: 'click' | 'hover'
-  setTriggerInteraction: (type: 'click' | 'hover') => void
+  triggerInteraction: 'click' | 'hover' | 'none'
+  setTriggerInteraction: (type: 'click' | 'hover' | 'none') => void
   popoverRef: React.ReactElement | null
 }
 
@@ -84,6 +84,7 @@ type PopoverProps = Omit<
   el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
   asChild?: boolean
   focusType?: 'none' | 'default'
+  shouldCloseOnOutsideClick?: boolean
 }
 
 const Popover = React.forwardRef(function Popover(
@@ -94,6 +95,7 @@ const Popover = React.forwardRef(function Popover(
     defaultValue,
     onValueChange,
     asChild,
+    shouldCloseOnOutsideClick = true,
     children,
     ...props
   }: PopoverProps & UseControlledStateParams<boolean>,
@@ -115,7 +117,7 @@ const Popover = React.forwardRef(function Popover(
     null
   )
   const [triggerInteraction, setTriggerInteraction] = React.useState<
-    'click' | 'hover'
+    'click' | 'hover' | 'none'
   >('click')
   const [triggerDimensions, setTriggerDimensions] = React.useState<Dimensions>({
     x: 0,
@@ -137,11 +139,12 @@ const Popover = React.forwardRef(function Popover(
   })
 
   const combinedRefs = useCombinedRefs(setPopoverRef, forwardedRef)
-  // useOutsideClick({
-  //   ref: combinedRefs,
-  //   fn: () => setValue(false)
-  //   // isEnabled: settings?.shouldCloseOnInteractOutside && value
-  // })
+
+  useOutsideClick({
+    ref: popoverRef,
+    fn: () => setValue(false),
+    isEnabled: shouldCloseOnOutsideClick
+  })
 
   React.useEffect(() => {
     const PopoverElement = popoverRef as unknown as HTMLElement
@@ -207,7 +210,7 @@ type PopoverTriggerProps = Omit<
   'el'
 > & {
   el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
-  interaction?: 'click' | 'hover'
+  interaction?: 'click' | 'hover' | 'none'
   asChild?: boolean
   children: (({value}: {value: boolean}) => React.ReactNode) | React.ReactNode
 }
@@ -266,6 +269,8 @@ const PopoverTrigger = React.forwardRef(
           setValue(!value)
         }}
         onClick={() => {
+          if (triggerInteraction === 'none') return
+
           if (
             triggerInteraction === 'click' ||
             (triggerInteraction === 'hover' && isTouchDevice())
@@ -274,6 +279,8 @@ const PopoverTrigger = React.forwardRef(
           }
         }}
         onMouseEnter={() => {
+          if (triggerInteraction === 'none') return
+
           if (triggerInteraction === 'hover' && ENVIRONMENT === 'web') {
             setValue(true)
           }

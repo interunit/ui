@@ -28,7 +28,7 @@ const PopoverPage = () => {
           data={{title: 'Popover', name, description, version, homepage}}
         />
         <ComponentDisplay className="mb-12">
-          <Popover defaultValue={false}>
+          <Popover defaultValue={false} className="relative">
             <Popover.Trigger asChild>
               <Button color={'bg-secondary'}>Click me</Button>
             </Popover.Trigger>
@@ -102,46 +102,41 @@ const PopoverPage = () => {
           <PropsTable
             propsToDisplay={[
               {
-                name: 'triggerType',
-                type: `'click' | 'hover'`,
+                name: 'value',
+                type: `any`,
                 required: false,
-                default: 'click',
-                description:
-                  'The user action that will trigger the popover. Note: on mobile hover will be ignored and click will be used instead. Also, click encompasses React Native onPress.'
+                default: '',
+                description: 'The controlled value of the popover'
               },
               {
-                name: 'defaultIsOpen',
+                name: 'onValueChange',
+                type: `(any) => void`,
+                required: false,
+                default: '',
+                description: 'The controlled value setter of the popover'
+              },
+              {
+                name: 'defaultValue',
+                type: `any`,
+                required: false,
+                default: '',
+                description: 'The unconrolled value of the popover'
+              },
+              {
+                name: 'asChild',
                 type: `boolean`,
                 required: false,
                 default: 'false',
-                description: 'If true, the popover will be open by default'
-              },
-
-              {
-                name: 'settings',
-                type: `PopoverSettings`,
-                required: false,
-                default: '',
-                description: 'General settings for the popover.',
-                properties: [
-                  {
-                    name: 'shouldCloseOnInteractionOutside',
-                    type: 'boolean',
-                    required: false,
-                    default: 'true',
-                    description:
-                      'If true, the popover will close when the user clicks outside of the popover'
-                  }
-                ]
-              },
-
-              {
-                name: 'onPopoverChange',
-                type: `(popoverState) => void`,
-                required: false,
-                default: '',
                 description:
-                  'A callback that will be called when the popover state changes.'
+                  'Use the built in Popover element or set asChild to true to provide your own'
+              },
+              {
+                name: 'shoudCloseOnOutsideClick',
+                type: `boolean`,
+                required: false,
+                default: 'true',
+                description:
+                  'Whether or not the popover should close when clicking outside of it'
               },
               {
                 name: 'children',
@@ -159,6 +154,23 @@ const PopoverPage = () => {
           </P.TX>
           <PropsTable
             propsToDisplay={[
+              {
+                name: 'interaction',
+                type: 'click | hover | none',
+                required: false,
+                default: 'click',
+                description:
+                  'The interaction that will trigger the popover to open'
+              },
+              {
+                name: 'asChild',
+                type: `boolean`,
+                required: false,
+                default: 'false',
+                description:
+                  'Use the built in Popover element or set asChild to true to provide your own'
+              },
+
               {
                 name: 'children',
                 type: 'React.ReactNode',
@@ -283,7 +295,14 @@ const PopoverPage = () => {
                   }
                 ]
               },
-
+              {
+                name: 'asChild',
+                type: `boolean`,
+                required: false,
+                default: 'false',
+                description:
+                  'Use the built in Popover element or set asChild to true to provide your own'
+              },
               {
                 name: 'children',
                 type: 'React.ReactNode',
