@@ -1,6 +1,6 @@
 {
   "name": "@interunit/modal",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "A low-level component to help display content on top of the current page or view",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {
@@ -30,6 +30,7 @@
     "@interunit/a11y": "workspace:*",
     "@interunit/config": "workspace:*",
     "@interunit/primitives": "workspace:*",
+    "@interunit/toolbox": "workspace:*",
     "focus-trap-react": "^10.2.1"
   },
   "devDependencies": {

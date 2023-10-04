@@ -1,5 +1,16 @@
 # @interunit/combobox
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/popover@0.0.26
+  - @interunit/config@0.0.17
+  - @interunit/a11y@0.0.22
+  - @interunit/primitives@0.0.24
+  - @interunit/toolbox@0.0.17
+
 ## 0.0.6
 
 ### Patch Changes

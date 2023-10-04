@@ -33,7 +33,6 @@ const PopoverPage = () => {
               <Button color={'bg-secondary'}>Click me</Button>
             </Popover.Trigger>
             <Popover.Content
-              asChild
               positioning={{
                 side: 'bottom',
                 align: 'center',
@@ -48,17 +47,11 @@ const PopoverPage = () => {
                 size: 10,
                 borderRadius: 2
               }}
+              className={'bg-bg-primary border-[1px] border-border rounded p-4'}
             >
-              <P.BX
-                el="div"
-                className={
-                  'bg-bg-primary border-[1px] border-border rounded p-4'
-                }
-              >
-                <Text el="span">
-                  The content test test <br /> test <br /> test
-                </Text>
-              </P.BX>
+              <Text el="span">
+                The content test test <br /> test <br /> test
+              </Text>
             </Popover.Content>
           </Popover>
         </ComponentDisplay>

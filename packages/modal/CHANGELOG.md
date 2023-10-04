@@ -1,5 +1,16 @@
 # @interunit/modal
 
+## 0.0.20
+
+### Patch Changes
+
+- Modal asChild adjusments + small fixes
+- Updated dependencies
+  - @interunit/config@0.0.17
+  - @interunit/a11y@0.0.22
+  - @interunit/primitives@0.0.24
+  - @interunit/toolbox@0.0.17
+
 ## 0.0.19
 
 ### Patch Changes

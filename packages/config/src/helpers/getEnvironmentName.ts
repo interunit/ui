@@ -6,7 +6,7 @@ export const getEnvironmentName = () => {
   // Might need to rethink this using haste or some other solution
   // if more problems arise from this same issue.
   try {
-    if (process.env.TEST_ENV_NAME) {
+    if (process?.env?.TEST_ENV_NAME !== undefined) {
       if (
         process.env.TEST_ENV_NAME !== ('native' as string) &&
         process.env.TEST_ENV_NAME !== ('web' as string)

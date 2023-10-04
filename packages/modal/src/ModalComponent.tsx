@@ -1,5 +1,6 @@
 import {useAccessibleClose, useLockBodyScroll} from '@interunit/a11y'
-import {P} from '@interunit/primitives'
+import {Child, P} from '@interunit/primitives'
+import {useCombinedRefs} from '@interunit/toolbox'
 import _FocusTrap, {type Props as FocusTrapProps} from 'focus-trap-react'
 import React from 'react'
 
@@ -10,16 +11,20 @@ const FocusTrap = _FocusTrap as React.ElementType<FocusTrapProps>
 
 type FocusType = 'none' | 'default'
 type ModalComponentProps = BaseModalProps &
-  Pick<FocusTrapProps, 'focusTrapOptions' | 'active'> & {
+  Pick<
+    FocusTrapProps,
+    'focusTrapOptions' | 'active' | 'paused' | 'containerElements'
+  > & {
     children: React.ReactNode
   }
 
 const ModalComponent = React.forwardRef<any, ModalComponentProps>(
   (
-    {isOpen, onClose, focusType = 'default', children, ...props},
+    {isOpen, onClose, focusType = 'default', asChild, children, ...props},
     forwardedRef
   ) => {
     const modalComponentRef = React.useRef(null)
+    const Box = asChild ? Child : P.BX
 
     useLockBodyScroll({
       isLocked: isOpen === true || isOpen === undefined,
@@ -27,6 +32,7 @@ const ModalComponent = React.forwardRef<any, ModalComponentProps>(
     })
 
     useAccessibleClose({onClose, KeyDownElement: modalComponentRef})
+    const combinedRefs = useCombinedRefs(forwardedRef, modalComponentRef)
 
     const calculateFocus = (focusType: FocusType) => {
       if (focusType === 'none') {
@@ -43,23 +49,15 @@ const ModalComponent = React.forwardRef<any, ModalComponentProps>(
         }}
         active={calculateFocus(focusType)}
       >
-        <P.BX
+        <Box
           el="div"
           role="dialog"
           aria-hidden={!isOpen || isOpen === undefined}
-          ref={(el: React.RefObject<any>) => {
-            modalComponentRef.current = el as any
-            if (forwardedRef) {
-              // TODO: Not sure why TS doesn't like this
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              forwardedRef.current = el
-            }
-          }}
+          ref={combinedRefs}
           {...props}
         >
           {children}
-        </P.BX>
+        </Box>
       </FocusTrap>
     )
   }

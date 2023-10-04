@@ -1,5 +1,11 @@
 # @interunit/config
 
+## 0.0.17
+
+### Patch Changes
+
+- Modal asChild adjusments + small fixes
+
 ## 0.0.16
 
 ### Patch Changes

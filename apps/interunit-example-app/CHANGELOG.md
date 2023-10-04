@@ -1,5 +1,19 @@
 # interunit-example-app
 
+## 1.0.8
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/popover@0.0.26
+  - @interunit/config@0.0.17
+  - @interunit/modal@0.0.20
+  - @interunit/combobox@0.0.7
+  - @interunit/form@0.0.16
+  - @interunit/primitives@0.0.24
+  - @interunit/responsive@0.0.16
+  - @interunit/tabs@0.0.16
+
 ## 1.0.7
 
 ### Patch Changes

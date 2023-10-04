@@ -9,6 +9,7 @@ export type BaseModalProps = {
   onClose?: () => void
   children: React.ReactNode
   focusType?: FocusType
+  asChild?: boolean
 }
 
 type ModalProps = (React.JSX.IntrinsicElements['div'] | RNModalProps) &

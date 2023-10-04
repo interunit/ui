@@ -1,5 +1,12 @@
 # @interunit/responsive
 
+## 0.0.16
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/config@0.0.17
+
 ## 0.0.15
 
 ### Patch Changes

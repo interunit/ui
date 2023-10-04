@@ -339,7 +339,7 @@ const PopoverContent = React.forwardRef(
     }: PopoverContentProps,
     forwardedRef
   ) => {
-    const Box = asChild ? P.BX : Child
+    const Box = asChild ? Child : P.BX
     const {
       value,
       triggerRef,
@@ -396,8 +396,8 @@ const PopoverContent = React.forwardRef(
         {...props}
       >
         <>
-          {children}
-          <Box
+          <Box el={el}>{children}</Box>
+          <P.BX
             el={el}
             className={`iu-popover-arrow ${arrow?.className}`}
             aria-hidden={true}
