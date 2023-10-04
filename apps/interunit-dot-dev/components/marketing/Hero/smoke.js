@@ -38,11 +38,22 @@
   ]
   var smokeSpriteSize = 20
 
-  var polyfillAnimFrame =
-    window.requestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.msRequestAnimationFrame
+  function getAnimFrame() {
+    try {
+      if (window) {
+        return (
+          window.requestAnimationFrame ||
+          window.mozRequestAnimationFrame ||
+          window.webkitRequestAnimationFrame ||
+          window.msRequestAnimationFrame
+        )
+      }
+
+      return null
+    } catch (e) {}
+  }
+
+  var polyfillAnimFrame = getAnimFrame()
 
   function floatInRange(start, end) {
     return start + Math.random() * (end - start)
@@ -180,3 +191,5 @@
   /* Magic UMD Boilerplate Ending */
   /**/
 })
+
+/* eslint-enable */

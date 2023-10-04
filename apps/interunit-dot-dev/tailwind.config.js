@@ -18,8 +18,6 @@ const colors = Object.keys(theme.colors).map(color => {
   })
 })
 
-console.log(flatten(colors))
-
 const fontSize = Object.keys(theme.fontSize).map(size => {
   return `text-${size}`
 })

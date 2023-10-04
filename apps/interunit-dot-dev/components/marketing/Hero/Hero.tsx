@@ -81,8 +81,10 @@ function Hero() {
   }
 
   React.useEffect(() => {
-    handleSmoke()
-    window.addEventListener('resize', handleSmoke)
+    if (window !== undefined) {
+      handleSmoke()
+      window.addEventListener('resize', handleSmoke)
+    }
 
     return () => {
       window.removeEventListener('resize', handleSmoke)
