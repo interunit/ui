@@ -9,15 +9,15 @@ import {ui} from '@/constants/ui'
 
 const DocsLayout = ({children}: {children: React.ReactNode}) => {
   return (
-    <div style={{height: '100%'}}>
+    <div className="h-full bg-slate-50">
       <TopNavigation />
       <Primitive.Box
         el="div"
-        className="flex flex-col lg:flex-row lg:justify-center lg:max-w-[1250px] lg:mx-auto h-full"
+        className=" flex flex-col lg:flex-row lg:justify-center lg:max-w-[1250px] lg:mx-auto h-full"
       >
         <Primitive.Box
           el="div"
-          className="sticky top-0 z-10 border-b-[1px] lg:basis-[250px] lg:min-h-screen  lg:border-r-[1px] lg:border-b-0"
+          className="sticky top-0 z-10 border-gray-200 border-b-[1px] lg:basis-[250px] lg:min-h-screen  lg:border-r-[1px] lg:border-b-0"
         >
           <DocsSideNavigation data={ui} />
         </Primitive.Box>

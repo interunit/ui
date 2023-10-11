@@ -5,7 +5,7 @@ import {firaCode} from '@/fonts'
 const CodeTag = ({children}: {children: React.ReactNode}) => {
   return (
     <code
-      className={`text-sm bg-bg-blended border rounded ${firaCode.className}`}
+      className={`text-sm bg-slate-100 border-gray-200 rounded ${firaCode.className}`}
     >
       {children}
     </code>

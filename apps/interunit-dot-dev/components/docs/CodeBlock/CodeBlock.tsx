@@ -51,8 +51,8 @@ const CodeBlock = ({
   return (
     <P.BX el="div" className={twMerge(className, 'relative')}>
       <Button
-        color="bg-muted"
-        variation="sm"
+        color="gray"
+        size="1"
         onClick={() => copyToClipboard()}
         className="w-8 h-8 absolute right-4 top-4"
       >

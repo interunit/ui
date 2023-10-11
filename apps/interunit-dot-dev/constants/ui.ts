@@ -20,71 +20,62 @@ export const gettingStarted = {
 export const ui = {
   sections: [
     {
-      name: 'Primitives',
-      description: 'Building blocks of InterUnit',
-      color: 'orange' as ThemeColor,
-      sections: [
-        {
-          name: 'Overview',
-          slug: '/primitives',
-          color: 'orange' as ThemeColor
-        },
-        {
-          name: 'Text',
-          slug: '/primitives/text',
-          color: 'orange' as ThemeColor
-        },
-        {
-          name: 'Box',
-          slug: '/primitives/box',
-          color: 'orange' as ThemeColor
-        },
-        {
-          name: 'Button',
-          slug: '/primitives/button',
-          color: 'orange' as ThemeColor
-        }
-      ]
-    },
-    {
-      name: 'Composites',
+      name: 'Components',
       description:
-        'Components that are made up of other composites and primitves',
+        'Components are the building blocks of your application. They are the smallest unit of UI that you can compose together to create a user interface.',
       color: 'blue' as ThemeColor,
+      slug: '/',
       sections: [
         {
-          name: 'Overview',
-          slug: '/primitives',
-          color: 'orange' as ThemeColor
+          name: 'Primitives',
+          slug: '/docs/primitives',
+          color: 'orange' as ThemeColor,
+          sections: [
+            {
+              name: 'Text',
+              slug: '/primitives/text',
+              color: 'orange' as ThemeColor
+            },
+            {
+              name: 'Box',
+              slug: '/primitives/box',
+              color: 'orange' as ThemeColor
+            },
+            {
+              name: 'Button',
+              slug: '/primitives/button',
+              color: 'orange' as ThemeColor
+            }
+          ]
         },
         {
           name: 'Collapsible',
-          slug: '/composites/collapsible',
+          slug: '/collapsible',
           color: 'blue' as ThemeColor
         },
         {
           name: 'Combobox',
-          slug: '/composites/combobox',
+          slug: '/combobox',
           color: 'blue' as ThemeColor
         },
         {
           name: 'Form',
-          slug: '/composites/form',
+          slug: '/form',
           color: 'blue' as ThemeColor
         },
         {
           name: 'Modal',
-          slug: '/composites/modal',
+          slug: '/modal',
           color: 'blue' as ThemeColor
         },
         {
           name: 'Popover',
-          slug: '/composites/popover',
+          slug: '/popover',
           color: 'blue' as ThemeColor
         },
         {
           name: 'Tabs',
-          slug: '/composites/tabs',
+          slug: '/tabs',
           color: 'blue' as ThemeColor
         }
       ]

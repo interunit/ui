@@ -8,7 +8,9 @@ import {Text} from '@/components/system/Text'
 import {firaCode} from '@/fonts'
 
 const InstallBlock = ({packageName}: {packageName: string}) => {
-  const [manager, setManager] = React.useState<'npm' | 'yarn' | 'pnpm'>('npm')
+  const [manager, setManager] = React.useState<'npm' | 'yarn' | 'bun' | 'pnpm'>(
+    'npm'
+  )
   const [isCopied, setIsCopied] = React.useState(false)
   const copyArea = React.useRef(null)
 
@@ -29,31 +31,42 @@ const InstallBlock = ({packageName}: {packageName: string}) => {
   }
 
   return (
-    <Primitive.Box el="div" className="bg-bg-blended border rounded w-full">
+    <Primitive.Box
+      el="div"
+      className="bg-gray-50 border border-gray-200 rounded w-full"
+    >
       <Primitive.Box
         el="div"
-        className="flex flex-row bg-bg-primary rounded-tr-[7px] rounded-tl-[7px]"
+        className="flex flex-row bg-gray-50 border-b border-b-gray-200 rounded-tr-[7px] rounded-tl-[7px]"
       >
         <Button
           onClick={() => setManager('npm')}
-          color={manager === 'npm' ? 'bg-muted' : 'bg-primary'}
-          variation="sm"
+          color={manager === 'npm' ? 'gray' : 'transparent'}
+          size="2"
           className="text-sm rounded-br-none rounded-bl-none rounded-tr-none "
         >
           npm
         </Button>
         <Button
           onClick={() => setManager('yarn')}
-          color={manager === 'yarn' ? 'bg-muted' : 'bg-primary'}
-          variation="sm"
+          color={manager === 'yarn' ? 'gray' : 'transparent'}
+          size="2"
           className="text-sm rounded-none transition-all"
         >
           yarn
         </Button>
         <Button
+          onClick={() => setManager('bun')}
+          color={manager === 'bun' ? 'gray' : 'transparent'}
+          size="2"
+          className="text-sm rounded-none"
+        >
+          bun
+        </Button>
+        <Button
           onClick={() => setManager('pnpm')}
-          color={manager === 'pnpm' ? 'bg-muted' : 'bg-primary'}
-          variation="sm"
+          color={manager === 'pnpm' ? 'gray' : 'transparent'}
+          size="2"
           className="text-sm rounded-none"
         >
           pnpm
@@ -66,16 +79,18 @@ const InstallBlock = ({packageName}: {packageName: string}) => {
         <Text
           el="span"
           id="packageInstall"
+          size="3"
           className={firaCode.className}
           ref={copyArea}
         >
           {manager === 'npm' && `npm install ${packageName}`}
           {manager === 'yarn' && `yarn add ${packageName}`}
+          {manager === 'bun' && `bun add ${packageName}`}
           {manager === 'pnpm' && `pnpm install ${packageName}`}
         </Text>
         <Button
-          color="bg-muted"
-          variation="sm"
+          color="gray"
+          size="1"
           onClick={() => copyToClipboard()}
           className="w-8 h-8 relative"
         >

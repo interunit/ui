@@ -28,7 +28,7 @@ const Command = ({os, onClose}: CommandProps) => {
     >
       <P.BX
         el="div"
-        className="max-w-[600px] w-full m-4 bg-bg-blended border rounded drop-shadow-lg"
+        className="max-w-[600px] w-full m-4 bg-slate-100 border-slate-400 rounded drop-shadow-lg"
         ref={commandRef}
       >
         <P.BX
@@ -45,11 +45,11 @@ const Command = ({os, onClose}: CommandProps) => {
             value={searchQuery}
             onChange={(value: string) => setSearchQuery(value)}
             placeholder="Quick search..."
-            className="bg-bg-blended rounded-bl-[0] rounded-br-[0] focus:outline-none focus:ring-0 focus:border-transparent text-light"
+            className="bg-transparent rounded-bl-[0] rounded-br-[0] focus:outline-none focus:ring-0 focus:border-transparent text-gray-900"
             autoFocus
           />
           <Badge
-            color="bg-muted"
+            color="slate"
             className={twMerge(
               'p-0 flex justify-center items-center transition-opacity',
 
@@ -58,7 +58,9 @@ const Command = ({os, onClose}: CommandProps) => {
           >
             <Text
               el="span"
-              className="text-xs text-text-light-accent leading-[0.5rem] p-[0.375rem] mt-[1px]"
+              size="1"
+              kind="accent"
+              className="leading-[0.5rem] p-[0.375rem] mt-[1px]"
             >
               ESC
             </Text>

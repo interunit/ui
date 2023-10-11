@@ -16,12 +16,15 @@ import './TopNavigation.css'
 const TopNavigation = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   return (
-    <Primitive.Box el="div" className="bg-bg-primary border-b-[1px]">
+    <Primitive.Box
+      el="div"
+      className="border-b-slate-100 border-b-[1px] bg-gradient-to-r from-blue-50"
+    >
       <Primitive.Box
         el="div"
         className="px-4 flex flex-row items-center justify-between max-w-[1200px] mx-auto"
       >
-        <Link href="/" tabIndex={0}>
+        <Link href="/">
           <Primitive.Box
             el="span"
             className="flex flex-row items-center gap-3 py-4"
@@ -51,10 +54,12 @@ const TopNavigation = () => {
                 className="relative"
               >
                 <Popover.Trigger asChild>
-                  <Button tabIndex={0} color="bg-secondary" variation="sm">
-                    <Text el="span">Docs</Text>
+                  <Button tabIndex={0} color="blue" size="2">
+                    <Text el="span" size="2">
+                      Docs
+                    </Text>
                     <ChevronDown
-                      color={theme.colors['text-light-accent']}
+                      color={theme.colors.gray[1100]}
                       role="img"
                       className={`transition-transform
                       ${isOpen && 'rotate-180'}
@@ -74,7 +79,7 @@ const TopNavigation = () => {
                       zIndex: 11
                     }}
                     arrow={{
-                      strokeColor: theme.colors.border,
+                      strokeColor: theme.colors.gray[200],
                       size: 12,
                       borderRadius: 2,
                       strokeWidth: 2
@@ -83,19 +88,22 @@ const TopNavigation = () => {
                   >
                     <Primitive.Box
                       el="div"
-                      className="rounded bg-bg-primary border"
+                      className="rounded bg-gray-50 border border-gray-200"
                     >
                       <Primitive.Box
                         el="div"
                         className="flex flex-col lg:flex-row"
                       >
-                        <Primitive.Box el="div" className="flex flex-col p-6">
-                          <Text el="span" className="text-md font-medium">
+                        <Primitive.Box
+                          el="div"
+                          className="flex flex-col p-6 border-r border-r-gray-200"
+                        >
+                          <Text el="span" size="2">
                             Getting Started
                           </Text>
                           <Primitive.Box
                             el="ul"
-                            className="list-none py-2 flex flex-col gap-1 px-2"
+                            className="list-none py-2 flex flex-col gap-1 px-2 h-full"
                           >
                             {gettingStarted.sections.map((section, index) => (
                               <Primitive.Box el="li" key={index}>
@@ -103,16 +111,18 @@ const TopNavigation = () => {
                                   href={section.slug}
                                   passHref
                                   className="hover:no-underline"
+                                  size="2"
                                 >
                                   <Text
                                     el="span"
                                     className="group text-md flex items-center gap-2 hover:no-underline"
+                                    size="2"
                                   >
                                     {section.name}
                                     <ArrowRight
                                       className="group-hover:translate-x-1 transition-transform"
                                       size={16}
-                                      color={theme.colors['text-light-accent']}
+                                      color={theme.colors.gray[1100]}
                                     />
                                   </Text>
                                 </Link>
@@ -120,36 +130,32 @@ const TopNavigation = () => {
                             ))}
                           </Primitive.Box>
                         </Primitive.Box>
-                        <Primitive.Box
-                          el="ul"
-                          className="m-0 flex-1 list-none p-0 flex flex-col bg-bg-primary border-t-[1px] lg:border-l-[1px] lg:border-t-[0px] hover:no-underline rounded-br rounded-bl lg:rounded-bl-none lg:rounded-tr lg:rounded-br"
-                        >
-                          {ui.sections.map((section, index) => (
-                            <Primitive.Box
-                              el="li"
-                              className={`nav-popover-li first:border-b-[1px] hover:bg-bg-muted lg:first:rounded-tl-[7px] lg:first:rounded-tr-[7px] last:rounded-bl-[7px] last:rounded-br-[7px] transition-all`}
-                              key={index}
+                        {ui.sections.map((section, index) => (
+                          <Primitive.Box
+                            el="div"
+                            className={`nav-popover-li hover:bg-gray-100 transition-all`}
+                            key={index}
+                          >
+                            <Link
+                              href={`/ui/docs`}
+                              size="2"
+                              className="flex flex-col hover:no-underline focus:no-underline"
                             >
-                              <Link
-                                href={`/docs/ui/${section?.slug}`}
-                                className="flex flex-col hover:no-underline focus:no-underline"
+                              <Primitive.Box
+                                el="div"
+                                className="p-6 transition-all flex flex-col gap-2 hover:no-underline"
+                                key={index}
                               >
-                                <Primitive.Box
-                                  el="div"
-                                  className="border-border p-6 transition-all flex flex-col full-width gap-2  hover:no-underline"
-                                  key={index}
-                                >
-                                  <Text el="h2" className="text-md font-medium">
-                                    {section.name}
-                                  </Text>
-                                  <Text el="p" className="text-md">
-                                    {section.description}
-                                  </Text>
-                                </Primitive.Box>
-                              </Link>
-                            </Primitive.Box>
-                          ))}
-                        </Primitive.Box>
+                                <Text el="h2" size="2" weight="medium">
+                                  {section.name}
+                                </Text>
+                                <Text el="p" size="2">
+                                  {section.description}
+                                </Text>
+                              </Primitive.Box>
+                            </Link>
+                          </Primitive.Box>
+                        ))}
                       </Primitive.Box>
                     </Primitive.Box>
                   </Popover.Content>
@@ -164,12 +170,12 @@ const TopNavigation = () => {
             <Primitive.Box el="li" className="flex flex-row items-center m-0">
               <Link
                 href="https://github.com/interunit"
+                size="2"
                 className="flex flex-col hover:no-underline focus:no-underline hover:bg-bg-muted rounded"
-                tabIndex={0}
               >
                 <Primitive.Box el="span" className="inline-block p-4">
                   <Github
-                    color={theme.colors['text-light-accent']}
+                    color={theme.colors.gray[1100]}
                     role="img"
                     aria-label="GitHub logo for going to the InterUnit GitHub"
                   />
@@ -180,11 +186,11 @@ const TopNavigation = () => {
               <Link
                 href="https://twitter.com/interunitdev"
                 className="flex flex-col hover:no-underline focus:no-underline hover:bg-bg-muted rounded"
-                tabIndex={0}
+                size="2"
               >
                 <Primitive.Box el="span" className="inline-block p-4">
                   <Twitter
-                    color={theme.colors['text-light-accent']}
+                    color={theme.colors.gray[1100]}
                     role="img"
                     aria-label="Twitter logo for going to the InterUnit Twitter"
                   />

@@ -94,8 +94,10 @@ const Text = React.forwardRef(function Text(
 }) as (props: TextProps) => React.JSX.Element
 
 type LinkProps = NextLinkProps &
-  Omit<React.ComponentPropsWithRef<typeof P.TX<'a'>>, 'el'> &
-  TextProps
+  Pick<
+    TextProps,
+    'color' | 'kind' | 'size' | 'weight' | 'children' | 'className'
+  >
 
 const Link = React.forwardRef(function Link(
   {
@@ -117,8 +119,8 @@ const Link = React.forwardRef(function Link(
         getWeightClass(weight),
         className
       ].join(' ')}
-      ref={forwardedRef}
       {...props}
+      ref={forwardedRef as React.RefObject<HTMLAnchorElement>}
     >
       {children}
     </NextLink>
