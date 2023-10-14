@@ -7,7 +7,7 @@ import {
   name,
   version
 } from '@interunit/collapsible/package.json'
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import {ChevronDown} from 'lucide-react'
 import React from 'react'
 import {twMerge} from 'tailwind-merge'
@@ -24,8 +24,8 @@ import {Text} from '@/components/system/Text'
 
 const CollapsiblePage = () => {
   return (
-    <P.BX el="div">
-      <P.BX el="div" className="mb-4">
+    <Primitive.Box el="div">
+      <Primitive.Box el="div" className="mb-4">
         <PackageInfo
           data={{
             title: 'Collapsible',
@@ -35,7 +35,7 @@ const CollapsiblePage = () => {
             homepage
           }}
         />
-      </P.BX>
+      </Primitive.Box>
       <ComponentDisplay
         className="mb-12"
         contentClassName="max-w-[300px] w-full flex flex-col justify-center items-center"
@@ -53,17 +53,17 @@ const CollapsiblePage = () => {
             </Button>
           </Collapsible.Trigger>
           <Collapsible.Content asChild>
-            <P.BX
+            <Primitive.Box
               el="div"
               className="bg-bg-primary border rounded p-4 mt-2 w-full"
             >
               Collapsed Content
-            </P.BX>
+            </Primitive.Box>
           </Collapsible.Content>
         </Collapsible>
       </ComponentDisplay>
-      <P.BX el="div" className="flex flex-col justify-between gap-12 mb-12">
-        <P.BX el="div" className="w-full">
+      <Primitive.Box el="div" className="flex flex-col justify-between gap-12 mb-12">
+        <Primitive.Box el="div" className="w-full">
           <AnchoredHeading
             id="installation"
             el="h2"
@@ -73,16 +73,16 @@ const CollapsiblePage = () => {
             Installation
           </AnchoredHeading>
           <InstallBlock packageName={name} />
-        </P.BX>
-        <P.BX el="div">
+        </Primitive.Box>
+        <Primitive.Box el="div">
           <Text el="h2" className="text-sm-hd mb-4">
             What's Included
           </Text>
           <FeatureList>
             <FeatureList.Item>Accessible</FeatureList.Item>
           </FeatureList>
-        </P.BX>
-      </P.BX>
+        </Primitive.Box>
+      </Primitive.Box>
       <AnchoredHeading
         id="form"
         el="h2"
@@ -96,16 +96,16 @@ const CollapsiblePage = () => {
         className="mb-8"
         code={`<Collapsible>
     <Collapsible.Trigger>
-        <P.BT>Click me</P.BT>
+        <Primitive.Button>Click me</Primitive.Button>
     </Collapsible.Trigger>
     <Collapsible.Content>
-        <P.BX el="div">
+        <Primitive.Box el="div">
             Collapsed Content
-        </P.BX>
+        </Primitive.Box>
     </Collapsible.Content>
 </Collapsible>`}
       />
-      <P.BX el="div" className="mb-8">
+      <Primitive.Box el="div" className="mb-8">
         <AnchoredHeading
           id="initial-values"
           el="h3"
@@ -114,8 +114,8 @@ const CollapsiblePage = () => {
         >
           Props
         </AnchoredHeading>
-      </P.BX>
-      <P.BX el="div" className="mb-8">
+      </Primitive.Box>
+      <Primitive.Box el="div" className="mb-8">
         <PropsTable
           propsToDisplay={[
             {
@@ -168,8 +168,8 @@ const CollapsiblePage = () => {
             }
           ]}
         />
-      </P.BX>
-    </P.BX>
+      </Primitive.Box>
+    </Primitive.Box>
   )
 }
 

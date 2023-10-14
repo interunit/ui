@@ -1,4 +1,4 @@
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import {Check} from 'lucide-react'
 import React from 'react'
 
@@ -6,27 +6,27 @@ import {Text} from '@/components/system/Text'
 
 const FeatureList = ({children}: {children: React.ReactNode}) => {
   return (
-    <P.BX el="ul" className="list-none flex justify-end flex-col gap-4 px-4">
+    <Primitive.Box el="ul" className="list-none flex justify-end flex-col gap-4 px-4">
       {children}
-    </P.BX>
+    </Primitive.Box>
   )
 }
 
 const FeatureListItem = ({children}: {children: React.ReactNode}) => {
   return (
-    <P.BX el="li">
-      <P.BX el="span" className="flex flex-row">
-        <P.BX
+    <Primitive.Box el="li">
+      <Primitive.Box el="span" className="flex flex-row">
+        <Primitive.Box
           el="span"
           className="inline-block p-2 mr-4 rounded-full bg-slate-100 self-start"
         >
           <Check size={16} role="img" aria-label="Checkmark" />
-        </P.BX>
+        </Primitive.Box>
         <Text el="span" size="4">
           {children}
         </Text>
-      </P.BX>
-    </P.BX>
+      </Primitive.Box>
+    </Primitive.Box>
   )
 }
 

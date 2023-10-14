@@ -1,4 +1,4 @@
-import {Child, P} from '@interunit/primitives'
+import {Child, Primitive} from '@interunit/primitives'
 import {
   type UseControlledStateParams,
   useCombinedRefs,
@@ -40,10 +40,10 @@ const Collapsible = function Collapsible({
 }
 
 type CollapsibleTriggerProps = Omit<
-  React.ComponentPropsWithRef<typeof P.BT>,
+  React.ComponentPropsWithRef<typeof Primitive.Button>,
   'el'
 > & {
-  el?: React.ComponentPropsWithRef<typeof P.BT>['el']
+  el?: React.ComponentPropsWithRef<typeof Primitive.Button>['el']
   asChild?: boolean
 }
 
@@ -54,7 +54,7 @@ const CollapsibleTrigger = React.forwardRef(function CollapsibleTrigger(
   const {value, setValue, idString} = React.useContext(CollapsibleContext)
   const combinedRef = useCombinedRefs(forwardedRef)
 
-  const Trigger = asChild ? Child : P.BT
+  const Trigger = asChild ? Child : Primitive.Button
 
   return (
     <Trigger
@@ -85,10 +85,10 @@ const CollapsibleTrigger = React.forwardRef(function CollapsibleTrigger(
 }) as (props: CollapsibleTriggerProps) => JSX.Element
 
 type CollapsibleContentProps = Omit<
-  React.ComponentPropsWithoutRef<typeof P.BX>,
+  React.ComponentPropsWithoutRef<typeof Primitive.Box>,
   'el'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Box>['el']
   asChild?: boolean
 }
 
@@ -98,7 +98,7 @@ const CollapsibleContent = React.forwardRef(function CollapsibleContent(
 ) {
   const combinedRef = useCombinedRefs(forwardedRef)
   const {value, idString} = React.useContext(CollapsibleContext)
-  const Content = asChild ? Child : P.BX
+  const Content = asChild ? Child : Primitive.Box
 
   return (
     <Content

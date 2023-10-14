@@ -1,7 +1,7 @@
 // TODO: This file needs some love
 import {type CSSUnit, getEnvironmentName} from '@interunit/config'
 import {platformCSSUnitTranslation} from '@interunit/crossplatform'
-import {type P} from '@interunit/primitives'
+import {type Primitive} from '@interunit/primitives'
 import {type WithRequired} from '@interunit/toolbox'
 import React from 'react'
 
@@ -14,7 +14,7 @@ type Dimensions = {
   height: number
 }
 
-type PrimitiveBoxProps = React.ComponentProps<typeof P.BX>
+type PrimitiveBoxProps = React.ComponentProps<typeof Primitive.Box>
 type PrimitiveBoxPropsStyle = WithRequired<PrimitiveBoxProps, 'style'>['style']
 
 export type PopoverPositioning = Omit<PrimitiveBoxProps, 'el'> & {

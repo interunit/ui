@@ -7,7 +7,7 @@ import {
   name,
   version
 } from '@interunit/popover/package.json'
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import React from 'react'
 
 import {CodeBlock} from '@/components/docs/CodeBlock'
@@ -22,8 +22,8 @@ import {theme} from '@/theme.config'
 
 const PopoverPage = () => {
   return (
-    <P.BX el="div">
-      <P.BX el="div" className="mb-8">
+    <Primitive.Box el="div">
+      <Primitive.Box el="div" className="mb-8">
         <PackageInfo
           data={{title: 'Popover', name, description, version, homepage}}
         />
@@ -55,16 +55,16 @@ const PopoverPage = () => {
             </Popover.Content>
           </Popover>
         </ComponentDisplay>
-        <P.BX el="div" className="mb-12">
-          <P.TX el="h2" className="text-sm-hd mb-4">
+        <Primitive.Box el="div" className="mb-12">
+          <Primitive.Text el="h2" className="text-sm-hd mb-4">
             Installation
-          </P.TX>
+          </Primitive.Text>
           <InstallBlock packageName={name} />
-        </P.BX>
-        <P.BX el="div" className="mb-12">
-          <P.TX el="h2" className="text-sm-hd mb-4">
+        </Primitive.Box>
+        <Primitive.Box el="div" className="mb-12">
+          <Primitive.Text el="h2" className="text-sm-hd mb-4">
             What's Included
-          </P.TX>
+          </Primitive.Text>
           <FeatureList>
             <FeatureList.Item>
               Fully accessible component to be used to create dialogs, popovers,
@@ -73,25 +73,25 @@ const PopoverPage = () => {
             <FeatureList.Item>Support for escape key closing</FeatureList.Item>
             <FeatureList.Item>Focus trapping control</FeatureList.Item>
           </FeatureList>
-        </P.BX>
+        </Primitive.Box>
 
         <CodeBlock
           className="mb-8"
           code={`<Popover>
     <Popover.Trigger>
-        <P.BT>Click me</P.BT>
+        <Primitive.Button>Click me</Primitive.Button>
     </Popover.Trigger>
     <Popover.Content>
-        <P.BX el="div">
+        <Primitive.Box el="div">
             Collapsed Content
-        </P.BX>
+        </Primitive.Box>
     </Popover.Content>
 </Popover>`}
         />
-        <P.BX el="div" className="mb-12">
-          <P.TX el="h2" className="text-sm-hd mb-4">
+        <Primitive.Box el="div" className="mb-12">
+          <Primitive.Text el="h2" className="text-sm-hd mb-4">
             {'<Popover/>'}
-          </P.TX>
+          </Primitive.Text>
           <PropsTable
             propsToDisplay={[
               {
@@ -139,12 +139,12 @@ const PopoverPage = () => {
               }
             ]}
           />
-        </P.BX>
+        </Primitive.Box>
 
-        <P.BX el="div" className="mb-12">
-          <P.TX el="h2" className="text-sm-hd mb-4">
+        <Primitive.Box el="div" className="mb-12">
+          <Primitive.Text el="h2" className="text-sm-hd mb-4">
             {'<Popover.Trigger/>'}
-          </P.TX>
+          </Primitive.Text>
           <PropsTable
             propsToDisplay={[
               {
@@ -173,11 +173,11 @@ const PopoverPage = () => {
               }
             ]}
           />
-        </P.BX>
-        <P.BX el="div" className="mb-12">
-          <P.TX el="h2" className="text-sm-hd mb-4">
+        </Primitive.Box>
+        <Primitive.Box el="div" className="mb-12">
+          <Primitive.Text el="h2" className="text-sm-hd mb-4">
             {'<Popover.Content/>'}
-          </P.TX>
+          </Primitive.Text>
           <PropsTable
             propsToDisplay={[
               {
@@ -304,9 +304,9 @@ const PopoverPage = () => {
               }
             ]}
           />
-        </P.BX>
-      </P.BX>
-    </P.BX>
+        </Primitive.Box>
+      </Primitive.Box>
+    </Primitive.Box>
   )
 }
 export default PopoverPage

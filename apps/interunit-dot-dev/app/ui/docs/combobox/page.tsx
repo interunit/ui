@@ -7,7 +7,7 @@ import {
   name,
   version
 } from '@interunit/combobox/package.json'
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import {ChevronDown} from 'lucide-react'
 import React from 'react'
 import {twMerge} from 'tailwind-merge'
@@ -22,12 +22,12 @@ import {Text} from '@/components/system/Text'
 const Page = () => {
   const [value, setValue] = React.useState('Item 1')
   return (
-    <P.BX el="div">
-      <P.BX el="div" className="mb-8">
+    <Primitive.Box el="div">
+      <Primitive.Box el="div" className="mb-8">
         <PackageInfo
           data={{title: 'Combobox', name, description, version, homepage}}
         />
-      </P.BX>
+      </Primitive.Box>
       <ComponentDisplay
         className="mb-8"
         contentClassName="max-w-[300px] w-full"
@@ -84,12 +84,12 @@ const Page = () => {
           </Combobox.Content>
         </Combobox>
       </ComponentDisplay>
-      <P.BX el="div" className="mb-12">
-        <P.TX el="h2" className="text-sm-hd mb-4">
+      <Primitive.Box el="div" className="mb-12">
+        <Primitive.Text el="h2" className="text-sm-hd mb-4">
           Installation
-        </P.TX>
+        </Primitive.Text>
         <InstallBlock packageName={name} />
-      </P.BX>
+      </Primitive.Box>
       <CodeBlock
         code={`<Combobox>
     <Combobox.Label>
@@ -111,7 +111,7 @@ const Page = () => {
 </Combobox>
       `}
       />
-    </P.BX>
+    </Primitive.Box>
   )
 }
 

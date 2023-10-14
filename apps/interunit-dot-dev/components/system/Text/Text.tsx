@@ -1,4 +1,4 @@
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import NextLink, {type LinkProps as NextLinkProps} from 'next/link'
 import React from 'react'
 
@@ -22,7 +22,7 @@ function getWeightClass(weight: BaseTextProps['weight']) {
   return `font-${weight}`
 }
 
-type BaseTextProps = React.ComponentPropsWithoutRef<typeof P.TX> & {
+type BaseTextProps = React.ComponentPropsWithoutRef<typeof Primitive.Text> & {
   className?: string
   color?: 'gray' | 'green' | 'red' | 'teal' | 'pink' | 'blue' | 'slate'
   weight?: 'light' | 'normal' | 'medium' | 'bold'
@@ -46,7 +46,7 @@ const Heading = React.forwardRef(function Heading(
   forwardedRef
 ) {
   return (
-    <P.TX
+    <Primitive.Text
       className={[
         getColorClass(color, kind),
         getSizeClass(size, 'heading'),
@@ -57,7 +57,7 @@ const Heading = React.forwardRef(function Heading(
       {...props}
     >
       {children}
-    </P.TX>
+    </Primitive.Text>
   )
 }) as (props: HeadingProps) => React.JSX.Element
 
@@ -78,7 +78,7 @@ const Text = React.forwardRef(function Text(
   forwardedRef
 ) {
   return (
-    <P.TX
+    <Primitive.Text
       className={[
         getColorClass(color, kind),
         getSizeClass(size, 'text'),
@@ -89,7 +89,7 @@ const Text = React.forwardRef(function Text(
       {...props}
     >
       {children}
-    </P.TX>
+    </Primitive.Text>
   )
 }) as (props: TextProps) => React.JSX.Element
 

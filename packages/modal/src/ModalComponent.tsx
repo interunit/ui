@@ -1,5 +1,5 @@
 import {useAccessibleClose, useLockBodyScroll} from '@interunit/a11y'
-import {Child, P} from '@interunit/primitives'
+import {Child, Primitive} from '@interunit/primitives'
 import {useCombinedRefs} from '@interunit/toolbox'
 import _FocusTrap, {type Props as FocusTrapProps} from 'focus-trap-react'
 import React from 'react'
@@ -24,7 +24,7 @@ const ModalComponent = React.forwardRef<any, ModalComponentProps>(
     forwardedRef
   ) => {
     const modalComponentRef = React.useRef(null)
-    const Box = asChild ? Child : P.BX
+    const Box = asChild ? Child : Primitive.Box
 
     useLockBodyScroll({
       isLocked: isOpen === true || isOpen === undefined,

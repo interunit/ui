@@ -1,22 +1,22 @@
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import React from 'react'
 import {twMerge} from 'tailwind-merge'
 
 import {type ThemeColor, theme} from '@/theme.config'
 
 type ButtonKind = 'primary' | 'text'
-type ButtonProps = Omit<React.ComponentPropsWithoutRef<typeof P.BT>, 'el'> & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
+type ButtonProps = Omit<React.ComponentPropsWithoutRef<typeof Primitive.Button>, 'el'> & {
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Button>['el']
   color: ThemeColor
   size?: '1' | '2' | '3' | '4'
   kind?: ButtonKind
 }
 
 type ButtonAnchorProps = Omit<
-  React.ComponentPropsWithoutRef<typeof P.TX>,
+  React.ComponentPropsWithoutRef<typeof Primitive.Text>,
   'el'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.TX>['el']
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Text>['el']
   color: ThemeColor
   size?: '1' | '2' | '3' | '4'
   kind?: ButtonKind
@@ -97,17 +97,17 @@ const Button = React.forwardRef(
     forwardedRef
   ) => {
     return (
-      <P.BT
+      <Primitive.Button
         el={el}
         className={twMerge(kindClassName(kind), sizeClassName(size), className)}
         style={getButtonStyle(kind, color)}
         {...props}
         ref={forwardedRef}
       >
-        <P.TX el="span" className={textClassName}>
+        <Primitive.Text el="span" className={textClassName}>
           {children}
-        </P.TX>
-      </P.BT>
+        </Primitive.Text>
+      </Primitive.Button>
     )
   }
 ) as (props: ButtonProps) => React.JSX.Element
@@ -129,7 +129,7 @@ const ButtonAnchor = React.forwardRef<
     forwardedRef
   ) => {
     return (
-      <P.TX
+      <Primitive.Text
         el={'a'}
         className={twMerge(
           'inline-block',
@@ -141,10 +141,10 @@ const ButtonAnchor = React.forwardRef<
         {...props}
         ref={forwardedRef}
       >
-        <P.TX el="span" className={textClassName}>
+        <Primitive.Text el="span" className={textClassName}>
           {children}
-        </P.TX>
-      </P.TX>
+        </Primitive.Text>
+      </Primitive.Text>
     )
   }
 ) as (props: ButtonAnchorProps) => React.JSX.Element

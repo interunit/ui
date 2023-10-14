@@ -1,6 +1,6 @@
 import {useOutsideClick} from '@interunit/a11y'
 import {Modal} from '@interunit/modal'
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import {Search} from 'lucide-react'
 import React from 'react'
 import {twMerge} from 'tailwind-merge'
@@ -26,12 +26,12 @@ const Command = ({os, onClose}: CommandProps) => {
       className="fixed top-0 left-0 w-full h-full z-20 flex justify-center items-center"
       style={{backdropFilter: 'blur(5px)'}}
     >
-      <P.BX
+      <Primitive.Box
         el="div"
         className="max-w-[600px] w-full m-4 bg-slate-100 border-slate-400 rounded drop-shadow-lg"
         ref={commandRef}
       >
-        <P.BX
+        <Primitive.Box
           el="div"
           className="flex flex-row gap-4 w-full items-center px-4 boreder-b-[1px]"
         >
@@ -65,8 +65,8 @@ const Command = ({os, onClose}: CommandProps) => {
               ESC
             </Text>
           </Badge>
-        </P.BX>
-      </P.BX>
+        </Primitive.Box>
+      </Primitive.Box>
     </Modal>
   )
 }

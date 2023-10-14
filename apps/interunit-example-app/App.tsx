@@ -1,10 +1,10 @@
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import {Tabs} from '@interunit/tabs'
 import React from 'react'
 
 const Test = () => {
   return (
-    <P.BX el="div" className="relative">
+    <Primitive.Box el="div" className="relative">
       <Tabs defaultValue="home">
         <Tabs.TriggerList className="flex flex-row justify-between w-screen bg-white p-4">
           <Tabs.Trigger
@@ -12,61 +12,61 @@ const Test = () => {
             aria-label="View the home content"
             asChild
           >
-            <P.BT el="button">
-              <P.TX el="span" className="text-blue">
+            <Primitive.Button el="button">
+              <Primitive.Text el="span" className="text-blue">
                 Home
-              </P.TX>
-            </P.BT>
+              </Primitive.Text>
+            </Primitive.Button>
           </Tabs.Trigger>
           <Tabs.Trigger
             value="about"
             aria-label="View the about content"
             asChild
           >
-            <P.BT el="button">
-              <P.TX el="span" className="text-blue">
+            <Primitive.Button el="button">
+              <Primitive.Text el="span" className="text-blue">
                 About
-              </P.TX>
-            </P.BT>
+              </Primitive.Text>
+            </Primitive.Button>
           </Tabs.Trigger>
           <Tabs.Trigger
             value="contact"
             aria-label="View the contact content"
             asChild
           >
-            <P.BT el="button">
-              <P.TX el="span" className="text-blue">
+            <Primitive.Button el="button">
+              <Primitive.Text el="span" className="text-blue">
                 Contact
-              </P.TX>
-            </P.BT>
+              </Primitive.Text>
+            </Primitive.Button>
           </Tabs.Trigger>
         </Tabs.TriggerList>
-        <P.BX
+        <Primitive.Box
           className="w-full border-border border-[2px] rounded p-4 mt-4"
           el="div"
         >
           <Tabs.Content value="home">
-            <P.TX el="span">Home</P.TX>
+            <Primitive.Text el="span">Home</Primitive.Text>
           </Tabs.Content>
           <Tabs.Content value="about">
-            <P.TX el="span">About</P.TX>
+            <Primitive.Text el="span">About</Primitive.Text>
           </Tabs.Content>
           <Tabs.Content value="contact">
-            <P.TX el="span">Contact</P.TX>
+            <Primitive.Text el="span">Contact</Primitive.Text>
           </Tabs.Content>
-        </P.BX>
+        </Primitive.Box>
       </Tabs>
-    </P.BX>
+    </Primitive.Box>
   )
 }
 
 export default function App() {
   return (
-    <P.BX
+    <Primitive.Box
       el="div"
       className="flex items-center justify-center h-full bg-bg-primary"
     >
       <Test />
-    </P.BX>
+    </Primitive.Box>
   )
 }

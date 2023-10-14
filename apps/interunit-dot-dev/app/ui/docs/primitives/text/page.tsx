@@ -1,11 +1,11 @@
 'use client'
 
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 
 const Page = () => {
   return (
     <div>
-      <P.TX el="a">Hello</P.TX>
+      <Primitive.Text el="a">Hello</Primitive.Text>
     </div>
   )
 }

@@ -7,7 +7,7 @@ import {
   name,
   version
 } from '@interunit/modal/package.json'
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import React from 'react'
 
 import {ComponentDisplay} from '@/components/docs/ComponentDisplay'
@@ -22,12 +22,12 @@ const ModalPage = () => {
   const testRef = React.useRef(null)
 
   return (
-    <P.BX el="div">
-      <P.BX el="div" className="mb-8">
+    <Primitive.Box el="div">
+      <Primitive.Box el="div" className="mb-8">
         <PackageInfo
           data={{title: 'Modal', name, description, version, homepage}}
         />
-      </P.BX>
+      </Primitive.Box>
       <ComponentDisplay className="mb-12">
         <Button color="bg-secondary" onClick={() => setShowModal(true)}>
           Show Modal
@@ -44,16 +44,16 @@ const ModalPage = () => {
           </Modal>
         )}
       </ComponentDisplay>
-      <P.BX el="div" className="mb-12">
-        <P.TX el="h2" className="text-sm-hd mb-4">
+      <Primitive.Box el="div" className="mb-12">
+        <Primitive.Text el="h2" className="text-sm-hd mb-4">
           Installation
-        </P.TX>
+        </Primitive.Text>
         <InstallBlock packageName={name} />
-      </P.BX>
-      <P.BX el="div" className="mb-12">
-        <P.TX el="h2" className="text-sm-hd mb-4">
+      </Primitive.Box>
+      <Primitive.Box el="div" className="mb-12">
+        <Primitive.Text el="h2" className="text-sm-hd mb-4">
           What's Included
-        </P.TX>
+        </Primitive.Text>
         <FeatureList>
           <FeatureList.Item>
             Fully accessible component to be used to create dialogs, popovers,
@@ -62,11 +62,11 @@ const ModalPage = () => {
           <FeatureList.Item>Support for escape key closing</FeatureList.Item>
           <FeatureList.Item>Focus trapping control</FeatureList.Item>
         </FeatureList>
-      </P.BX>
-      <P.BX el="div" className="mb-12">
-        <P.TX el="h2" className="text-sm-hd mb-4">
+      </Primitive.Box>
+      <Primitive.Box el="div" className="mb-12">
+        <Primitive.Text el="h2" className="text-sm-hd mb-4">
           {'<Modal/>'}
-        </P.TX>
+        </Primitive.Text>
         <PropsTable
           propsToDisplay={[
             {
@@ -111,8 +111,8 @@ const ModalPage = () => {
             }
           ]}
         />
-      </P.BX>
-    </P.BX>
+      </Primitive.Box>
+    </Primitive.Box>
   )
 }
 

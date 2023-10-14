@@ -1,4 +1,4 @@
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import {Search} from 'lucide-react'
 import React from 'react'
 import {twMerge} from 'tailwind-merge'
@@ -43,7 +43,7 @@ const SearchBar = () => {
 
   return (
     <>
-      <P.BT
+      <Primitive.Button
         className="appearance-none bg-transparent border border-slate-200 rounded px-4 py-2 flex flex-row items-center gap-2 h-[44px] hover:border-text-light transition-all drop-shadow-sm hover:drop-shadow-md"
         onClick={() => setShowCommand(true)}
       >
@@ -74,7 +74,7 @@ const SearchBar = () => {
             {!os && '⌘K'}
           </Text>
         </Badge>
-      </P.BT>
+      </Primitive.Button>
       {showCommand && <Command onClose={() => setShowCommand(false)} os={os} />}
     </>
   )
