@@ -25,7 +25,7 @@
     "@interunit/modal": "workspace:*",
     "@interunit/popover": "workspace:*",
     "@interunit/primitives": "workspace:*",
-    "@interunit/pretteir": "workspace:*",
+    "@interunit/prettier": "workspace:*",
     "@interunit/responsive": "workspace:*",
     "@interunit/tabs": "workspace:*",
     "@preconstruct/next": "^4.0.0",
