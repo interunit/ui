@@ -1,5 +1,15 @@
 # @interunit/primitives
 
+## 0.0.25
+
+### Patch Changes
+
+- Myriad of updates prepping for v0.1.0 launch, pushing out for testing
+- Updated dependencies
+  - @interunit/config@0.0.18
+  - @interunit/crossplatform@0.0.18
+  - @interunit/toolbox@0.0.18
+
 ## 0.0.24
 
 ### Patch Changes

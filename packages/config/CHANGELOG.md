@@ -1,5 +1,11 @@
 # @interunit/config
 
+## 0.0.18
+
+### Patch Changes
+
+- Myriad of updates prepping for v0.1.0 launch, pushing out for testing
+
 ## 0.0.17
 
 ### Patch Changes

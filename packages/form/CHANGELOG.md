@@ -1,5 +1,14 @@
 # @interunit/form
 
+## 0.0.17
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/primitives@0.0.25
+  - @interunit/config@0.0.18
+  - @interunit/a11y@0.0.23
+
 ## 0.0.16
 
 ### Patch Changes
