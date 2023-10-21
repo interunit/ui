@@ -10,6 +10,9 @@
     "lint": {
         "outputs": ["node_modules/.cache/.eslintcache"]
     },
+    "lint:docs": {
+        "outputs": ["node_modules/.cache/.eslintcache"]
+    },
     "lint:fix": {
         "outputs": ["node_modules/.cache/.eslintcache"]
     },

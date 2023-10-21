@@ -1,1 +1,1 @@
-type PrimitiveBoxProps = React.ComponentProps<typeof P.BX>;
+type PrimitiveBoxProps = React.ComponentProps<typeof Primitive.Box>;

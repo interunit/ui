@@ -1,6 +1,6 @@
 {
   "name": "@interunit/config",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Handles all config for interactions between packages",
   "homepage": "https://github.com/interunit/ui#readme",
   "bugs": {

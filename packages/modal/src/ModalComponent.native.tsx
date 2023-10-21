@@ -1,4 +1,4 @@
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import React from 'react'
 
 import type {BaseModalProps} from './Modal'
@@ -11,9 +11,9 @@ const ModalComponent = React.forwardRef<any, BaseModalProps>(
     // const {Modal} = require('react-native')
 
     return (
-      <P.BX el="div" {...props} ref={forwardedRef}>
+      <Primitive.Box el="div" {...props} ref={forwardedRef}>
         {children}
-      </P.BX>
+      </Primitive.Box>
     )
 
     // return (

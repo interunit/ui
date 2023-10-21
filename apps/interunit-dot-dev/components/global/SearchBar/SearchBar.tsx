@@ -1,4 +1,4 @@
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import {Search} from 'lucide-react'
 import React from 'react'
 import {twMerge} from 'tailwind-merge'
@@ -43,8 +43,8 @@ const SearchBar = () => {
 
   return (
     <>
-      <P.BT
-        className="appearance-none bg-bg-blended border rounded px-4 py-2 flex flex-row items-center gap-2 h-[44px] hover:border-text-light transition-all drop-shadow-sm hover:drop-shadow-md"
+      <Primitive.Button
+        className="appearance-none bg-transparent border border-slate-200 rounded px-4 py-2 flex flex-row items-center gap-2 h-[44px] hover:border-text-light transition-all drop-shadow-sm hover:drop-shadow-md"
         onClick={() => setShowCommand(true)}
       >
         <Search
@@ -53,11 +53,11 @@ const SearchBar = () => {
           aria-label="Search"
           className="stroke-text-light-accent"
         />
-        <P.TX el="span" className="text-text-light-accent hidden lg:block">
+        <Text el="span" size="3" className="hidden lg:block">
           Quick search...
-        </P.TX>
+        </Text>
         <Badge
-          color="bg-muted"
+          color="slate"
           className={twMerge(
             'p-0 hidden lg:flex justify-center items-center transition-opacity ',
             !os ? 'opacity-0' : ''
@@ -65,14 +65,16 @@ const SearchBar = () => {
         >
           <Text
             el="span"
-            className="text-xs text-text-light-accent leading-[0.5rem] p-[0.375rem] mt-[1px]"
+            size="1"
+            kind="accent"
+            className="leading-[0.5rem] p-[0.375rem] mt-[1px]"
           >
             {os === 'Mac' && '⌘K'}
             {os === 'Win' && 'Ctrl+K'}
             {!os && '⌘K'}
           </Text>
         </Badge>
-      </P.BT>
+      </Primitive.Button>
       {showCommand && <Command onClose={() => setShowCommand(false)} os={os} />}
     </>
   )

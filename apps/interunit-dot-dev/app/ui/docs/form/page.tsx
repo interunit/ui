@@ -7,7 +7,7 @@ import {
   name,
   version
 } from '@interunit/form/package.json'
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import React from 'react'
 
 import {AnchoredHeading} from '@/components/docs/AnchoredHeading'
@@ -35,7 +35,7 @@ const FormPage = () => {
   }
 
   return (
-    <P.BX el="div">
+    <Primitive.Box el="div">
       <PackageInfo
         data={{
           title: 'Form',
@@ -110,8 +110,8 @@ const FormPage = () => {
           )}
         </Form>
       </ComponentDisplay>
-      <P.BX el="div" className="flex flex-col justify-between gap-12 mb-12">
-        <P.BX el="div" className="w-full">
+      <Primitive.Box el="div" className="flex flex-col justify-between gap-12 mb-12">
+        <Primitive.Box el="div" className="w-full">
           <AnchoredHeading
             id="installation"
             el="h2"
@@ -122,8 +122,8 @@ const FormPage = () => {
           </AnchoredHeading>
 
           <InstallBlock packageName={name} />
-        </P.BX>
-        <P.BX el="div">
+        </Primitive.Box>
+        <Primitive.Box el="div">
           <Text el="h2" className="text-sm-hd mb-4">
             What's Included
           </Text>
@@ -133,8 +133,8 @@ const FormPage = () => {
             <FeatureList.Item>Text Input</FeatureList.Item>
             <FeatureList.Item>More (WIP)</FeatureList.Item>
           </FeatureList>
-        </P.BX>
-      </P.BX>
+        </Primitive.Box>
+      </Primitive.Box>
       <AnchoredHeading
         id="form"
         el="h2"
@@ -167,7 +167,7 @@ const FormPage = () => {
 >
         `}
       />
-      <P.BX el="div" className="mb-8">
+      <Primitive.Box el="div" className="mb-8">
         <AnchoredHeading
           id="initial-values"
           el="h3"
@@ -176,13 +176,13 @@ const FormPage = () => {
         >
           Props
         </AnchoredHeading>
-        <P.TX el="p">
+        <Primitive.Text el="p">
           An object of values that the form will be initialized with. The keys
           of this object should match the <CodeTag>name</CodeTag> prop of the{' '}
           <CodeTag>{'<Field />'}</CodeTag> component.
-        </P.TX>
-      </P.BX>
-      <P.BX el="div" className="mb-8">
+        </Primitive.Text>
+      </Primitive.Box>
+      <Primitive.Box el="div" className="mb-8">
         <PropsTable
           propsToDisplay={[
             {
@@ -201,8 +201,8 @@ const FormPage = () => {
             }
           ]}
         />
-      </P.BX>
-    </P.BX>
+      </Primitive.Box>
+    </Primitive.Box>
   )
 }
 

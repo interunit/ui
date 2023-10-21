@@ -1,6 +1,6 @@
 {
   "name": "interunit-dot-dev",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,8 +8,12 @@
     "dev:all": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --fix --config ./.eslintrc.js",
+    "lint:fix": "eslint . --fix --config ./.eslintrc.js",
+    "format": "prettier ./**/* --check",
+    "format:fix": "prettier ./**/* --write"
   },
+  "prettier": "@interunit/prettier",
   "dependencies": {
     "@ctrl/tinycolor": "^3.6.0",
     "@interunit/a11y": "workspace:*",
@@ -21,6 +25,7 @@
     "@interunit/modal": "workspace:*",
     "@interunit/popover": "workspace:*",
     "@interunit/primitives": "workspace:*",
+    "@interunit/prettier": "workspace:*",
     "@interunit/responsive": "workspace:*",
     "@interunit/tabs": "workspace:*",
     "@preconstruct/next": "^4.0.0",

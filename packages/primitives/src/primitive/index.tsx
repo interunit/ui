@@ -9,10 +9,3 @@ export const Primitive = {
   Text,
   Image
 }
-
-export const P = {
-  BX: Box,
-  BT: Button,
-  TX: Text,
-  IM: Image
-}

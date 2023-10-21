@@ -1,5 +1,5 @@
 import {useKeyboardNavigation} from '@interunit/a11y'
-import {Child, P} from '@interunit/primitives'
+import {Child, Primitive} from '@interunit/primitives'
 import {
   type UseControlledStateParams,
   useCombinedRefs,
@@ -7,8 +7,11 @@ import {
 } from '@interunit/toolbox'
 import React from 'react'
 
-type TabsProps = Omit<React.ComponentPropsWithoutRef<typeof P.BX>, 'el'> & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
+type TabsProps = Omit<
+  React.ComponentPropsWithoutRef<typeof Primitive.Box>,
+  'el'
+> & {
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Box>['el']
   orientation?: 'horizontal' | 'vertical'
   asChild?: boolean
 }
@@ -32,9 +35,9 @@ const Tabs = React.forwardRef(function Tabs<V>(
   }: TabsProps & UseControlledStateParams<V>,
   forwardedRef
 ) {
-  const tabsContainerRef = React.useRef<typeof P.BX>(null)
+  const tabsContainerRef = React.useRef<typeof Primitive.Box>(null)
   const combinedRefs = useCombinedRefs(tabsContainerRef, forwardedRef)
-  const Box = asChild ? Child : P.BX
+  const Box = asChild ? Child : Primitive.Box
 
   const [value, setValue] = useControlledState({
     ...props
@@ -67,10 +70,10 @@ const Tabs = React.forwardRef(function Tabs<V>(
 ) => React.ReactElement<TabsTriggerProps<V>>
 
 type TabsTriggerListProps = Omit<
-  React.ComponentPropsWithoutRef<typeof P.BX>,
+  React.ComponentPropsWithoutRef<typeof Primitive.Box>,
   'el'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Box>['el']
   asChild?: boolean
 }
 
@@ -78,7 +81,7 @@ const TabsTriggerList = React.forwardRef(function TabsTriggerList(
   {el = 'div', asChild, children, ...props}: TabsTriggerListProps,
   forwardedRef: React.Ref<TabsTriggerListProps>
 ) {
-  const TriggerList = asChild ? Child : P.BX
+  const TriggerList = asChild ? Child : Primitive.Box
 
   const combinedRef = useCombinedRefs(forwardedRef)
   return (
@@ -89,10 +92,10 @@ const TabsTriggerList = React.forwardRef(function TabsTriggerList(
 })
 
 type TabsTriggerProps<V> = Omit<
-  React.ComponentPropsWithoutRef<typeof P.BT>,
+  React.ComponentPropsWithoutRef<typeof Primitive.Button>,
   'el' | 'value'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Button>['el']
   // Would like to enforce this to be of the same type as the Tabs value
   // or check if it exists on a Tabs Content, but TS doesn't allow
   // for enforcing props on children in React as of now.
@@ -107,7 +110,7 @@ const TabsTrigger = React.forwardRef(function TabsTrigger<V>(
   forwardedRef
 ) {
   const {value: currentValue, setValue} = React.useContext(TabsContext)
-  const Button = asChild ? Child : P.BT
+  const Button = asChild ? Child : Primitive.Button
   const combinedRef = useCombinedRefs(forwardedRef)
 
   return (
@@ -132,7 +135,7 @@ const TabsTrigger = React.forwardRef(function TabsTrigger<V>(
 })
 
 type TabsContentProps<V> = Omit<
-  React.ComponentPropsWithoutRef<typeof P.BX>,
+  React.ComponentPropsWithoutRef<typeof Primitive.Box>,
   'el'
 > & {
   // Would like to enforce this to be of the same type as the Tabs value
@@ -141,7 +144,7 @@ type TabsContentProps<V> = Omit<
   //
   // See: https://github.com/microsoft/TypeScript/issues/21699
   value?: V
-  el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Box>['el']
   asChild?: boolean
 }
 
@@ -150,7 +153,7 @@ const TabsContent = React.forwardRef(function TabsContent<V>(
   forwardedRef: React.Ref<TabsContentProps<V>>
 ) {
   const {value: currentValue, setValue} = React.useContext(TabsContext)
-  const Content = props.asChild ? Child : P.BX
+  const Content = props.asChild ? Child : Primitive.Box
   const combinedRef = useCombinedRefs(forwardedRef)
 
   return (

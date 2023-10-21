@@ -1,1 +1,1 @@
-export {Text, Link} from './Text'
+export {Heading, Text, Link} from './Text'

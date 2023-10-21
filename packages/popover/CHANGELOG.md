@@ -1,5 +1,18 @@
 # @interunit/popover
 
+## 0.0.27
+
+### Patch Changes
+
+- Myriad of updates prepping for v0.1.0 launch, pushing out for testing
+- Updated dependencies
+  - @interunit/primitives@0.0.25
+  - @interunit/config@0.0.18
+  - @interunit/modal@0.0.21
+  - @interunit/a11y@0.0.23
+  - @interunit/crossplatform@0.0.18
+  - @interunit/toolbox@0.0.18
+
 ## 0.0.26
 
 ### Patch Changes

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import {Check, Copy} from 'lucide-react'
 // @ts-ignore
 import Prism from 'prismjs'
@@ -49,10 +49,10 @@ const CodeBlock = ({
   }
 
   return (
-    <P.BX el="div" className={twMerge(className, 'relative')}>
+    <Primitive.Box el="div" className={twMerge(className, 'relative')}>
       <Button
-        color="bg-muted"
-        variation="sm"
+        color="gray"
+        size="1"
         onClick={() => copyToClipboard()}
         className="w-8 h-8 absolute right-4 top-4"
       >
@@ -83,7 +83,7 @@ const CodeBlock = ({
           {code}
         </code>
       </pre>
-    </P.BX>
+    </Primitive.Box>
   )
 }
 

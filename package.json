@@ -22,7 +22,7 @@
     "util:delete-dist": "rm -rf packages/**/dist",
     "changeset:add": "changeset add",
     "changeset:version": "changeset version",
-    "changeset:publish": "bun run util:delete-dist && bun install && bun build:package && bun run scripts/publish/index.js" ,
+    "changeset:publish": "bun run util:delete-dist && bun install && bun build:package && bun run scripts/publish/index.js",
     "postinstall": "husky install",
     "husky": "postinstall"
   },
@@ -42,9 +42,6 @@
     "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.22.5",
     "@changesets/cli": "^2.26.2",
-    "@interunit/eslint": "workspace:*",
-    "@interunit/prettier": "workspace:*",
-    "@interunit/tsconfig": "workspace:*",
     "@manypkg/cli": "^0.20.0",
     "@microsoft/api-extractor": "^7.36.4",
     "@microsoft/api-extractor-model": "^7.27.6",
@@ -56,7 +53,7 @@
     "nyc": "^15.1.0",
     "ts-node": "^10.9.1",
     "tsup": "^7.2.0",
-    "turbo": "^1.10.14",
+    "turbo": "latest",
     "typescript": "^5.2.2",
     "yargs-parser": "^21.1.1"
   },

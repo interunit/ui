@@ -31,7 +31,7 @@ const RecursiveRender = ({data, path}: {path: string; data: DataItem}) => {
           <Link href={path + data.slug} legacyBehavior passHref>
             <ButtonAnchor
               color={data.color as ThemeColor}
-              variation="xs"
+              size="2"
               data-active={pathname === path + data.slug}
               className={`text-sm ${
                 pathname !== path + data.slug ? 'ButtonInActive' : ''
@@ -45,7 +45,7 @@ const RecursiveRender = ({data, path}: {path: string; data: DataItem}) => {
       {data?.sections?.length > 0 && (
         <Primitive.Box
           el="ul"
-          className="flex flex-col list-none gap-4 [&_ul]:ml-4"
+          className="flex flex-col list-none gap-4 [&_ul]:ml-6"
         >
           {data.sections.map((section, index) => {
             return <RecursiveRender data={section} path={path} key={index} />
@@ -81,14 +81,11 @@ const DocsSideNavigation = ({data}: DocsSideNavigationProps) => {
     >
       <Popover defaultValue={false}>
         <Popover.Trigger asChild>
-          <Button
-            el="button"
-            className="block lg:hidden"
-            color="bg-muted"
-            variation="sm"
-          >
+          <Button el="button" className="block lg:hidden" color="blue" size="2">
             <VisuallyHidden>
-              <Text el="span">Open navigation</Text>
+              <Text el="span" size="1">
+                Open navigation
+              </Text>
             </VisuallyHidden>
             <Menu size={24} role="img" />
           </Button>
@@ -103,8 +100,8 @@ const DocsSideNavigation = ({data}: DocsSideNavigationProps) => {
           }}
           arrow={{
             borderRadius: 2,
-            strokeColor: theme.colors.border,
-            fillColor: theme.colors['bg-primary'],
+            strokeColor: theme.colors.gray[200],
+            fillColor: theme.colors.gray[50],
             strokeWidth: 2,
             size: 12
           }}

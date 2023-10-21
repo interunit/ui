@@ -1,5 +1,5 @@
 import {fireEvent, render} from '@interunit/jest/native'
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 
 import {Tabs} from './Tabs'
 
@@ -13,11 +13,11 @@ const TabsComponent = ({defaultValue = 'home'}) => {
           asChild
           testID="home"
         >
-          <P.BT el="button">
-            <P.TX el="span" className="text-blue">
+          <Primitive.Button el="button">
+            <Primitive.Text el="span" className="text-blue">
               Home
-            </P.TX>
-          </P.BT>
+            </Primitive.Text>
+          </Primitive.Button>
         </Tabs.Trigger>
         <Tabs.Trigger
           value="about"
@@ -25,38 +25,38 @@ const TabsComponent = ({defaultValue = 'home'}) => {
           asChild
           testID="about"
         >
-          <P.BT el="button">
-            <P.TX el="span" className="text-blue">
+          <Primitive.Button el="button">
+            <Primitive.Text el="span" className="text-blue">
               About
-            </P.TX>
-          </P.BT>
+            </Primitive.Text>
+          </Primitive.Button>
         </Tabs.Trigger>
         <Tabs.Trigger
           value="contact"
           aria-label="View the contact content"
           asChild
         >
-          <P.BT el="button">
-            <P.TX el="span" className="text-blue">
+          <Primitive.Button el="button">
+            <Primitive.Text el="span" className="text-blue">
               Contact
-            </P.TX>
-          </P.BT>
+            </Primitive.Text>
+          </Primitive.Button>
         </Tabs.Trigger>
       </Tabs.TriggerList>
-      <P.BX
+      <Primitive.Box
         className="w-full border-border border-[2px] rounded p-4 mt-4"
         el="div"
       >
         <Tabs.Content value="home">
-          <P.TX el="span">Home</P.TX>
+          <Primitive.Text el="span">Home</Primitive.Text>
         </Tabs.Content>
         <Tabs.Content value="about">
-          <P.TX el="span">About</P.TX>
+          <Primitive.Text el="span">About</Primitive.Text>
         </Tabs.Content>
         <Tabs.Content value="contact">
-          <P.TX el="span">Contact</P.TX>
+          <Primitive.Text el="span">Contact</Primitive.Text>
         </Tabs.Content>
-      </P.BX>
+      </Primitive.Box>
     </Tabs>
   )
 }

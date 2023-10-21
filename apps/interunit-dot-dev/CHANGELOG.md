@@ -1,5 +1,21 @@
 # interunit-dot-dev
 
+## 0.1.12
+
+### Patch Changes
+
+- Updated dependencies
+  - @interunit/collapsible@0.0.21
+  - @interunit/primitives@0.0.25
+  - @interunit/popover@0.0.27
+  - @interunit/config@0.0.18
+  - @interunit/modal@0.0.21
+  - @interunit/tabs@0.0.17
+  - @interunit/a11y@0.0.23
+  - @interunit/combobox@0.0.8
+  - @interunit/form@0.0.17
+  - @interunit/responsive@0.0.17
+
 ## 0.1.11
 
 ### Patch Changes

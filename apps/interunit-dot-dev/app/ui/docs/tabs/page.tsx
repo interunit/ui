@@ -1,6 +1,6 @@
 'use client'
 
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import {Tabs} from '@interunit/tabs'
 import {
   description,
@@ -20,7 +20,7 @@ import {Button} from '@/components/system/Button'
 const TabsPage = () => {
   const [value, setValue] = React.useState('hi')
   return (
-    <P.BX el="div">
+    <Primitive.Box el="div">
       <PackageInfo
         data={{title: 'Tabs', name, description, version, homepage}}
       />
@@ -32,9 +32,9 @@ const TabsPage = () => {
               aria-label="View the home content"
               asChild
             >
-              <P.BT el="button" className="hi">
+              <Primitive.Button el="button" className="hi">
                 Home
-              </P.BT>
+              </Primitive.Button>
             </Tabs.Trigger>
             <Tabs.Trigger
               value="about"
@@ -61,33 +61,33 @@ const TabsPage = () => {
           </div>
         </Tabs>
       </ComponentDisplay>
-      <P.BX el="div" className="mb-12">
-        <P.TX el="h2" className="text-sm-hd mb-4">
+      <Primitive.Box el="div" className="mb-12">
+        <Primitive.Text el="h2" className="text-sm-hd mb-4">
           Installation
-        </P.TX>
+        </Primitive.Text>
         <InstallBlock packageName={name} />
-      </P.BX>
+      </Primitive.Box>
       <CodeBlock
         className="mb-8"
         code={`<Tabs defaultValue="home">
     <Tabs.Trigger value="home">
-        <P.BT>Home</P.BT>
+        <Primitive.Button>Home</Primitive.Button>
     </Tabs.Trigger>
     <Tabs.Trigger value="about">
-        <P.BT>About</P.BT>
+        <Primitive.Button>About</Primitive.Button>
     </Tabs.Trigger>
     <Tabs.Trigger value="contact">
-        <P.BT>Contact</P.BT>
+        <Primitive.Button>Contact</Primitive.Button>
     </Tabs.Trigger>
     <Tabs.Content value="about">About</Tabs.Content>
     <Tabs.Content value="home">Home</Tabs.Content>
     <Tabs.Content value="contact">Contact</Tabs.Content>
 </Tabs>`}
       />
-      <P.BX el="div" className="mb-12">
-        <P.TX el="h2" className="text-sm-hd mb-4">
+      <Primitive.Box el="div" className="mb-12">
+        <Primitive.Text el="h2" className="text-sm-hd mb-4">
           {'<Tabs/>'}
-        </P.TX>
+        </Primitive.Text>
         <PropsTable
           propsToDisplay={[
             {
@@ -127,11 +127,11 @@ const TabsPage = () => {
             }
           ]}
         />
-      </P.BX>
-      <P.BX el="div" className="mb-12">
-        <P.TX el="h2" className="text-sm-hd mb-4">
+      </Primitive.Box>
+      <Primitive.Box el="div" className="mb-12">
+        <Primitive.Text el="h2" className="text-sm-hd mb-4">
           {'<Tabs.Trigger/>'}
-        </P.TX>
+        </Primitive.Text>
         <PropsTable
           propsToDisplay={[
             {
@@ -156,11 +156,11 @@ const TabsPage = () => {
             }
           ]}
         />
-      </P.BX>
-      <P.BX el="div" className="mb-12">
-        <P.TX el="h2" className="text-sm-hd mb-4">
+      </Primitive.Box>
+      <Primitive.Box el="div" className="mb-12">
+        <Primitive.Text el="h2" className="text-sm-hd mb-4">
           {'<Tabs.Content/>'}
-        </P.TX>
+        </Primitive.Text>
         <PropsTable
           propsToDisplay={[
             {
@@ -185,8 +185,8 @@ const TabsPage = () => {
             }
           ]}
         />
-      </P.BX>
-    </P.BX>
+      </Primitive.Box>
+    </Primitive.Box>
   )
 }
 

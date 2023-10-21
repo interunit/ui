@@ -1,5 +1,5 @@
 import {fireEvent, render} from '@interunit/jest/native'
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 
 import {Collapsible} from './Collapsible'
 
@@ -7,7 +7,7 @@ const CollapsibleComponent = ({defaultValue = false, ...props}) => {
   return (
     <Collapsible defaultValue={defaultValue} {...props}>
       <Collapsible.Trigger {...props} testID="trigger">
-        <P.TX el="span">Trigger</P.TX>
+        <Primitive.Text el="span">Trigger</Primitive.Text>
       </Collapsible.Trigger>
       <Collapsible.Content {...props} testID="content">
         Content

@@ -1,5 +1,5 @@
 import {fireEvent, render} from '@interunit/jest/native'
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 
 import {Popover} from './Popover'
 
@@ -7,10 +7,10 @@ const PopoverComponent = () => {
   return (
     <Popover defaultValue={false}>
       <Popover.Trigger testID="trigger">
-        <P.TX el="span">Trigger</P.TX>
+        <Primitive.Text el="span">Trigger</Primitive.Text>
       </Popover.Trigger>
       <Popover.Content testID="content">
-        <P.TX el="span">Content</P.TX>
+        <Primitive.Text el="span">Content</Primitive.Text>
       </Popover.Content>
     </Popover>
   )

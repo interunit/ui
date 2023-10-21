@@ -2,7 +2,7 @@ import {isTouchDevice, useOutsideClick} from '@interunit/a11y'
 import {getEnvironmentName} from '@interunit/config'
 import {platformCSSUnitTranslation} from '@interunit/crossplatform'
 import {Modal} from '@interunit/modal'
-import {Child, P} from '@interunit/primitives'
+import {Child, Primitive} from '@interunit/primitives'
 import {
   type UseControlledStateParams,
   useCombinedRefs, // useIdString
@@ -79,10 +79,10 @@ const PopoverContext = React.createContext<PopoverContextState>({
 })
 
 type PopoverProps = Omit<
-  React.ComponentPropsWithRef<typeof P.BX>,
+  React.ComponentPropsWithRef<typeof Primitive.Box>,
   'el' | 'defaultValue' | 'value' | 'onValueChange'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BX>['el']
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Box>['el']
   asChild?: boolean
   focusType?: 'none' | 'default'
   shouldCloseOnOutsideClick?: boolean
@@ -164,7 +164,7 @@ const Popover = React.forwardRef(function Popover(
     }
   }, [popoverRef])
 
-  const Box = asChild ? Child : P.BX
+  const Box = asChild ? Child : Primitive.Box
 
   return (
     <PopoverContext.Provider
@@ -214,10 +214,10 @@ const Popover = React.forwardRef(function Popover(
 ) => React.ReactElement<PopoverProps>
 
 type PopoverTriggerProps = Omit<
-  React.ComponentPropsWithoutRef<typeof P.BT>,
+  React.ComponentPropsWithoutRef<typeof Primitive.Button>,
   'el'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Button>['el']
   interaction?: 'click' | 'hover' | 'none'
   asChild?: boolean
   children: (({value}: {value: boolean}) => React.ReactNode) | React.ReactNode
@@ -234,7 +234,7 @@ const PopoverTrigger = React.forwardRef(
     }: PopoverTriggerProps,
     forwardedRef
   ) => {
-    const Button = asChild ? Child : P.BT
+    const Button = asChild ? Child : Primitive.Button
     const {
       value,
       setValue,
@@ -315,10 +315,10 @@ const PopoverTrigger = React.forwardRef(
   }
 )
 type PopoverContentProps = Omit<
-  React.ComponentPropsWithoutRef<typeof P.BX<'div'>>,
+  React.ComponentPropsWithoutRef<typeof Primitive.Box<'div'>>,
   'el'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BX<'div'>>['el']
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Box<'div'>>['el']
   asChild?: boolean
   positioning?: PopoverPositioning
   arrow?: PopoverArrow
@@ -339,7 +339,7 @@ const PopoverContent = React.forwardRef(
     }: PopoverContentProps,
     forwardedRef
   ) => {
-    const Box = asChild ? Child : P.BX
+    const Box = asChild ? Child : Primitive.Box
     const {
       value,
       triggerRef,
@@ -397,7 +397,7 @@ const PopoverContent = React.forwardRef(
       >
         <>
           <Box el={el}>{children}</Box>
-          <P.BX
+          <Primitive.Box
             el={el}
             className={`iu-popover-arrow ${arrow?.className}`}
             aria-hidden={true}
@@ -407,7 +407,7 @@ const PopoverContent = React.forwardRef(
             }}
           />
           {/* Hover Helper */}
-          <P.BX
+          <Primitive.Box
             el="span"
             style={{
               position: 'absolute',

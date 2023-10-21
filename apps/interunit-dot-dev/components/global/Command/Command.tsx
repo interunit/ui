@@ -1,6 +1,6 @@
 import {useOutsideClick} from '@interunit/a11y'
 import {Modal} from '@interunit/modal'
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import {Search} from 'lucide-react'
 import React from 'react'
 import {twMerge} from 'tailwind-merge'
@@ -26,12 +26,12 @@ const Command = ({os, onClose}: CommandProps) => {
       className="fixed top-0 left-0 w-full h-full z-20 flex justify-center items-center"
       style={{backdropFilter: 'blur(5px)'}}
     >
-      <P.BX
+      <Primitive.Box
         el="div"
-        className="max-w-[600px] w-full m-4 bg-bg-blended border rounded drop-shadow-lg"
+        className="max-w-[600px] w-full m-4 bg-slate-100 border-slate-400 rounded drop-shadow-lg"
         ref={commandRef}
       >
-        <P.BX
+        <Primitive.Box
           el="div"
           className="flex flex-row gap-4 w-full items-center px-4 boreder-b-[1px]"
         >
@@ -45,11 +45,11 @@ const Command = ({os, onClose}: CommandProps) => {
             value={searchQuery}
             onChange={(value: string) => setSearchQuery(value)}
             placeholder="Quick search..."
-            className="bg-bg-blended rounded-bl-[0] rounded-br-[0] focus:outline-none focus:ring-0 focus:border-transparent text-light"
+            className="bg-transparent rounded-bl-[0] rounded-br-[0] focus:outline-none focus:ring-0 focus:border-transparent text-gray-900"
             autoFocus
           />
           <Badge
-            color="bg-muted"
+            color="slate"
             className={twMerge(
               'p-0 flex justify-center items-center transition-opacity',
 
@@ -58,13 +58,15 @@ const Command = ({os, onClose}: CommandProps) => {
           >
             <Text
               el="span"
-              className="text-xs text-text-light-accent leading-[0.5rem] p-[0.375rem] mt-[1px]"
+              size="1"
+              kind="accent"
+              className="leading-[0.5rem] p-[0.375rem] mt-[1px]"
             >
               ESC
             </Text>
           </Badge>
-        </P.BX>
-      </P.BX>
+        </Primitive.Box>
+      </Primitive.Box>
     </Modal>
   )
 }

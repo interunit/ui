@@ -1,37 +1,36 @@
-import {TinyColor, isReadable} from '@ctrl/tinycolor'
-import {P} from '@interunit/primitives'
+import {Primitive} from '@interunit/primitives'
 import React from 'react'
 import {twMerge} from 'tailwind-merge'
 
 import {type ThemeColor, theme} from '@/theme.config'
 
 type ButtonKind = 'primary' | 'text'
-type ButtonProps = Omit<React.ComponentPropsWithoutRef<typeof P.BT>, 'el'> & {
-  el?: React.ComponentPropsWithoutRef<typeof P.BT>['el']
+type ButtonProps = Omit<React.ComponentPropsWithoutRef<typeof Primitive.Button>, 'el'> & {
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Button>['el']
   color: ThemeColor
-  variation?: 'xs' | 'sm' | 'md' | 'lg'
+  size?: '1' | '2' | '3' | '4'
   kind?: ButtonKind
 }
 
 type ButtonAnchorProps = Omit<
-  React.ComponentPropsWithoutRef<typeof P.TX>,
+  React.ComponentPropsWithoutRef<typeof Primitive.Text>,
   'el'
 > & {
-  el?: React.ComponentPropsWithoutRef<typeof P.TX>['el']
+  el?: React.ComponentPropsWithoutRef<typeof Primitive.Text>['el']
   color: ThemeColor
-  variation?: 'xs' | 'sm' | 'md' | 'lg'
+  size?: '1' | '2' | '3' | '4'
   kind?: ButtonKind
 }
 
-const variationClassName = (variation: ButtonProps['variation']) => {
-  switch (variation) {
-    case 'xs':
+const sizeClassName = (size: ButtonProps['size']) => {
+  switch (size) {
+    case '1':
       return 'px-2 py-1'
-    case 'sm':
+    case '2':
       return 'px-3 py-2'
-    case 'md':
+    case '3':
       return 'px-5 py-4'
-    case 'lg':
+    case '4':
       return 'px-6 py-5'
     default:
       return 'px-5 py-4'
@@ -40,10 +39,10 @@ const variationClassName = (variation: ButtonProps['variation']) => {
 
 const kindClassName = (kind: ButtonProps['kind']) => {
   const primary =
-    'border-transparent appearance-none rounded shadow-button cursor-pointer brightness-100 text-md transition-all hover:brightness-105 hover:no-underline focus:no-underline'
+    'border-transparent appearance-none rounded shadow-button cursor-pointer brightness-100 text-md transition-all hover:brightness-125 hover:no-underline focus:no-underline'
   switch (kind) {
     case 'primary':
-      return 'border-transparent appearance-none rounded shadow-button cursor-pointer brightness-100 text-md transition-all hover:brightness-105 hover:no-underline focus:no-underline'
+      return 'border-transparent appearance-none rounded shadow-button cursor-pointer brightness-100 text-md transition-all hover:brightness-125 hover:no-underline focus:no-underline'
     case 'text':
       return `border-transparent bg-transparent hover:opacity-70 transition-opacity rounded`
     default:
@@ -54,40 +53,30 @@ const kindClassName = (kind: ButtonProps['kind']) => {
 const textClassName =
   'flex flex-row items-center justify-between gap-x-2 shadow-button font-normal hover:no-underline'
 
-const getColorValue = (color: ThemeColor) => {
-  if (theme.colors[color]) {
-    return theme.colors[color]
-  }
-
-  return theme.colors['bg-secondary']
-}
-
-const getFontColor = (color: string) => {
-  return isReadable(color, theme.colors['text-light'])
-    ? theme.colors['text-light']
-    : theme.colors['text-dark']
+const getFontColor = () => {
+  return theme.colors.gray['900']
 }
 
 const getGradient = (color: string) => {
   return `linear-gradient(
         to top,
-        ${new TinyColor(color).lighten(3).toString()},
-        ${color}
+        ${`var(--${color}-${100})`},
+        ${`var(--${color}-${200})`}
       )
       padding-box,
     linear-gradient(
         to top,
-        ${color},
-        ${new TinyColor(color).lighten(10).toString()}
+        ${`var(--${color}-${300})`},
+        ${`var(--${color}-${200})`}
       )
       border-box`
 }
 
-const getButtonStyle = (kind: ButtonKind, colorValue: string) => {
+const getButtonStyle = (kind: ButtonKind, color: string) => {
   if (kind === 'primary') {
     return {
-      color: getFontColor(colorValue),
-      background: getGradient(colorValue)
+      color: getFontColor(),
+      background: getGradient(color)
     }
   }
 
@@ -98,8 +87,8 @@ const Button = React.forwardRef(
   (
     {
       el = 'button',
-      color = 'bg-secondary' as ThemeColor,
-      variation = 'md',
+      color = 'slate' as ThemeColor,
+      size = '2',
       kind = 'primary',
       className,
       children,
@@ -107,26 +96,22 @@ const Button = React.forwardRef(
     }: ButtonProps,
     forwardedRef
   ) => {
-    const colorValue = getColorValue(color)
     return (
-      <P.BT
+      <Primitive.Button
         el={el}
-        className={twMerge(
-          kindClassName(kind),
-          variationClassName(variation),
-          className
-        )}
-        style={getButtonStyle(kind, colorValue)}
+        className={twMerge(kindClassName(kind), sizeClassName(size), className)}
+        style={getButtonStyle(kind, color)}
         {...props}
         ref={forwardedRef}
       >
-        <P.TX el="span" className={textClassName}>
+        <Primitive.Text el="span" className={textClassName}>
           {children}
-        </P.TX>
-      </P.BT>
+        </Primitive.Text>
+      </Primitive.Button>
     )
   }
-)
+) as (props: ButtonProps) => React.JSX.Element
+
 const ButtonAnchor = React.forwardRef<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   any,
@@ -135,7 +120,7 @@ const ButtonAnchor = React.forwardRef<
   (
     {
       color = 'bg-secondary',
-      variation = 'md',
+      size = '2',
       kind = 'primary',
       className,
       children,
@@ -143,26 +128,25 @@ const ButtonAnchor = React.forwardRef<
     },
     forwardedRef
   ) => {
-    const colorValue = getColorValue(color)
     return (
-      <P.TX
+      <Primitive.Text
         el={'a'}
         className={twMerge(
           'inline-block',
           kindClassName(kind),
-          variationClassName(variation),
+          sizeClassName(size),
           className
         )}
-        style={getButtonStyle(kind, colorValue)}
+        style={getButtonStyle(kind, color)}
         {...props}
         ref={forwardedRef}
       >
-        <P.TX el="span" className={textClassName}>
+        <Primitive.Text el="span" className={textClassName}>
           {children}
-        </P.TX>
-      </P.TX>
+        </Primitive.Text>
+      </Primitive.Text>
     )
   }
-)
+) as (props: ButtonAnchorProps) => React.JSX.Element
 
 export {Button, ButtonAnchor}
